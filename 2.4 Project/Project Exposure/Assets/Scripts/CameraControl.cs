@@ -22,7 +22,6 @@ public class CameraControl : MonoBehaviour
     //Camera Position
     Vector3 camSpeed = Vector3.zero;
     Vector3 target;
-    [HideInInspector]
     public Vector3 offset;
 
     //Camera Shake
@@ -37,14 +36,14 @@ public class CameraControl : MonoBehaviour
     public Vector3 lastPosBeforeShake; //Used to produce camera shake .. 
 
     //Camera Zoom
-    public float myZoomValue;
+    public float myFieldOfView;
 
 
     void Start()
     {
         currentRotation = this.transform.rotation;
         newRotation = this.transform.rotation;
-        offset = new Vector3(15, 10, 0);
+      //  offset = new Vector3(15, 10, 0);
     }
 
     void FixedUpdate()
@@ -92,7 +91,7 @@ public class CameraControl : MonoBehaviour
         //}
 
         float fov = Camera.main.fieldOfView;
-        Camera.main.fieldOfView = Mathf.Lerp(fov, 30 + myZoomValue, Time.deltaTime * 2.5f);
+        Camera.main.fieldOfView = Mathf.Lerp(fov, myFieldOfView, Time.deltaTime * 2.5f);
     }
 
 
