@@ -17,7 +17,13 @@ public class BigValve : MonoBehaviour {
     Quaternion targetRotation;
     ValveLineJoint[] line1;
     ValveLineJoint[] line2;
+    public ParticleSystem smoke1;
+    public ParticleSystem smoke2;
+    void Awake()
+    {
 
+      
+    }
     // Use this for initialization
     void Start () {
 
@@ -26,6 +32,7 @@ public class BigValve : MonoBehaviour {
         SetupPipeConnection();
         DisableLine(1);
         DisableLine(2);
+
     }
     void SetupPipeConnection()
     {
@@ -91,26 +98,32 @@ public class BigValve : MonoBehaviour {
         switch(index)
         {
             case 1:
-                float distance = Vector3.Distance(transform.position, line1[0].transform.position);
-                Vector3 direction = (line1[0].transform.position - transform.position);
-                direction.Normalize();
 
-                Debug.DrawRay(transform.position, direction * distance, Color.green, 1000);
+                //float distance = Vector3.Distance(transform.position, line1[0].transform.position);
+                //Vector3 direction = (line1[0].transform.position - transform.position);
+                //direction.Normalize();
+
+                //Debug.DrawRay(transform.position, direction * distance, Color.green, 1000);
+                smoke1.Play();
                 for (int i = 0; i < line1.Length; i++)
                 {
                     line1[i].DrawConnection(Color.green);
                 }
+
                 break;
             case 2:
-                float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
-                Vector3 direction2 = (line2[0].transform.position - transform.position);
-                direction2.Normalize();
 
-                Debug.DrawRay(transform.position, direction2 * distance2, Color.green, 1000);
+                //float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
+                //Vector3 direction2 = (line2[0].transform.position - transform.position);
+                //direction2.Normalize();
+
+                //Debug.DrawRay(transform.position, direction2 * distance2, Color.green, 1000);
+                smoke2.Play();
                 for (int i = 0; i < line1.Length; i++)
                 {
                     line2[i].DrawConnection(Color.green);
                 }
+
                 break;
         }
     }
@@ -120,25 +133,28 @@ public class BigValve : MonoBehaviour {
         switch (index)
         {
             case 1:
-                float distance = Vector3.Distance(transform.position, line1[0].transform.position);
-                Vector3 direction = (line1[0].transform.position - transform.position);
-                direction.Normalize();
+                //float distance = Vector3.Distance(transform.position, line1[0].transform.position);
+                //Vector3 direction = (line1[0].transform.position - transform.position);
+                //direction.Normalize();
 
-                Debug.DrawRay(transform.position, direction * distance, Color.red, 1000);
+                //Debug.DrawRay(transform.position, direction * distance, Color.red, 1000);
+                smoke1.Stop();
+
                 for (int i = 0; i < line1.Length; i++)
                 {
-                    line1[i].DrawConnection(Color.red);
+                    line1[i].DeleteConnection();
                 }
                 break;
             case 2:
-                float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
-                Vector3 direction2 = (line2[0].transform.position - transform.position);
-                direction2.Normalize();
+                smoke2.Stop();
+                //float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
+                //Vector3 direction2 = (line2[0].transform.position - transform.position);
+                //direction2.Normalize();
 
-                Debug.DrawRay(transform.position, direction2 * distance2, Color.red, 1000);
+                //Debug.DrawRay(transform.position, direction2 * distance2, Color.red, 1000);
                 for (int i = 0; i < line2.Length; i++)
                 {
-                    line2[i].DrawConnection(Color.red);
+                    line2[i].DeleteConnection();
                 }
                 break;
         }
@@ -154,22 +170,22 @@ public class BigValve : MonoBehaviour {
             {
                 case "Input":
                     currentState = 3;
+                    DisableLine(2);
                     break;
 
                 case "Line1":
                     currentState = 1;
-                    DisableLine(2);
                     ActivateLine(1);
                     break;
 
                 case "Line2":
                     currentState = 2;
-                    DisableLine(1);
                     ActivateLine(2);
                     break;
 
                 case "Off":
                     currentState = 0;
+                    DisableLine(1);
                     break;
             }
         }

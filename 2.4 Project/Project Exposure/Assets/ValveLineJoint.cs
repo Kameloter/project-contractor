@@ -4,19 +4,24 @@ using System.Collections;
 public class ValveLineJoint : MonoBehaviour {
 
    public ValveLineJoint connectTo;
-
+    ParticleSystem smoke;
 	// Use this for initialization
 	void Start () {
-	    
+       
+        smoke.Pause();
+        if (smoke == null)
+            Debug.Log("ebi sa ");
 	}
 	public void DrawConnection(Color color)
     {
-        if(connectTo != null)
-        {
-            float distance = Vector3.Distance(transform.position, connectTo.transform.position);
-            Debug.DrawRay(transform.position, transform.right * distance, color,1000);
-        }
+        smoke.Play();
        
+    }
+    public void DeleteConnection()
+    {
+        if (smoke == null)
+            smoke = GetComponentInChildren<ParticleSystem>();
+        smoke.Stop();
     }
 	
 }
