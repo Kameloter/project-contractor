@@ -388,7 +388,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 4, y: 1, z: 4}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &687038560
 MeshRenderer:
@@ -442,8 +442,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 687038557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.25, y: 0.54, z: -37.72}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 6.96, y: 0.44, z: -36.28}
+  m_LocalScale: {x: 11.572215, y: 1.2117143, z: 3.8739815}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
@@ -1245,7 +1245,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 9d9d72108f5f70a44b77305db22e9057, type: 2}
+  - {fileID: 2100000, guid: 9e75fec53f25793499fbf0d09c9c76f3, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
