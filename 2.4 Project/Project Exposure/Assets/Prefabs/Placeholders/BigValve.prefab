@@ -32,7 +32,7 @@ GameObject:
   m_Layer: 0
   m_Name: Line2
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -48,9 +48,9 @@ GameObject:
   - 65: {fileID: 6526074}
   - 23: {fileID: 2383898}
   m_Layer: 0
-  m_Name: None
+  m_Name: Input
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -62,6 +62,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 474188}
+  - 114: {fileID: 11422924}
+  - 135: {fileID: 13533324}
   m_Layer: 0
   m_Name: BigValve
   m_TagString: Untagged
@@ -83,7 +85,7 @@ GameObject:
   m_Layer: 0
   m_Name: Off
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -119,7 +121,7 @@ GameObject:
   m_Layer: 0
   m_Name: Line1
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -129,7 +131,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169064}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
   m_LocalPosition: {x: 0, y: 0.477, z: -0.328}
   m_LocalScale: {x: 0.10711586, y: 0.09089006, z: 0.539663}
   m_Children: []
@@ -482,6 +484,31 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11422924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157118}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a290ff3a1e06fe14cb9eadc188b063df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayPointer: {fileID: 426328}
+  currentState: 0
+--- !u!135 &13533324
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 157118}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &100100000
 Prefab:

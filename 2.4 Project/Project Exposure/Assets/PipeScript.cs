@@ -11,6 +11,12 @@ public class PipeScript : MonoBehaviour {
     Interactable[] interactables;
 
     GameObject socketed = null;
+    [HideInInspector]
+    public BigValve controlValve;
+
+    [Header("Connects to : ")]
+    public int valveID;
+    public int valveLine;
 
 	// Use this for initialization
 	void Start () {
@@ -36,9 +42,18 @@ public class PipeScript : MonoBehaviour {
         valve.GetComponent<PickableScript>().Place(this.transform.position + this.transform.up,this.gameObject);
         valve.GetComponent<PickableScript>().clickable = false;
         socketed = valve;
-        foreach (Interactable interactable in interactables) {
-            interactable.Activate();
+        if(controlValve.currentState == valveLine)
+        {
+            foreach (Interactable interactable in interactables)
+            {
+                interactable.Activate();
+            }
         }
+        else
+        {
+            Debug.Log("Line not active! Not doing action.");
+        }
+     
     }
 
     void RemoveValve(GameObject valve) {
