@@ -5,10 +5,12 @@ public class PickableScript : MonoBehaviour {
 
     bool InRange = false;
     bool IsCarried = false;
+    public bool clickable = true;
 
     GameObject Player;
 
     Rigidbody rigidBody;
+
 	// Use this for initialization
 	void Start () {
         Player = GameObject.FindGameObjectWithTag("Player");
@@ -21,13 +23,14 @@ public class PickableScript : MonoBehaviour {
 	}
 
     void OnMouseDown() {
-        if (IsCarried) {
-            print("dropping");
-            Drop();
-        }
-        else {
-            if (InRange) {
-                PickUp();
+        if (clickable) {
+            if (IsCarried) {
+                Drop();
+            }
+            else {
+                if (InRange) {
+                    PickUp();
+                }
             }
         }
     }
@@ -62,6 +65,10 @@ public class PickableScript : MonoBehaviour {
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
         IsCarried = false;
+
+        if (this.CompareTag("Valve")) {
+            Player.GetComponent<PlayerScript>().carriedValve = null;
+        }
     }
 
     void OnTriggerEnter(Collider other) {

@@ -14,10 +14,11 @@ public class BridgeScript : Interactable {
 	}
 
     public override void Activate() {
-        print("hiiiiiiiiiiiii");
+        print("activated");
     }
 
     public override void Deactivate() {
+        print("deactivated");
 
     }
 }
