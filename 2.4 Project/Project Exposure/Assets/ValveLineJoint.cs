@@ -6,15 +6,19 @@ public class ValveLineJoint : MonoBehaviour {
    public ValveLineJoint connectTo;
     ParticleSystem smoke;
 	// Use this for initialization
+    void Awake()
+    {
+        smoke = GetComponentInChildren<ParticleSystem>();
+    }
 	void Start () {
        
         smoke.Pause();
-        if (smoke == null)
-            Debug.Log("ebi sa ");
+
 	}
 	public void DrawConnection(Color color)
     {
-        smoke.Play();
+        if(smoke!=null)
+          smoke.Play();
        
     }
     public void DeleteConnection()

@@ -44,10 +44,7 @@ public class PipeScript : MonoBehaviour {
         socketed = valve;
         if(controlValve.currentState == valveLine)
         {
-            foreach (Interactable interactable in interactables)
-            {
-                interactable.Activate();
-            }
+            ActivateInteractables();
         }
         else
         {
@@ -55,7 +52,15 @@ public class PipeScript : MonoBehaviour {
         }
      
     }
+    public void ActivateInteractables()
+    {
+        if (socketed == null) return;
+        foreach (Interactable interactable in interactables)
+        {
+            interactable.Activate();
+        }
 
+    }
     void RemoveValve(GameObject valve) {
         valve.GetComponent<PickableScript>().PickUp();
         valve.GetComponent<PickableScript>().clickable = true;
@@ -64,7 +69,13 @@ public class PipeScript : MonoBehaviour {
             interactable.Deactivate();
         }
     }
-
+    public void DeactivateSocket()
+    {
+        foreach (Interactable interactable in interactables)
+        {
+            interactable.Deactivate();
+        }
+    }
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = true;
