@@ -19,10 +19,15 @@ public class BigValve : MonoBehaviour {
     ValveLineJoint[] line2;
     public ParticleSystem smoke1;
     public ParticleSystem smoke2;
+
+    private List<PipeScript> line1Sockets;
+    private List<PipeScript> line2Sockets;
+
     void Awake()
     {
+        line1Sockets = new List<PipeScript>();
+        line2Sockets = new List<PipeScript>();
 
-      
     }
     // Use this for initialization
     void Start () {
@@ -53,10 +58,10 @@ public class BigValve : MonoBehaviour {
         int line2Lenght = line2.Length;
         for (int i = 0; i < line2Lenght; i++)
         {
-            print("name order -> " + line1[i].gameObject.name);
+          
             if (line2[i] != line2[line2Lenght - 1])
             {
-                Debug.Log("set " + line1[i].name + " to " + line1[i + 1].name);
+              
                 line2[i].connectTo = line2[i + 1];
             }
 
@@ -70,6 +75,10 @@ public class BigValve : MonoBehaviour {
             if(pipes[i].valveID == valveID)
             {
                 pipes[i].controlValve = this;
+                if (pipes[i].valveLine == 1)
+                    line1Sockets.Add(pipes[i]);
+                else
+                    line2Sockets.Add(pipes[i]);
             }
         }        
     }
@@ -99,31 +108,29 @@ public class BigValve : MonoBehaviour {
         {
             case 1:
 
-                //float distance = Vector3.Distance(transform.position, line1[0].transform.position);
-                //Vector3 direction = (line1[0].transform.position - transform.position);
-                //direction.Normalize();
 
-                //Debug.DrawRay(transform.position, direction * distance, Color.green, 1000);
                 smoke1.Play();
                 for (int i = 0; i < line1.Length; i++)
                 {
                     line1[i].DrawConnection(Color.green);
                 }
+                foreach (PipeScript socket in line1Sockets)
+                {
+                    socket.ActivateInteractables();
+                }
 
                 break;
             case 2:
 
-                //float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
-                //Vector3 direction2 = (line2[0].transform.position - transform.position);
-                //direction2.Normalize();
-
-                //Debug.DrawRay(transform.position, direction2 * distance2, Color.green, 1000);
                 smoke2.Play();
                 for (int i = 0; i < line1.Length; i++)
                 {
                     line2[i].DrawConnection(Color.green);
                 }
-
+                foreach (PipeScript socket in line2Sockets)
+                {
+                    socket.ActivateInteractables();
+                }
                 break;
         }
     }
@@ -133,28 +140,28 @@ public class BigValve : MonoBehaviour {
         switch (index)
         {
             case 1:
-                //float distance = Vector3.Distance(transform.position, line1[0].transform.position);
-                //Vector3 direction = (line1[0].transform.position - transform.position);
-                //direction.Normalize();
 
-                //Debug.DrawRay(transform.position, direction * distance, Color.red, 1000);
                 smoke1.Stop();
 
                 for (int i = 0; i < line1.Length; i++)
                 {
                     line1[i].DeleteConnection();
                 }
+                foreach (PipeScript socket in line1Sockets)
+                {
+                    socket.DeactivateSocket();
+                }
                 break;
             case 2:
                 smoke2.Stop();
-                //float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
-                //Vector3 direction2 = (line2[0].transform.position - transform.position);
-                //direction2.Normalize();
 
-                //Debug.DrawRay(transform.position, direction2 * distance2, Color.red, 1000);
                 for (int i = 0; i < line2.Length; i++)
                 {
                     line2[i].DeleteConnection();
+                }
+                foreach(PipeScript socket in line2Sockets)
+                {
+                    socket.DeactivateSocket();
                 }
                 break;
         }
