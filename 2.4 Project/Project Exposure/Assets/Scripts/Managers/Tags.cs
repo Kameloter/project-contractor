@@ -13,4 +13,5 @@ public class Tags : MonoBehaviour {
     
     //Custom Tags
     public const string valve = "Valve";
+    public const string mirror = "Mirror";
 }
