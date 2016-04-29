@@ -22,7 +22,7 @@ public class LaserEmitter : MonoBehaviour {
         //}
 
         RaycastHit hit;
-        Vector3 RayDir = transform.forward;
+        Vector3 RayDir = transform.forward; 
         for (int i = 0; i < 1000; i++) {
             if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
                 Debug.DrawLine(startPoint, hit.point, Color.red);                //laser
