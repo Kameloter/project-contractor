@@ -58,10 +58,10 @@ public class BigValve : MonoBehaviour {
         int line2Lenght = line2.Length;
         for (int i = 0; i < line2Lenght; i++)
         {
-            print("name order -> " + line1[i].gameObject.name);
+          
             if (line2[i] != line2[line2Lenght - 1])
             {
-                Debug.Log("set " + line1[i].name + " to " + line1[i + 1].name);
+              
                 line2[i].connectTo = line2[i + 1];
             }
 

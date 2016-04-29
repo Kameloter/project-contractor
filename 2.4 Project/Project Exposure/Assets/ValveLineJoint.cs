@@ -17,7 +17,7 @@ public class ValveLineJoint : MonoBehaviour {
 	}
 	public void DrawConnection(Color color)
     {
-        if(smoke!=null)
+		if(smoke!=null && connectTo != null)
           smoke.Play();
        
     }
