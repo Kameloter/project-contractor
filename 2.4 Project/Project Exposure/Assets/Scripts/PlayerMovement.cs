@@ -8,7 +8,7 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-
+    NavMeshAgent agent;
 
     private Camera cam;
     private Rigidbody rigibody;
@@ -23,12 +23,25 @@ public class PlayerMovement : MonoBehaviour
        // anim = GetComponentInChildren<Animator>();
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
     void FixedUpdate()
     {
-        Movement();
+        MouseMovement();
         rigibody.AddForce(new Vector3(0, -0.1f, 0));
+    }
+
+    void MouseMovement() {
+        //agent.areaMask = 4;
+        if (Input.GetMouseButtonDown(0)) {
+            RaycastHit hit;
+
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
+                agent.destination = hit.point;
+            }
+        }
+
     }
 
     void Movement()

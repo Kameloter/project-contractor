@@ -27,7 +27,7 @@ public class LaserEmitter : MonoBehaviour {
         RaycastHit hit;
         Vector3 RayDir = transform.forward;
 
-        for (int i = 1; i < 5; i++) {
+        for (int i = 1; i < 100; i++) {
             if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
                 if (hit.collider.CompareTag(Tags.mirror)) {
                     AddLineRenderer(startPoint, hit.point);
@@ -40,6 +40,7 @@ public class LaserEmitter : MonoBehaviour {
                 }
                 else {
                     AddLineRenderer(startPoint, hit.point);
+                    break;
                 }
             }
         }
