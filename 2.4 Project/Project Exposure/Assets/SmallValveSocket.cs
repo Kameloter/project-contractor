@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PipeScript : MonoBehaviour {
+public class SmallValveSocket : MonoBehaviour {
 
     bool InRange = false;
     GameObject Player;
@@ -30,6 +30,7 @@ public class PipeScript : MonoBehaviour {
 	}
 
     void OnMouseDown() {
+
         if (playerScript.carriedValve != null && InRange && !socketed) {
             PlaceValve(playerScript.carriedValve);
         }

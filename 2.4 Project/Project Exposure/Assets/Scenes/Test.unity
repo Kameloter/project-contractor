@@ -178,15 +178,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 467056, guid: bbc4ecd8fc9e0894992227dcd22d0724, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.18
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 467056, guid: bbc4ecd8fc9e0894992227dcd22d0724, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.54
+      value: 0.896
       objectReference: {fileID: 0}
     - target: {fileID: 467056, guid: bbc4ecd8fc9e0894992227dcd22d0724, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 6.84
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 467056, guid: bbc4ecd8fc9e0894992227dcd22d0724, type: 2}
       propertyPath: m_LocalRotation.x
@@ -373,6 +373,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe204605027dab3499ff504f097338c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  typeOfInteractable: 0
+  movableObject: {fileID: 0}
+  endPoint: {fileID: 0}
+  startPoint: {fileID: 0}
+  moveSpeed: 0
+  startState: 0
+  currentState: 0
+  degrees: 0
+  axisToRotate: {x: 0, y: 0, z: 0}
 --- !u!65 &935607548
 BoxCollider:
   m_ObjectHideFlags: 0
