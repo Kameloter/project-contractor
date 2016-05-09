@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     private float gravity = 10.0f;
     private float maxVelocityChange = 10.0f;
 
+    private NavMeshPath path;
     
   //  Animator anim;
     void Start()
@@ -24,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+
+        path = new NavMeshPath();
     }
 
     void FixedUpdate()
@@ -34,13 +37,28 @@ public class PlayerMovement : MonoBehaviour
 
     void MouseMovement() {
         //agent.areaMask = 4;
-        if (Input.GetMouseButtonDown(0)) {
+        if (Input.GetMouseButton(0)) {
             RaycastHit hit;
-
+            NavMeshHit navHit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
-                agent.destination = hit.point;
+                if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
+                    NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
+                    if (path.status == NavMeshPathStatus.PathComplete) {
+                        agent.destination = hit.point;
+                    }
+                }
+
+
             }
+
+
+
+            for (int i = 0; i < path.corners.Length - 1; i++)
+                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
+
+
         }
+
 
     }
 
