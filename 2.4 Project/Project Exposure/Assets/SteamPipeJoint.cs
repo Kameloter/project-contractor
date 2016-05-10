@@ -21,18 +21,18 @@ public class SteamPipeJoint : MonoBehaviour {
 
     public void StopSteamConnection()
     {
-        //if(smoke != null)
-        //{
+     
        
-        //}
-
-        activated = false;
         if (connectTo != null)
         {
+          
             smoke.Stop();
+            activated = false;
             float distance = Vector3.Distance(transform.position, connectTo.transform.position);
             float waitTime = distance / connectTo.steamParticleSpeed;
+            print("stoppping smoke" + waitTime);
             Invoke("StopSmoke", waitTime);
+         
         }
     }
     void StopSmoke()
