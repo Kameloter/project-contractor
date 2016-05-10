@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         MouseMovement();
-        rigibody.AddForce(new Vector3(0, -0.1f, 0));
+        //rigibody.AddForce(new Vector3(0, -0.1f, 0));
     }
 
     void MouseMovement() {
@@ -47,16 +47,9 @@ public class PlayerMovement : MonoBehaviour
                         agent.destination = hit.point;
                     }
                 }
-
-
             }
-
-
-
-            for (int i = 0; i < path.corners.Length - 1; i++)
-                Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
-
-
+            //for (int i = 0; i < path.corners.Length - 1; i++)
+            //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
 
 
