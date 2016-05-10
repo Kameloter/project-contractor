@@ -26,6 +26,8 @@ public class BigValve : MonoBehaviour {
     private List<SmallValveSocket> line1Sockets;
     private List<SmallValveSocket> line2Sockets;
 
+    bool activated = false;
+
     void Awake()
     {
         line1Sockets = new List<SmallValveSocket>();
@@ -102,7 +104,7 @@ public class BigValve : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (InRange)
+        if (InRange && activated)
             Rotate();
     }
     void ActivateLine(int index)
@@ -216,6 +218,14 @@ public class BigValve : MonoBehaviour {
         }
     }
 
+    void OnParticleCollision(GameObject go) {
+      
+            if (!activated) {
+                activated = true;
+            }
+        
+
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
