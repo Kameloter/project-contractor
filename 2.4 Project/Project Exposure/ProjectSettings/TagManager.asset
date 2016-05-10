@@ -7,6 +7,9 @@ TagManager:
   - Valve
   - Mirror
   - Managers
+  - WaterParticle
+  - HeatParticle
+  - SteamParticle
   layers:
   - Default
   - TransparentFX
