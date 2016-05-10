@@ -2001,7 +2001,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 431272, guid: b3cf46ca442e73840b2736a2bee78908, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3cf46ca442e73840b2736a2bee78908, type: 2}
@@ -5373,14 +5373,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 13671224, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5452930, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
-      propertyPath: m_IsKinematic
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
   m_IsPrefabParent: 0
@@ -5388,26 +5380,6 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 191208, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
   m_PrefabInternal: {fileID: 1978949534}
---- !u!195 &1978949536
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1978949535}
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 100000
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
-  m_WalkableMask: 13
-  m_ObstacleAvoidanceType: 4
 --- !u!1 &1981463138
 GameObject:
   m_ObjectHideFlags: 0
@@ -5520,7 +5492,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 427624, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: targetToFollow
