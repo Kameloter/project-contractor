@@ -74,12 +74,14 @@ public class PickableScript : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = true;
+            print("In Range TRUE");
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = false;
+            print("In Range FALSE");
         }
     }
 }
