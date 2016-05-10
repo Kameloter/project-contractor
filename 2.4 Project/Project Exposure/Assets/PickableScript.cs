@@ -31,6 +31,9 @@ public class PickableScript : MonoBehaviour {
                 if (InRange) {
                     PickUp();
                 }
+                else {
+                    GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+                }
             }
         }
     }
