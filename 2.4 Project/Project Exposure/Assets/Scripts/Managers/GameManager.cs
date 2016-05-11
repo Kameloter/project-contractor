@@ -24,4 +24,32 @@ public class GameManager : MonoBehaviour {
     public GameState CurrentState {
         get { return _currentState; }
     }
+
+    //PLAYER  //SerializeField used for debugging purposes.
+    [SerializeField] private GameObject _player;
+    [SerializeField] private PlayerScript _playerScript;
+    [SerializeField] private int _totalCollectables = 0;
+
+    public GameObject Player {
+        get {
+            if (_player == null) _player = GameObject.FindGameObjectWithTag("Player");
+            return _player;
+        }
+    }
+
+    public PlayerScript PlayerScript { //fast access to playerscript
+        get {
+            if (_playerScript == null) _playerScript = Player.GetComponent<PlayerScript>();
+            return _playerScript;
+        }
+    }
+
+    public void IncreaseCollectables(int amount = 1) {
+        PlayerScript.collectables += amount; 
+    }
+
+    public int TotalCollectables {
+        get { return _totalCollectables; }
+        set { _totalCollectables = value; }        
+    }
 }
