@@ -41,30 +41,41 @@ public class Interactable : MonoBehaviour {
     public virtual void FixedUpdate()
     {
 
-        if(currentState != 0)
-        {
-            movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
+        switch (typeOfInteractable) {
+            case TypeOfInteractables.Movable:
+                if (currentState != 0) {
+                    movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
 
-            if (currentState == 2)
-            {
-                SetDestination(endPoint);
-            }
+                    if (currentState == 2) {
+                        SetDestination(endPoint);
+                    }
 
-            if (currentState == 1)
-            {
-                SetDestination(startPoint);
-            }
+                    if (currentState == 1) {
+                        SetDestination(startPoint);
+                    }
 
-            if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f)
-            {
-                currentState = 0;
-                moveDirection = Vector3.zero;
-                movableObject.position = currentDestination.position;
-            }
+                    if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
+                        currentState = 0;
+                        moveDirection = Vector3.zero;
+                        movableObject.position = currentDestination.position;
+                    }
+
+                }
+                break;
+
+            case TypeOfInteractables.Rotatable:
+                switch (currentState) {
+                    case 1:
+                        this.transform.rotation = Quaternion.AngleAxis(degrees, axisToRotate);
+                        break;
+                        
+                    case 2:
+                        this.transform.rotation = Quaternion.AngleAxis(0, axisToRotate);
+                        break;
+                }
+                break;
 
         }
-
-
         //should handle when an object started rotating 
 
         //should handle when an object started moving 
