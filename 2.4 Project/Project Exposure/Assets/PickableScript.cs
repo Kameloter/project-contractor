@@ -16,11 +16,6 @@ public class PickableScript : MonoBehaviour {
         Player = GameObject.FindGameObjectWithTag("Player");
         rigidBody = this.GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
 
     void OnMouseDown() {
         if (clickable) {
