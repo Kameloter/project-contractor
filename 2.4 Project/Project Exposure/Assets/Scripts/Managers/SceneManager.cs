@@ -2,23 +2,18 @@
 using System.Collections;
 
 
-public enum GameState
-{
+public enum GameState {
     Menu, InGame, Paused
 }
-public class SceneManager : MonoBehaviour
-{
 
+public class SceneManager : MonoBehaviour {
     GameState currentState;
 
-
-    void Awake()
-    {
+    void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
     }
-    // Use this for initialization
-    void Start()
-    {
+    
+    void Start() {
         currentState = GameManager.Instance.CurrentState;
 
         //if (currentState == GameState.InGame)
@@ -33,14 +28,9 @@ public class SceneManager : MonoBehaviour
         //}
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            switch (currentState)
-            {
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            switch (currentState) {
                 case GameState.InGame:
                     SetState(GameState.Paused);
                     break;
@@ -54,14 +44,9 @@ public class SceneManager : MonoBehaviour
         }
     }
 
-
-
-
-    public void SetState(GameState newGameState)
-    {
+    public void SetState(GameState newGameState) {
         DisablePreviousState(currentState);
-        switch (newGameState)
-        {
+        switch (newGameState) {
             case GameState.Menu:
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
@@ -74,52 +59,47 @@ public class SceneManager : MonoBehaviour
             case GameState.Paused:
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
-                Time.timeScale = 0; // stop ime when paused.
+                Time.timeScale = 0; // stop time when paused.
                 break;
         }
         currentState = newGameState;
     }
 
 
-    void DisablePreviousState(GameState previousState)
-    {
-        switch (previousState)
-        {
+    void DisablePreviousState(GameState previousState) {
+        switch (previousState) {
             case GameState.Menu:
                 break;
             case GameState.InGame:
                 break;
             case GameState.Paused:
-                //deactivate puase menu
+                //deactivate pause menu
                 break;
         }
     }
 
-
-    public void UnpauseGame()
-    {
+    public void UnpauseGame() {
         SetState(GameState.InGame);
     }
-    public void PauseGame()
-    {
+    public void PauseGame() {
         SetState(GameState.Paused);
     }
 
-    public void SwitchToLevel(int index)
-    {
+    public void SwitchToLevel(int index) {
+        ExportSaveData();
         print("loading level " + index);
         SetState(GameState.InGame);
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
         print("loaded level " + index);
     }
 
-
-    public void QuitGame()
-    {
-        print("Application shut down !!");
-        Application.Quit();
+    public void ExportSaveData() {
+        GameManager.Instance.TotalCollectables += GameManager.Instance.PlayerScript.collectables;
     }
 
-
+    public void QuitGame() {
+        print("Application shut down.");
+        Application.Quit();
+    }
 }
 
