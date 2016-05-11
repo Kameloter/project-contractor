@@ -13,7 +13,6 @@ public class ProceduralBridge : MonoBehaviour {
     Transform leftTr;
     Transform rightTr;
 
-    List<GameObject> bridgeParts = null;
 
     float distanceBetweenParts = 0;
     float wholePartsCount = 0;
@@ -28,16 +27,16 @@ public class ProceduralBridge : MonoBehaviour {
             bridgeBuilt = true;
     }
 
-	IEnumerator Build()
+	void Build()
     {
         for (int i = 0; i < wholePartsCount; i++)
         {
             Vector3 direction = leftTr.position - rightTr.position;
             direction.Normalize();
-            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + (i * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + (i * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
+            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 1) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 1) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
             part.transform.parent = holder.transform;
             // bridgeParts.Add(part);
-            yield return new WaitForSeconds(0.15f);
+            //yield return new WaitForSeconds(0.15f);
         }
         print("Bridge constructed!");
     }
@@ -73,8 +72,7 @@ public class ProceduralBridge : MonoBehaviour {
                 bridgeBuilt = true;
                 distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
                 wholePartsCount = Mathf.Ceil(distanceBetweenParts);
-                bridgeParts = new List<GameObject>((int)wholePartsCount);
-                StartCoroutine("Build");
+                Build();
             }
         }
     }

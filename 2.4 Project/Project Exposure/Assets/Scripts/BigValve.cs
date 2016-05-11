@@ -120,23 +120,20 @@ public class BigValve : MonoBehaviour {
                 //    line1[i].DrawConnection();
                 //}
 
-                //foreach (SmallValveSocket socket in line1Sockets)
-                //{
-                //    socket.ActivateInteractables();
-                //}
+                foreach (SmallValveSocket socket in line1Sockets)
+                {
+                    socket.ActivateInteractables();
+                }
 
                 break;
             case 2:
 
                 smoke2.Play();
-                //for (int i = 0; i < line1.Length; i++)
-                //{
-                //    line2[i].DrawConnection();
-                //}
-                //foreach (SmallValveSocket socket in line2Sockets)
-                //{
-                //    socket.ActivateInteractables();
-                //}
+
+                foreach (SmallValveSocket socket in line2Sockets)
+                {
+                    socket.ActivateInteractables();
+                }
                 break;
         }
     }
@@ -164,10 +161,10 @@ public class BigValve : MonoBehaviour {
                 //{
                 //    line1[i].DeleteConnection();
                 //}
-                //foreach (SmallValveSocket socket in line1Sockets)
-                //{
-                //    socket.DeactivateSocket();
-                //}
+                foreach (SmallValveSocket socket in line1Sockets)
+                {
+                    socket.DeactivateSocket();
+                }
                 break;
             case 2:
                 smoke2.Stop();
@@ -179,10 +176,10 @@ public class BigValve : MonoBehaviour {
                 //{
                 //    line2[i].DeleteConnection();
                 //}
-                //foreach(SmallValveSocket socket in line2Sockets)
-                //{
-                //    socket.DeactivateSocket();
-                //}
+                foreach (SmallValveSocket socket in line2Sockets)
+                {
+                    socket.DeactivateSocket();
+                }
                 break;
         }
     }
