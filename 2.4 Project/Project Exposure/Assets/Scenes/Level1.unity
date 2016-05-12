@@ -5624,7 +5624,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 488934, guid: 9b7a40ff84bb52f499e337541657c129, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 2.49
+      value: 2.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 11439318, guid: 9b7a40ff84bb52f499e337541657c129, type: 2}
+      propertyPath: typeOfInteractable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9b7a40ff84bb52f499e337541657c129, type: 2}
@@ -7392,6 +7396,22 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 0
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &1715732771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1715732764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb877d3e8684da4699a202260a041e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperatureState: 1
+  changeable: 1
+  frozenMaterial: {fileID: 2100000, guid: 848918a99d11f25f110026ca44295342, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: ff31adc1e5cf3ea4b9efc4c0df263fec, type: 2}
+  hotMaterial: {fileID: 2100000, guid: ac14f7cc45f9c0c408feb723ae892a24, type: 2}
 --- !u!1 &1761497948
 GameObject:
   m_ObjectHideFlags: 0
@@ -9547,6 +9567,7 @@ GameObject:
   - 65: {fileID: 2070958098}
   - 23: {fileID: 2070958097}
   - 114: {fileID: 2070958096}
+  - 114: {fileID: 2070958101}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -9574,6 +9595,7 @@ MonoBehaviour:
   startState: 0
   degrees: 90
   axisToRotate: {x: 0, y: 1, z: 0}
+  temperatureScript: {fileID: 0}
 --- !u!23 &2070958097
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9584,7 +9606,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 796cf22a314a0174fa3edd1452774f30, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -9631,6 +9653,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!114 &2070958101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2070958095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebb877d3e8684da4699a202260a041e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperatureState: 1
+  changeable: 1
+  frozenMaterial: {fileID: 2100000, guid: ff31adc1e5cf3ea4b9efc4c0df263fec, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: 848918a99d11f25f110026ca44295342, type: 2}
+  hotMaterial: {fileID: 2100000, guid: 24385af51685bf740abfe80ed8da5d4a, type: 2}
 --- !u!1 &2117592435
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,11 +10,11 @@ public class DoorActivatorScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
 
-        if (timer > 0.5f) {
-            transform.parent.GetComponent<Interactable>().currentState = 1;
-        }
+        //if (timer > 0.5f) {
+        //    transform.parent.GetComponent<Interactable>().currentState = 1;
+        //}
 	}
 
     void OnParticleCollision(GameObject go) {
