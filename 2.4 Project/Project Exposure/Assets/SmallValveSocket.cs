@@ -26,7 +26,6 @@ public class SmallValveSocket : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 
     void OnMouseDown() {
