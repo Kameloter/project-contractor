@@ -16,11 +16,6 @@ public class PickableScript : MonoBehaviour {
         Player = GameObject.FindGameObjectWithTag("Player");
         rigidBody = this.GetComponent<Rigidbody>();
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	    
-	}
 
     void OnMouseDown() {
         if (clickable) {
@@ -30,6 +25,9 @@ public class PickableScript : MonoBehaviour {
             else {
                 if (InRange) {
                     PickUp();
+                }
+                else {
+                    GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
                 }
             }
         }
@@ -74,12 +72,14 @@ public class PickableScript : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = true;
+            print("In Range TRUE");
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = false;
+            print("In Range FALSE");
         }
     }
 }

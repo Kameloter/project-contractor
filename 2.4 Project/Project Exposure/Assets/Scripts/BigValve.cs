@@ -14,19 +14,24 @@ public class BigValve : MonoBehaviour {
     bool InRange = false;
     public int valveID;
     bool inRotation = false;
+
     Quaternion targetRotation;
-    ValveLineJoint[] line1;
-    ValveLineJoint[] line2;
+
+    SteamPipeJoint[] line1;
+    SteamPipeJoint[] line2;
+
     public ParticleSystem smoke1;
     public ParticleSystem smoke2;
 
-    private List<PipeScript> line1Sockets;
-    private List<PipeScript> line2Sockets;
+    private List<SmallValveSocket> line1Sockets;
+    private List<SmallValveSocket> line2Sockets;
+
+    bool activated = false;
 
     void Awake()
     {
-        line1Sockets = new List<PipeScript>();
-        line2Sockets = new List<PipeScript>();
+        line1Sockets = new List<SmallValveSocket>();
+        line2Sockets = new List<SmallValveSocket>();
 
     }
     // Use this for initialization
@@ -41,7 +46,7 @@ public class BigValve : MonoBehaviour {
     }
     void SetupPipeConnection()
     {
-        line1 = line1Path.GetComponentsInChildren<ValveLineJoint>();
+        line1 = line1Path.GetComponentsInChildren<SteamPipeJoint>();
         int line1Lenght = line1.Length;
         for (int i = 0; i < line1Lenght; i++)
         {
@@ -54,7 +59,7 @@ public class BigValve : MonoBehaviour {
             
         }
 
-        line2 = line2Path.GetComponentsInChildren<ValveLineJoint>();
+        line2 = line2Path.GetComponentsInChildren<SteamPipeJoint>();
         int line2Lenght = line2.Length;
         for (int i = 0; i < line2Lenght; i++)
         {
@@ -69,16 +74,16 @@ public class BigValve : MonoBehaviour {
     }
     void ConnectSmallValves()
     {
-        PipeScript[] pipes = FindObjectsOfType<PipeScript>();
-        for (int i = 0; i < pipes.Length; i++)
+        SmallValveSocket[] smallValveSockets = FindObjectsOfType<SmallValveSocket>();
+        for (int i = 0; i < smallValveSockets.Length; i++)
         {
-            if(pipes[i].valveID == valveID)
+            if(smallValveSockets[i].valveID == valveID)
             {
-                pipes[i].controlValve = this;
-                if (pipes[i].valveLine == 1)
-                    line1Sockets.Add(pipes[i]);
+                smallValveSockets[i].controlValve = this;
+                if (smallValveSockets[i].valveLine == 1)
+                    line1Sockets.Add(smallValveSockets[i]);
                 else
-                    line2Sockets.Add(pipes[i]);
+                    line2Sockets.Add(smallValveSockets[i]);
             }
         }        
     }
@@ -99,7 +104,7 @@ public class BigValve : MonoBehaviour {
 
     void OnMouseDown()
     {
-        if (InRange)
+        if (InRange && activated)
             Rotate();
     }
     void ActivateLine(int index)
@@ -110,11 +115,12 @@ public class BigValve : MonoBehaviour {
 
 
                 smoke1.Play();
-                for (int i = 0; i < line1.Length; i++)
-                {
-                    line1[i].DrawConnection(Color.green);
-                }
-                foreach (PipeScript socket in line1Sockets)
+                //for (int i = 0; i < line1.Length; i++)
+                //{
+                //    line1[i].DrawConnection();
+                //}
+
+                foreach (SmallValveSocket socket in line1Sockets)
                 {
                     socket.ActivateInteractables();
                 }
@@ -123,18 +129,22 @@ public class BigValve : MonoBehaviour {
             case 2:
 
                 smoke2.Play();
-                for (int i = 0; i < line1.Length; i++)
-                {
-                    line2[i].DrawConnection(Color.green);
-                }
-                foreach (PipeScript socket in line2Sockets)
+
+                foreach (SmallValveSocket socket in line2Sockets)
                 {
                     socket.ActivateInteractables();
                 }
                 break;
         }
     }
-  
+    void StopLine1()
+    {
+        line1[0].StopSteamConnection();
+    }
+    void StopLine2()
+    {
+        line2[0].StopSteamConnection();
+    }
     void DisableLine(int index)
     {
         switch (index)
@@ -142,24 +152,31 @@ public class BigValve : MonoBehaviour {
             case 1:
 
                 smoke1.Stop();
+              
+                float distance = Vector3.Distance(transform.position, line1[0].transform.position);
+                float waitTime = distance / line1[0].steamParticleSpeed;
+                Invoke("StopLine1", waitTime);
 
-                for (int i = 0; i < line1.Length; i++)
-                {
-                    line1[i].DeleteConnection();
-                }
-                foreach (PipeScript socket in line1Sockets)
+                //for (int i = 0; i < line1.Length; i++)
+                //{
+                //    line1[i].DeleteConnection();
+                //}
+                foreach (SmallValveSocket socket in line1Sockets)
                 {
                     socket.DeactivateSocket();
                 }
                 break;
             case 2:
                 smoke2.Stop();
+                float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
+                float waitTime2 = distance2 / line2[0].steamParticleSpeed;
+                Invoke("StopLine2", waitTime2);
 
-                for (int i = 0; i < line2.Length; i++)
-                {
-                    line2[i].DeleteConnection();
-                }
-                foreach(PipeScript socket in line2Sockets)
+                //for (int i = 0; i < line2.Length; i++)
+                //{
+                //    line2[i].DeleteConnection();
+                //}
+                foreach (SmallValveSocket socket in line2Sockets)
                 {
                     socket.DeactivateSocket();
                 }
@@ -198,6 +215,14 @@ public class BigValve : MonoBehaviour {
         }
     }
 
+    void OnParticleCollision(GameObject go) {
+      
+            if (!activated) {
+                activated = true;
+            }
+        
+
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
