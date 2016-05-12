@@ -27,30 +27,29 @@ public class LaserEmitter : MonoBehaviour {
         RaycastHit hit;
         Vector3 RayDir = transform.forward;
 
-        for (int i = 1; i < 100; i++) {
+        for (int i = 1; i < 100; i++) {  //Max 100 bounces
             if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
                 if (hit.collider.CompareTag(Tags.mirror)) {
-                    AddLineRenderer(startPoint, hit.point);
+                    AddLineRenderer(startPoint, hit.point, i.ToString());
                     Debug.DrawLine(startPoint, hit.point, Color.red);                //laser
                     Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow); //normal
 
-                    RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);
+                    RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);    //calculate reflected ray direction
                     Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);       //reflected laser
                     startPoint = hit.point;
-                }
-                else {
-                    AddLineRenderer(startPoint, hit.point);
-                    break;
+                } else {
+                    AddLineRenderer(startPoint, hit.point, i.ToString());
+                    break;                                                          //break out of the for loop to prevent multiple end lasors.
                 }
             }
         }
 
     }
 
-    void AddLineRenderer(Vector3 startPoint, Vector3 endPoint) {
+    void AddLineRenderer(Vector3 startPoint, Vector3 endPoint, string name = "") {
         GameObject lineRendererParent = new GameObject();
         lineRendererParent.transform.SetParent(this.transform);
-        lineRendererParent.name = "las0r";
+        lineRendererParent.name = "las0r " + name;
         LineRenderer lineRenderer = lineRendererParent.AddComponent<LineRenderer>();
 
         lineRenderer.SetWidth(0.1f, 0.1f);
