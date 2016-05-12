@@ -43,7 +43,7 @@ public class Interactable : MonoBehaviour {
         }
     }
     public virtual void FixedUpdate() {
-        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
+       // if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
             switch (typeOfInteractable) {
                 case TypeOfInteractables.Movable:
                     if (currentState != 0) {
@@ -78,7 +78,7 @@ public class Interactable : MonoBehaviour {
                     }
                     break;
             }
-        }
+      //  }
         //should handle when an object started rotating 
 
         //should handle when an object started moving 

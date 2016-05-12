@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEditor;
 
 [ExecuteInEditMode]
-public class ProceduralBridge : MonoBehaviour {
+public class ProceduralBridge : Interactable {
     public GameObject bridgePart;
     public GameObject leftPart;
     public GameObject rightPart;
@@ -60,15 +60,12 @@ public class ProceduralBridge : MonoBehaviour {
     }
 
 
-    public void Activate()
-    {
+    public override void Activate() {
         if (bridgeBuilt) { print("bridge already built!!!!!"); return; }
 
         RaycastHit hit;
-        if(Physics.Raycast(rightTr.position,leftTr.position - rightTr.position,out hit,1000))
-        {
-            if(hit.transform.name == "Left")
-            {
+        if (Physics.Raycast(rightTr.position, leftTr.position - rightTr.position, out hit, 1000)) {
+            if (hit.transform.name == "Left") {
                 bridgeBuilt = true;
                 distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
                 wholePartsCount = Mathf.Ceil(distanceBetweenParts);
@@ -77,8 +74,7 @@ public class ProceduralBridge : MonoBehaviour {
         }
     }
 
-    public void Deactivate()
-    {
+    public override void Deactivate() {
         Destroy();
     }
 
