@@ -8,7 +8,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PipeSystemJoints : MonoBehaviour
 {
-    public List<PipeJointPoint> pipeJoints;
+    public List<PipeJointPoint> pipeJoints = new List<PipeJointPoint>();
 
     
 }
@@ -30,20 +30,20 @@ public class PipeJointPoint : Object
 public class ValveSystem : Editor
 {
 
-   // private SerializedObject trackDataSO;
+    private SerializedObject trackDataSO;
     private PipeSystemJoints myTrackData;
-    private List<bool> showTrackDataPoint;
+    private List<bool> showTrackDataPoint = new List<bool>();
 
     void OnEnable()
     {
-       // trackDataSO = new SerializedObject(target);
+        trackDataSO = new SerializedObject(target);
      
     }
 
     public override void OnInspectorGUI()
     {
         myTrackData = (PipeSystemJoints)target;
-       // trackDataSO.Update();
+        trackDataSO.Update();
 
         EditorGUILayout.BeginVertical();
 
@@ -56,10 +56,10 @@ public class ValveSystem : Editor
                 //if (showTrackDataPoint[i])
                 //{
 
-                    tp.position = EditorGUILayout.Vector3Field("Position:", tp.position);
-                    tp.tangentDir = EditorGUILayout.Vector3Field("TangentDir:", tp.tangentDir);
-                    tp.tangentWeightIn = EditorGUILayout.FloatField("Tangent Weight In:", tp.tangentWeightIn);
-                    tp.tangentWeightOut = EditorGUILayout.FloatField("Tangent Weight Out:", tp.tangentWeightOut);
+                  //  tp.position = EditorGUILayout.Vector3Field("Position:", tp.position);
+                   // tp.tangentDir = EditorGUILayout.Vector3Field("TangentDir:", tp.tangentDir);
+                   // tp.tangentWeightIn = EditorGUILayout.FloatField("Tangent Weight In:", tp.tangentWeightIn);
+//                    tp.tangentWeightOut = EditorGUILayout.FloatField("Tangent Weight Out:", tp.tangentWeightOut);
 
                 //}
                 //i++;
@@ -82,6 +82,6 @@ public class ValveSystem : Editor
             EditorUtility.SetDirty(myTrackData);
         }
 
-      //  trackDataSO.ApplyModifiedProperties();
+        trackDataSO.ApplyModifiedProperties();
     }
 }
