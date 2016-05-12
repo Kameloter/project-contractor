@@ -9,7 +9,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     NavMeshAgent agent;
-
+    
     private Camera cam;
     private Rigidbody rigibody;
     public float speed = 10.0f;
@@ -17,10 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private float maxVelocityChange = 10.0f;
 
     private NavMeshPath path;
-    
+    public LayerMask clickableLayer;
+    bool eventCalled = false;
   //  Animator anim;
     void Start()
     {
+        print(clickableLayer.value);
        // anim = GetComponentInChildren<Animator>();
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
@@ -38,13 +40,27 @@ public class PlayerMovement : MonoBehaviour
 
     void MouseMovement() {
         //agent.areaMask = 4;
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0))
+        {
             RaycastHit hit;
             NavMeshHit navHit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
-                if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
+            {
+
+                if (hit.transform.GetComponent<CustomEvent>() != null && !eventCalled)
+                {
+                    print("ha");
+                    hit.transform.GetComponent<CustomEvent>().OnCustomEvent();
+                    eventCalled = true;
+                }
+
+
+                //Navigation
+                if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas))
+                {
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete) {
+                    if (path.status == NavMeshPathStatus.PathComplete)
+                    {
                         agent.destination = hit.point;
                     }
                 }
@@ -52,6 +68,7 @@ public class PlayerMovement : MonoBehaviour
             //for (int i = 0; i < path.corners.Length - 1; i++)
             //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
+        else if (Input.GetMouseButtonUp(0)) { print("up"); eventCalled = false; }
 
 
     }

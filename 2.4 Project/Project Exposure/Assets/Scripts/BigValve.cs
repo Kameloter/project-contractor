@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 
+[ExecuteInEditMode]
 public class BigValve : MonoBehaviour {
 
     public GameObject line1Path;
@@ -30,20 +32,26 @@ public class BigValve : MonoBehaviour {
 
     void Awake()
     {
-        line1Sockets = new List<SmallValveSocket>();
-        line2Sockets = new List<SmallValveSocket>();
+        if (Application.isPlaying)
+        {
+            line1Sockets = new List<SmallValveSocket>();
+            line2Sockets = new List<SmallValveSocket>();
+        }
 
     }
     // Use this for initialization
-    void Start () {
-
-        valve = transform.GetChild(0);
-        ConnectSmallValves();
-        SetupPipeConnection();
-        DisableLine(1);
-        DisableLine(2);
-
+    void Start()
+    {
+        if (Application.isPlaying)
+        {
+            valve = transform.GetChild(0);
+            ConnectSmallValves();
+            SetupPipeConnection();
+            DisableLine(1);
+            DisableLine(2);
+        }
     }
+
     void SetupPipeConnection()
     {
         line1 = line1Path.GetComponentsInChildren<SteamPipeJoint>();
@@ -72,6 +80,9 @@ public class BigValve : MonoBehaviour {
 
         }
     }
+
+
+    
     void ConnectSmallValves()
     {
         SmallValveSocket[] smallValveSockets = FindObjectsOfType<SmallValveSocket>();
@@ -80,6 +91,7 @@ public class BigValve : MonoBehaviour {
             if(smallValveSockets[i].valveID == valveID)
             {
                 smallValveSockets[i].controlValve = this;
+
                 if (smallValveSockets[i].valveLine == 1)
                     line1Sockets.Add(smallValveSockets[i]);
                 else
@@ -115,25 +127,13 @@ public class BigValve : MonoBehaviour {
 
 
                 smoke1.Play();
-                //for (int i = 0; i < line1.Length; i++)
-                //{
-                //    line1[i].DrawConnection();
-                //}
 
-                foreach (SmallValveSocket socket in line1Sockets)
-                {
-                    socket.ActivateInteractables();
-                }
 
                 break;
             case 2:
 
                 smoke2.Play();
 
-                foreach (SmallValveSocket socket in line2Sockets)
-                {
-                    socket.ActivateInteractables();
-                }
                 break;
         }
     }
@@ -157,29 +157,18 @@ public class BigValve : MonoBehaviour {
                 float waitTime = distance / line1[0].steamParticleSpeed;
                 Invoke("StopLine1", waitTime);
 
-                //for (int i = 0; i < line1.Length; i++)
-                //{
-                //    line1[i].DeleteConnection();
-                //}
-                foreach (SmallValveSocket socket in line1Sockets)
-                {
-                    socket.DeactivateSocket();
-                }
+
+
                 break;
             case 2:
+
                 smoke2.Stop();
+
                 float distance2 = Vector3.Distance(transform.position, line2[0].transform.position);
                 float waitTime2 = distance2 / line2[0].steamParticleSpeed;
                 Invoke("StopLine2", waitTime2);
 
-                //for (int i = 0; i < line2.Length; i++)
-                //{
-                //    line2[i].DeleteConnection();
-                //}
-                foreach (SmallValveSocket socket in line2Sockets)
-                {
-                    socket.DeactivateSocket();
-                }
+
                 break;
         }
     }
@@ -237,5 +226,19 @@ public class BigValve : MonoBehaviour {
         {
             InRange = false;
         }
+    }
+}
+
+[CustomEditor(typeof(BigValve))]
+public class BigValveEditor : Editor
+{
+
+
+    public override void OnInspectorGUI()
+    {
+        DrawDefaultInspector();
+
+        BigValve myScript = (BigValve)target;
+
     }
 }
