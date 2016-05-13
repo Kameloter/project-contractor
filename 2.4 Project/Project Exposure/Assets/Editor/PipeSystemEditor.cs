@@ -22,11 +22,11 @@ public class PipeSystemEditor : Editor
 
         if (targetPoint.points.Length == 0) { Debug.Log("EMPTY POINT ARRAY"); return; }
 
-      
+
 
         Vector3 v0 = createPoint(0);
         int cashedLenght = targetPoint.points.Length;
-        for (int i = 1; i < cashedLenght; i+=2)
+        for (int i = 1; i < cashedLenght; i += 2)
         {
 
             if ((i + 1) == cashedLenght) return;
@@ -51,7 +51,7 @@ public class PipeSystemEditor : Editor
 
     private Vector3 createPoint(int index)
     {
-        
+
 
         Vector3 point = handleTransform.TransformPoint(targetPoint.points[index]);
         EditorGUI.BeginChangeCheck();
@@ -62,7 +62,10 @@ public class PipeSystemEditor : Editor
             EditorUtility.SetDirty(targetPoint);
             targetPoint.points[index] = handleTransform.InverseTransformPoint(point);
         }
+
         return point;
+
     }
 }
+
 

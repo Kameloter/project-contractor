@@ -127,6 +127,7 @@ public class Interactable : MonoBehaviour {
 
     void OnDrawGizmos() {
         if (typeOfInteractable == TypeOfInteractables.Movable) {
+            if (movableObject == null || startPoint == null || endPoint == null) return;
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(startPoint.position, movableObject.localScale);
 

@@ -12,6 +12,8 @@ public class BigValve : MonoBehaviour {
     RaycastHit hit;
     private Transform valve;
     public Transform rayPointer;
+    [Tooltip("0 = OFF , 1 = Line 1 , 2 = Line 2, 3 = INPUT !")]
+    public int startState;
     public int currentState = 0;
     bool InRange = false;
     public int valveID;
@@ -28,8 +30,16 @@ public class BigValve : MonoBehaviour {
     private List<SmallValveSocket> line1Sockets;
     private List<SmallValveSocket> line2Sockets;
 
+    Quaternion startRot;
+
     bool activated = false;
 
+
+
+    float inStateRot = 0;
+    float line2rot = 90;
+    float offRot = 180;
+    float line1rot = 270;
     void Awake()
     {
         if (Application.isPlaying)
@@ -37,6 +47,7 @@ public class BigValve : MonoBehaviour {
             line1Sockets = new List<SmallValveSocket>();
             line2Sockets = new List<SmallValveSocket>();
         }
+       
 
     }
     // Use this for initialization
@@ -45,10 +56,29 @@ public class BigValve : MonoBehaviour {
         if (Application.isPlaying)
         {
             valve = transform.GetChild(0);
+            startRot = valve.transform.rotation;
+
+
             ConnectSmallValves();
             SetupPipeConnection();
-            DisableLine(1);
-            DisableLine(2);
+            switch(startState)
+            {
+                case 0:
+                    SetRotation(offRot);
+                    break;
+                case 1:
+                    SetRotation(line1rot);
+                    break;
+                case 2:
+                    SetRotation(line2rot);
+                    break;
+                case 3:
+                    SetRotation(inStateRot);
+                    break;
+            }
+            //DisableLine(1);
+            //DisableLine(2);
+
         }
     }
 
@@ -172,35 +202,53 @@ public class BigValve : MonoBehaviour {
                 break;
         }
     }
+    void SetRotation(float rot)
+    {
+        valve.Rotate(new Vector3(0, rot, 0));
+
+        switch ((int)rot)
+        {
+            case 0:
+                currentState = 0;
+                DisableLine(2);
+                break;
+            case 90:
+                currentState = 2;
+                ActivateLine(2);
+                break;
+            case 180:
+                currentState = 3;
+                DisableLine(1);
+                break;
+            case 270:
+                currentState = 1;
+                ActivateLine(1);
+                break;
+        }
+    }
     void Rotate()
     {
-        // targetRotation = Quaternion.Euler(0, 90, 0) * valve.transform.rotation;
-        // inRotation = true;
-        valve.transform.Rotate(new Vector3(0, 90, 0));
-        if(Physics.Raycast(rayPointer.transform.position,rayPointer.transform.forward,out hit,1f))
+
+        valve.Rotate(new Vector3(0, -90, 0));
+
+        switch((int)valve.localEulerAngles.y)
         {
-            switch(hit.transform.name)
-            {
-                case "Input":
-                    currentState = 3;
-                    DisableLine(2);
-                    break;
-
-                case "Line1":
-                    currentState = 1;
-                    ActivateLine(1);
-                    break;
-
-                case "Line2":
-                    currentState = 2;
-                    ActivateLine(2);
-                    break;
-
-                case "Off":
-                    currentState = 0;
-                    DisableLine(1);
-                    break;
-            }
+            case 0:
+                currentState = 0;
+                DisableLine(2);
+                break;
+            case 90:
+                currentState = 2;
+                ActivateLine(2);
+                break;
+            case 180:
+                currentState = 3;
+                DisableLine(1);
+                break;
+            case 270:
+                currentState = 1;
+                ActivateLine(1);
+                break;
         }
     }
 

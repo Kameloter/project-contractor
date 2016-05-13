@@ -12,7 +12,7 @@ GameObject:
   - 65: {fileID: 6525532}
   - 23: {fileID: 2330878}
   m_Layer: 0
-  m_Name: BridgePart
+  m_Name: BridgePart 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
