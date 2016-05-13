@@ -19,10 +19,12 @@ public class ProceduralBridge : BaseInteractable {
     float wholePartsCount = 0;
     bool bridgeBuilt = false;
 
+    [SerializeField]
+    GameObject obstacle;
+
 	// Use this for initialization
 	void Start ()
     {
-        
         leftTr = leftPart.transform;
         rightTr = rightPart.transform;
         if (holder.transform.childCount > 0)
@@ -35,11 +37,12 @@ public class ProceduralBridge : BaseInteractable {
         {
             Vector3 direction = leftTr.position - rightTr.position;
             direction.Normalize();
-            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 1) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 1) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
+            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 0.5f) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 0.5f) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
             part.transform.parent = holder.transform;
             // bridgeParts.Add(part);
             //yield return new WaitForSeconds(0.15f);
         }
+        obstacle.SetActive(false);
         print("Bridge constructed!");
     }
 
@@ -56,6 +59,7 @@ public class ProceduralBridge : BaseInteractable {
                 DestroyImmediate(holder.transform.GetChild(0).gameObject);
             }
 
+            obstacle.SetActive(true);
             bridgeBuilt = false;
             print("Bridge deleted!");
         }
@@ -71,6 +75,7 @@ public class ProceduralBridge : BaseInteractable {
                 bridgeBuilt = true;
                 distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
                 wholePartsCount = Mathf.Ceil(distanceBetweenParts);
+                wholePartsCount /= bridgePart.transform.lossyScale.x;
                 Build();
             }
         }

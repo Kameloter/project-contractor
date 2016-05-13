@@ -12,7 +12,7 @@ public class SmallValveSocket : MonoBehaviour {
     public bool StartWithValve = false;
 
     [SerializeField]
-    Interactable[] interactables;
+    BaseInteractable[] interactables;
 
     //[HideInInspector]
     [HideInInspector]
@@ -120,7 +120,7 @@ public class SmallValveSocket : MonoBehaviour {
     public void ActivateInteractables() {
         if (controlValve.currentState == valveLine) {
             print("started with valve" + this.name);
-            foreach (Interactable interactable in interactables) {
+            foreach (BaseInteractable interactable in interactables) {
                 interactable.Activate();
             }
         }
@@ -130,14 +130,14 @@ public class SmallValveSocket : MonoBehaviour {
         valve.GetComponent<PickableScript>().PickUp();
         valve.GetComponent<PickableScript>().clickable = true;
         socketed = null;
-        foreach (Interactable interactable in interactables) {
+        foreach (BaseInteractable interactable in interactables) {
             interactable.DeActivate();
         }
     }
 
     public void DeactivateSocket()
     {
-        foreach (Interactable interactable in interactables)
+        foreach (BaseInteractable interactable in interactables)
         {
             interactable.DeActivate();
         }

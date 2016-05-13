@@ -39,6 +39,7 @@ public class PickableScript : MonoBehaviour {
         rigidBody.useGravity = false;
         rigidBody.isKinematic = true;
         IsCarried = true;
+        rigidBody.constraints = RigidbodyConstraints.None;
 
         if (this.CompareTag("Valve")) {
             Player.GetComponent<PlayerScript>().carriedValve = this.gameObject;
@@ -60,6 +61,7 @@ public class PickableScript : MonoBehaviour {
         this.transform.position = position;
         this.transform.SetParent(parent.transform);
 
+        rigidBody.constraints = RigidbodyConstraints.FreezeAll;
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
         IsCarried = false;
