@@ -11,6 +11,8 @@ public class MovingBridgeScript : MonoBehaviour {
     private Vector3 moveDirection;
     private Transform currentDestination;
 
+    public GameObject obstacle;
+
     public TemperatureScript temperatureScript;
 	// Use this for initialization
 	void Start () {
@@ -28,9 +30,13 @@ public class MovingBridgeScript : MonoBehaviour {
             print("updating");
             movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
 
+            obstacle.SetActive(true);
             if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
                 SetDestination(currentDestination == startPoint ? endPoint : startPoint);
             }
+        }
+        else {
+            obstacle.SetActive(false);
         }
 
     }

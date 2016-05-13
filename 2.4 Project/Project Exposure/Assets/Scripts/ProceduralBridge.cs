@@ -19,10 +19,12 @@ public class ProceduralBridge : BaseInteractable {
     float wholePartsCount = 0;
     bool bridgeBuilt = false;
 
+    [SerializeField]
+    GameObject obstacle;
+
 	// Use this for initialization
 	void Start ()
     {
-        
         leftTr = leftPart.transform;
         rightTr = rightPart.transform;
         if (holder.transform.childCount > 0)
@@ -40,6 +42,7 @@ public class ProceduralBridge : BaseInteractable {
             // bridgeParts.Add(part);
             //yield return new WaitForSeconds(0.15f);
         }
+        obstacle.SetActive(false);
         print("Bridge constructed!");
     }
 
@@ -56,6 +59,7 @@ public class ProceduralBridge : BaseInteractable {
                 DestroyImmediate(holder.transform.GetChild(0).gameObject);
             }
 
+            obstacle.SetActive(true);
             bridgeBuilt = false;
             print("Bridge deleted!");
         }

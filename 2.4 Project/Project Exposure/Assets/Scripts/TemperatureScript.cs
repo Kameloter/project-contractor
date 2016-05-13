@@ -53,4 +53,13 @@ public class TemperatureScript : MonoBehaviour {
                 break;
         }
     }
+
+    void OnParticleCollision(GameObject go) {
+        print(go.name);
+        if (go.CompareTag("FreezeParticle")) {
+            print("test2");
+            ChangeState(TemperatureState.Frozen);
+        }
+    
+    }
 }
