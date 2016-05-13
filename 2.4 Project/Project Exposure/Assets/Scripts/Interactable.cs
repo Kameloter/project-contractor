@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEditor;
 
 
-public class Interactable : MonoBehaviour {
+public class Interactable : BaseInteractable {
     
     public enum TypeOfInteractables
     {
@@ -43,7 +43,7 @@ public class Interactable : MonoBehaviour {
         }
     }
     public virtual void FixedUpdate() {
-        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
+       // if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
             switch (typeOfInteractable) {
                 case TypeOfInteractables.Movable:
                     if (currentState != 0) {
@@ -78,7 +78,7 @@ public class Interactable : MonoBehaviour {
                     }
                     break;
             }
-        }
+      //  }
         //should handle when an object started rotating 
 
         //should handle when an object started moving 
@@ -116,17 +116,18 @@ public class Interactable : MonoBehaviour {
         //rotates object.
     }
 
-    public virtual void Activate()
+    public override void Activate()
     {
         SendMessage(typeOfInteractable.ToString(), 1);
     }
-    public virtual void Deactivate()
+    public override void DeActivate()
     {
         SendMessage(typeOfInteractable.ToString(), 2);
     }
 
     void OnDrawGizmos() {
         if (typeOfInteractable == TypeOfInteractables.Movable) {
+            if (movableObject == null || startPoint == null || endPoint == null) return;
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(startPoint.position, movableObject.localScale);
 

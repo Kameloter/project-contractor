@@ -28,7 +28,7 @@ public class LaserEmitter : Interactable {
         DrawLaser(transform.position);
     }
 
-    public override void Deactivate() {
+    public override void DeActivate() {
         active = false;
         DestroyLaser();
     }

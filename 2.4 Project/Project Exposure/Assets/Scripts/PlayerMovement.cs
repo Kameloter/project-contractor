@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
   //  Animator anim;
     void Start()
     {
-        print(clickableLayer.value);
+    //    print(clickableLayer.value);
        // anim = GetComponentInChildren<Animator>();
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
