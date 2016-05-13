@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEditor;
 
 
-public class Interactable : MonoBehaviour {
+public class Interactable : BaseInteractable {
     
     public enum TypeOfInteractables
     {
@@ -116,11 +116,11 @@ public class Interactable : MonoBehaviour {
         //rotates object.
     }
 
-    public virtual void Activate()
+    public override void Activate()
     {
         SendMessage(typeOfInteractable.ToString(), 1);
     }
-    public virtual void Deactivate()
+    public override void DeActivate()
     {
         SendMessage(typeOfInteractable.ToString(), 2);
     }

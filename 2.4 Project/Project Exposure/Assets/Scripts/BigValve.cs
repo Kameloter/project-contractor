@@ -40,6 +40,9 @@ public class BigValve : MonoBehaviour {
     float line2rot = 90;
     float offRot = 180;
     float line1rot = 270;
+
+
+
     void Awake()
     {
         if (Application.isPlaying)

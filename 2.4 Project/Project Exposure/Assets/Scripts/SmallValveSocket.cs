@@ -131,7 +131,7 @@ public class SmallValveSocket : MonoBehaviour {
         valve.GetComponent<PickableScript>().clickable = true;
         socketed = null;
         foreach (Interactable interactable in interactables) {
-            interactable.Deactivate();
+            interactable.DeActivate();
         }
     }
 
@@ -139,7 +139,7 @@ public class SmallValveSocket : MonoBehaviour {
     {
         foreach (Interactable interactable in interactables)
         {
-            interactable.Deactivate();
+            interactable.DeActivate();
         }
     }
 

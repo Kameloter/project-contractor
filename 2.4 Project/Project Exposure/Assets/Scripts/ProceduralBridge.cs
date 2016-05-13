@@ -4,7 +4,8 @@ using System.Collections;
 using UnityEditor;
 
 [ExecuteInEditMode]
-public class ProceduralBridge : Interactable {
+public class ProceduralBridge : BaseInteractable {
+
     public GameObject bridgePart;
     public GameObject leftPart;
     public GameObject rightPart;
@@ -21,6 +22,7 @@ public class ProceduralBridge : Interactable {
 	// Use this for initialization
 	void Start ()
     {
+        
         leftTr = leftPart.transform;
         rightTr = rightPart.transform;
         if (holder.transform.childCount > 0)
@@ -74,7 +76,7 @@ public class ProceduralBridge : Interactable {
         }
     }
 
-    public override void Deactivate() {
+    public override void DeActivate() {
         Destroy();
     }
 
@@ -94,7 +96,7 @@ public class TestBridge : Editor
         }
         if (GUILayout.Button("Destroy bridge"))
         {
-            myScript.Deactivate();
+            myScript.DeActivate();
         }
 
     }

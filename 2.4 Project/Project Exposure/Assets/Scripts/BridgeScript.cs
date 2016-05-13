@@ -12,12 +12,12 @@ public class BridgeScript : Interactable {
 	}
 
     public override void Activate() {
-        this.gameObject.SetActive(true);
+        //this.gameObject.SetActive(true);
     }
 
-    public override void Deactivate() {
-        this.gameObject.SetActive(false);
-        print("deactivated");
+    public override void DeActivate() {
+       // this.gameObject.SetActive(false);
+        //print("deactivated");
 
     }
 }
