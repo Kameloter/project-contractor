@@ -10,7 +10,7 @@ TagManager:
   - WaterParticle
   - HeatParticle
   - SteamParticle
-  - FreezeParticle
+  - Collectable
   layers:
   - Default
   - TransparentFX
@@ -22,7 +22,7 @@ TagManager:
   - 
   - Sunlight
   - SteamSystem
-  - Laser
+  - 
   - 
   - 
   - 
