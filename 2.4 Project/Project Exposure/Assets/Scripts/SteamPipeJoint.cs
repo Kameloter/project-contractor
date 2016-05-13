@@ -31,7 +31,7 @@ public class SteamPipeJoint : MonoBehaviour {
             activated = false;
             float distance = Vector3.Distance(transform.position, connectTo.transform.position);
             float waitTime = distance / connectTo.steamParticleSpeed;
-            print("stoppping smoke" + waitTime);
+          //  print("stoppping smoke" + waitTime);
             Invoke("StopSmoke", waitTime);
          
         }
@@ -39,7 +39,7 @@ public class SteamPipeJoint : MonoBehaviour {
     void StopSmoke()
     {
         connectTo.StopSteamConnection();
-        print("stop");
+       // print("stop");
     }
 
     void OnParticleCollision(GameObject go)
@@ -48,8 +48,14 @@ public class SteamPipeJoint : MonoBehaviour {
         {
             if (!activated)
             {
-                print(" this -> " + go.name);
-                if (poweredSocket != null) poweredSocket.ActivateInteractables();
+             //   print(" this -> " + go.name);
+                if (poweredSocket != null){
+                    print("in powering on!");
+                    if (poweredSocket.socketed != null){
+                       
+                       poweredSocket.ActivateInteractables();
+                    }
+                }
                 activated = true;
                 smoke.Play();
             }

@@ -9,10 +9,12 @@ public class SmallValveSocket : MonoBehaviour {
     GameObject Player;
     PlayerScript playerScript;
 
+    public bool StartWithValve = false;
+
     [SerializeField]
     Interactable[] interactables;
 
-    GameObject socketed = null;
+    //[HideInInspector]
     [HideInInspector]
     public BigValve controlValve;
 
@@ -27,6 +29,9 @@ public class SmallValveSocket : MonoBehaviour {
     [HideInInspector]
     public SteamPipeJoint poweredBy = null;
 
+    [Header("If starting with valvehead:")]
+    public GameObject socketed = null;
+
     // Use this for initialization
     void Start ()
     {
@@ -37,6 +42,11 @@ public class SmallValveSocket : MonoBehaviour {
             playerScript = Player.GetComponent<PlayerScript>();
 
             FindASteamJoint();
+        }
+
+        if (socketed != null) {
+       
+            PlaceValve(socketed);
         }
     }
 
@@ -65,12 +75,12 @@ public class SmallValveSocket : MonoBehaviour {
             }
             if (poweredBy == null)
             {
-                Debug.Log(" SMALL VALVE SOCKET WITH NAME \"" + gameObject.name + "\" DOES NOT FIND A STEAM-JOINT TO BE POWERED BY !!!");
+              //  Debug.Log(" SMALL VALVE SOCKET WITH NAME \"" + gameObject.name + "\" DOES NOT FIND A STEAM-JOINT TO BE POWERED BY !!!");
 
             }
             else
             {
-                Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
+             //   Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
                 poweredBy.poweredSocket = this;
             }
               
@@ -100,43 +110,39 @@ public class SmallValveSocket : MonoBehaviour {
     }
 
     void PlaceValve(GameObject valve) {
-        valve.GetComponent<PickableScript>().Place(this.transform.position + this.transform.up,this.gameObject);
+        valve.GetComponent<PickableScript>().Place(this.transform.position + this.transform.up, this.gameObject);
         valve.GetComponent<PickableScript>().clickable = false;
         socketed = valve;
-        if(controlValve.currentState == valveLine)
-        {
-            ActivateInteractables();
-        }
-        else
-        {
-            Debug.Log("Line not active! Not doing action.");
-        }
-     
-    }
-    public void ActivateInteractables()
-    {
         if (socketed == null) return;
-        foreach (Interactable interactable in interactables)
-        {
-            interactable.Activate();
-        }
-
+        ActivateInteractables();
     }
+
+    public void ActivateInteractables() {
+        if (controlValve.currentState == valveLine) {
+            print("started with valve" + this.name);
+            foreach (Interactable interactable in interactables) {
+                interactable.Activate();
+            }
+        }
+    }
+
     void RemoveValve(GameObject valve) {
         valve.GetComponent<PickableScript>().PickUp();
         valve.GetComponent<PickableScript>().clickable = true;
         socketed = null;
         foreach (Interactable interactable in interactables) {
-            interactable.Deactivate();
+            interactable.DeActivate();
         }
     }
+
     public void DeactivateSocket()
     {
         foreach (Interactable interactable in interactables)
         {
-            interactable.Deactivate();
+            interactable.DeActivate();
         }
     }
+
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = true;

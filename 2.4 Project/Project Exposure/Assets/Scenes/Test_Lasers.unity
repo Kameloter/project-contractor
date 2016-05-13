@@ -105,6 +105,7 @@ MonoBehaviour:
   frozenMaterial: {fileID: 2100000, guid: ef020cd383809c649bffd9554a7ef809, type: 2}
   neutralMaterial: {fileID: 2100000, guid: ff31adc1e5cf3ea4b9efc4c0df263fec, type: 2}
   hotMaterial: {fileID: 2100000, guid: c529f44bc3ff06649983f1a74cb7b008, type: 2}
+  rend: {fileID: 0}
 --- !u!1 &229638340
 GameObject:
   m_ObjectHideFlags: 0
@@ -353,6 +354,14 @@ Prefab:
     - target: {fileID: 11415686, guid: 69ab6ff79738cb949b15a0da626cb944, type: 2}
       propertyPath: valveLine
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: -0.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: -0.78
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 69ab6ff79738cb949b15a0da626cb944, type: 2}
