@@ -35,7 +35,7 @@ public class ProceduralBridge : BaseInteractable {
         {
             Vector3 direction = leftTr.position - rightTr.position;
             direction.Normalize();
-            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 1) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 1) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
+            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 0.5f) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 0.5f) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
             part.transform.parent = holder.transform;
             // bridgeParts.Add(part);
             //yield return new WaitForSeconds(0.15f);
@@ -71,6 +71,7 @@ public class ProceduralBridge : BaseInteractable {
                 bridgeBuilt = true;
                 distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
                 wholePartsCount = Mathf.Ceil(distanceBetweenParts);
+                wholePartsCount /= bridgePart.transform.lossyScale.x;
                 Build();
             }
         }
