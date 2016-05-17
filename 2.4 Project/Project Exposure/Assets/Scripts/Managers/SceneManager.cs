@@ -10,7 +10,8 @@ public class SceneManager : MonoBehaviour {
     GameState currentState;
 
     [Header("Level Stats")]
-    [SerializeField][Tooltip("Read Only")] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
+    [SerializeField][ShowOnly] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
+    
 
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
