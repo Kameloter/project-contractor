@@ -12,10 +12,10 @@ GameObject:
   - 135: {fileID: 13530568}
   - 23: {fileID: 2310726}
   - 108: {fileID: 10893522}
-  - 114: {fileID: 11467048}
+  - 114: {fileID: 11498250}
   m_Layer: 0
   m_Name: Collectable
-  m_TagString: Collectable
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 189208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.566902, y: 1, z: 10.143536}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -98,7 +98,7 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
---- !u!114 &11467048
+--- !u!114 &11498250
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 189208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd526f3c9f2500846958f472cf4dbdc2, type: 3}
+  m_Script: {fileID: 11500000, guid: 20333f6f7c6889e459e34b3e4d2ef350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1

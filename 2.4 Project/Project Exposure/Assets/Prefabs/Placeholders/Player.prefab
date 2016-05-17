@@ -31,7 +31,7 @@ GameObject:
   - 23: {fileID: 2318270}
   - 54: {fileID: 5452930}
   - 114: {fileID: 11432312}
-  - 114: {fileID: 11435928}
+  - 114: {fileID: 11427756}
   - 195: {fileID: 19527000}
   m_Layer: 0
   m_Name: Player
@@ -158,6 +158,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11427756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 191208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d68300662b2297a42ba5c47ae4e15cb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carriedValve: {fileID: 0}
+  carryingValve: 0
 --- !u!114 &11432312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -170,23 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  clickableLayer:
-    serializedVersion: 2
-    m_Bits: 0
---- !u!114 &11435928
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 191208}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c379b3a7a5fc348b1af2cad2404e9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  carriedValve: {fileID: 0}
-  carryingValve: 0
-  collectables: 0
 --- !u!136 &13671224
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public enum GameState {
     Menu, InGame, Paused
 }
 
 public class SceneManager : MonoBehaviour {
     GameState currentState;
-    private int collectablesInLevel = 0;
 
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
@@ -26,8 +26,6 @@ public class SceneManager : MonoBehaviour {
         //    Cursor.lockState = CursorLockMode.None;
         //    Cursor.visible = true;
         //}
-
-        CountCollectables();
     }
 
     void Update() {
@@ -102,12 +100,6 @@ public class SceneManager : MonoBehaviour {
     public void QuitGame() {
         print("Application shut down.");
         Application.Quit();
-    }
-
-    public int CountCollectables() {
-        collectablesInLevel = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
-        print(collectablesInLevel);
-        return collectablesInLevel;
     }
 }
 
