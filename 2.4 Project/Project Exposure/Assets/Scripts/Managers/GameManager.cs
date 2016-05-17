@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     //PLAYER  //SerializeField used for debugging purposes.
     [SerializeField] private GameObject _player;
     [SerializeField] private PlayerScript _playerScript;
-    [SerializeField] private int _totalCollectables = 0;
+    [SerializeField] private int _totalCollectables = 0; //total collectables the player has collected through the entire game
 
     public GameObject Player {
         get {

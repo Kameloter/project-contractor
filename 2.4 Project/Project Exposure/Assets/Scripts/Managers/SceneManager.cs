@@ -93,12 +93,15 @@ public class SceneManager : MonoBehaviour {
         print("loaded level " + index);
     }
 
+    /// <summary>
+    /// Export some data. This should be called just before switching levels.s
+    /// </summary>
     public void ExportSaveData() {
-        GameManager.Instance.TotalCollectables += GameManager.Instance.PlayerScript.collectables;
+        GameManager.Instance.TotalCollectables += GameManager.Instance.PlayerScript.collectables; //Total collectables actually collected this level
     }
 
     public void QuitGame() {
-        print("Application shut down.");
+        print("Application terminated.");
         Application.Quit();
     }
 }

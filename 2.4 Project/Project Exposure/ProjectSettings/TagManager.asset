@@ -11,6 +11,7 @@ TagManager:
   - HeatParticle
   - SteamParticle
   - FreezeParticle
+  - Collectable
   layers:
   - Default
   - TransparentFX

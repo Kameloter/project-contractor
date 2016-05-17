@@ -613,7 +613,7 @@ GameObject:
   - 222: {fileID: 266812819}
   - 114: {fileID: 266812818}
   m_Layer: 5
-  m_Name: Script Text 2
+  m_Name: Total
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '-'
 --- !u!222 &266812819
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -836,7 +836,7 @@ GameObject:
   - 222: {fileID: 340263715}
   - 114: {fileID: 340263714}
   m_Layer: 5
-  m_Name: Static Text
+  m_Name: Divider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1770,7 +1770,7 @@ GameObject:
   - 222: {fileID: 684081047}
   - 114: {fileID: 684081046}
   m_Layer: 5
-  m_Name: Static Text
+  m_Name: Collectabels
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2024,6 +2024,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3cf46ca442e73840b2736a2bee78908, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &792946856 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 191208, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
+  m_PrefabInternal: {fileID: 1061193704}
 --- !u!1 &810591779
 GameObject:
   m_ObjectHideFlags: 0
@@ -2434,7 +2438,7 @@ GameObject:
   - 222: {fileID: 1096831655}
   - 114: {fileID: 1096831654}
   m_Layer: 5
-  m_Name: Script Text 1
+  m_Name: Found
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2489,7 +2493,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 0
+  m_Text: '-'
 --- !u!222 &1096831655
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4052,7 +4056,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 468022, guid: 9f8b0c9863237234f891b8227d3a3305, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 189208, guid: 9f8b0c9863237234f891b8227d3a3305, type: 2}
       propertyPath: m_Name
@@ -4177,7 +4181,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 468022, guid: 9f8b0c9863237234f891b8227d3a3305, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9f8b0c9863237234f891b8227d3a3305, type: 2}
@@ -4269,6 +4273,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1751066412}
+  - 114: {fileID: 1751066413}
   m_Layer: 5
   m_Name: Collectable Hud
   m_TagString: Untagged
@@ -4295,6 +4300,21 @@ RectTransform:
   m_AnchoredPosition: {x: -960, y: -539}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1751066413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1751066411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15c325aa4f9d0844a20194f7818af6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  divider: {fileID: 340263714}
+  collectables: {fileID: 684081046}
+  found: {fileID: 1096831654}
+  total: {fileID: 266812818}
 --- !u!1 &1772560147
 GameObject:
   m_ObjectHideFlags: 0
@@ -5104,7 +5124,7 @@ Prefab:
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: targetToFollow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 792946856}
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: offset.x
       value: 0
