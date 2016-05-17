@@ -3,7 +3,8 @@ using System.Collections;
 
 public class SteamPipeJoint : MonoBehaviour {
 
-   public SteamPipeJoint connectTo;
+    public SteamPipeJoint connectTo;
+    public SmallValveSocket poweredSocket;
 
     [HideInInspector]
     public float steamParticleSpeed { get { return smoke.startSpeed; } }
@@ -25,12 +26,12 @@ public class SteamPipeJoint : MonoBehaviour {
        
         if (connectTo != null)
         {
-          
+            if (poweredSocket != null) poweredSocket.DeactivateSocket();
             smoke.Stop();
             activated = false;
             float distance = Vector3.Distance(transform.position, connectTo.transform.position);
             float waitTime = distance / connectTo.steamParticleSpeed;
-            print("stoppping smoke" + waitTime);
+          //  print("stoppping smoke" + waitTime);
             Invoke("StopSmoke", waitTime);
          
         }
@@ -38,7 +39,7 @@ public class SteamPipeJoint : MonoBehaviour {
     void StopSmoke()
     {
         connectTo.StopSteamConnection();
-        print("stop");
+       // print("stop");
     }
 
     void OnParticleCollision(GameObject go)
@@ -47,7 +48,14 @@ public class SteamPipeJoint : MonoBehaviour {
         {
             if (!activated)
             {
-                print(" this -> " + go.name);
+             //   print(" this -> " + go.name);
+                if (poweredSocket != null){
+                    print("in powering on!");
+                    if (poweredSocket.socketed != null){
+                       
+                       poweredSocket.ActivateInteractables();
+                    }
+                }
                 activated = true;
                 smoke.Play();
             }

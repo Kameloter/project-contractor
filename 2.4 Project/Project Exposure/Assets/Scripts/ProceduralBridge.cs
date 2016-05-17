@@ -4,7 +4,8 @@ using System.Collections;
 using UnityEditor;
 
 [ExecuteInEditMode]
-public class ProceduralBridge : MonoBehaviour {
+public class ProceduralBridge : BaseInteractable {
+
     public GameObject bridgePart;
     public GameObject leftPart;
     public GameObject rightPart;
@@ -17,6 +18,9 @@ public class ProceduralBridge : MonoBehaviour {
     float distanceBetweenParts = 0;
     float wholePartsCount = 0;
     bool bridgeBuilt = false;
+
+    [SerializeField]
+    GameObject obstacle;
 
 	// Use this for initialization
 	void Start ()
@@ -33,11 +37,12 @@ public class ProceduralBridge : MonoBehaviour {
         {
             Vector3 direction = leftTr.position - rightTr.position;
             direction.Normalize();
-            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 1) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 1) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
+            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 0.5f) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 0.5f) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
             part.transform.parent = holder.transform;
             // bridgeParts.Add(part);
             //yield return new WaitForSeconds(0.15f);
         }
+        obstacle.SetActive(false);
         print("Bridge constructed!");
     }
 
@@ -54,31 +59,29 @@ public class ProceduralBridge : MonoBehaviour {
                 DestroyImmediate(holder.transform.GetChild(0).gameObject);
             }
 
+            obstacle.SetActive(true);
             bridgeBuilt = false;
             print("Bridge deleted!");
         }
     }
 
 
-    public void Activate()
-    {
+    public override void Activate() {
         if (bridgeBuilt) { print("bridge already built!!!!!"); return; }
 
         RaycastHit hit;
-        if(Physics.Raycast(rightTr.position,leftTr.position - rightTr.position,out hit,1000))
-        {
-            if(hit.transform.name == "Left")
-            {
+        if (Physics.Raycast(rightTr.position, leftTr.position - rightTr.position, out hit, 1000)) {
+            if (hit.transform.name == "Left") {
                 bridgeBuilt = true;
                 distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
                 wholePartsCount = Mathf.Ceil(distanceBetweenParts);
+                wholePartsCount /= bridgePart.transform.lossyScale.x;
                 Build();
             }
         }
     }
 
-    public void Deactivate()
-    {
+    public override void DeActivate() {
         Destroy();
     }
 
@@ -98,7 +101,7 @@ public class TestBridge : Editor
         }
         if (GUILayout.Button("Destroy bridge"))
         {
-            myScript.Deactivate();
+            myScript.DeActivate();
         }
 
     }

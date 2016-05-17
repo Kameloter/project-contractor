@@ -1,9 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BridgeScript : Interactable {
+public class FreezeStreamScript : BaseInteractable {
+
+    public ParticleSystem particle;
+
 	// Use this for initialization
 	void Start () {
+	
 	}
 	
 	// Update is called once per frame
@@ -12,12 +16,10 @@ public class BridgeScript : Interactable {
 	}
 
     public override void Activate() {
-        //this.gameObject.SetActive(true);
+        particle.Play();
     }
 
     public override void DeActivate() {
-       // this.gameObject.SetActive(false);
-        //print("deactivated");
-
+        particle.Stop();
     }
 }

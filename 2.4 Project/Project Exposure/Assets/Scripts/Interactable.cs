@@ -3,11 +3,11 @@ using System.Collections;
 using UnityEditor;
 
 
-public class Interactable : MonoBehaviour {
+public class Interactable : BaseInteractable {
     
     public enum TypeOfInteractables
     {
-        Movable, Rotatable
+        Movable, Rotatable, Laser
     }
     
     public TypeOfInteractables typeOfInteractable;
@@ -25,68 +25,69 @@ public class Interactable : MonoBehaviour {
     [SerializeField]
     private int startState;
 
-
-
     [Header("Rotatable:")]
     public float degrees;
     public Vector3 axisToRotate = Vector3.zero;
 
-
     private Vector3 moveDirection;
     private Transform currentDestination;
+
+    public TemperatureScript temperatureScript;
+
     void Awake()
     {
         currentState = startState;
-    }
-    public virtual void FixedUpdate()
-    {
-
-        switch (typeOfInteractable) {
-            case TypeOfInteractables.Movable:
-                if (currentState != 0) {
-                    movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
-
-                    if (currentState == 2) {
-                        SetDestination(endPoint);
-                    }
-
-                    if (currentState == 1) {
-                        SetDestination(startPoint);
-                    }
-
-                    if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
-                        currentState = 0;
-                        moveDirection = Vector3.zero;
-                        movableObject.position = currentDestination.position;
-                    }
-
-                }
-                break;
-
-            case TypeOfInteractables.Rotatable:
-                switch (currentState) {
-                    case 1:
-                        this.transform.rotation = Quaternion.AngleAxis(degrees, axisToRotate);
-                        break;
-                        
-                    case 2:
-                        this.transform.rotation = Quaternion.AngleAxis(0, axisToRotate);
-                        break;
-                }
-                break;
-
+        temperatureScript = GetComponent<TemperatureScript>();
+        if (temperatureScript == null) {
+            temperatureScript = GetComponentInChildren<TemperatureScript>();
         }
+    }
+    public virtual void FixedUpdate() {
+       // if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
+            switch (typeOfInteractable) {
+                case TypeOfInteractables.Movable:
+                    if (currentState != 0) {
+                        movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
+
+                        if (currentState == 2) {
+                            SetDestination(endPoint);
+                        }
+
+                        if (currentState == 1) {
+                            SetDestination(startPoint);
+                        }
+
+                        if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
+                            currentState = 0;
+                            moveDirection = Vector3.zero;
+                            movableObject.position = currentDestination.position;
+                        }
+
+                    }
+                    break;
+
+                case TypeOfInteractables.Rotatable:
+                    switch (currentState) {
+                        case 1:
+                            this.transform.rotation = Quaternion.AngleAxis(degrees, axisToRotate);
+                            break;
+
+                        case 2:
+                            this.transform.rotation = Quaternion.AngleAxis(0, axisToRotate);
+                            break;
+                    }
+                    break;
+            }
+      //  }
         //should handle when an object started rotating 
 
         //should handle when an object started moving 
 
         //should not update object ALL the time.
-        if (Input.GetKeyDown(KeyCode.O))
-        {
+        if (Input.GetKeyDown(KeyCode.O)) {
             currentState = 1;
         }
-        if (Input.GetKeyDown(KeyCode.C))
-        {
+        if (Input.GetKeyDown(KeyCode.C)) {
             currentState = 2;
         }
     }
@@ -109,20 +110,30 @@ public class Interactable : MonoBehaviour {
         print("Rotation state -> " + rotateState);
         currentState = rotateState;
     }
+
     public virtual void RotateAroundAxis(float angle,Vector3 axis)
     {
         //rotates object.
     }
 
-
-
-    public virtual void Activate()
+    public override void Activate()
     {
         SendMessage(typeOfInteractable.ToString(), 1);
     }
-    public virtual void Deactivate()
+    public override void DeActivate()
     {
         SendMessage(typeOfInteractable.ToString(), 2);
+    }
+
+    void OnDrawGizmos() {
+        if (typeOfInteractable == TypeOfInteractables.Movable) {
+            if (movableObject == null || startPoint == null || endPoint == null) return;
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(startPoint.position, movableObject.localScale);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(endPoint.position, movableObject.localScale);
+        }
     }
 }
 
