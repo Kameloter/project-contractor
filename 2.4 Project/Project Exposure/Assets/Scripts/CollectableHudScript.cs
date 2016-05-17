@@ -29,7 +29,7 @@ public class CollectableHudScript : MonoBehaviour {
     }
 
     public void UpdateTotal() {
-        total.text = GameManager.Instance.PlayerScript.collectables.ToString();
+        //
     }
 
     

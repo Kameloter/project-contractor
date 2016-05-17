@@ -2021,6 +2021,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 11455868, guid: b3cf46ca442e73840b2736a2bee78908, type: 2}
+      propertyPath: collectablesAvailable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b3cf46ca442e73840b2736a2bee78908, type: 2}
   m_IsPrefabParent: 0
