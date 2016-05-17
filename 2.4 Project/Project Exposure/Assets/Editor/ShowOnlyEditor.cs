@@ -1,29 +1,51 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-[CustomPropertyDrawer(typeof(ShowOnlyAttribute))]
+[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ShowOnlyDrawer : PropertyDrawer {
-    public override void OnGUI(Rect position, SerializedProperty prop, GUIContent label) {
-        string valueStr;
+    public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
+        string value;
 
-        switch (prop.propertyType) {
-            case SerializedPropertyType.Integer:
-                valueStr = prop.intValue.ToString();
+        switch (property.propertyType) {
+            case SerializedPropertyType.String:
+                value = property.stringValue;
                 break;
             case SerializedPropertyType.Boolean:
-                valueStr = prop.boolValue.ToString();
+                value = property.boolValue.ToString();
+                break;
+            case SerializedPropertyType.Integer:
+                value = property.intValue.ToString();
                 break;
             case SerializedPropertyType.Float:
-                valueStr = prop.floatValue.ToString("0.00000");
+                value = property.floatValue.ToString("F4");
                 break;
-            case SerializedPropertyType.String:
-                valueStr = prop.stringValue;
+            case SerializedPropertyType.Vector2:
+                value = property.vector2Value.ToString("F4");
+                break;
+            case SerializedPropertyType.Vector3:
+                value = property.vector3Value.ToString("F4");
+                break;
+            case SerializedPropertyType.Vector4:
+                value = property.vector4Value.ToString("F4");
+                break;
+            case SerializedPropertyType.Quaternion:
+                value = property.quaternionValue.ToString("F4");
+                break;
+            case SerializedPropertyType.Rect:
+                value = property.rectValue.ToString("F4");
+                break;
+            case SerializedPropertyType.Color:
+                value = property.colorValue.ToString("F4");
+                break;
+            case SerializedPropertyType.ObjectReference:    //Needs a GameObject assigned (HACK: assign one via inspector without [ReadOnly] first.) 
+                if (property.objectReferenceValue != null) value = property.objectReferenceValue.ToString();
+                else value = "Null --[PlayMode Only]";
                 break;
             default:
-                valueStr = "(not supported)";
+                value = "ERROR: Value type unsupported for ReadOnly";
                 break;
         }
 
-        EditorGUI.LabelField(position, label.text, valueStr);
+        EditorGUI.LabelField(position, label.text, value);
     }
 }

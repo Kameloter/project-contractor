@@ -10,12 +10,10 @@ public class SceneManager : MonoBehaviour {
     GameState currentState;
 
     [Header("Level Stats")]
-    [SerializeField][ShowOnly] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
-    
+    [SerializeField][ReadOnly] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
 
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
-
         //Count collectables available this scene
         collectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
     }
