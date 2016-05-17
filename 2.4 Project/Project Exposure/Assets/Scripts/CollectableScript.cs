@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This script should be attached to actual collectables.
+/// It handles collision with the player and the destruction after pickup.
+/// It notifies the CollectableHudScript that it was picked up and tells him its value.
+/// </summary>
 public class CollectableScript : MonoBehaviour {
     [Tooltip("Amount of points awarded")] public int value = 1;
 
@@ -11,7 +16,7 @@ public class CollectableScript : MonoBehaviour {
     }
 
     void Collect() {
-        GameManager.Instance.IncreaseCollectables(value);
+        GameObject.FindObjectOfType<CollectableHudScript>().OnCollectCollectable(value);
         Destroy(gameObject);
     }
 }

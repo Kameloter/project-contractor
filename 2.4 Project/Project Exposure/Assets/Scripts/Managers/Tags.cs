@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// Used to autocomplete tags. Less prone to typos.
+/// </summary>
 public class Tags : MonoBehaviour {
     //----------------- Unity Predifined Tags -----------------
     public const string respawn = "Respawn";
@@ -14,7 +17,7 @@ public class Tags : MonoBehaviour {
     //Custom Tags
     public const string valve = "Valve";
     public const string mirror = "Mirror";
-    //public const string collectable = "Collectable";
+    public const string collectable = "Collectable";
     public const string particleWater = "WaterParticle";
     public const string particleHeat = "HeatParticle";
     public const string particleSteam = "SteamParticle";

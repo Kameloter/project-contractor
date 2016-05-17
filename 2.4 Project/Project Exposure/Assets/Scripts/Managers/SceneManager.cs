@@ -9,8 +9,13 @@ public enum GameState {
 public class SceneManager : MonoBehaviour {
     GameState currentState;
 
+    [Header("Level Stats")]
+    [SerializeField][ReadOnly] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
+
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
+        //Count collectables available this scene
+        collectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
     }
     
     void Start() {
@@ -93,12 +98,16 @@ public class SceneManager : MonoBehaviour {
         print("loaded level " + index);
     }
 
+    /// <summary>
+    /// Export some data. This should be called just before switching levels.s
+    /// </summary>
     public void ExportSaveData() {
-        GameManager.Instance.TotalCollectables += GameManager.Instance.PlayerScript.collectables;
+        GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables collected this level
+        GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables available this level
     }
 
     public void QuitGame() {
-        print("Application shut down.");
+        print("Application terminated.");
         Application.Quit();
     }
 }
