@@ -4,9 +4,6 @@ using System.Collections.Generic;
 
 public class LaserEmitter : Interactable {
 
-    //List<LineRenderer> lineRederers = new List<LineRenderer>();
-
- //   GameObject lineRendererParent;
     [SerializeField]
     Material mat;
 
@@ -15,7 +12,8 @@ public class LaserEmitter : Interactable {
 
     Vector3 rotation = Vector3.zero;
 
-    bool active = false;
+    bool _active = false;
+    bool InRange = false;
 
     void Start() {
     }
@@ -24,16 +22,29 @@ public class LaserEmitter : Interactable {
     }
 
     public override void Activate() {
-        active = true;
+        _active = true;
         DrawLaser(transform.position);
     }
 
     public override void DeActivate() {
-        active = false;
+        _active = false;
         DestroyLaser();
     }
 
-    void OnMouseDown() {
+    public void OnCustomEvent() {
+        if (InRange) {
+            print("clicked and inrange");
+            ActivateLaser();
+        }
+        else {
+            print("clicked and NOT inrange");
+            GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+            GameManager.Instance.ClickedObject = this.gameObject;
+            print(GameManager.Instance.ClickedObject.name);
+        }
+    }
+
+    void ActivateLaser() {
         if (state == 7) {
             state = 0;
         }
@@ -44,8 +55,8 @@ public class LaserEmitter : Interactable {
 
         Vector3 rotation = new Vector3(0, state * 45, 0);
         this.transform.eulerAngles = rotation;
-        
-        if(active) DrawLaser(transform.position);
+
+        if (_active) DrawLaser(transform.position);
     }
 
     void DestroyLaser() {
@@ -89,6 +100,8 @@ public class LaserEmitter : Interactable {
         lineRendererParent.transform.SetParent(this.transform);
         lineRendererParent.name = "las0r " + name;
         LineRenderer lineRenderer = lineRendererParent.AddComponent<LineRenderer>();
+        BoxCollider col = lineRendererParent.AddComponent<BoxCollider>();
+      //  col.center = 
 
         lineRenderer.SetWidth(0.1f, 0.1f);
         lineRenderer.material = mat;
@@ -97,40 +110,27 @@ public class LaserEmitter : Interactable {
         lineRenderer.SetPosition(1, endPoint);
     }
 
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Player")) {
+            InRange = true;
+            if (GameManager.Instance.ClickedObject == this.gameObject) {
+                ActivateLaser();
+            }
+            //  print("In Range TRUE");
+        }
+    }
+
+    void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Player")) {
+            InRange = false;
+            //  print("In Range FALSE");
+        }
+    }
+
+
+
 }
 
 
 
 
-//RaycastHit hit;
-//Vector3 RayDir = transform.forward;
-
-//Destroy(lineRendererParent);
-
-//lineRendererParent = new GameObject();
-//lineRendererParent.name = "las0r";
-//LineRenderer lineRenderer = lineRendererParent.AddComponent<LineRenderer>();
-
-
-//lineRenderer.SetVertexCount(4);
-//lineRenderer.SetWidth(0.1f, 0.1f);
-//lineRenderer.material = mat;
-
-//lineRenderer.SetPosition(0, startPoint);
-
-//for (int i = 1; i < 1000; i++) {
-//    if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
-//        if (hit.collider.CompareTag(Tags.mirror)) {
-//            print("index -->" + i);
-//            lineRenderer.SetPosition(i,hit.point) ;
-//          //  lineRenderer.SetPosition(1, hit.point);
-//            //lineRenderer.SetPosition(i, startPoint);
-//            Debug.DrawLine(startPoint, hit.point, Color.red);                //laser
-//            Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow); //normal
-
-//            RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);
-//            Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);       //reflected laser
-//            startPoint = hit.point;
-//        }
-//    }
-//}

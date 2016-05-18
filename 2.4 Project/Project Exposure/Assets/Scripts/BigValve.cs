@@ -147,11 +147,24 @@ public class BigValve : MonoBehaviour {
 
     }
 
+
+    public void OnCustomEvent() {
+        if (InRange && activated) {
+            Rotate();
+        }
+        else if (!InRange && activated) {
+            GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+            GameManager.Instance.ClickedObject = this.gameObject;
+            print(GameManager.Instance.ClickedObject.name);
+        }
+    }
+
     void OnMouseDown()
     {
-        if (InRange && activated)
-            Rotate();
+        //if (InRange && activated)
+        //    Rotate();
     }
+
     void ActivateLine(int index)
     {
         switch(index)
@@ -268,6 +281,9 @@ public class BigValve : MonoBehaviour {
         if (other.CompareTag("Player"))
         {
             InRange = true;
+            if (GameManager.Instance.ClickedObject == this.gameObject) {
+                Rotate();
+            }
         }
     }
 
