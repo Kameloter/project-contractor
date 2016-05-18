@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public enum GameState {
     Menu, InGame, Paused
 }
@@ -9,15 +8,11 @@ public enum GameState {
 public class SceneManager : MonoBehaviour {
     GameState currentState;
 
-    [Header("Level Stats")]
-    [SerializeField][ReadOnly] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
-
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
-        //Count collectables available this scene
-        collectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
+  
     }
-    
+
     void Start() {
         currentState = GameManager.Instance.CurrentState;
 
@@ -33,6 +28,7 @@ public class SceneManager : MonoBehaviour {
         //}
     }
 
+
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape)) {
             switch (currentState) {
@@ -43,7 +39,7 @@ public class SceneManager : MonoBehaviour {
                     SetState(GameState.InGame);
                     break;
                 default:
-                    print(string.Format("Current state is '{0}'. If not expected state check build settings !!", currentState));
+                    print(string.Format("Current state is '{0}'. If this is not the expected state: check build settings.", currentState));
                     break;
             }
         }
@@ -92,10 +88,10 @@ public class SceneManager : MonoBehaviour {
 
     public void SwitchToLevel(int index) {
         ExportSaveData();
-        print("loading level " + index);
+        //print("loading level " + index);
         SetState(GameState.InGame);
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
-        print("loaded level " + index);
+        //print("loaded level " + index);
     }
 
     /// <summary>
@@ -103,7 +99,7 @@ public class SceneManager : MonoBehaviour {
     /// </summary>
     public void ExportSaveData() {
         GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables collected this level
-        GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables available this level
+        GameManager.Instance.MaxCollectablesAvailable += gameObject.GetComponent<SceneStats>().CollectablesAvailable; //Total collectables available this level
     }
 
     public void QuitGame() {
