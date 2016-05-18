@@ -11334,7 +11334,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1256384091}
-  - 114: {fileID: 1256384090}
   m_Layer: 0
   m_Name: MovingBridge
   m_TagString: Untagged
@@ -11342,17 +11341,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1256384090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1256384089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9ec84ed49747cd49877366470254ec8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1256384091
 Transform:
   m_ObjectHideFlags: 0
