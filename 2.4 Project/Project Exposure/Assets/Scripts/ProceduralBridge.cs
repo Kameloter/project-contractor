@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEditor;
 
-[ExecuteInEditMode]
+[ExecuteInEditMode][System.Serializable]
 public class ProceduralBridge : BaseInteractable {
 
     public GameObject bridgePart;
@@ -53,10 +53,14 @@ public class ProceduralBridge : BaseInteractable {
         {
 
             int cachedLenght = holder.transform.childCount;
-
-            for (int i = 0;i < cachedLenght; i++)
+            print("LENGTH"+cachedLenght);
+            for (int i = cachedLenght;i > 0; i--)
             {
-                DestroyImmediate(holder.transform.GetChild(0).gameObject);
+                if(!Application.isPlaying)
+                    DestroyImmediate(holder.transform.GetChild(i - 1).gameObject);
+                else
+                    Destroy(holder.transform.GetChild(i - 1).gameObject);
+                
             }
 
             obstacle.SetActive(true);

@@ -17,7 +17,22 @@ public class PickableScript : MonoBehaviour {
         rigidBody = this.GetComponent<Rigidbody>();
 	}
 
-    void OnMouseDown() {
+    public void PickUp() {
+        if (GameManager.Instance.PlayerScript.carriedValve == null) {
+            this.transform.position = Player.transform.position - Player.transform.forward;
+            this.transform.SetParent(Player.transform);
+            rigidBody.useGravity = false;
+            rigidBody.isKinematic = true;
+            IsCarried = true;
+            rigidBody.constraints = RigidbodyConstraints.None;
+
+            if (this.CompareTag("Valve")) {
+                Player.GetComponent<PlayerScript>().carriedValve = this.gameObject;
+            }
+        }
+    }
+
+    public void OnCustomEvent() {
         if (clickable) {
             if (IsCarried) {
                 Drop();
@@ -28,21 +43,10 @@ public class PickableScript : MonoBehaviour {
                 }
                 else {
                     GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+                    GameManager.Instance.ClickedObject = this.gameObject;
+                    print(GameManager.Instance.ClickedObject.name);
                 }
             }
-        }
-    }
-
-    public void PickUp() {
-        this.transform.position = Player.transform.position - Player.transform.forward;
-        this.transform.SetParent(Player.transform);
-        rigidBody.useGravity = false;
-        rigidBody.isKinematic = true;
-        IsCarried = true;
-        rigidBody.constraints = RigidbodyConstraints.None;
-
-        if (this.CompareTag("Valve")) {
-            Player.GetComponent<PlayerScript>().carriedValve = this.gameObject;
         }
     }
 
@@ -55,6 +59,10 @@ public class PickableScript : MonoBehaviour {
           if (this.CompareTag("Valve")) {
               Player.GetComponent<PlayerScript>().carriedValve = null;
         }
+    }
+
+    void RemoveClickedObject() {
+        GameManager.Instance.ClickedObject = null;
     }
 
     public void Place(Vector3 position, GameObject parent) {
@@ -74,14 +82,18 @@ public class PickableScript : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = true;
-            print("In Range TRUE");
+            if (GameManager.Instance.ClickedObject == this.gameObject) {
+                PickUp();
+                RemoveClickedObject();
+            }
+          //  print("In Range TRUE");
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = false;
-            print("In Range FALSE");
+          //  print("In Range FALSE");
         }
     }
 }
