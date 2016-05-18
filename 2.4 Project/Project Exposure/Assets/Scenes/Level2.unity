@@ -659,44 +659,44 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalPosition.x
       value: 8.22
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalPosition.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalPosition.z
       value: 10.08
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 484338, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 11483116, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+    - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: interactables.Array.data[0]
       value: 
       objectReference: {fileID: 1161973934}
     m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: ff0e0afd6c274a84693b65331c9ec554, type: 2}
+  m_ParentPrefab: {fileID: 100100000, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &431455031
 GameObject:
@@ -3528,6 +3528,43 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+--- !u!1 &1888101651 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 122174, guid: c4fa89249f4b63a4a853979b32817280, type: 2}
+  m_PrefabInternal: {fileID: 330957973}
+--- !u!114 &1888101652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1888101651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8925c0e628a61fb44a48ae68544fa4a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MyCustomEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1888101654}
+        m_MethodName: OnCustomEvent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+--- !u!114 &1888101654 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11489100, guid: c4fa89249f4b63a4a853979b32817280,
+    type: 2}
+  m_PrefabInternal: {fileID: 330957973}
+  m_Script: {fileID: 11500000, guid: a290ff3a1e06fe14cb9eadc188b063df, type: 3}
 --- !u!1 &1889517858
 GameObject:
   m_ObjectHideFlags: 0
