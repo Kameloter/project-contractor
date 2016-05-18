@@ -1,19 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 /// <summary>
 /// This script is attached to the main camera and it follows the target Game Object provided.
 /// </summary>
 public class CameraControl : MonoBehaviour
 {
-
     public GameObject targetToFollow;
     private Vector3 nextCamPos;
     //Camera Rotating
-    [HideInInspector]
-    public float startTime;
-    [HideInInspector]
-    public float length;
-    private float completed;
+ //   [HideInInspector]
+   // public float startTime;
+  //  [HideInInspector]
+  //  public float length;
+   // private float completed;
     [HideInInspector]
     public Quaternion currentRotation;
     [HideInInspector]
@@ -24,33 +24,46 @@ public class CameraControl : MonoBehaviour
     Vector3 target;
     public Vector3 offset;
 
-    //Camera Shake
+    //camere spline
+    //public float lerp = 0;
+    //public GameObject path;
+    //List<Transform> pathList = new List<Transform>();
 
 
-    [HideInInspector]
-    public float shake = 0f;
-    [Header("Camera Shake")]
-    public float shakeAmount = 75f;
-    public float decreaseFactor = 1.0f;
-    [HideInInspector]
-    public Vector3 lastPosBeforeShake; //Used to produce camera shake .. 
+    bool playCutscene = false;
+    //int index = 0;
+    //Transform currentPos;
 
-    //Camera Zoom
-    public float myFieldOfView;
+    //public float speed = 1.0F;
+    //private float startTime;
+    //private float journeyLength;
+
 
 
     void Start()
     {
+      
+    //    PlayCutscene(path);
         currentRotation = this.transform.rotation;
         newRotation = this.transform.rotation;
-      //  offset = new Vector3(15, 10, 0);
     }
 
     void FixedUpdate()
     {
-        Rotating();
-        Zooming();
-        ApplyPosition();
+        if (Input.GetKeyDown(KeyCode.B)) {
+            
+        }
+
+        if (!playCutscene) {
+            ApplyPosition();
+        }
+       // }
+    }
+
+    public void StartCutscene(GameObject path) {
+        GetComponent<SplineController>().SplineRoot = path;
+        GetComponent<SplineController>().FollowSpline();
+        playCutscene = true;
     }
 
     void ApplyPosition()
@@ -62,37 +75,59 @@ public class CameraControl : MonoBehaviour
 
     void Rotating()
     {
-        float distCovered = (Time.time - startTime) * 0.5f;
-        float completed = distCovered / length;
+        //float distCovered = (Time.time - startTime) * 0.5f;
+        //float completed = distCovered / length;
 
 
-        transform.position = Vector3.SmoothDamp(transform.position,
-                                       target + offset,
-                                       ref camSpeed, 0.5f);
+        //transform.position = Vector3.SmoothDamp(transform.position,
+        //                               target + offset,
+        //                               ref camSpeed, 0.5f);
 
-        if (completed > 1)
-        {
-            length = 0;
-            currentRotation = newRotation;
-        }
-    }
-
-    void Zooming()
-    {
-        // float distance = Vector3.Distance(big.transform.position, small.transform.position);
-        //  float zoomValue = 0;
-
-        //if (distance > myZoomValue)
+        //if (completed > 1)
         //{
-        //    zoomValue = myZoomValue;
+        // //   length = 0;
+        //    currentRotation = newRotation;
         //}
-        //else {
-        //    zoomValue = distance;
-        //}
-
-        float fov = Camera.main.fieldOfView;
-        Camera.main.fieldOfView = Mathf.Lerp(fov, myFieldOfView, Time.deltaTime * 2.5f);
     }
 
+    public void DisableCutscene() {
+        this.transform.rotation = currentRotation;
+        playCutscene = false;
+    }
 
+    //public void PlayCutscene(GameObject path) {
+    ////    print("playcutscene");
+    //    CalculatePath(path);
+    //    SetVariables(this.transform, 0);
+    //    playCutscene = true;
+       
+        
+    //}
+
+    //void CalculatePath(GameObject path) {
+    //    print(path.transform.childCount);
+    //    for (int i = 0; i < path.transform.childCount; i++) {
+    //        pathList.Add(path.transform.GetChild(i));
+    //    }
+
+    //    //foreach (Transform trans in pathList) {
+    //    //    print(trans.name);
+    //    //}
+    //}
+
+    //void Cutscene() {
+    //    float distCovered = (Time.time - startTime) * speed;
+    //    float fracJourney = distCovered / journeyLength;
+    //    this.transform.position = Vector3.Lerp(currentPos.position, pathList[index].position, fracJourney);
+    //    if (Vector3.Distance( currentPos.position, pathList[index].position) <= 0.5f) {
+    //        index++;
+    //        SetVariables(this.transform,index);
+    //    }
+    //}
+
+    //void SetVariables(Transform pCurrentPos, int pIndex) {
+    //    startTime = Time.time;
+    //    currentPos = pCurrentPos;
+    //    journeyLength = Vector3.Distance(currentPos.position, pathList[pIndex].position);
+    //}
 }
