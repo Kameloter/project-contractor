@@ -44,18 +44,18 @@ public class PlayerMovement : MonoBehaviour
         
         //agent.areaMask = 4;
         if (Input.GetMouseButton(0) &! eventCalled ) {
-            print("clicked object: " + GameManager.Instance.ClickedObject);
+           // print("clicked object: " + GameManager.Instance.ClickedObject);
             RaycastHit hit;
             NavMeshHit navHit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
 
                 if (hit.transform.GetComponent<CustomEvent>() != null && !eventCalled && firstFrame) {
-                    print("ha");
+                //    print("ha");
                     hit.transform.GetComponent<CustomEvent>().OnCustomEvent();
                     eventCalled = true;
                 }
                 else if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
-                    print("ho");
+                //    print("ho");
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
                         GameManager.Instance.ClickedObject = null;

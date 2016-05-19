@@ -124,7 +124,7 @@ public class SmallValveSocket : MonoBehaviour {
 
     public void ActivateInteractables() {
         if (controlValve.currentState == valveLine) {
-            print("started with valve" + this.name);
+         //   print("started with valve" + this.name);
             foreach (BaseInteractable interactable in interactables) {
                 interactable.Activate();
             }

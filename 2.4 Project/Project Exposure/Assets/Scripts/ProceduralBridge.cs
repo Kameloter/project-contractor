@@ -43,7 +43,7 @@ public class ProceduralBridge : BaseInteractable {
             //yield return new WaitForSeconds(0.15f);
         }
         obstacle.SetActive(false);
-        print("Bridge constructed!");
+        //print("Bridge constructed!");
     }
 
 

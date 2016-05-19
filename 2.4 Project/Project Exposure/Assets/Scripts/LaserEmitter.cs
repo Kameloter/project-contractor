@@ -15,10 +15,17 @@ public class LaserEmitter : Interactable {
     bool _active = false;
     bool InRange = false;
 
+    [ReadOnly] public Vector3[] points = new Vector3[100];
+    Vector3[] oldPoints = new Vector3[100];
+
+    bool update = false;
+    int index = 0;
+
     void Start() {
     }
 
     void Update() {
+        DrawLaser(transform.position);
     }
 
     public override void Activate() {
@@ -28,19 +35,19 @@ public class LaserEmitter : Interactable {
 
     public override void DeActivate() {
         _active = false;
-        DestroyLaser();
+        DestroyLaser(0);
     }
 
     public void OnCustomEvent() {
         if (InRange) {
-            print("clicked and inrange");
+          //  print("clicked and inrange");
             ActivateLaser();
         }
         else {
-            print("clicked and NOT inrange");
+          //  print("clicked and NOT inrange");
             GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
-            print(GameManager.Instance.ClickedObject.name);
+          //  print(GameManager.Instance.ClickedObject.name);
         }
     }
 
@@ -51,41 +58,62 @@ public class LaserEmitter : Interactable {
         else {
             state++;
         }
-        print(state);
 
         Vector3 rotation = new Vector3(0, state * 45, 0);
         this.transform.eulerAngles = rotation;
 
-        if (_active) DrawLaser(transform.position);
+      //  if (_active) DrawLaser(transform.position);
     }
 
-    void DestroyLaser() {
-        foreach (Transform child in transform) {
-            Destroy(child.gameObject);
+    void DestroyLaser(int index) {
+        for (int i = 0; i < transform.childCount; i++) {
+            print("name: " + transform.GetChild(i).name);
+            Destroy(transform.GetChild(i).gameObject);
         }
     }
 
     void DrawLaser(Vector3 startPoint) {
 
-        //kill your overdate kids
-        DestroyLaser();
-
         RaycastHit hit;
         Vector3 RayDir = transform.forward;
+
+        points[0] = startPoint;
 
         for (int i = 1; i < 100; i++) {  //Max 100 bounces
             if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
                 if (hit.collider.CompareTag(Tags.mirror)) {
-                    AddLineRenderer(startPoint, hit.point, i.ToString());
-                    Debug.DrawLine(startPoint, hit.point, Color.red);                //laser
-                    Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow); //normal
+                    //  if (points[i] != hit.point) {
+                    //  DestroyLaser(i);
+                    // AddLineRenderer(startPoint, hit.point, i.ToString());
+                    //   }
+                    //Debug.DrawLine(startPoint, hit.point, Color.red);                //laser
+                    //  Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow); //normal
 
                     RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);    //calculate reflected ray direction
-                    Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);       //reflected laser
+                    //   Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);       //reflected laser
                     startPoint = hit.point;
-                } else {
-                    AddLineRenderer(startPoint, hit.point, i.ToString());
-                    if (hit.collider.GetComponent<TemperatureScript>() != null){
+                    points[i] = hit.point;
+
+                    index++;
+
+                    if (oldPoints[i] == points[i]) {
+                        print("ghjk");
+                        update = true;
+                    }
+                }
+                else {
+                    //   if (points[i] != hit.point) {
+                    //DestroyLaser(i);
+                    // AddLineRenderer(startPoint, hit.point, i.ToString());
+                    //  }
+                    points[i] = hit.point;
+                    //index++;
+                    if (oldPoints[i] == points[i]) {
+                        print("ghjk");
+                        update = true;
+                    }
+
+                    if (hit.collider.GetComponent<TemperatureScript>() != null) {
                         hit.collider.gameObject.GetComponent<TemperatureScript>().ChangeState(TemperatureScript.TemperatureState.Hot);
                     }
                     break;                                                          //break out of the for loop to prevent multiple end lasors.
@@ -93,6 +121,20 @@ public class LaserEmitter : Interactable {
             }
         }
 
+        DestroyLaser(0);
+        for (int i = 0; i < index+1; i++) {
+            print("oldPoint: " + oldPoints[i] + "newPoint: " + points[i]);
+            AddLineRenderer(points[i], points[i + 1], i.ToString());
+        }
+
+        oldPoints = points;
+
+        index = 0;
+
+        update = false;
+    }
+
+    void Redraw() {
     }
 
     void AddLineRenderer(Vector3 startPoint, Vector3 endPoint, string name = "") {
@@ -100,8 +142,6 @@ public class LaserEmitter : Interactable {
         lineRendererParent.transform.SetParent(this.transform);
         lineRendererParent.name = "las0r " + name;
         LineRenderer lineRenderer = lineRendererParent.AddComponent<LineRenderer>();
-        BoxCollider col = lineRendererParent.AddComponent<BoxCollider>();
-      //  col.center = 
 
         lineRenderer.SetWidth(0.1f, 0.1f);
         lineRenderer.material = mat;
