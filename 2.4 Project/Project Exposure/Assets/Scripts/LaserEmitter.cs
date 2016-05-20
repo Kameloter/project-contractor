@@ -25,15 +25,16 @@ public class LaserEmitter : Interactable {
     }
 
     void Update() {
-        DrawLaser(transform.position);
+       if (_active) DrawLaser(transform.position);
     }
 
     public override void Activate() {
         _active = true;
-        DrawLaser(transform.position);
+       // DrawLaser(transform.position);
     }
 
     public override void DeActivate() {
+        print("deactived laser");
         _active = false;
         DestroyLaser(0);
     }
