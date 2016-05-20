@@ -34,19 +34,19 @@ public class SceneManager : MonoBehaviour {
     }
 
     void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            switch (currentState) {
-                case GameState.InGame:
-                    SetState(GameState.Paused);
-                    break;
-                case GameState.Paused:
-                    SetState(GameState.InGame);
-                    break;
-                default:
-                    print(string.Format("Current state is '{0}'. If not expected state check build settings !!", currentState));
-                    break;
-            }
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape)) {
+        //    switch (currentState) {
+        //        case GameState.InGame:
+        //            SetState(GameState.Paused);
+        //            break;
+        //        case GameState.Paused:
+        //            SetState(GameState.InGame);
+        //            break;
+        //        default:
+        //            print(string.Format("Current state is '{0}'. If not expected state check build settings !!", currentState));
+        //            break;
+        //    }
+        //}
     }
 
     public void SetState(GameState newGameState) {

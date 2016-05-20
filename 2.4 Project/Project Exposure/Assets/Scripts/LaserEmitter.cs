@@ -4,11 +4,8 @@ using System.Collections.Generic;
 
 public class LaserEmitter : Interactable {
 
-    [SerializeField]
-    Material mat;
-
-    [HideInInspector]
-    public int state = 0;
+    [SerializeField] Material mat;
+    [HideInInspector] public int state = 0;
 
     Vector3 rotation = Vector3.zero;
 
@@ -21,11 +18,8 @@ public class LaserEmitter : Interactable {
     bool update = false;
     int index = 0;
 
-    void Start() {
-    }
-
     void Update() {
-        CheckLaser(transform.position);
+        if(_active) CheckLaser(transform.position);
     }
 
     public override void Activate() {
@@ -40,34 +34,26 @@ public class LaserEmitter : Interactable {
 
     public void OnCustomEvent() {
         if (InRange) {
-          //  print("clicked and inrange");
             ActivateLaser();
-        }
-        else {
-          //  print("clicked and NOT inrange");
+        } else {
             GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
-          //  print(GameManager.Instance.ClickedObject.name);
         }
     }
 
     void ActivateLaser() {
         if (state == 7) {
             state = 0;
-        }
-        else {
+        } else {
             state++;
         }
 
         Vector3 rotation = new Vector3(0, state * 45, 0);
         this.transform.eulerAngles = rotation;
-
-        //if (_active) DrawLaser(transform.position);
     }
 
     void DestroyLaser(int index) {
         for (int i = 1; i < transform.childCount; i++) { //start at 1 to not remove the nose
-            //print("name: " + transform.GetChild(i).name);
             Destroy(transform.GetChild(i).gameObject);
         }
     }
@@ -81,12 +67,12 @@ public class LaserEmitter : Interactable {
         for (int i = 1; i < 100; i++) {  //Max 100 bounces
             if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
                 if (hit.collider.CompareTag(Tags.mirror)) {
-                    //Debug.DrawLine(startPoint, hit.point, Color.red);                //laser
-                    //Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow); //normal
+                    //Debug.DrawLine(startPoint, hit.point, Color.red);                 //laser
+                    //Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow);  //normal
 
-                    RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);    //calculate reflected ray direction
-                    //Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);       //reflected laser
-                    
+                    RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);       //calculate reflected ray direction
+                    //Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);        //reflected laser
+
                     startPoint = hit.point;
                     points[i] = hit.point;
 
@@ -95,8 +81,7 @@ public class LaserEmitter : Interactable {
                     if (oldPoints[i] != points[i]) {
                         update = true;
                     }
-                }
-                else {
+                } else {
                     points[i] = hit.point;
                     if (oldPoints[i] != points[i]) {
                         update = true;
@@ -153,7 +138,3 @@ public class LaserEmitter : Interactable {
         }
     }
 }
-
-
-
-
