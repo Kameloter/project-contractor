@@ -19,7 +19,7 @@ public class LaserEmitter : Interactable {
     int index = 0;
 
     void Update() {
-        if(_active) CheckLaser(transform.position);
+        if (_active) CheckLaser(transform.position);
     }
 
     public override void Activate() {
@@ -115,7 +115,8 @@ public class LaserEmitter : Interactable {
         lineRendererParent.transform.SetParent(this.transform);
         lineRendererParent.name = "las0r " + name;
         LineRenderer lineRenderer = lineRendererParent.AddComponent<LineRenderer>();
-
+        lineRenderer.receiveShadows = false;
+        lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         lineRenderer.SetWidth(0.1f, 0.1f);
         lineRenderer.material = mat;
 
