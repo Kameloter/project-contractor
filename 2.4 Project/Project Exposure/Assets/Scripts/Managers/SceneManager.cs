@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
 public enum GameState {
     Menu, InGame, Paused
 }
@@ -9,15 +8,10 @@ public enum GameState {
 public class SceneManager : MonoBehaviour {
     GameState currentState;
 
-    [Header("Level Stats")]
-    [SerializeField][ReadOnly] private int collectablesAvailable = 0; //keeps track of the amount of collectables to be found 
-
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
-        //Count collectables available this scene
-        collectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
     }
-    
+
     void Start() {
         currentState = GameManager.Instance.CurrentState;
 
@@ -32,6 +26,7 @@ public class SceneManager : MonoBehaviour {
         //    Cursor.visible = true;
         //}
     }
+
 
     void Update() {
         //if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -53,18 +48,12 @@ public class SceneManager : MonoBehaviour {
         DisablePreviousState(currentState);
         switch (newGameState) {
             case GameState.Menu:
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
                 break;
             case GameState.InGame:
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-                Time.timeScale = 1; //reset time scale
+                //Time.timeScale = 1; //reset time scale
                 break;
             case GameState.Paused:
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-                Time.timeScale = 0; // stop time when paused.
+                //Time.timeScale = 0; // stop time when paused.
                 break;
         }
         currentState = newGameState;
@@ -92,10 +81,10 @@ public class SceneManager : MonoBehaviour {
 
     public void SwitchToLevel(int index) {
         ExportSaveData();
-        print("loading level " + index);
+        //print("loading level " + index);
         SetState(GameState.InGame);
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
-        print("loaded level " + index);
+        //print("loaded level " + index);
     }
 
     /// <summary>
@@ -103,7 +92,7 @@ public class SceneManager : MonoBehaviour {
     /// </summary>
     public void ExportSaveData() {
         GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables collected this level
-        GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables available this level
+        GameManager.Instance.MaxCollectablesAvailable += gameObject.GetComponent<SceneStats>().CollectablesAvailable; //Total collectables available this level
     }
 
     public void QuitGame() {
@@ -111,4 +100,3 @@ public class SceneManager : MonoBehaviour {
         Application.Quit();
     }
 }
-
