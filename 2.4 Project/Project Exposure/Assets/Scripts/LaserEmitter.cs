@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class LaserEmitter : Interactable {
+    [Header("Laser")]
+    public Transform laserSpawn;
+
 
     [SerializeField] Material mat;
     [HideInInspector] public int state = 0;
@@ -19,7 +22,7 @@ public class LaserEmitter : Interactable {
     int index = 0;
 
     void Update() {
-        if (_active) CheckLaser(transform.position);
+        if (_active) CheckLaser(laserSpawn.position);
     }
 
     public override void Activate() {
@@ -53,7 +56,7 @@ public class LaserEmitter : Interactable {
     }
 
     void DestroyLaser(int index) {
-        for (int i = 1; i < transform.childCount; i++) { //start at 1 to not remove the nose
+        for (int i = 1; i < transform.childCount; i++) { //start at 1 to not remove the body
             Destroy(transform.GetChild(i).gameObject);
         }
     }
