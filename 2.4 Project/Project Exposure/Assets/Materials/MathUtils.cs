@@ -1,3 +1,9 @@
+/**
+ * STUFF DOWNLOADED FROM http://wiki.unity3d.com/index.php/Hermite_Spline_Controller
+ * AUTHOR: Benoit FOULETIER (http://wiki.unity3d.com/index.php/User:Benblo)
+ * * MODIFIED BY F. Montorsi
+ */
+
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -84,7 +90,7 @@ public class MathUtils
 
 	/// <summary>
 	/// Smooths the input parameter t.
-	/// If less than k1 ir greater than k2, it uses a sin.
+	/// If less than k1 ir greater than k2, it uses a sin().
 	/// Between k1 and k2 it uses linear interp.
 	/// </summary>
 	public static float Ease(float t, float k1, float k2)
@@ -93,19 +99,27 @@ public class MathUtils
 
 		f = k1 * 2 / Mathf.PI + k2 - k1 + (1.0f - k2) * 2 / Mathf.PI;
 
-		if (t < k1)
+		if (t <= k1)
 		{
-			s = k1 * (2 / Mathf.PI) * (Mathf.Sin((t / k1) * Mathf.PI / 2 - Mathf.PI / 2) + 1);
+			if (k1 == 0)
+				s = 0;
+			else
+				s = k1 * (2 / Mathf.PI) * (Mathf.Sin((t / k1) * Mathf.PI / 2 - Mathf.PI / 2) + 1);
 		}
 		else
-			if (t < k2)
+		{
+			if (t <= k2)
 			{
 				s = (2 * k1 / Mathf.PI + t - k1);
 			}
 			else
 			{
-				s = 2 * k1 / Mathf.PI + k2 - k1 + ((1 - k2) * (2 / Mathf.PI)) * Mathf.Sin(((t - k2) / (1.0f - k2)) * Mathf.PI / 2);
+				if (k2 == 1)
+					s = 1;
+				else
+					s = 2 * k1 / Mathf.PI + k2 - k1 + ((1 - k2) * (2 / Mathf.PI)) * Mathf.Sin(((t - k2) / (1.0f - k2)) * Mathf.PI / 2);
 			}
+		}
 
 		return (s / f);
 	}
