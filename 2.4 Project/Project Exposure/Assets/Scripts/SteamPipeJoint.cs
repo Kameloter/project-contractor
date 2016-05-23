@@ -22,8 +22,6 @@ public class SteamPipeJoint : MonoBehaviour {
 
     public void StopSteamConnection()
     {
-     
-       
         if (connectTo != null)
         {
             if (poweredSocket != null) poweredSocket.DeactivateSocket();
@@ -50,7 +48,7 @@ public class SteamPipeJoint : MonoBehaviour {
             {
              //   print(" this -> " + go.name);
                 if (poweredSocket != null){
-                    print("in powering on!");
+                  //  print("in powering on!");
                     if (poweredSocket.socketed != null){
                        
                        poweredSocket.ActivateInteractables();
@@ -60,6 +58,5 @@ public class SteamPipeJoint : MonoBehaviour {
                 smoke.Play();
             }
         }
-
     }
 }

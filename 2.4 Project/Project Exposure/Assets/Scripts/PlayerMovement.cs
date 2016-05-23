@@ -19,6 +19,8 @@ public class PlayerMovement : MonoBehaviour
     private NavMeshPath path;
     public LayerMask clickableLayer;
     bool eventCalled = false;
+    bool firstFrame = true;
+
   //  Animator anim;
     void Start()
     {
@@ -39,38 +41,33 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void MouseMovement() {
+        
         //agent.areaMask = 4;
-        if (Input.GetMouseButton(0))
-        {
+        if (Input.GetMouseButton(0) &! eventCalled ) {
+           // print("clicked object: " + GameManager.Instance.ClickedObject);
             RaycastHit hit;
             NavMeshHit navHit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100))
-            {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
 
-                if (hit.transform.GetComponent<CustomEvent>() != null && !eventCalled)
-                {
-                    print("ha");
+                if (hit.transform.GetComponent<CustomEvent>() != null && !eventCalled && firstFrame) {
+                //    print("ha");
                     hit.transform.GetComponent<CustomEvent>().OnCustomEvent();
                     eventCalled = true;
                 }
-
-
-                //Navigation
-                if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas))
-                {
+                else if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
+                //    print("ho");
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
-                    if (path.status == NavMeshPathStatus.PathComplete)
-                    {
+                    if (path.status == NavMeshPathStatus.PathComplete) {
+                        GameManager.Instance.ClickedObject = null;
                         agent.destination = hit.point;
                     }
                 }
             }
+            firstFrame = false;
             //for (int i = 0; i < path.corners.Length - 1; i++)
             //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
-        else if (Input.GetMouseButtonUp(0)) { print("up"); eventCalled = false; }
-
-
+        else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; }
     }
 
     void Movement()

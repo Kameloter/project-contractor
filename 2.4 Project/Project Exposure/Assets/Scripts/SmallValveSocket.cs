@@ -107,6 +107,11 @@ public class SmallValveSocket : MonoBehaviour {
         {
             RemoveValve(socketed);
         }
+        else if (!InRange) {
+            GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+            GameManager.Instance.ClickedObject = this.gameObject;
+            print(GameManager.Instance.ClickedObject.name);
+        }
     }
 
     void PlaceValve(GameObject valve) {
@@ -119,7 +124,7 @@ public class SmallValveSocket : MonoBehaviour {
 
     public void ActivateInteractables() {
         if (controlValve.currentState == valveLine) {
-            print("started with valve" + this.name);
+         //   print("started with valve" + this.name);
             foreach (BaseInteractable interactable in interactables) {
                 interactable.Activate();
             }
@@ -143,9 +148,21 @@ public class SmallValveSocket : MonoBehaviour {
         }
     }
 
+    void Check() {
+        if (playerScript.carriedValve != null && InRange && !socketed) {
+            PlaceValve(playerScript.carriedValve);
+        }
+        else if (socketed != null && InRange) {
+            RemoveValve(socketed);
+        }
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            InRange = true;
+             InRange = true;
+            if (GameManager.Instance.ClickedObject == this.gameObject) {
+                Check();
+            }
         }
     }
 

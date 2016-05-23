@@ -25,9 +25,9 @@ public class MovingBridgeScript : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-    void Update() {
+    void FixedUpdate() {
         if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
-            print("updating");
+            //print("updating");
             movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
 
             obstacle.SetActive(true);
