@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
     private int _collectablesCollected = 0; //total collectables the player has collected through the entire game
     [SerializeField]
     private int _maxCollectablesAvailable = 0; //total collectables the player *could have* collected through the entire game
+    GameObject clickedObject;
 
     public GameObject Player {
         get {
@@ -64,8 +65,11 @@ public class GameManager : MonoBehaviour {
         get { return _maxCollectablesAvailable; }
         set { _maxCollectablesAvailable = value; }
     }
- 
+
+    //private bool clickedOnObject = false;
+
+    public GameObject ClickedObject {
+        get { return clickedObject; }
+        set { clickedObject = value; }
+    }
 }
-
-
-
