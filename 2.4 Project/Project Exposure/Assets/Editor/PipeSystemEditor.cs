@@ -42,13 +42,7 @@ public class PipeSystemEditor : Editor
         //    if (e.character == 'h')
         //        Debug.Log("tha pos => " + position);
         //}
-          
-          
-
-        
-
-
-
+         
 
         myValveTransform = myValve.transform;
 
