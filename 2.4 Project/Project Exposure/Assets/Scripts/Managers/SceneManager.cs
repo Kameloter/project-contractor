@@ -10,7 +10,6 @@ public class SceneManager : MonoBehaviour {
 
     void Awake() {
         DontDestroyOnLoad(GameManager.Instance);
-
     }
 
     void Start() {

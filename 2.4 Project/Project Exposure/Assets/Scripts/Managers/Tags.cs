@@ -13,8 +13,9 @@ public class Tags : MonoBehaviour {
     public const string player = "Player";
     public const string gameController = "GameController";
     //---------------------------------------------------------
-    
+
     //Custom Tags
+    public const string managers = "Managers";
     public const string valve = "Valve";
     public const string mirror = "Mirror";
     public const string collectable = "Collectable";
