@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class GameManager : MonoBehaviour {
-    //singleton
-    public static GameManager Instance {
+    private static GameManager _instance;
+    public static GameManager Instance { //singleton
         get {
             if (_instance == null) {
                 GameObject gameManager = new GameObject("GameController");
@@ -20,24 +20,21 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    private static GameManager _instance;
     private GameState _currentState;
+    public GameState CurrentState { get { return _currentState; } }
 
-    public GameState CurrentState {
-        get { return _currentState; }
-    }
+    //PLAYER         //SerializeField used for debugging purposes.
+    [SerializeField] private GameObject _player;
+    [SerializeField] private PlayerScript _playerScript;
+    [SerializeField] private SceneStats _sceneStats;
+    [SerializeField] private int _collectablesCollected = 0;        //total collectables the player has collected through the entire game
+    [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
 
-    //PLAYER  //SerializeField used for debugging purposes.
-    [SerializeField]
-    private GameObject _player;
-    [SerializeField]
-    private PlayerScript _playerScript;
-    [SerializeField]
-    private int _collectablesCollected = 0; //total collectables the player has collected through the entire game
-    [SerializeField]
-    private int _maxCollectablesAvailable = 0; //total collectables the player *could have* collected through the entire game
     GameObject clickedObject;
 
+    /// <summary>
+    /// Returns the Player GameObject.
+    /// </summary>
     public GameObject Player {
         get {
             if (_player == null) _player = GameObject.FindGameObjectWithTag("Player");
@@ -45,10 +42,23 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Returns the PlayerScript from the Player GameObject.
+    /// </summary>
     public PlayerScript PlayerScript { //fast access to playerscript
         get {
             if (_playerScript == null) _playerScript = Player.GetComponent<PlayerScript>();
             return _playerScript;
+        }
+    }
+
+    /// <summary>
+    /// Returns the SceneStats script from the UtilityManagers
+    /// </summary>
+    public SceneStats SceneStats { //fast access to scenestats
+        get {
+            if (_sceneStats == null) _sceneStats = GameObject.FindGameObjectWithTag(Tags.managers).GetComponent<SceneStats>();
+            return _sceneStats;
         }
     }
 
