@@ -15,12 +15,13 @@ public class Tags : MonoBehaviour {
     //---------------------------------------------------------
 
     //Custom Tags
-    public const string managers = "Managers";
     public const string valve = "Valve";
     public const string mirror = "Mirror";
+    public const string managers = "Managers";
     public const string collectable = "Collectable";
     public const string particleWater = "WaterParticle";
     public const string particleHeat = "HeatParticle";
     public const string particleSteam = "SteamParticle";
+    public const string particleFreeze = "FreezeParticle";
 
 }
