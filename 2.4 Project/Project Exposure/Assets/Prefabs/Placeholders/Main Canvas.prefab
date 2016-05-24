@@ -277,8 +277,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c15c325aa4f9d0844a20194f7818af6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  divider: {fileID: 11468084}
-  collectables: {fileID: 11402960}
   found: {fileID: 11418290}
   total: {fileID: 11484660}
 --- !u!114 &11468084
