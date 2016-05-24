@@ -7,20 +7,22 @@ public class PickableScript : MonoBehaviour {
     bool IsCarried = false;
     public bool clickable = true;
 
+    GameObject player;
     PlayerScript playerScript;
 
     Rigidbody rigidBody;
 
 	// Use this for initialization
 	void Start () {
+        player = GameManager.Instance.Player;
         playerScript = GameManager.Instance.PlayerScript;
         rigidBody = this.GetComponent<Rigidbody>();
 	}
 
     public void PickUp() {
         if (playerScript.carriedValve == null) {
-            this.transform.position = Player.transform.position - Player.transform.forward;
-            this.transform.SetParent(Player.transform);
+            this.transform.position = player.transform.position - player.transform.forward;
+            this.transform.SetParent(player.transform);
             rigidBody.useGravity = false;
             rigidBody.isKinematic = true;
             IsCarried = true;
