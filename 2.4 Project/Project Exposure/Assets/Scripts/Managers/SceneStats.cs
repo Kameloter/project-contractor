@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-//[ExecuteInEditMode]
+[ExecuteInEditMode]
 public class SceneStats : MonoBehaviour {
 
     [Header("Level Stats")]
-    //[ReadOnly]
-    public int _collectablesAvailable = 0;   //keeps track of the amount of collectables to be found 
+    [ReadOnly] public int _collectablesAvailable = 0;   //keeps track of the amount of collectables to be found 
 
     void Start() {
         //Count collectables available this scene
@@ -14,8 +13,7 @@ public class SceneStats : MonoBehaviour {
     }
 
     void Update() {
-        //if (!Application.isPlaying) CollectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
-        if (Input.GetKeyDown(KeyCode.Space)) CollectablesAvailable -= 1;
+        if (!Application.isPlaying) CollectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
     }
 
     public int CollectablesAvailable {
