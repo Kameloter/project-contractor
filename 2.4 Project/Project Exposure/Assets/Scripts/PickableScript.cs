@@ -7,18 +7,18 @@ public class PickableScript : MonoBehaviour {
     bool IsCarried = false;
     public bool clickable = true;
 
-    GameObject Player;
+    PlayerScript playerScript;
 
     Rigidbody rigidBody;
 
 	// Use this for initialization
 	void Start () {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        playerScript = GameManager.Instance.PlayerScript;
         rigidBody = this.GetComponent<Rigidbody>();
 	}
 
     public void PickUp() {
-        if (GameManager.Instance.PlayerScript.carriedValve == null) {
+        if (playerScript.carriedValve == null) {
             this.transform.position = Player.transform.position - Player.transform.forward;
             this.transform.SetParent(Player.transform);
             rigidBody.useGravity = false;
@@ -27,22 +27,18 @@ public class PickableScript : MonoBehaviour {
             rigidBody.constraints = RigidbodyConstraints.None;
 
             if (this.CompareTag("Valve")) {
-                Player.GetComponent<PlayerScript>().carriedValve = this.gameObject;
+                playerScript.carriedValve = this.gameObject;
             }
         }
     }
 
     public void OnCustomEvent() {
         if (clickable) {
-            if (IsCarried) {
-                Drop();
-            }
+            if (IsCarried) { Drop(); }
             else {
-                if (InRange) {
-                    PickUp();
-                }
+                if (InRange) { PickUp(); }
                 else {
-                    GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+                    GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
                     GameManager.Instance.ClickedObject = this.gameObject;
                     print(GameManager.Instance.ClickedObject.name);
                 }
@@ -56,8 +52,8 @@ public class PickableScript : MonoBehaviour {
         rigidBody.isKinematic = false;
         IsCarried = false;
 
-          if (this.CompareTag("Valve")) {
-              Player.GetComponent<PlayerScript>().carriedValve = null;
+        if (this.CompareTag("Valve")) {
+            playerScript.carriedValve = null;
         }
     }
 
@@ -75,7 +71,7 @@ public class PickableScript : MonoBehaviour {
         IsCarried = false;
 
         if (this.CompareTag("Valve")) {
-            Player.GetComponent<PlayerScript>().carriedValve = null;
+            playerScript.carriedValve = null;
         }
     }
 
@@ -86,14 +82,12 @@ public class PickableScript : MonoBehaviour {
                 PickUp();
                 RemoveClickedObject();
             }
-          //  print("In Range TRUE");
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
             InRange = false;
-          //  print("In Range FALSE");
         }
     }
 }

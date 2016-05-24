@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour {
     /// </summary>
     public GameObject Player {
         get {
-            if (_player == null) _player = GameObject.FindGameObjectWithTag("Player");
+            if (_player == null) _player = GameObject.FindGameObjectWithTag(Tags.player);
             return _player;
         }
     }

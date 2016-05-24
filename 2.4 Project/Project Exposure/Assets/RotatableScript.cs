@@ -49,7 +49,7 @@ public class RotatableScript : MonoBehaviour {
             Rotate();
         }
         else {
-            GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+            GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
         }
     }

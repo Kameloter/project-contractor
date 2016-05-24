@@ -38,8 +38,7 @@ public class SmallValveSocket : MonoBehaviour {
         sphereColor.a = 1;
         if (Application.isPlaying)
         {
-            Player = GameObject.FindGameObjectWithTag("Player");
-            playerScript = Player.GetComponent<PlayerScript>();
+            playerScript = GameManager.Instance.PlayerScript;
 
             FindASteamJoint();
         }
@@ -108,7 +107,7 @@ public class SmallValveSocket : MonoBehaviour {
             RemoveValve(socketed);
         }
         else if (!InRange) {
-            GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
+            GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
             print(GameManager.Instance.ClickedObject.name);
         }
