@@ -1,57 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MovingBridgeScript : MonoBehaviour {
-
-    public Transform movableObject;
-    public Transform endPoint;
-    public Transform startPoint;
-    public float moveSpeed = 0;
-
-    private Vector3 moveDirection;
-    private Transform currentDestination;
+public class MovingBridgeScript : MoveableScript {
 
     public GameObject obstacle;
 
-    public TemperatureScript temperatureScript;
 	// Use this for initialization
-	void Start () {
-        temperatureScript = GetComponent<TemperatureScript>();
-        if (temperatureScript == null) {
-            temperatureScript = GetComponentInChildren<TemperatureScript>();
-        }
-
-        SetDestination(startPoint);
+	public override void Start () {
+        base.Start();
+        print("base");
 	}
-	
-	// Update is called once per frame
-    void FixedUpdate() {
-        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
-            //print("updating");
-            movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
 
-            obstacle.SetActive(true);
-            if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
-                SetDestination(currentDestination == startPoint ? endPoint : startPoint);
-            }
-        }
-        else {
+    void Update() {
+        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
             obstacle.SetActive(false);
         }
-
+        else {
+            obstacle.SetActive(true);
+        }
+    }
+	
+	// Update is called once per frame
+    public override void Activate() {
+        base.Activate();
     }
 
-    void SetDestination(Transform dest) {
-        currentDestination = dest;
-        moveDirection = (currentDestination.position - movableObject.position).normalized;
-    }
-
-    void OnDrawGizmos() {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(startPoint.position, movableObject.localScale);
-
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(endPoint.position, movableObject.localScale);
-
+    public override void DeActivate() {
+        base.DeActivate();
     }
 }
