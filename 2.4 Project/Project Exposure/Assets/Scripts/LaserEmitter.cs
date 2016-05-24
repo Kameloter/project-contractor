@@ -2,27 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class LaserEmitter : Interactable {
+[RequireComponent(typeof(RotatableScript))]
+public class LaserEmitter : BaseInteractable{
     [Header("Laser")]
     public Transform laserSpawn;
 
-
     [SerializeField] Material mat;
-    [HideInInspector] public int state = 0;
-
-    Vector3 rotation = Vector3.zero;
 
     bool _active = false;
-    bool InRange = false;
 
-    [ReadOnly] public Vector3[] points = new Vector3[100];
+    Vector3[] points = new Vector3[100];
     Vector3[] oldPoints = new Vector3[100];
 
     bool update = false;
     int index = 0;
 
     void Update() {
-        if (_active) CheckLaser(laserSpawn.position);
+       CheckLaser(laserSpawn.position);
     }
 
     public override void Activate() {
@@ -32,30 +28,10 @@ public class LaserEmitter : Interactable {
 
     public override void DeActivate() {
         _active = false;
-        DestroyLaser(0);
+        DestroyLaser();
     }
 
-    public void OnCustomEvent() {
-        if (InRange) {
-            ActivateLaser();
-        } else {
-            GameObject.FindGameObjectWithTag(Tags.player).GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
-            GameManager.Instance.ClickedObject = this.gameObject;
-        }
-    }
-
-    void ActivateLaser() {
-        if (state == 7) {
-            state = 0;
-        } else {
-            state++;
-        }
-
-        Vector3 rotation = new Vector3(0, state * 45, 0);
-        this.transform.eulerAngles = rotation;
-    }
-
-    void DestroyLaser(int index) {
+    void DestroyLaser() {
         for (int i = 1; i < transform.childCount; i++) { //start at 1 to not remove the body
             Destroy(transform.GetChild(i).gameObject);
         }
@@ -106,7 +82,7 @@ public class LaserEmitter : Interactable {
     }
 
     void RedrawLaser() {
-        DestroyLaser(0);
+        DestroyLaser();
         for (int i = 0; i < index + 1; i++) {
             AddLineRenderer(points[i], points[i + 1], i.ToString());
         }
@@ -125,20 +101,5 @@ public class LaserEmitter : Interactable {
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
-    }
-
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = true;
-            if (GameManager.Instance.ClickedObject == this.gameObject) {
-                ActivateLaser();
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = false;
-        }
     }
 }
