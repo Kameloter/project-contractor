@@ -86,6 +86,7 @@ public static class EditorList
             showEvents = (options == EditorListOption.Events);
 
         if (showEvents) {
+          
             for (int i = 0; i < list.arraySize; i++) {
 
                 //   EditorGUILayout.TextField ("Event " + i.ToString());

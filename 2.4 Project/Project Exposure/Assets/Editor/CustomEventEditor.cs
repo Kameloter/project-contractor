@@ -8,11 +8,13 @@ public class CustomEventEditor : Editor {
     bool [] foldouts;
     CustomEventTrigger trigger;
     SerializedProperty prop;
+    MonoScript script;
 	// Use this for initialization
 
     void OnEnable() {
         trigger = (CustomEventTrigger) target;
         prop = serializedObject.FindProperty("Go");
+        script = MonoScript.FromMonoBehaviour((CustomEventTrigger)target);
         foldouts = new bool[20];
     }
 
@@ -28,6 +30,7 @@ public class CustomEventEditor : Editor {
     public override void OnInspectorGUI() {
        // DrawDefaultInspector();
         serializedObject.Update();
+        EditorGUILayout.ObjectField(script, typeof(MonoScript), false);
             
         EditorList.ShowWithBool(prop,foldouts, EditorListOption.Events);
 
