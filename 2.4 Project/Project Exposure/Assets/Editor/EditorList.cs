@@ -11,8 +11,10 @@ public enum EditorListOption {
 	Buttons = 8,
 	Default = ListSize | ListLabel | ElementLabels,
 	NoElementLabels = ListSize | ListLabel,
-	All = Default | Buttons
+	All = Default | Buttons , Events
 }
+
+
 
 public static class EditorList
 {
@@ -43,7 +45,7 @@ public static class EditorList
             EditorGUILayout.PropertyField(list);
             EditorGUI.indentLevel += 1;
         }
-        if (!showListLabel || list.isExpanded)
+        else if (!showListLabel || list.isExpanded)
         {
             SerializedProperty size = list.FindPropertyRelative("Array.size");
             if (showListSize)
@@ -64,27 +66,127 @@ public static class EditorList
         }
     }
 
-    private static void ShowElements(SerializedProperty list, EditorListOption options)
-    {
+    public static void ShowWithBool(SerializedProperty list, bool[] booleans, EditorListOption options = EditorListOption.Default) {
+        if (!list.isArray) {
+            EditorGUILayout.HelpBox(list.name + " is neither an array nor a list!", MessageType.Error);
+            return;
+        }
+
+        bool
+            showEvents = (options == EditorListOption.Events);
+
+        if (showEvents) {
+            ShowElementsCustom(list, booleans, options);
+        }
+    }
+
+
+    private static void ShowElementsCustom(SerializedProperty list, bool[] booleans, EditorListOption options) {
+        bool
+            showEvents = (options == EditorListOption.Events);
+
+        if (showEvents) {
+            for (int i = 0; i < list.arraySize; i++) {
+
+                //   EditorGUILayout.TextField ("Event " + i.ToString());
+                booleans[i] = EditorGUILayout.Foldout(booleans[i], new GUIContent("Event " + i.ToString()));
+                if (booleans[i]) {
+                    GUILayout.FlexibleSpace();
+                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("action"), new GUIContent("Type of action"));
+                    CustomEventTrigger.Action action = (CustomEventTrigger.Action)list.GetArrayElementAtIndex(i).FindPropertyRelative("action").enumValueIndex;
+                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("onTrigger"), new GUIContent("When to Trigger"));
+                   
+                    switch (action) {
+                        case CustomEventTrigger.Action.PlayAnimation:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to perform action"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animation"), new GUIContent("Animation to play"));
+                            break;
+                        case CustomEventTrigger.Action.ActivateInteractable:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("interactable"), new GUIContent("Interactable to activate"));
+                            break;
+                        case CustomEventTrigger.Action.DeactivateInteractable:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("interactable"), new GUIContent("Interactable to deactivate"));
+                            break;
+                        case CustomEventTrigger.Action.PlaySound:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to perform action"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("audioClip"), new GUIContent("AudioClip to activate"));
+                            break;
+                        case CustomEventTrigger.Action.PlayCameraPath:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("path"), new GUIContent("Path"));
+                            break;
+                        case CustomEventTrigger.Action.ShowHint:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("image"), new GUIContent("Image from canvas"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("sprite"), new GUIContent("Sprite to show"));
+                            break;
+                        case CustomEventTrigger.Action.ActivateLight:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("light"), new GUIContent("light to activate"));
+                            break;
+                        case CustomEventTrigger.Action.DisableLight:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("light"), new GUIContent("light to deactivate"));
+                            break;
+                        case CustomEventTrigger.Action.ChangeLightValues:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("light"), new GUIContent("light to deactivate"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("color"), new GUIContent("Color"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("range"), new GUIContent("Range if PointLight"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("intensity"), new GUIContent("Intesity"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("bounceIntensity"), new GUIContent("BounceIntesity"));
+                            break;
+                        case CustomEventTrigger.Action.ActivateObject: 
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to activate"));
+                            break;
+                        case CustomEventTrigger.Action.DeactivateObject:
+                           EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to deactivate"));
+                           break;
+                        case CustomEventTrigger.Action.FocusOnTarget:
+                           EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("target"));
+                             break;
+                        case CustomEventTrigger.Action.PlayParticle:
+                           EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("particle"), new GUIContent("particle to play"));
+                             break;
+                        case CustomEventTrigger.Action.StopParticle:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("particle"), new GUIContent("particle to stop"));
+                             break;
+                    }
+                    GUILayout.FlexibleSpace();
+                }
+            }
+        }
+
+        EditorGUILayout.BeginHorizontal();
+        GUILayout.FlexibleSpace();
+        if (list.arraySize != 15) {
+            if (GUILayout.Button(addButtonContent, EditorStyles.miniButtonLeft, miniButtonWidth, miniButtonHeigth)) {
+
+                list.arraySize += 1;
+            }
+        }
+
+        if (list.arraySize != 0) {
+            if (GUILayout.Button(deleteButtonContent, EditorStyles.miniButtonRight, miniButtonWidth, miniButtonHeigth)) {
+
+                list.arraySize -= 1;
+            }
+        }
+        GUILayout.FlexibleSpace();
+        EditorGUILayout.EndHorizontal();
+    }
+
+    private static void ShowElements(SerializedProperty list, EditorListOption options) {
         bool
             showElementLabels = (options & EditorListOption.ElementLabels) != 0,
-            showButtons = (options & EditorListOption.Buttons) != 0;
-
-        for (int i = 0; i < list.arraySize; i++)
-        {
-            if (showButtons)
-            {
+            showButtons = (options & EditorListOption.Buttons) != 0,
+        showEvents = (options == EditorListOption.Events);
+        for (int i = 0; i < list.arraySize; i++) {
+            if (showButtons) {
                 EditorGUILayout.BeginHorizontal();
             }
-            if (showElementLabels)
-            {
+            if (showElementLabels) {
                 EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i));
             }
             else {
                 EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i), GUIContent.none);
             }
-            if (showButtons)
-            {
+            if (showButtons) {
                 ShowButtons(list, i);
                 EditorGUILayout.EndHorizontal();
             }
@@ -92,13 +194,11 @@ public static class EditorList
 
         EditorGUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
-        if (GUILayout.Button(addButtonContent, EditorStyles.miniButtonLeft, miniButtonWidth, miniButtonHeigth))
-        {
+        if (GUILayout.Button(addButtonContent, EditorStyles.miniButtonLeft, miniButtonWidth, miniButtonHeigth)) {
             list.arraySize += 1;
         }
 
-        if (GUILayout.Button(deleteButtonContent, EditorStyles.miniButtonRight, miniButtonWidth, miniButtonHeigth))
-        {
+        if (GUILayout.Button(deleteButtonContent, EditorStyles.miniButtonRight, miniButtonWidth, miniButtonHeigth)) {
             list.arraySize -= 1;
         }
         GUILayout.FlexibleSpace();

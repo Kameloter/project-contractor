@@ -110,12 +110,12 @@ public class MoveableScript : BaseInteractable {
     }
 
     public override void Activate() {
-        currentState = 1;
+        currentState = 2;
         activated = true;
     }
 
     public override void DeActivate() {
-        currentState = 2;
+        currentState = 1;
         activated = false;
     }
 
