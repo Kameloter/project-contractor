@@ -9,7 +9,7 @@ public class LaserEmitter : BaseInteractable{
 
     [SerializeField] Material mat;
 
-    bool _active = false;
+    [SerializeField] bool _active = false;
 
     Vector3[] points = new Vector3[100];
     Vector3[] oldPoints = new Vector3[100];
@@ -18,7 +18,7 @@ public class LaserEmitter : BaseInteractable{
     int index = 0;
 
     void Update() {
-       CheckLaser(laserSpawn.position);
+       if(_active) CheckLaser(laserSpawn.position);
     }
 
     public override void Activate() {
