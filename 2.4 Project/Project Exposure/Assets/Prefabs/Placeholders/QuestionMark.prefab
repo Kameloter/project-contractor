@@ -97,6 +97,7 @@ MonoBehaviour:
   sprite: {fileID: 0}
   useTriggerExit: 1
   pausesGameplay: 0
+  showUntilClick: 0
   showTime: 0
   activatable: 1
 --- !u!135 &13505702

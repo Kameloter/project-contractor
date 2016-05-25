@@ -13,6 +13,7 @@ public class QuestionMarkScript : MonoBehaviour {
     [Header("Behaviour")]
     public bool useTriggerExit = true;
     public bool pausesGameplay = false;
+    public bool showUntilClick = false;
 
     [Tooltip("Time to show sprite (0 = infinit, make sure to disable it some other way).")]
     public float showTime = 0.0f;
@@ -27,16 +28,18 @@ public class QuestionMarkScript : MonoBehaviour {
     }
 
     void Update() {
-        //AnyKeyUp workaround
-        if (helpImage.enabled && Input.anyKey) {
-            //Key was down
-            holdingDown = true;
-        }
-        if (!Input.anyKey && holdingDown) {
-            //Key was released
-            holdingDown = false;
-            Time.timeScale = 1;
-            DisableImage();
+        if (pausesGameplay || showUntilClick) {
+            //AnyKeyUp workaround
+            if (helpImage.enabled && Input.anyKey) {
+                //Key was down
+                holdingDown = true;
+            }
+            if (!Input.anyKey && holdingDown) {
+                //Key was released
+                holdingDown = false;
+                Time.timeScale = 1;
+                DisableImage();
+            }
         }
     }
 	
