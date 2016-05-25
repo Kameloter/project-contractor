@@ -476,7 +476,7 @@ public class BigValve : MonoBehaviour
                     {
                         offset += new Vector3(0, dir.y, 0);
                         posToSet = start + offset;
-                        pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
+                        pipePart = CreateLongPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
                         pipePart.transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
                         offset += new Vector3(0, dir.y, 0);
                     }
@@ -847,81 +847,81 @@ public class BigValve : MonoBehaviour
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        //if (Selection.activeGameObject == null) return;
-        //if (Application.isPlaying) return;
-        //if (!draw) return;
-        //if (cellSizeY == 0 || cellSizeX == 0 || gridWidth == 0 || gridHeight == 0) return;
+        if (Selection.activeGameObject == null) return;
+        if (Application.isPlaying) return;
+        if (!draw) return;
+        if (cellSizeY == 0 || cellSizeX == 0 || gridWidth == 0 || gridHeight == 0) return;
 
-        ////   print("on draw gizmo running !");
-        //// Debug.Log(SceneView.lastActiveSceneView.rotation.eulerAngles);
-        //Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
-        //if (eulerRot.x == 90)
-        //{
+        //   print("on draw gizmo running !");
+        // Debug.Log(SceneView.lastActiveSceneView.rotation.eulerAngles);
+        Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
+        if (eulerRot.x == 90)
+        {
 
-        //    if (Selection.activeGameObject.transform.root == transform.root)
-        //    {
-        //        Vector3 pos = transform.position;
+            if (Selection.activeGameObject.transform.root == transform.root)
+            {
+                Vector3 pos = transform.position;
 
-        //        for (float x = pos.x - gridWidth / 2; x <= pos.x + gridWidth / 2; x += cellSizeX)
-        //        {
-        //            Gizmos.color = Color.red;
-        //            Gizmos.DrawLine(new Vector3(x, 0.0f, pos.z - gridHeight / 2),
-        //                            new Vector3(x, 0.0f, pos.z + gridHeight / 2));
-        //        }
+                for (float x = pos.x - gridWidth / 2; x <= pos.x + gridWidth / 2; x += cellSizeX)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(new Vector3(x, 0.0f, pos.z - gridHeight / 2),
+                                    new Vector3(x, 0.0f, pos.z + gridHeight / 2));
+                }
 
-        //        for (float z = pos.z - gridHeight / 2; z <= pos.z + gridHeight / 2; z += cellSizeY)
-        //        {
-        //            Gizmos.color = Color.blue;
-        //            Gizmos.DrawLine(new Vector3(pos.x - gridWidth / 2, 0.0f, z),
-        //                            new Vector3(pos.x + gridWidth / 2, 0.0f, z));
-        //        }
-        //    }
-        //}
-        //else if (eulerRot.y == 180 || eulerRot.y == 0)//we are drawing a X/Y grid
-        //{
-        //   // Debug.Log("draw 180 / 0");
-        //    if (Selection.activeGameObject.transform.root == transform.root)
-        //    {
-        //        Vector3 pos = transform.position;
+                for (float z = pos.z - gridHeight / 2; z <= pos.z + gridHeight / 2; z += cellSizeY)
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawLine(new Vector3(pos.x - gridWidth / 2, 0.0f, z),
+                                    new Vector3(pos.x + gridWidth / 2, 0.0f, z));
+                }
+            }
+        }
+        else if (eulerRot.y == 180 || eulerRot.y == 0)//we are drawing a X/Y grid
+        {
+            // Debug.Log("draw 180 / 0");
+            if (Selection.activeGameObject.transform.root == transform.root)
+            {
+                Vector3 pos = transform.position;
 
-        //        for (float x = pos.x - gridWidth / 2; x <= pos.x + gridWidth / 2; x += cellSizeX)
-        //        {
-        //            Gizmos.color = Color.red;
-        //            Gizmos.DrawLine(new Vector3(x, pos.y - gridHeight / 2, pos.z),
-        //                            new Vector3(x, pos.y + gridHeight / 2, pos.z));
-        //        }
+                for (float x = pos.x - gridWidth / 2; x <= pos.x + gridWidth / 2; x += cellSizeX)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawLine(new Vector3(x, pos.y - gridHeight / 2, pos.z),
+                                    new Vector3(x, pos.y + gridHeight / 2, pos.z));
+                }
 
-        //        for (float y = pos.y - gridHeight / 2; y <= pos.y + gridHeight / 2; y += cellSizeY)
-        //        {
-        //            Gizmos.color = Color.green;
-        //            Gizmos.DrawLine(new Vector3(pos.x - gridWidth / 2, y, pos.z),
-        //                            new Vector3(pos.x + gridWidth / 2, y, pos.z));
-        //        }
-        //    }
-        //}
-        //else
-        //{
-        //   // Debug.Log("draw 90 / 270");
-        //    if (Selection.activeGameObject.transform.root == transform.root)
-        //    {
-        //        Vector3 pos = transform.position;
+                for (float y = pos.y - gridHeight / 2; y <= pos.y + gridHeight / 2; y += cellSizeY)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawLine(new Vector3(pos.x - gridWidth / 2, y, pos.z),
+                                    new Vector3(pos.x + gridWidth / 2, y, pos.z));
+                }
+            }
+        }
+        else
+        {
+            // Debug.Log("draw 90 / 270");
+            if (Selection.activeGameObject.transform.root == transform.root)
+            {
+                Vector3 pos = transform.position;
 
-        //        for (float z = pos.x - gridWidth / 2; z <= pos.x + gridWidth / 2; z += cellSizeX)
-        //        {
-        //            Gizmos.color = Color.blue;
-        //            Gizmos.DrawLine(new Vector3(pos.x, pos.y - gridHeight / 2, z),
-        //                            new Vector3(pos.x, pos.y + gridHeight / 2, z));
-        //        }
+                for (float z = pos.x - gridWidth / 2; z <= pos.x + gridWidth / 2; z += cellSizeX)
+                {
+                    Gizmos.color = Color.blue;
+                    Gizmos.DrawLine(new Vector3(pos.x, pos.y - gridHeight / 2, z),
+                                    new Vector3(pos.x, pos.y + gridHeight / 2, z));
+                }
 
-        //        for (float y = pos.y - gridHeight / 2; y <= pos.y + gridHeight / 2; y += cellSizeY)
-        //        {
-        //            Gizmos.color = Color.green;
-        //            Gizmos.DrawLine(new Vector3(pos.x, y, pos.z - gridWidth/2),
-        //                            new Vector3(pos.x, y, pos.z + gridWidth / 2));
-        //        }
-        //    }
-        //}
-       
+                for (float y = pos.y - gridHeight / 2; y <= pos.y + gridHeight / 2; y += cellSizeY)
+                {
+                    Gizmos.color = Color.green;
+                    Gizmos.DrawLine(new Vector3(pos.x, y, pos.z - gridWidth / 2),
+                                    new Vector3(pos.x, y, pos.z + gridWidth / 2));
+                }
+            }
+        }
+
     }
 #endif
 
