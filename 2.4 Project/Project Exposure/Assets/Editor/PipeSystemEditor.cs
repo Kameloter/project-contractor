@@ -16,14 +16,13 @@ public class PipeSystemEditor : Editor
 
     private Color Line_1_debugColor;
     private Color Line_2_debugColor;
-    int prev_line_1_array_size = 0;
-    int prev_line_2_array_size;
+    int prevLine1CachedLength = 0;
+    int prevLine2CachedLength = 0;
 
     public void OnEnable()
     {
         myValve = (BigValve)target;
         Line_1_debugColor.a = 1;
-     
         Line_2_debugColor.a = 1;
         Debug.Log("Hi ! " + myValve.gameObject.name + " <- Activated!");
     }
@@ -37,39 +36,30 @@ public class PipeSystemEditor : Editor
         mousePos.y = SceneView.currentDrawingSceneView.camera.pixelHeight - mousePos.y;
         worldMousePos = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(mousePos).origin;
 
-        //if (e.isKey)
-        //{
-        //    if (e.character == 'h')
-        //        Debug.Log("tha pos => " + position);
-        //}
-         
-
         myValveTransform = myValve.transform;
 
-        //handleRotation = Tools.pivotRotation == PivotRotation.Local ?
-        //    myValveTransform.rotation : Quaternion.identity;
-
-        if (myValve.Pipe_Line_1.Length == 0)
+        
+        if (myValve.pipeLine1Points.Length == 0)
         {
             return;
         }
         else
         {
-            if (myValve.Pipe_Line_1[0] == null) return;
-            DrawPipeLine(1);
+            if (myValve.pipeLine1Points[0] == null) return;
+            DrawPipeLine1();
         }
 
 
 
-        if (myValve.Pipe_Line_2.Length == 0)
+        if (myValve.pipeLine2Points.Length == 0)
         {
             //Debug.Log("EMPTY POINT ARRAY");
             return;
         }
         else
         {
-            if (myValve.Pipe_Line_2[0] == null) return;
-            DrawPipeLine(2);
+            if (myValve.pipeLine2Points[0] == null) return;
+            DrawPipeLine2();
         }
 
 
@@ -87,126 +77,159 @@ public class PipeSystemEditor : Editor
 
         if (GUILayout.Button("Build corner base"))
         {
-            myValve.CreateLine1();
+            myValve.CreateLineJoints(1);
         }
         if (GUILayout.Button("Destroy corner base"))
         {
-            myValve.DestroyLine1();
+            myValve.DestroyJointLine(1);
         }
         if (GUILayout.Button("Build pipe-line"))
         {
-            myValve.BuildPipeLine();
+            myValve.BuildPipeLine(1);
         }
         if (GUILayout.Button("Destroy pipe-line"))
         {
-            myValve.DestroyPipeLine();
+            myValve.DestroyPipeConnections(1);
+                
         }
 
 
         Line_1_debugColor = EditorGUILayout.ColorField(Line_1_debugColor);
-        EditorList.Show(serializedObject.FindProperty("Pipe_Line_1"), EditorListOption.Buttons);
+        EditorList.Show(serializedObject.FindProperty("pipeLine1Points"), EditorListOption.Buttons);
         
 
 
         EditorGUILayout.LabelField("Line 2 ");
+
+
+        if (GUILayout.Button("Build corner base"))
+        {
+            myValve.CreateLineJoints(2);
+        }
+        if (GUILayout.Button("Destroy corner base"))
+        {
+            myValve.DestroyJointLine(2);
+        }
+        if (GUILayout.Button("Build pipe-line"))
+        {
+            myValve.BuildPipeLine(2);
+        }
+        if (GUILayout.Button("Destroy pipe-line"))
+        {
+            myValve.DestroyPipeConnections(2);
+
+        }
+
+
         Line_2_debugColor = EditorGUILayout.ColorField(Line_2_debugColor);
-        EditorList.Show(serializedObject.FindProperty("Pipe_Line_2"), EditorListOption.Buttons);
+        EditorList.Show(serializedObject.FindProperty("pipeLine2Points"), EditorListOption.Buttons);
 
 
 
         serializedObject.ApplyModifiedProperties();
         EditorUtility.SetDirty(myValve);
     }
-
-    //Private functions
-    void DrawPipeLine(int line)
+    void DrawPipeLine1()
     {
-        Vector3 v0 = createPoint(0, line);
+        Vector3 v0 = createPoint(0, 1);
 
-        int cachedLength = line == 1 ? myValve.Pipe_Line_1.Length : myValve.Pipe_Line_2.Length;
-       
+        int cachedLength = myValve.pipeLine1Points.Length;
+        Handles.color = Line_1_debugColor;
+
         for (int i = 1; i < cachedLength; i += 2)
         {
-            //if ((i + 1) == cashedLenght) return;
-
-            if (line == 1)
-            {
-                Handles.color = Line_1_debugColor;
-                //if (myValve.Pipe_Line_1[i] == null)
-                //{
-                //    myValve.AddObjectToLine(i, 1, myValve.Pipe_Line_1[0].transform.position);
-                //}
-                    
-
-            }
-            else
-            {
-                Handles.color = Line_2_debugColor;
-                //if (myValve.Pipe_Line_2[i] == null)
-                //    myValve.AddObjectToLine(i, 1, myValve.Pipe_Line_1[0].transform.position);
-            }
-
-          
-
-            Vector3 v1 = createPoint(i, line);
+            Vector3 v1 = createPoint(i, 1);
             Vector3 v2 = Vector3.zero;
-    
-
-         
-            Handles.color = line == 1 ? Line_1_debugColor : Line_2_debugColor;
 
             Handles.DrawLine(v0, v1);
             if (i + 1 != cachedLength)
             {
-                v2 = createPoint(i + 1, line);
+                v2 = createPoint(i + 1, 1);
                 Handles.DrawLine(v1, v2);
                 v0 = v2;
             }
-           
-         
-            
-        }
-        if (prev_line_1_array_size == 0) prev_line_1_array_size = cachedLength;
 
-        if (cachedLength > prev_line_1_array_size)
+
+
+        }
+        if (prevLine1CachedLength == 0) prevLine1CachedLength = cachedLength;
+
+        if (cachedLength > prevLine1CachedLength)
         {
             Debug.Log("new item being exhanged.");
+            myValve.pipeLine1Points[cachedLength - 1] = myValve.pipeLine1End;
+            Vector3 posForNewObject = myValve.pipeLine1Points[cachedLength - 3].transform.localPosition + Vector3.right ;
 
-
-            myValve.Pipe_Line_1[cachedLength - 1] = myValve.AddObjectToLine(cachedLength - 1, 1, myValve.Pipe_Line_1[cachedLength - 2].transform.position + new Vector3(1, 0, 1));
+            myValve.pipeLine1Points[cachedLength - 2] = myValve.AddJointToPipeLine(myValve.jointHolder1.transform, posForNewObject);
+             
             Debug.Log("new item exhanged.");
-        }else if(cachedLength < prev_line_1_array_size)
-        {
-            if (!Application.isPlaying)
-            {
-                Debug.Log(cachedLength );
-                Debug.Log(prev_line_1_array_size);
-                Undo.DestroyObjectImmediate(myValve.pipeLine1Holder.transform.GetChild(myValve.pipeLine1Holder.transform.childCount - 1).gameObject);
-            }
-            else
-            {
-                Destroy(myValve.pipeLine1Holder.transform.GetChild(myValve.pipeLine1Holder.transform.childCount - 1).gameObject);
-            }
-            
         }
-        prev_line_1_array_size = cachedLength;
+        else if (cachedLength < prevLine1CachedLength)
+        {
+            myValve.pipeLine1Points[cachedLength - 1] = myValve.pipeLine1End;
+            myValve.DeleteJointFromPipeLine(1);
+        }
+        prevLine1CachedLength = cachedLength;
+    }
+    //Private functions
+    void DrawPipeLine2()
+    {
+        Vector3 v0 = createPoint(0, 2);
+
+        int cachedLength = myValve.pipeLine2Points.Length;
+        Handles.color = Line_2_debugColor;
+
+        for (int i = 1; i < cachedLength; i += 2)
+        {
+            Vector3 v1 = createPoint(i, 2);
+            Vector3 v2 = Vector3.zero;
+
+            Handles.DrawLine(v0, v1);
+            if (i + 1 != cachedLength)
+            {
+                v2 = createPoint(i + 1, 2);
+                Handles.DrawLine(v1, v2);
+                v0 = v2;
+            }
+
+
+
+        }
+        if (prevLine2CachedLength == 0) prevLine2CachedLength = cachedLength;
+
+        if (cachedLength > prevLine2CachedLength)
+        {
+            Debug.Log("new item being exhanged.");
+            myValve.pipeLine2Points[cachedLength - 1] = myValve.pipeLine2End;
+            Vector3 posForNewObject = myValve.pipeLine2Points[cachedLength - 3].transform.position + Vector3.right;
+
+            myValve.pipeLine2Points[cachedLength - 2] = myValve.AddJointToPipeLine(myValve.jointHolder2.transform, posForNewObject);
+
+            Debug.Log("new item exhanged.");
+        }
+        else if (cachedLength < prevLine2CachedLength)
+        {
+            myValve.pipeLine2Points[cachedLength - 1] = myValve.pipeLine2End;
+            myValve.DeleteJointFromPipeLine(2);
+        }
+        prevLine2CachedLength = cachedLength;
     }
 
 
     private Vector3 createPoint(int index, int line)
     {
 
- 
+
 
 
         Quaternion rotationHandle = Tools.pivotRotation == PivotRotation.Local ?
-            line == 1 ? myValve.Pipe_Line_1[index].transform.rotation : myValveTransform.rotation
-             : Quaternion.identity;
+            line == 1 ? myValve.pipeLine1Points[index].transform.rotation : myValve.pipeLine2Points[index].transform.rotation :
+             Quaternion.identity;
 
         //transform the point from local to world space
-        Quaternion rot = Quaternion.identity;
 
-        Vector3 position = line == 1 ? myValveTransform.TransformPoint(myValve.Pipe_Line_1[index].transform.localPosition) : myValveTransform.TransformPoint(myValve.Pipe_Line_2[index]);
+
+        Vector3 position = line == 1 ? myValveTransform.TransformPoint(myValve.pipeLine1Points[index].transform.localPosition) : myValveTransform.TransformPoint(myValve.pipeLine2Points[index].transform.localPosition);
 
         EditorGUI.BeginChangeCheck();
 
@@ -225,21 +248,40 @@ public class PipeSystemEditor : Editor
 
         if (EditorGUI.EndChangeCheck())
         {
-            Vector2 snapPoint = snapPointXZ();
-            position.x = snapPoint.x;
-            position.z = snapPoint.y;
+            Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
+            if (eulerRot.x == 90)
+            {
+                Vector2 snapPoint = snapPointXZ();
+                position.x = snapPoint.x;
+                position.z = snapPoint.y;
 
-            Debug.Log("Finished dragging!");
+            }
+            else if (eulerRot.y == 180 || eulerRot.y == 0)//we are drawing a X/Y grid
+            {
+                Vector2 snapPoint = snapPointXY();
+                position.x = snapPoint.x;
+                position.y = snapPoint.y;
+            }
+            else
+            {
+                Vector2 snapPoint = snapPointZY();
+                position.z = snapPoint.x;
+                position.y = snapPoint.y;
+            }
+
+          
+
+           // Debug.Log("Finished dragging!");
 
             
 
 
             if(line == 1)
             {
-                Undo.RecordObject(myValve.Pipe_Line_1[index].transform, "Move Point");
-                EditorUtility.SetDirty(myValve.Pipe_Line_1[index].transform);
+                Undo.RecordObject(myValve.pipeLine1Points[index].transform, "Move Point");
+                EditorUtility.SetDirty(myValve.pipeLine1Points[index].transform);
 
-                myValve.Pipe_Line_1[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
+                myValve.pipeLine1Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
             //    myValve.Pipe_Line_1[index].transform.rotation = rot;
             }
                
@@ -247,16 +289,14 @@ public class PipeSystemEditor : Editor
             {
                 Undo.RecordObject(myValve, "Move Point");
                 EditorUtility.SetDirty(myValve);
-                myValve.Pipe_Line_2[index] = myValveTransform.InverseTransformPoint(position);
+                myValve.pipeLine1Points[index].transform.position = myValveTransform.InverseTransformPoint(position);
             }
                
         }
-
         return position;
-
     }
 
-    Vector2 snapPointXZ ()
+    Vector2 snapPointXZ()
     {
         float snapX = worldMousePos.x;
         float snapZ = worldMousePos.z;
@@ -268,6 +308,31 @@ public class PipeSystemEditor : Editor
 
         return snappedPoint;
     }
+    Vector2 snapPointXY()
+    {
+        float snapX = worldMousePos.x;
+        float snapY = worldMousePos.y;
+
+        Vector2 snappedPoint;
+        snappedPoint.x = snapX % myValve.cellSizeX < myValve.cellSizeX / 2 ? snapX -= snapX % myValve.cellSizeX : snapX += (myValve.cellSizeX - snapX % myValve.cellSizeX);
+        snappedPoint.y = snapY % myValve.cellSizeY < myValve.cellSizeY / 2 ? snapY -= snapY % myValve.cellSizeY : snapY += (myValve.cellSizeY - snapY % myValve.cellSizeY);
+
+
+        return snappedPoint;
+    }
+    Vector2 snapPointZY()
+    {
+        float snapZ = worldMousePos.z;
+        float snapY = worldMousePos.y;
+
+        Vector2 snappedPoint;
+        snappedPoint.x = snapZ % myValve.cellSizeX < myValve.cellSizeX / 2 ? snapZ -= snapZ % myValve.cellSizeX : snapZ += (myValve.cellSizeX - snapZ % myValve.cellSizeX);
+        snappedPoint.y = snapY % myValve.cellSizeY < myValve.cellSizeY / 2 ? snapY -= snapY % myValve.cellSizeY : snapY += (myValve.cellSizeY - snapY % myValve.cellSizeY);
+
+
+        return snappedPoint;
+    }
+
 }
 
 
