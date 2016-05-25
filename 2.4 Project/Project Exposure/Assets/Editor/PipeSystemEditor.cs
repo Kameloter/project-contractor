@@ -19,110 +19,142 @@ public class PipeSystemEditor : Editor
     int prevLine1CachedLength = 0;
     int prevLine2CachedLength = 0;
 
+    [SerializeField]
+    public bool showLine1 = false;
+    [SerializeField]
+    public bool showLine2 = false;
+    
+
     public void OnEnable()
     {
         myValve = (BigValve)target;
         Line_1_debugColor.a = 1;
         Line_2_debugColor.a = 1;
         Debug.Log("Hi ! " + myValve.gameObject.name + " <- Activated!");
+
+
+        showLine1 = EditorPrefs.GetBool("ShowLine1");
+        showLine2 = EditorPrefs.GetBool("ShowLine2");
     }
 
 
     private void OnSceneGUI()
     {
         Event e = Event.current;
-       
+
         Vector2 mousePos = Event.current.mousePosition;
         mousePos.y = SceneView.currentDrawingSceneView.camera.pixelHeight - mousePos.y;
         worldMousePos = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(mousePos).origin;
 
         myValveTransform = myValve.transform;
 
-        
-        if (myValve.pipeLine1Points.Length == 0)
+        if (showLine1)
         {
-            return;
-        }
-        else
-        {
-            if (myValve.pipeLine1Points[0] == null) return;
-            DrawPipeLine1();
-        }
-
-
-
-        if (myValve.pipeLine2Points.Length == 0)
-        {
-            //Debug.Log("EMPTY POINT ARRAY");
-            return;
-        }
-        else
-        {
-            if (myValve.pipeLine2Points[0] == null) return;
-            DrawPipeLine2();
+            if (myValve.pipeLine1Points.Length == 0)
+            {
+                return;
+            }
+            else
+            {
+                if (myValve.pipeLine1Points[0] == null) { prevLine1CachedLength = 0; return; }
+                DrawPipeLine1();
+            }
         }
 
 
 
+        if (showLine2)
+        {
+            if (myValve.pipeLine2Points.Length == 0)
+            {
+                //Debug.Log("EMPTY POINT ARRAY");
+                return;
+            }
+            else
+            {
+                if (myValve.pipeLine2Points[0] == null) { prevLine2CachedLength = 0; return; }
+                DrawPipeLine2();
+            }
+        }
     }
 
     public override void OnInspectorGUI()
     {
   
         DrawDefaultInspector();
+
+
+   
         EditorGUILayout.LabelField("EDITOR PART !");
+        EditorGUILayout.BeginVertical();
+
+        showLine1 = EditorGUILayout.Toggle("Show Line 1", showLine1);
+        showLine2 = EditorGUILayout.Toggle("Show Line 2", showLine2);
+
+        EditorPrefs.SetBool("ShowLine1", showLine1);
+        EditorPrefs.SetBool("ShowLine2", showLine2);
+
+        EditorGUILayout.EndVertical();
 
         serializedObject.Update();
-        EditorGUILayout.LabelField("Line 1");
+        if(showLine1)
+        {
+          
+            EditorGUILayout.LabelField("Line 1");
+            if (GUILayout.Button("Build corner base"))
+            {
+                myValve.CreateLineJoints(1);
+            }
+            if (GUILayout.Button("Destroy corner base"))
+            {
+                myValve.DestroyJointLine(1);
+            }
+            if (GUILayout.Button("Build pipe-line"))
+            {
+                myValve.BuildPipeLine(1);
+            }
+            if (GUILayout.Button("Destroy pipe-line"))
+            {
+                myValve.DestroyPipeConnections(1);
 
-        if (GUILayout.Button("Build corner base"))
-        {
-            myValve.CreateLineJoints(1);
-        }
-        if (GUILayout.Button("Destroy corner base"))
-        {
-            myValve.DestroyJointLine(1);
-        }
-        if (GUILayout.Button("Build pipe-line"))
-        {
-            myValve.BuildPipeLine(1);
-        }
-        if (GUILayout.Button("Destroy pipe-line"))
-        {
-            myValve.DestroyPipeConnections(1);
-                
-        }
-
-
-        Line_1_debugColor = EditorGUILayout.ColorField(Line_1_debugColor);
-        EditorList.Show(serializedObject.FindProperty("pipeLine1Points"), EditorListOption.Buttons);
-        
+            }
 
 
-        EditorGUILayout.LabelField("Line 2 ");
-
-
-        if (GUILayout.Button("Build corner base"))
-        {
-            myValve.CreateLineJoints(2);
-        }
-        if (GUILayout.Button("Destroy corner base"))
-        {
-            myValve.DestroyJointLine(2);
-        }
-        if (GUILayout.Button("Build pipe-line"))
-        {
-            myValve.BuildPipeLine(2);
-        }
-        if (GUILayout.Button("Destroy pipe-line"))
-        {
-            myValve.DestroyPipeConnections(2);
+            Line_1_debugColor = EditorGUILayout.ColorField(Line_1_debugColor);
+            EditorList.Show(serializedObject.FindProperty("pipeLine1Points"), EditorListOption.Buttons);
 
         }
+        if(showLine2)
+        {
+           
+            EditorGUILayout.LabelField("Line 2 ");
 
 
-        Line_2_debugColor = EditorGUILayout.ColorField(Line_2_debugColor);
-        EditorList.Show(serializedObject.FindProperty("pipeLine2Points"), EditorListOption.Buttons);
+            if (GUILayout.Button("Build corner base"))
+            {
+                myValve.CreateLineJoints(2);
+            }
+            if (GUILayout.Button("Destroy corner base"))
+            {
+                myValve.DestroyJointLine(2);
+            }
+            if (GUILayout.Button("Build pipe-line"))
+            {
+                myValve.BuildPipeLine(2);
+            }
+            if (GUILayout.Button("Destroy pipe-line"))
+            {
+                myValve.DestroyPipeConnections(2);
+
+            }
+
+            Line_2_debugColor = EditorGUILayout.ColorField(Line_2_debugColor);
+            EditorList.Show(serializedObject.FindProperty("pipeLine2Points"), EditorListOption.Buttons);
+
+
+        }
+
+
 
 
 

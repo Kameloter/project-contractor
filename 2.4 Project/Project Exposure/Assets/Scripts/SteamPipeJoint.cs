@@ -42,6 +42,7 @@ public class SteamPipeJoint : MonoBehaviour {
 
     void OnParticleCollision(GameObject go)
     {
+        print("da");
         if (connectTo != null)
         {
             if (!activated)

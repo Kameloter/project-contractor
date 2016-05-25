@@ -37,8 +37,8 @@ public class BigValve : MonoBehaviour
 
     Quaternion targetRotation;
 
-    SteamPipeJoint[] steamJointsLine1;
-    SteamPipeJoint[] steamJointsLine2;
+    List<SteamPipeJoint> steamJointsLine1 = null;
+    List<SteamPipeJoint> steamJointsLine2 = null;
 
     public ParticleSystem smoke1;
     public ParticleSystem smoke2;
@@ -98,8 +98,8 @@ public class BigValve : MonoBehaviour
 
 
             ConnectSmallValves();
-            //ConnectJointsTogether(1);
-            //ConnectJointsTogether(2);
+            ConnectJointsTogether(1);
+            ConnectJointsTogether(2);
             switch (startState)
             {
                 case 0:
@@ -511,7 +511,8 @@ public class BigValve : MonoBehaviour
             if (prev.x == 1 && next.z == 1)    //if we go up 
             {
                 //Debug.Log("-------------- 90 magic degrees !");
-                angleY = 90;
+                // angleY = 90;
+                angleZ = 180;
             }
             else if (prev.x == 1 && next.z == -1)
             {
@@ -526,19 +527,30 @@ public class BigValve : MonoBehaviour
             else if (prev.x == -1 && next.z == -1)
             {
                 //Debug.Log("-------------- 270 magic degrees !");
-                angleY = 270;
+                //angleY = 270;
+                angleX = 180;
             }
             else if (next.y == 1)
             {
                 angleX = 270;
-                if (prev.x == 1)
-                    angleY = 180;
+                angleY = 180;
+                if (prev.x == -1)
+                {
+                    angleX = 270;
+                    angleY = 0;
+                }
+                
             }
             else
             {
                 angleX = 90;
-                if (prev.x == 1)
-                    angleY = 180;
+                angleY = 180;
+                if (prev.x == -1)
+                {
+                    angleY = 0;
+                    angleX = 90;
+                }
+                    
             }
 
         }
@@ -552,24 +564,31 @@ public class BigValve : MonoBehaviour
             else if (prev.z == 1 && next.x == -1)
             {
                 //Debug.Log("-------------- 0 magic degrees !");
-                angleY = 0;
+                angleY = 270;
+                angleZ = 180;
             }
             else if (prev.z == -1 && next.x == 1)
             {
                 //Debug.Log("-------------- 180 magic degrees !");
-                angleY = 180;
+                angleY = 90;
+                angleZ = 180;
             }
             else if (prev.z == -1 && next.x == -1)
             {
                 //Debug.Log("-------------- 270 magic degrees !");
-                angleY = 270;
+                angleX = 180;
+                angleY = 90;
+                angleZ = 180;
             }
             else if (next.y == 1)//maybe needs change ? check others too
             {
+                //prev Z == 1
                 angleX = 270;
-                angleY = 90;
+                angleZ = 90;
+
                 if(prev.z == -1)
                 {
+                    angleX = 270;
                     angleY = 270;
                 }
             }
@@ -579,6 +598,7 @@ public class BigValve : MonoBehaviour
                 angleY = 90;
                 if (prev.z == -1)
                 {
+                    angleX = 90;
                     angleY = 270;
                 }
             }
@@ -633,8 +653,9 @@ public class BigValve : MonoBehaviour
         //has to change 
         if (index == 1)
         {
-            steamJointsLine1 = jointHolder1.GetComponentsInChildren<SteamPipeJoint>();
-            int line1Lenght = steamJointsLine1.Length;
+            steamJointsLine1 = new List<SteamPipeJoint>(jointHolder1.GetComponentsInChildren<SteamPipeJoint>());
+            steamJointsLine1.Add(pipeLine1End.GetComponent<SteamPipeJoint>());
+            int line1Lenght = steamJointsLine1.Count;
             for (int i = 0; i < line1Lenght; i++)
             {
                 // print("name order -> " + line1[i].gameObject.name);
@@ -645,11 +666,13 @@ public class BigValve : MonoBehaviour
                 }
 
             }
+     
         }
         else
         {
-            steamJointsLine2 = jointHolder2.GetComponentsInChildren<SteamPipeJoint>();
-            int line2Lenght = steamJointsLine2.Length;
+            steamJointsLine2 = new List<SteamPipeJoint>(jointHolder2.GetComponentsInChildren<SteamPipeJoint>());
+            steamJointsLine2.Add(pipeLine2End.GetComponent<SteamPipeJoint>());
+            int line2Lenght = steamJointsLine2.Count;
             for (int i = 0; i < line2Lenght; i++)
             {
 
@@ -660,6 +683,7 @@ public class BigValve : MonoBehaviour
                 }
 
             }
+          
         }
 
 
