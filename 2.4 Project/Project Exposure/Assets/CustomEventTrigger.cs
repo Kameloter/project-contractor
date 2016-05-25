@@ -16,12 +16,30 @@ public class CustomEventTrigger : MonoBehaviour {
         OnTriggerEnter, OnTriggerExit, OnTriggerStay
     };
 
+    [SerializeField]
+    public enum FireType {
+        Once, Delayed, Repeat, RepeatDelayed
+    };
+
     [System.Serializable]
     public struct info {
         public Action action;
 
         [SerializeField]
         public OnTrigger onTrigger;
+
+        [SerializeField]
+        public FireType fireType;
+
+        [SerializeField]
+        public float delay;
+
+        [SerializeField]
+        public float repeatTime;
+
+        [SerializeField]
+        public float repeatAmount;
+
 
         [SerializeField]
         public bool activated;
@@ -91,175 +109,138 @@ public class CustomEventTrigger : MonoBehaviour {
 
     }
 
-    void OnTriggerEnter() {
-        for (int i = 0; i < Go.Length; i++) {
-            if (Go[i].onTrigger == OnTrigger.OnTriggerEnter) {
-                switch (Go[i].action) {
-                    case Action.ActivateInteractable:
-                        Go[i].interactable.Activate();
-                        break;
-                    case Action.DeactivateInteractable:
-                        Go[i].interactable.DeActivate();
-                        break;
-                    case Action.PlayAnimation:
-                        Go[i].go.GetComponent<Animation>().clip = Go[i].animation;
-                        Go[i].go.GetComponent<Animation>().Play();
-                        break;
-                    case Action.PlayCameraPath:
-                        Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path);
-                        break;
-                    case Action.PlaySound:
-                        Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
-                        Go[i].go.GetComponent<AudioSource>().Play();
-                        break;
-                    case Action.ShowHint:
-                        //gotyn
-                        break;
-                    case Action.ActivateLight:
-                        Go[i].light.enabled = true;
-                        break;
-                    case Action.DisableLight:
-                        Go[i].light.enabled = false;
-                        break;
-                    case Action.ChangeLightValues:
-                        if (Go[i].light.range != null) {
-                            Go[i].light.range = Go[i].range;
-                        }
-                        Go[i].light.color = Go[i].color;
-                        Go[i].light.intensity = Go[i].intensity;
-                        Go[i].light.bounceIntensity = Go[i].bounceIntensity;
-                        break;
-                    case Action.ActivateObject:
-                        Go[i].go.SetActive(true);
-                        break;
-                    case Action.DeactivateObject:
-                        Go[i].go.SetActive(false);
-                        break;
-                    case Action.PlayParticle:
-                        Go[i].particle.Play();
-                        break;
-                    case Action.StopParticle:
-                        Go[i].particle.Stop();
-                        break;
-                    case Action.FocusOnTarget:
-                        //camera focus
-                        break;
+    IEnumerator DoEvent(int i, float waitTime) {
+        yield return new WaitForSeconds(waitTime);
+
+        switch (Go[i].action) {
+            case Action.ActivateInteractable:
+                Go[i].interactable.Activate();
+                break;
+            case Action.DeactivateInteractable:
+                Go[i].interactable.DeActivate();
+                break;
+            case Action.PlayAnimation:
+                Go[i].go.GetComponent<Animation>().clip = Go[i].animation;
+                Go[i].go.GetComponent<Animation>().Play();
+                break;
+            case Action.PlayCameraPath:
+                Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path);
+                break;
+            case Action.PlaySound:
+                Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
+                Go[i].go.GetComponent<AudioSource>().Play();
+                break;
+            case Action.ShowHint:
+                //gotyn
+                break;
+            case Action.ActivateLight:
+                Go[i].light.enabled = true;
+                break;
+            case Action.DisableLight:
+                Go[i].light.enabled = false;
+                break;
+            case Action.ChangeLightValues:
+                if (Go[i].light.range != null) {
+                    Go[i].light.range = Go[i].range;
+                }
+                Go[i].light.color = Go[i].color;
+                Go[i].light.intensity = Go[i].intensity;
+                Go[i].light.bounceIntensity = Go[i].bounceIntensity;
+                break;
+            case Action.ActivateObject:
+                Go[i].go.SetActive(true);
+                break;
+            case Action.DeactivateObject:
+                Go[i].go.SetActive(false);
+                break;
+            case Action.PlayParticle:
+                Go[i].particle.Play();
+                break;
+            case Action.StopParticle:
+                Go[i].particle.Stop();
+                break;
+            case Action.FocusOnTarget:
+                //camera focus
+                break;
+        }
+    }
+
+    void OnTriggerEnter(Collider other) {
+        if (other.CompareTag(Tags.player)) {
+            for (int i = 0; i < Go.Length; i++) {
+                if (Go[i].onTrigger == OnTrigger.OnTriggerEnter) {
+                    switch (Go[i].fireType) {
+                        case FireType.Once:
+                            StartCoroutine(DoEvent(i, 0));
+                            break;
+                        case FireType.Delayed:
+                            StartCoroutine(DoEvent(i, Go[i].delay));
+                            break;
+                        case FireType.Repeat:
+                            for (int j = 0; j < Go[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                            }
+                            break;
+                        case FireType.RepeatDelayed:
+                            for (int j = 0; j < Go[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                            }
+                            break;
+                    }
                 }
             }
         }
     }
 
-    void OnTriggerStay() {
-        for (int i = 0; i < Go.Length; i++) {
-            if (Go[i].onTrigger == OnTrigger.OnTriggerStay) {
-                switch (Go[i].action) {
-                    case Action.ActivateInteractable:
-                        Go[i].interactable.Activate();
-                        break;
-                    case Action.DeactivateInteractable:
-                        Go[i].interactable.DeActivate();
-                        break;
-                    case Action.PlayAnimation:
-                        Go[i].go.GetComponent<Animation>().clip = Go[i].animation;
-                        Go[i].go.GetComponent<Animation>().Play();
-                        break;
-                    case Action.PlayCameraPath:
-                        Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path);
-                        break;
-                    case Action.PlaySound:
-                        Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
-                        Go[i].go.GetComponent<AudioSource>().Play();
-                        break;
-                    case Action.ShowHint:
-                        //gotyn
-                        break;
-                    case Action.ActivateLight:
-                        Go[i].light.enabled = true;
-                        break;
-                    case Action.DisableLight:
-                        Go[i].light.enabled = false;
-                        break;
-                    case Action.ChangeLightValues:
-                        if (Go[i].light.range != null) {
-                            Go[i].light.range = Go[i].range;
-                        }
-                        Go[i].light.color = Go[i].color;
-                        Go[i].light.intensity = Go[i].intensity;
-                        Go[i].light.bounceIntensity = Go[i].bounceIntensity;
-                        break;
-                    case Action.ActivateObject:
-                        Go[i].go.SetActive(true);
-                        break;
-                    case Action.DeactivateObject:
-                        Go[i].go.SetActive(false);
-                        break;
-                    case Action.PlayParticle:
-                        Go[i].particle.Play();
-                        break;
-                    case Action.StopParticle:
-                        Go[i].particle.Stop();
-                        break;
-                    case Action.FocusOnTarget:
-                        //camera focus
-                        break;
+    void OnTriggerStay(Collider other) {
+        if (other.CompareTag(Tags.player)) {
+            for (int i = 0; i < Go.Length; i++) {
+                if (Go[i].onTrigger == OnTrigger.OnTriggerStay) {
+                    switch (Go[i].fireType) {
+                        case FireType.Once:
+                            StartCoroutine(DoEvent(i, 0));
+                            break;
+                        case FireType.Delayed:
+                            StartCoroutine(DoEvent(i, Go[i].delay));
+                            break;
+                        case FireType.Repeat:
+                            for (int j = 0; j < Go[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                            }
+                            break;
+                        case FireType.RepeatDelayed:
+                            for (int j = 0; j < Go[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                            }
+                            break;
+                    }
                 }
             }
         }
     }
 
-    void OnTriggerExit() {
-        for (int i = 0; i < Go.Length; i++) {
-            if (Go[i].onTrigger == OnTrigger.OnTriggerExit) {
-                switch (Go[i].action) {
-                    case Action.ActivateInteractable:
-                        Go[i].interactable.Activate();
-                        break;
-                    case Action.DeactivateInteractable:
-                        Go[i].interactable.DeActivate();
-                        break;
-                    case Action.PlayAnimation:
-                        Go[i].go.GetComponent<Animation>().clip = Go[i].animation;
-                        Go[i].go.GetComponent<Animation>().Play();
-                        break;
-                    case Action.PlayCameraPath:
-                        Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path);
-                        break;
-                    case Action.PlaySound:
-                        Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
-                        Go[i].go.GetComponent<AudioSource>().Play();
-                        break;
-                    case Action.ShowHint:
-                        //gotyn
-                        break;
-                    case Action.ActivateLight:
-                        Go[i].light.enabled = true;
-                        break;
-                    case Action.DisableLight:
-                        Go[i].light.enabled = false;
-                        break;
-                    case Action.ChangeLightValues:
-                        if (Go[i].light.range != null) {
-                            Go[i].light.range = Go[i].range;
-                        }
-                        Go[i].light.color = Go[i].color;
-                        Go[i].light.intensity = Go[i].intensity;
-                        Go[i].light.bounceIntensity = Go[i].bounceIntensity;
-                        break;
-                    case Action.ActivateObject:
-                        Go[i].go.SetActive(true);
-                        break;
-                    case Action.DeactivateObject:
-                        Go[i].go.SetActive(false);
-                        break;
-                    case Action.PlayParticle:
-                        Go[i].particle.Play();
-                        break;
-                    case Action.StopParticle:
-                        Go[i].particle.Stop();
-                        break;
-                    case Action.FocusOnTarget:
-                        //camera focus
-                        break;
+    void OnTriggerExit(Collider other) {
+        if (other.CompareTag(Tags.player)) {
+            for (int i = 0; i < Go.Length; i++) {
+                if (Go[i].onTrigger == OnTrigger.OnTriggerExit) {
+                    switch (Go[i].fireType) {
+                        case FireType.Once:
+                            StartCoroutine(DoEvent(i, 0));
+                            break;
+                        case FireType.Delayed:
+                            StartCoroutine(DoEvent(i, Go[i].delay));
+                            break;
+                        case FireType.Repeat:
+                            for (int j = 0; j < Go[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                            }
+                            break;
+                        case FireType.RepeatDelayed:
+                            for (int j = 0; j < Go[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                            }
+                            break;
+                    }
                 }
             }
         }

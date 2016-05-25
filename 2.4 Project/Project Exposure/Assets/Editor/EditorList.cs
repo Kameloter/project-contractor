@@ -95,7 +95,26 @@ public static class EditorList
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("action"), new GUIContent("Type of action"));
                     CustomEventTrigger.Action action = (CustomEventTrigger.Action)list.GetArrayElementAtIndex(i).FindPropertyRelative("action").enumValueIndex;
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("onTrigger"), new GUIContent("When to Trigger"));
-                   
+                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType"), new GUIContent("Fire Type"));
+                    CustomEventTrigger.FireType fireType = (CustomEventTrigger.FireType)list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType").enumValueIndex;
+                  
+                    switch (fireType) {
+                        case CustomEventTrigger.FireType.Delayed:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Delay Time"));
+                            break;
+                        case CustomEventTrigger.FireType.Repeat:
+                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatTime"), new GUIContent("Time Between fires"));
+                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatAmount"), new GUIContent("Amount of fires"));
+                         
+                            break;
+                        case CustomEventTrigger.FireType.RepeatDelayed:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Delay Time"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatTime"), new GUIContent("Time Between fires"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatAmount"), new GUIContent("Amount of fires"));
+                            break;
+                    }
+
+              
                     switch (action) {
                         case CustomEventTrigger.Action.PlayAnimation:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to perform action"));
