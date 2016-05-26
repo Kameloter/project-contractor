@@ -1,0 +1,170 @@
+fileFormatVersion: 2
+guid: acdbc659c0ecb1545998e25861bf0bdb
+timeCreated: 1464291237
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Antenna_1
+    100002: Antenna_2
+    100004: Antenna_3
+    100006: Antenna_4
+    100008: Antenna_5
+    100010: Antenna_6
+    100012: Antenna_7
+    100014: Bag
+    100016: Body
+    100018: Character_whole_lowPoly_pPlane1
+    100020: //RootNode
+    100022: Elbow_L
+    100024: Elbow_R
+    100026: Foot_L
+    100028: Foot_R
+    100030: Hip_L
+    100032: Hip_R
+    100034: Index1_L
+    100036: Index1_R
+    100038: Index2_L
+    100040: Index2_R
+    100042: Knee_L
+    100044: Knee_R
+    100046: Middle1_L
+    100048: Middle1_R
+    100050: Middle2_L
+    100052: Middle2_R
+    100054: Neck
+    100056: Pinky1_L
+    100058: Pinky1_R
+    100060: Pinky2_L
+    100062: Pinky2_R
+    100064: RootJoint
+    100066: Shoulder_L
+    100068: Shoulder_R
+    100070: Spine_1
+    100072: Spine_2
+    100074: Spine_3
+    100076: Spine_4
+    100078: Spine_Root
+    100080: Thumb1_L
+    100082: Thumb1_R
+    100084: Thumb2_L
+    100086: Thumb2_R
+    100088: transform1
+    100090: ValveAnim
+    400000: Antenna_1
+    400002: Antenna_2
+    400004: Antenna_3
+    400006: Antenna_4
+    400008: Antenna_5
+    400010: Antenna_6
+    400012: Antenna_7
+    400014: Bag
+    400016: Body
+    400018: Character_whole_lowPoly_pPlane1
+    400020: //RootNode
+    400022: Elbow_L
+    400024: Elbow_R
+    400026: Foot_L
+    400028: Foot_R
+    400030: Hip_L
+    400032: Hip_R
+    400034: Index1_L
+    400036: Index1_R
+    400038: Index2_L
+    400040: Index2_R
+    400042: Knee_L
+    400044: Knee_R
+    400046: Middle1_L
+    400048: Middle1_R
+    400050: Middle2_L
+    400052: Middle2_R
+    400054: Neck
+    400056: Pinky1_L
+    400058: Pinky1_R
+    400060: Pinky2_L
+    400062: Pinky2_R
+    400064: RootJoint
+    400066: Shoulder_L
+    400068: Shoulder_R
+    400070: Spine_1
+    400072: Spine_2
+    400074: Spine_3
+    400076: Spine_4
+    400078: Spine_Root
+    400080: Thumb1_L
+    400082: Thumb1_R
+    400084: Thumb2_L
+    400086: Thumb2_R
+    400088: transform1
+    400090: ValveAnim
+    2300000: ValveAnim
+    3300000: ValveAnim
+    4300000: Body
+    4300002: ValveAnim
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: Body
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
