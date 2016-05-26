@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Collections.Generic;
 public class SteamPipeJoint : MonoBehaviour {
 
     public SteamPipeJoint connectTo;
-    public SmallValveSocket poweredSocket;
+    public List<SmallValveSocket> poweredSockets;
 
     [HideInInspector]
     public float steamParticleSpeed { get { return smoke.startSpeed; } }
@@ -19,12 +19,27 @@ public class SteamPipeJoint : MonoBehaviour {
         smoke.Pause();
     }
 
-
+    void deactivatePoweredSockets()
+    {
+        foreach (SmallValveSocket poweredsocket in poweredSockets)
+        {
+            poweredsocket.DeactivateSocket();
+        }
+    }
+    void activatePoweredSockets()
+    {
+        foreach (SmallValveSocket poweredsocket in poweredSockets)
+        {
+            if (poweredsocket.socketed != null)
+                poweredsocket.ActivateInteractables();
+        }
+    }
     public void StopSteamConnection()
     {
+      
         if (connectTo != null)
         {
-            if (poweredSocket != null) poweredSocket.DeactivateSocket();
+            if (poweredSockets.Count > 0) deactivatePoweredSockets();
             smoke.Stop();
             activated = false;
             float distance = Vector3.Distance(transform.position, connectTo.transform.position);
@@ -46,14 +61,9 @@ public class SteamPipeJoint : MonoBehaviour {
         {
             if (!activated)
             {
-             //   print(" this -> " + go.name);
-                if (poweredSocket != null){
-                  //  print("in powering on!");
-                    if (poweredSocket.socketed != null){
-                       
-                       poweredSocket.ActivateInteractables();
-                    }
-                }
+               
+                //   print(" this -> " + go.name);
+                if (poweredSockets.Count > 0) activatePoweredSockets();
                 activated = true;
                 smoke.Play();
             }

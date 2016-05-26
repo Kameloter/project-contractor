@@ -29,12 +29,17 @@ public class ProceduralBridge : BaseInteractable {
     {
         leftTr = leftPart.transform;
         rightTr = rightPart.transform;
-        if (holder.transform.childCount > 0)
-            bridgeBuilt = true;
+
+        if(Application.isPlaying)
+        {
+            if (holder.transform.childCount > 0)
+                bridgeBuilt = true;
+        }
     }
 
 	void Build()
     {
+        Debug.Log(gameObject.name + "I AM GETTING BUILT MOTHERFUCKER !");
         for (int i = 0; i < wholePartsCount; i++)
         {
             Vector3 direction = leftTr.position - rightTr.position;

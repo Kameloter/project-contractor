@@ -50,6 +50,11 @@ public class PipeSystemEditor : Editor
 
         if (showLine1)
         {
+            //myValve.pipeLine1Start.SetActive(true);
+            //myValve.pipeLine1End.SetActive(true);
+            //myValve.pipeLine2Start.SetActive(false);
+            //myValve.pipeLine2End.SetActive(false);
+
             if (myValve.pipeLine1Points.Length == 0)
             {
                 return;
@@ -60,11 +65,16 @@ public class PipeSystemEditor : Editor
                 DrawPipeLine1();
             }
         }
+       
 
 
 
         if (showLine2)
         {
+            //myValve.pipeLine1Start.SetActive(false);
+            //myValve.pipeLine1End.SetActive(false);
+            //myValve.pipeLine2Start.SetActive(true);
+            //myValve.pipeLine2End.SetActive(true);
             if (myValve.pipeLine2Points.Length == 0)
             {
                 //Debug.Log("EMPTY POINT ARRAY");
@@ -317,9 +327,9 @@ public class PipeSystemEditor : Editor
                
             else
             {
-                Undo.RecordObject(myValve, "Move Point");
-                EditorUtility.SetDirty(myValve);
-                myValve.pipeLine1Points[index].transform.position = myValveTransform.InverseTransformPoint(position);
+                Undo.RecordObject(myValve.pipeLine1Points[index].transform, "Move Point");
+                EditorUtility.SetDirty(myValve.pipeLine1Points[index].transform);
+                myValve.pipeLine2Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
             }
                
         }
