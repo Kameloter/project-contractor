@@ -176,7 +176,9 @@ ModelImporter:
     4300000: Body
     4300002: ValveAnim
     4300004: BagFlap
-    7400000: Take 001
+    7400000: Walk
+    7400002: ra
+    7400004: idle
     9500000: //RootNode
     13700000: BagFlap
     13700002: Body
@@ -200,7 +202,395 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walk
+      takeName: Take 001
+      firstFrame: 2
+      lastFrame: 32
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: IKFoot_L
+        weight: 1
+      - path: IKFoot_R
+        weight: 1
+      - path: MASTER_CTRL
+        weight: 1
+      - path: MASTER_CTRL/FOOT_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/FOOT_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/BACKPACK_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL/ANTENNA_4_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL/ANTENNA_4_CTRL/ANTENNA_5_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL/ANTENNA_4_CTRL/ANTENNA_5_CTRL/ANTENNA_6_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/topnurbsSquare5
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/INDEX_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/MIDDLE_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/PINKY_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/THUMB_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/INDEX_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/MIDDLE_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/PINKY_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/THUMB_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/topnurbsSquare4
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/topnurbsSquare3
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/topnurbsSquare2
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/topnurbsSquare1
+        weight: 1
+      - path: MASTER_CTRL/KNEE_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/KNEE_R_CTRL
+        weight: 1
+      - path: RootJoint
+        weight: 1
+      - path: RootJoint/Spine_Root
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_L/Knee_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_L/Knee_L/Foot_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_R/Knee_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_R/Knee_R/Foot_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Bag
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Bag/BagFlap
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4/Antenna_5
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4/Antenna_5/Antenna_6
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4/Antenna_5/Antenna_6/Antenna_7
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Index1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Index1_L/Index2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Middle1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Middle1_L/Middle2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Pinky1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Pinky1_L/Pinky2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Thumb1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Thumb1_L/Thumb2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Index1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Index1_R/Index2_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Middle1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Middle1_R/Middle2_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Pinky1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Pinky1_R/Pinky2_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Thumb1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Thumb1_R/Thumb2_R
+        weight: 1
+      - path: transform1
+        weight: 1
+      - path: ValveAnim
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: idle
+      takeName: Take 001
+      firstFrame: 34
+      lastFrame: 92
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Body
+        weight: 1
+      - path: IKFoot_L
+        weight: 1
+      - path: IKFoot_R
+        weight: 1
+      - path: MASTER_CTRL
+        weight: 1
+      - path: MASTER_CTRL/FOOT_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/FOOT_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/BACKPACK_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL/ANTENNA_4_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL/ANTENNA_4_CTRL/ANTENNA_5_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/ANTENNA_1_CTRL/ANTENNA_2_CTRL/ANTENNA_3_CTRL/ANTENNA_4_CTRL/ANTENNA_5_CTRL/ANTENNA_6_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/NECK_CTRL/topnurbsSquare5
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/INDEX_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/MIDDLE_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/PINKY_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_L_CTRL/ELBOW_L_CTRL/THUMB_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/INDEX_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/MIDDLE_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/PINKY_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/SHOULDER_R_CTRL/ELBOW_R_CTRL/THUMB_R_CTRL
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/SPINE_4_CTRL/topnurbsSquare4
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/SPINE_3_CTRL/topnurbsSquare3
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/SPINE_2_CTRL/topnurbsSquare2
+        weight: 1
+      - path: MASTER_CTRL/HIP_CTRL/SPINE_1_CTRL/topnurbsSquare1
+        weight: 1
+      - path: MASTER_CTRL/KNEE_L_CTRL
+        weight: 1
+      - path: MASTER_CTRL/KNEE_R_CTRL
+        weight: 1
+      - path: RootJoint
+        weight: 1
+      - path: RootJoint/Spine_Root
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_L/Knee_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_L/Knee_L/Foot_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_R/Knee_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Hip_R/Knee_R/Foot_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Bag
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Bag/BagFlap
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4/Antenna_5
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4/Antenna_5/Antenna_6
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Neck/Antenna_1/Antenna_2/Antenna_3/Antenna_4/Antenna_5/Antenna_6/Antenna_7
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Index1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Index1_L/Index2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Middle1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Middle1_L/Middle2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Pinky1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Pinky1_L/Pinky2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Thumb1_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_L/Elbow_L/Thumb1_L/Thumb2_L
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Index1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Index1_R/Index2_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Middle1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Middle1_R/Middle2_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Pinky1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Pinky1_R/Pinky2_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Thumb1_R
+        weight: 1
+      - path: RootJoint/Spine_Root/Spine_1/Spine_2/Spine_3/Spine_4/Shoulder_R/Elbow_R/Thumb1_R/Thumb2_R
+        weight: 1
+      - path: transform1
+        weight: 1
+      - path: ValveAnim
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []

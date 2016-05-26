@@ -9,7 +9,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour
 {
     NavMeshAgent agent;
-    
+    Animator myAnimator;
     private Camera cam;
     private Rigidbody rigibody;
     public float speed = 10.0f;
@@ -29,12 +29,19 @@ public class PlayerMovement : MonoBehaviour
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-
+        myAnimator = GetComponentInChildren<Animator>();
         path = new NavMeshPath();
     }
 
     void FixedUpdate()
     {
+        float velMagn = agent.velocity.magnitude;
+        if (velMagn > 0)
+            myAnimator.SetBool("Move", true);
+        if(velMagn < 1)
+            myAnimator.SetBool("Move", false);
+
+
         MouseMovement();
         //Movement();
         //rigibody.AddForce(new Vector3(0, -0.1f, 0));
@@ -73,8 +80,7 @@ public class PlayerMovement : MonoBehaviour
     void Movement()
     {
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        //if (input.x == 0 && input.z == 0) anim.SetBool("Moving", false); else anim.SetBool("Moving", true);
-
+    
         Vector3 lookdir = cam.transform.forward;
         lookdir.y = 0;
         lookdir.Normalize();
