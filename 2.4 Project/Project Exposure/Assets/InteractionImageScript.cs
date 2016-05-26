@@ -9,6 +9,8 @@ public class InteractionImageScript : MonoBehaviour {
 
     [Tooltip("The sprite to show.")]
     public Sprite sprite;
+    public Vector3 position = Vector3.zero;
+    public Vector3 scale = Vector3.one;
 
     [Header("Behaviour")]
     public bool useTriggerExit = true;
@@ -22,6 +24,8 @@ public class InteractionImageScript : MonoBehaviour {
     [ReadOnly][SerializeField] bool activatable = true;
 
     bool holdingDown;
+
+    
 
     void Start() {
         GetImageObject();
@@ -49,18 +53,22 @@ public class InteractionImageScript : MonoBehaviour {
     void GetImageObject() {
         //Check if there is an image specified via the inspector, if not try to find it automatically.
         if (helpImage == null) {
-            if (GameObject.Find("HelpImage") == null) Debug.LogError("Couldn't find Image(script) named 'HelpImage', make sure its somewhere (active) or specify it via the inspector");
+            if (GameObject.Find("InteractionImage") == null) Debug.LogError("Couldn't find Image(script) named 'InteractionImage', make sure its somewhere (active) or specify it via the inspector");
             else {
                 Debug.LogWarning("HelpImage found automatically by script.");
-                helpImage = GameObject.Find("HelpImage").GetComponent<Image>();
+                helpImage = GameObject.Find("InteractionImage").GetComponent<Image>();
             }
         }
         helpImage.enabled = false;
     }
 
     void SetSprite() {
-        if (sprite != null) helpImage.sprite = sprite;
-        else Debug.LogError("No sprite set to " + gameObject.name);
+        if (sprite != null) {
+            helpImage.sprite = sprite;
+            helpImage.SetNativeSize();
+            helpImage.rectTransform.localPosition = position;
+            helpImage.rectTransform.localScale = scale;
+        } else Debug.LogError("No sprite set to " + gameObject.name);
     }
 
     void OnTriggerEnter(Collider hit) {
