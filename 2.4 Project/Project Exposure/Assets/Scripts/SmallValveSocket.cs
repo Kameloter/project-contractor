@@ -83,7 +83,7 @@ public class SmallValveSocket : MonoBehaviour {
             else
             {
                 Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
-                poweredBy.poweredSocket = this;
+                poweredBy.poweredSockets.Add(this);
             }
               
         }

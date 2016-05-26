@@ -443,13 +443,17 @@ public class BigValve : MonoBehaviour {
             if (prev.z == 1 && next.x == 1)    //if we go up
             {
                 //Debug.Log("-------------- 90 magic degrees !");
+                angleX = 0;
                 angleY = 90;
+                angleZ = 0;
             } else if (prev.z == 1 && next.x == -1) {
                 //Debug.Log("-------------- 0 magic degrees !");
+                angleX = 0;
                 angleY = 270;
                 angleZ = 180;
             } else if (prev.z == -1 && next.x == 1) {
                 //Debug.Log("-------------- 180 magic degrees !");
+                angleX = 0;
                 angleY = 90;
                 angleZ = 180;
             } else if (prev.z == -1 && next.x == -1) {
@@ -459,22 +463,25 @@ public class BigValve : MonoBehaviour {
                 angleZ = 180;
             } else if (next.y == 1)//maybe needs change ? check others too
               {
-                //prev Z == 1
+                //prev Z == 1 && next.y == 1
                 angleX = 270;
                 angleZ = 90;
-
+                angleY = 0;
                 if (prev.z == -1) {
                     angleX = 270;
                     angleY = 270;
+                    angleZ = 0;
                 }
             } else// next Y == -1
               {
                 //prev.z ==1
                 angleX = 90;
                 angleY = 90;
+                angleZ = 0;
                 if (prev.z == -1) {
                     angleX = 90;
                     angleY = 270;
+                    angleZ = 0;
                 }
             }
         } else if (Mathf.Abs(prev.y) == 1)//its coming from up/down
