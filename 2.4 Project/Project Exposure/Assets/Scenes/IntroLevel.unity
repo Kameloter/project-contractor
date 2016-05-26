@@ -1828,9 +1828,11 @@ MonoBehaviour:
   pipeSmall: {fileID: 0}
   pipeJoint: {fileID: 0}
   pipeLine1Start: {fileID: 0}
+  pipeLine1End: {fileID: 0}
   pipeLine2Start: {fileID: 0}
-  pipeLine1Holder: {fileID: 0}
-  pipeLine2Holder: {fileID: 0}
+  pipeLine2End: {fileID: 0}
+  jointHolder1: {fileID: 0}
+  jointHolder2: {fileID: 0}
   startState: 2
   currentState: 1
   valveID: 1
@@ -1841,8 +1843,9 @@ MonoBehaviour:
   cellSizeX: 0
   gridWidth: 0
   gridHeight: 0
-  Pipe_Line_1: []
-  Pipe_Line_2: []
+  pipeLine1Points: []
+  pipeLine2Points: []
+  testForUndo: {fileID: 0}
 --- !u!4 &59549313
 Transform:
   m_ObjectHideFlags: 0
@@ -2166,7 +2169,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11451520, guid: 8b80725e87bf9124da2fbdd3b8b29b6e, type: 2}
       propertyPath: level
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8b80725e87bf9124da2fbdd3b8b29b6e, type: 2}

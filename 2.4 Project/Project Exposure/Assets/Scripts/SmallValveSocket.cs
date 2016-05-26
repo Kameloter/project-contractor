@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [ExecuteInEditMode]
 public class SmallValveSocket : MonoBehaviour {
@@ -172,6 +174,7 @@ public class SmallValveSocket : MonoBehaviour {
     }
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(SmallValveSocket))]
 public class ValveEditorScript : Editor
 {
@@ -186,3 +189,4 @@ public class ValveEditorScript : Editor
         }
     }
 }
+#endif
