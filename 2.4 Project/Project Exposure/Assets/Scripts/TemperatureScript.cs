@@ -22,15 +22,15 @@ public class TemperatureScript : MonoBehaviour {
         
     }
     void Update() {
-        if (Input.GetKeyDown(KeyCode.I)) {
-            ChangeState(TemperatureState.Frozen);
-        }
-        if (Input.GetKeyDown(KeyCode.O)) {
-            ChangeState(TemperatureState.Neutral);
-        }
-        if (Input.GetKeyDown(KeyCode.P)) {
-            ChangeState(TemperatureState.Hot);
-        }
+        //if (Input.GetKeyDown(KeyCode.I)) {
+        //    ChangeState(TemperatureState.Frozen);
+        //}
+        //if (Input.GetKeyDown(KeyCode.O)) {
+        //    ChangeState(TemperatureState.Neutral);
+        //}
+        //if (Input.GetKeyDown(KeyCode.P)) {
+        //    ChangeState(TemperatureState.Hot);
+        //}
     }
 
     public void ChangeState(TemperatureState state) {

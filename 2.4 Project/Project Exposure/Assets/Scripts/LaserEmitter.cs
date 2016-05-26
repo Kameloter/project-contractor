@@ -23,7 +23,7 @@ public class LaserEmitter : BaseInteractable{
 
     public override void Activate() {
         _active = true;
-        CheckLaser(transform.position);
+       // CheckLaser(transform.position);
     }
 
     public override void DeActivate() {
@@ -32,8 +32,10 @@ public class LaserEmitter : BaseInteractable{
     }
 
     void DestroyLaser() {
-        for (int i = 1; i < transform.childCount; i++) { //start at 1 to not remove the body
-            Destroy(transform.GetChild(i).gameObject);
+        for (int i = 0; i < transform.childCount; i++) { //start at 1 to not remove the body
+            print(transform.GetChild(i).gameObject.name);
+            if (transform.GetChild(i).gameObject.name == "las0r " + i.ToString())
+                Destroy(transform.GetChild(i).gameObject);
         }
     }
 
