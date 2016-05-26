@@ -11,9 +11,9 @@ public class GameManager : MonoBehaviour {
 
                 if (gameManager != null) {
                     _instance = gameManager.AddComponent<GameManager>();
-                    Debug.Log("Game Manager created !");
+                    //Debug.Log("Game Manager created !");
                 } else {
-                    Debug.Log("Manager GameObject not present. Make sure the Tag is proper or the game object Managers exists");
+                   // Debug.Log("Manager GameObject not present. Make sure the Tag is proper or the game object Managers exists");
                 }
             }
             return _instance;

@@ -4,7 +4,6 @@ using System.Collections;
 public class BaseInteractable : MonoBehaviour {
 
     public virtual void Start() {
-        print("tyu");
     }
 
     public virtual void Activate()

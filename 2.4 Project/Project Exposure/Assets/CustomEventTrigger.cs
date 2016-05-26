@@ -160,7 +160,7 @@ public class CustomEventTrigger : MonoBehaviour {
                 Go[i].particle.Stop();
                 break;
             case Action.FocusOnTarget:
-                //camera focus
+                Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].go);
                 break;
         }
     }

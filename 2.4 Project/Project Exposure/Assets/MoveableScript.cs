@@ -41,8 +41,6 @@ public class MoveableScript : BaseInteractable {
         if (temperatureScript == null) {
             temperatureScript = GetComponentInChildren<TemperatureScript>();
         }
-
-        print("super");
 	}
 	
 	// Update is called once per frame
@@ -126,6 +124,5 @@ public class MoveableScript : BaseInteractable {
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(endPoint.position, movableObject.localScale);
-
     }
 }

@@ -75,19 +75,7 @@ public class CameraControl : MonoBehaviour
 
     void Rotating()
     {
-        //float distCovered = (Time.time - startTime) * 0.5f;
-        //float completed = distCovered / length;
-
-
-        //transform.position = Vector3.SmoothDamp(transform.position,
-        //                               target + offset,
-        //                               ref camSpeed, 0.5f);
-
-        //if (completed > 1)
-        //{
-        // //   length = 0;
-        //    currentRotation = newRotation;
-        //}
+       
     }
 
     public void DisableCutscene() {
@@ -95,39 +83,5 @@ public class CameraControl : MonoBehaviour
         playCutscene = false;
     }
 
-    //public void PlayCutscene(GameObject path) {
-    ////    print("playcutscene");
-    //    CalculatePath(path);
-    //    SetVariables(this.transform, 0);
-    //    playCutscene = true;
-       
-        
-    //}
-
-    //void CalculatePath(GameObject path) {
-    //    print(path.transform.childCount);
-    //    for (int i = 0; i < path.transform.childCount; i++) {
-    //        pathList.Add(path.transform.GetChild(i));
-    //    }
-
-    //    //foreach (Transform trans in pathList) {
-    //    //    print(trans.name);
-    //    //}
-    //}
-
-    //void Cutscene() {
-    //    float distCovered = (Time.time - startTime) * speed;
-    //    float fracJourney = distCovered / journeyLength;
-    //    this.transform.position = Vector3.Lerp(currentPos.position, pathList[index].position, fracJourney);
-    //    if (Vector3.Distance( currentPos.position, pathList[index].position) <= 0.5f) {
-    //        index++;
-    //        SetVariables(this.transform,index);
-    //    }
-    //}
-
-    //void SetVariables(Transform pCurrentPos, int pIndex) {
-    //    startTime = Time.time;
-    //    currentPos = pCurrentPos;
-    //    journeyLength = Vector3.Distance(currentPos.position, pathList[pIndex].position);
-    //}
+    
 }
