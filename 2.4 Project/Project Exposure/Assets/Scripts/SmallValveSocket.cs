@@ -43,12 +43,13 @@ public class SmallValveSocket : MonoBehaviour {
             playerScript = GameManager.Instance.PlayerScript;
 
             FindASteamJoint();
+			if (socketed != null) {
+
+				PlaceValve(socketed);
+			}
         }
 
-        if (socketed != null) {
-       
-            PlaceValve(socketed);
-        }
+        
     }
 
    public void FindASteamJoint()
@@ -76,12 +77,12 @@ public class SmallValveSocket : MonoBehaviour {
             }
             if (poweredBy == null)
             {
-              //  Debug.Log(" SMALL VALVE SOCKET WITH NAME \"" + gameObject.name + "\" DOES NOT FIND A STEAM-JOINT TO BE POWERED BY !!!");
+                Debug.Log(" SMALL VALVE SOCKET WITH NAME \"" + gameObject.name + "\" DOES NOT FIND A STEAM-JOINT TO BE POWERED BY !!!");
 
             }
             else
             {
-             //   Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
+                Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
                 poweredBy.poweredSocket = this;
             }
               
