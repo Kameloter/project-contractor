@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class QuestionMarkScript : MonoBehaviour {
+public class InteractionImageScript : MonoBehaviour {
     [Header("References")]
     [Tooltip("The GameObject with Image(script) on a Canvas.")]
     public Image helpImage;
