@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 [ExecuteInEditMode][System.Serializable]
 public class ProceduralBridge : BaseInteractable {
@@ -91,6 +93,7 @@ public class ProceduralBridge : BaseInteractable {
 
 }
 
+#if UNITY_EDITOR
 [CustomEditor(typeof(ProceduralBridge))]
 public class TestBridge : Editor
 {
@@ -110,3 +113,4 @@ public class TestBridge : Editor
 
     }
 }
+#endif
