@@ -568,9 +568,9 @@ public class BigValve : MonoBehaviour {
     }
 
     public void OnCustomEvent() {
-        if (InRange && activated) {
+        if (InRange) {
             Rotate();
-        } else if (!InRange && activated) {
+        } else if (!InRange) {
             GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(transform.position);
             GameManager.Instance.ClickedObject = gameObject;
             print(GameManager.Instance.ClickedObject.name);
@@ -669,9 +669,9 @@ public class BigValve : MonoBehaviour {
 
     void OnParticleCollision(GameObject go) {
 
-        if (!activated) {
-            activated = true;
-        }
+//        if (!activated) {
+//            activated = true;
+//        }
 
 
     }

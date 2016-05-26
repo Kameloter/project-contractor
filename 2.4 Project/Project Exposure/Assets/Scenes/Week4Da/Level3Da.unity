@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -240,6 +240,33 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 102867978}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &113917583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1595433195}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 113917584}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &113917584
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1595433195}
+  m_GameObject: {fileID: 113917583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
 --- !u!1 &139313863
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +443,34 @@ Transform:
   - {fileID: 623722879}
   m_Father: {fileID: 0}
   m_RootOrder: 17
+--- !u!1 &237232494
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1133412546}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 237232495}
+  - 114: {fileID: 1227807701}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &237232495
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1133412546}
+  m_GameObject: {fileID: 237232494}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1172879276}
+  m_RootOrder: 1
 --- !u!1001 &242746562
 Prefab:
   m_ObjectHideFlags: 0
@@ -461,11 +516,11 @@ Prefab:
       objectReference: {fileID: 419299003}
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: offset.x
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: offset.y
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
@@ -4028,7 +4083,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 474776, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 21.15
+      value: -0.18
       objectReference: {fileID: 0}
     - target: {fileID: 474776, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
       propertyPath: m_LocalRotation.x
@@ -8331,16 +8386,79 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 497c56a595a6a6146947492116754d26, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1227807700 stripped
+--- !u!1 &1172879275
 GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1133412546}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1172879276}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172879276
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1133412546}
+  m_GameObject: {fileID: 1172879275}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1227807702}
+  - {fileID: 237232495}
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+--- !u!1 &1227807700
+GameObject:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 176812, guid: 497c56a595a6a6146947492116754d26, type: 2}
   m_PrefabInternal: {fileID: 1133412546}
---- !u!114 &1227807701 stripped
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1227807702}
+  - 135: {fileID: 1227807707}
+  - 114: {fileID: 1227807706}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1227807701
 MonoBehaviour:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11484610, guid: 497c56a595a6a6146947492116754d26,
     type: 2}
   m_PrefabInternal: {fileID: 1133412546}
+  m_GameObject: {fileID: 237232494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 490cf2c98cfa2ea44ada9db66c971a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserSpawn: {fileID: 0}
+  mat: {fileID: 0}
+  _active: 0
+--- !u!4 &1227807702
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 1133412546}
+  m_GameObject: {fileID: 1227807700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1172879276}
+  m_RootOrder: 0
 --- !u!114 &1227807706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8530,14 +8648,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a290ff3a1e06fe14cb9eadc188b063df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  line1Path: {fileID: 394609384}
-  line2Path: {fileID: 1726962042}
-  rayPointer: {fileID: 2060779730}
+  pipeLongWindow: {fileID: 0}
+  pipeLong: {fileID: 0}
+  pipeSmall: {fileID: 0}
+  pipeJoint: {fileID: 0}
+  pipeLine1Start: {fileID: 0}
+  pipeLine1End: {fileID: 0}
+  pipeLine2Start: {fileID: 0}
+  pipeLine2End: {fileID: 0}
+  jointHolder1: {fileID: 0}
+  jointHolder2: {fileID: 0}
   startState: 2
   currentState: 1
   valveID: 1
   smoke1: {fileID: 499536677}
   smoke2: {fileID: 297634321}
+  draw: 0
+  cellSizeY: 0
+  cellSizeX: 0
+  gridWidth: 0
+  gridHeight: 0
+  pipeLine1Points: []
+  pipeLine2Points: []
+  testForUndo: {fileID: 0}
 --- !u!4 &1305825868
 Transform:
   m_ObjectHideFlags: 0
