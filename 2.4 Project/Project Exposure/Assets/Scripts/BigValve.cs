@@ -83,8 +83,10 @@ public class BigValve : MonoBehaviour {
             ConnectSmallValves();
             ConnectJointsTogether(1);
             ConnectJointsTogether(2);
-            BuildPipeLine(1);
-            BuildPipeLine(2);
+            if (pipeLine1Points[1] != null)
+                BuildPipeLine(1);
+           if( pipeLine2Points[1] != null)
+                 BuildPipeLine(2);
             switch (startState) {
                 case 0:
                     SetRotation(offRot);

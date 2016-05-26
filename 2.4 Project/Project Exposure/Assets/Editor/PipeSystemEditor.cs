@@ -122,13 +122,11 @@ public class PipeSystemEditor : Editor
 
             Line_1_debugColor = EditorGUILayout.ColorField(Line_1_debugColor);
             EditorList.Show(serializedObject.FindProperty("pipeLine1Points"), EditorListOption.Buttons);
-
         }
+
         if(showLine2)
         {
-           
             EditorGUILayout.LabelField("Line 2 ");
-
 
             if (GUILayout.Button("Build corner base"))
             {
