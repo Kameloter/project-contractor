@@ -4731,7 +4731,7 @@ GameObject:
   - 199: {fileID: 840739832}
   m_Layer: 9
   m_Name: 'WaterParticle '
-  m_TagString: WaterParticle
+  m_TagString: SteamParticle
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5006,7 +5006,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294907648
+        rgba: 4294967295
       minMaxState: 0
     startSize:
       scalar: 0.5
@@ -6513,7 +6513,7 @@ ParticleSystem:
         rgba: 4294967295
       maxColor:
         serializedVersion: 2
-        rgba: 4294901790
+        rgba: 4294967295
       minMaxState: 0
     startSize:
       scalar: 0.5
