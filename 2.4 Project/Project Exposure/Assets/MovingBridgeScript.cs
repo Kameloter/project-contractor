@@ -4,6 +4,7 @@ using System.Collections;
 public class MovingBridgeScript : MoveableScript {
 
     public GameObject obstacle;
+    bool wasFrozen = false;
 
 	// Use this for initialization
 	public override void Start () {
@@ -14,8 +15,10 @@ public class MovingBridgeScript : MoveableScript {
     void Update() {
         if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
             obstacle.SetActive(false);
+            wasFrozen = true;
         }
         else {
+            if (!wasFrozen)
             obstacle.SetActive(true);
         }
     }

@@ -42,37 +42,47 @@ public class MoveableScript : BaseInteractable {
             temperatureScript = GetComponentInChildren<TemperatureScript>();
         }
 	}
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-        if (Input.GetKeyDown(KeyCode.Alpha9)) {
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha9))
+        {
             Activate();
         }
-        if (Input.GetKeyDown(KeyCode.Alpha0)) {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
             DeActivate();
         }
 
-        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
-            if (needsToBeActivated) {
-                if (activated) {
-                    if (continuous) {
-                        MoveContinuous();
-                    }
-                    else {
-                        Move();
-                    }
-                }
-            }
-            else {
-                if (continuous) {
+        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen)
+        {
+            if (needsToBeActivated)
+            {
+
+                if (continuous)
+                {
                     MoveContinuous();
                 }
-                else {
+                else
+                {
+                    Move();
+                }
+
+            }
+            else
+            {
+                if (continuous)
+                {
+                    MoveContinuous();
+                }
+                else
+                {
                     Move();
                 }
             }
         }
-	}
+    }
 
     void Move() {
         if (currentState != 0) {

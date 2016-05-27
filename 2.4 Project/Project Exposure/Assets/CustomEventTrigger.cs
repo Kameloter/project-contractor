@@ -21,6 +21,8 @@ public class CustomEventTrigger : MonoBehaviour {
         Once, Delayed, Repeat, RepeatDelayed
     };
 
+    bool triggered = false;
+
     [System.Serializable]
     public struct info {
         public Action action;
@@ -166,26 +168,35 @@ public class CustomEventTrigger : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if (other.CompareTag(Tags.player)) {
-            for (int i = 0; i < Go.Length; i++) {
-                if (Go[i].onTrigger == OnTrigger.OnTriggerEnter) {
-                    switch (Go[i].fireType) {
-                        case FireType.Once:
-                            StartCoroutine(DoEvent(i, 0));
-                            break;
-                        case FireType.Delayed:
-                            StartCoroutine(DoEvent(i, Go[i].delay));
-                            break;
-                        case FireType.Repeat:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
-                            }
-                            break;
-                        case FireType.RepeatDelayed:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
-                            }
-                            break;
+        if (!triggered)
+        {
+            if (other.CompareTag(Tags.player))
+            {
+                for (int i = 0; i < Go.Length; i++)
+                {
+                    if (Go[i].onTrigger == OnTrigger.OnTriggerEnter)
+                    {
+                        switch (Go[i].fireType)
+                        {
+                            case FireType.Once:
+                                StartCoroutine(DoEvent(i, 0));
+                                break;
+                            case FireType.Delayed:
+                                StartCoroutine(DoEvent(i, Go[i].delay));
+                                break;
+                            case FireType.Repeat:
+                                for (int j = 0; j < Go[i].repeatAmount; j++)
+                                {
+                                    StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                                }
+                                break;
+                            case FireType.RepeatDelayed:
+                                for (int j = 0; j < Go[i].repeatAmount; j++)
+                                {
+                                    StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                                }
+                                break;
+                        }
                     }
                 }
             }
@@ -193,26 +204,35 @@ public class CustomEventTrigger : MonoBehaviour {
     }
 
     void OnTriggerStay(Collider other) {
-        if (other.CompareTag(Tags.player)) {
-            for (int i = 0; i < Go.Length; i++) {
-                if (Go[i].onTrigger == OnTrigger.OnTriggerStay) {
-                    switch (Go[i].fireType) {
-                        case FireType.Once:
-                            StartCoroutine(DoEvent(i, 0));
-                            break;
-                        case FireType.Delayed:
-                            StartCoroutine(DoEvent(i, Go[i].delay));
-                            break;
-                        case FireType.Repeat:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
-                            }
-                            break;
-                        case FireType.RepeatDelayed:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
-                            }
-                            break;
+        if (!triggered)
+        {
+            if (other.CompareTag(Tags.player))
+            {
+                for (int i = 0; i < Go.Length; i++)
+                {
+                    if (Go[i].onTrigger == OnTrigger.OnTriggerStay)
+                    {
+                        switch (Go[i].fireType)
+                        {
+                            case FireType.Once:
+                                StartCoroutine(DoEvent(i, 0));
+                                break;
+                            case FireType.Delayed:
+                                StartCoroutine(DoEvent(i, Go[i].delay));
+                                break;
+                            case FireType.Repeat:
+                                for (int j = 0; j < Go[i].repeatAmount; j++)
+                                {
+                                    StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                                }
+                                break;
+                            case FireType.RepeatDelayed:
+                                for (int j = 0; j < Go[i].repeatAmount; j++)
+                                {
+                                    StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                                }
+                                break;
+                        }
                     }
                 }
             }
@@ -220,30 +240,40 @@ public class CustomEventTrigger : MonoBehaviour {
     }
 
     void OnTriggerExit(Collider other) {
-        if (other.CompareTag(Tags.player)) {
-            for (int i = 0; i < Go.Length; i++) {
-                if (Go[i].onTrigger == OnTrigger.OnTriggerExit) {
-                    switch (Go[i].fireType) {
-                        case FireType.Once:
-                            StartCoroutine(DoEvent(i, 0));
-                            break;
-                        case FireType.Delayed:
-                            StartCoroutine(DoEvent(i, Go[i].delay));
-                            break;
-                        case FireType.Repeat:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
-                            }
-                            break;
-                        case FireType.RepeatDelayed:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
-                            }
-                            break;
+        if (!triggered)
+        {
+            if (other.CompareTag(Tags.player))
+            {
+                for (int i = 0; i < Go.Length; i++)
+                {
+                    if (Go[i].onTrigger == OnTrigger.OnTriggerExit)
+                    {
+                        switch (Go[i].fireType)
+                        {
+                            case FireType.Once:
+                                StartCoroutine(DoEvent(i, 0));
+                                break;
+                            case FireType.Delayed:
+                                StartCoroutine(DoEvent(i, Go[i].delay));
+                                break;
+                            case FireType.Repeat:
+                                for (int j = 0; j < Go[i].repeatAmount; j++)
+                                {
+                                    StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                                }
+                                break;
+                            case FireType.RepeatDelayed:
+                                for (int j = 0; j < Go[i].repeatAmount; j++)
+                                {
+                                    StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                                }
+                                break;
+                        }
                     }
                 }
             }
         }
+        triggered = true;
     }
 }
 

@@ -39,7 +39,6 @@ public class ProceduralBridge : BaseInteractable {
 
 	void Build()
     {
-        Debug.Log(gameObject.name + "I AM GETTING BUILT MOTHERFUCKER !");
         for (int i = 0; i < wholePartsCount; i++)
         {
             Vector3 direction = leftTr.position - rightTr.position;

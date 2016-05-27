@@ -5,7 +5,7 @@ public class PumpScript : MonoBehaviour {
     float timer = 0.0f;
     bool activated = false;
 
-    public Interactable interactable;
+    public BaseInteractable interactable;
 	// Use this for initialization
 	void Start () {
 	
@@ -22,16 +22,19 @@ public class PumpScript : MonoBehaviour {
         }
 
         if (activated) {
-            interactable.currentState = 2;
+            print("yooo2");
+            interactable.Activate();
         }
         else {
-            interactable.currentState = 1;
+            print("yooo4");
+            interactable.DeActivate();
         }
 	}
 
     void OnParticleCollision(GameObject go) {
-        print("yooo");
+        print(go.name);
         if (go.CompareTag(Tags.particleSteam)) {
+            print("yooo");
             activated = true;
             timer = 0.0f;
         }

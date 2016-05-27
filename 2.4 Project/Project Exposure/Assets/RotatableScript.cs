@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(TemperatureScript))]
 [RequireComponent(typeof(CustomEvent))]
 public class RotatableScript : MonoBehaviour {
 
@@ -45,10 +43,14 @@ public class RotatableScript : MonoBehaviour {
     }
 
     public void OnCustomEvent() {
+
+        print("GETTING PRINT");
         if (InRange) {
+            print("IN RANGE PRINT");
             Rotate();
         }
         else {
+            print("ELSE PRINT");
             GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
         }

@@ -33,8 +33,7 @@ public class LaserEmitter : BaseInteractable{
 
     void DestroyLaser() {
         for (int i = 0; i < transform.childCount; i++) { //start at 1 to not remove the body
-            print(transform.GetChild(i).gameObject.name);
-            if (transform.GetChild(i).gameObject.name == "las0r " + i.ToString())
+            if (transform.GetChild(i).gameObject.name.Contains("las0r"))
                 Destroy(transform.GetChild(i).gameObject);
         }
     }
