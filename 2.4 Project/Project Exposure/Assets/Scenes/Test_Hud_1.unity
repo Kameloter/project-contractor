@@ -726,7 +726,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.688, y: 0.701}
+  m_AnchoredPosition: {x: -0.7, y: 0.701}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &312800978
@@ -1212,7 +1212,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 486586880}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -0.00000016292068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1220,7 +1220,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.688, y: 0.701}
+  m_AnchoredPosition: {x: 0.69, y: 0.701}
   m_SizeDelta: {x: 0.5, y: 0.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &486586882
@@ -3731,7 +3731,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1536066279}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.956, y: 0.027, z: 0.709}
+  m_LocalPosition: {x: -3.956, y: 0.027, z: 4.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 751359662}
@@ -5085,19 +5085,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 427624, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0.38268346
+      value: -0.00000006234705
       objectReference: {fileID: 0}
     - target: {fileID: 427624, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.9238795
       objectReference: {fileID: 0}
     - target: {fileID: 427624, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0.38268346
       objectReference: {fileID: 0}
     - target: {fileID: 427624, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: m_LocalRotation.w
-      value: 0.9238795
+      value: -0.00000015051909
       objectReference: {fileID: 0}
     - target: {fileID: 427624, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: m_RootOrder
@@ -5113,7 +5113,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: offset.z
-      value: -5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11431324, guid: a6950370f126ffc4e912677afc6ff285, type: 2}
       propertyPath: offset.y
