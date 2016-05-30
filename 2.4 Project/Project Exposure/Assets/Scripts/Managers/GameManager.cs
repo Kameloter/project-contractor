@@ -34,21 +34,12 @@ public class GameManager : MonoBehaviour {
 
     GameObject clickedObject;
     Text text;
-    Text text2;
-    Text text3;
-    Text text4;
-    Text text5;
     WWW www;
 
     int score = 100;
 
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
-        text2 = GameObject.Find("Arg1").GetComponent<Text>();
-        text3 = GameObject.Find("Arg2").GetComponent<Text>();
-        text4 = GameObject.Find("Arg3").GetComponent<Text>();
-        text5 = GameObject.Find("Arg4").GetComponent<Text>();
-       // 
     }
 
     void OnLevelWasLoaded(int level) {
@@ -116,14 +107,6 @@ public class GameManager : MonoBehaviour {
           //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
         }
         text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
-
-
-        ////debug
-        //text.text = "UserID: " + Environment.GetCommandLineArgs()[2];
-        //text2.text = "GameID: " + Environment.GetCommandLineArgs()[3];
-        //text3.text = "UserName: " + Environment.GetCommandLineArgs()[4];
-        //text4.text = "GameTime: " + Environment.GetCommandLineArgs()[5];
-        //text5.text = "ConURL: " + Environment.GetCommandLineArgs()[6];
     }
 
 
