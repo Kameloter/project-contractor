@@ -11,8 +11,6 @@ public class SmallValveSocket : MonoBehaviour {
     GameObject Player;
     PlayerScript playerScript;
 
-    public bool StartWithValve = false;
-
     [SerializeField]
     BaseInteractable[] interactables;
 
@@ -35,35 +33,27 @@ public class SmallValveSocket : MonoBehaviour {
     public GameObject socketed = null;
 
     // Use this for initialization
-    void Start ()
-    {
+    void Start () {
         sphereColor.a = 1;
-        if (Application.isPlaying)
-        {
+        if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;
 
             FindASteamJoint();
 			if (socketed != null) {
-
 				PlaceValve(socketed);
 			}
         }
-
-        
     }
 
-   public void FindASteamJoint()
-    {
+   public void FindASteamJoint() {
         colliders = Physics.OverlapSphere(transform.position, radius);
         int cashedLength = colliders.Length;
 
-        if (cashedLength > 0)
-        {
+        if (cashedLength > 0) {
             float potentialShortestDistance = 0;
             float prevShortestDist = float.MaxValue;
 
-            for (int i = 0; i < cashedLength; i++)
-            {
+            for (int i = 0; i < cashedLength; i++) {
                 if (colliders[i].gameObject.GetComponent<SteamPipeJoint>() != null)
                 {
                     potentialShortestDistance = Vector3.Distance(transform.position, colliders[i].transform.position);
@@ -150,7 +140,7 @@ public class SmallValveSocket : MonoBehaviour {
         }
     }
 
-    void Check() {
+    public void Check() {
         if (playerScript.carriedValve != null && InRange && !socketed) {
             PlaceValve(playerScript.carriedValve);
         }
