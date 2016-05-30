@@ -7,7 +7,7 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class SmallValveSocket : MonoBehaviour {
 
-    bool InRange = false;
+    bool inRange = false;
     GameObject Player;
     PlayerScript playerScript;
 
@@ -32,8 +32,15 @@ public class SmallValveSocket : MonoBehaviour {
     [Header("If starting with valvehead:")]
     public GameObject socketed = null;
 
-    // Use this for initialization
+    [Header("Object Canvas")]
+    public Canvas objectCanvas;
+
     void Start () {
+        
+        objectCanvas = GetComponentInChildren<Canvas>();
+        if (objectCanvas != null) objectCanvas.enabled = false;
+        else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");
+
         sphereColor.a = 1;
         if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;
@@ -90,16 +97,14 @@ public class SmallValveSocket : MonoBehaviour {
 #endif
     public void OnCustomEvent()
     {
-
-        if (playerScript.carriedValve != null && InRange && !socketed)
-        {
-            PlaceValve(playerScript.carriedValve);
-        }
-        else if (socketed != null && InRange)
-        {
-            RemoveValve(socketed);
-        }
-        else if (!InRange) {
+        //--------------This was to pickup without button-----------------------
+        //if (playerScript.carriedValve != null && InRange && !socketed) {
+        //    PlaceValve(playerScript.carriedValve);
+        //} else if (socketed != null && InRange) {
+        //    RemoveValve(socketed);
+        //} else if
+        //----------------------------------------------------------------------
+        if (!inRange) {
             GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
             print(GameManager.Instance.ClickedObject.name);
@@ -141,26 +146,28 @@ public class SmallValveSocket : MonoBehaviour {
     }
 
     public void Check() {
-        if (playerScript.carriedValve != null && InRange && !socketed) {
+        if (playerScript.carriedValve != null && inRange && !socketed) {
             PlaceValve(playerScript.carriedValve);
         }
-        else if (socketed != null && InRange) {
+        else if (socketed != null && inRange) {
             RemoveValve(socketed);
         }
     }
 
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-             InRange = true;
-            if (GameManager.Instance.ClickedObject == this.gameObject) {
-                Check();
-            }
+            inRange = true;
+            if (objectCanvas != null) objectCanvas.enabled = true;
+            //if (GameManager.Instance.ClickedObject == this.gameObject) {
+            //    Check();
+            //}
         }
     }
 
     void OnTriggerExit(Collider other) {
         if (other.CompareTag("Player")) {
-            InRange = false;
+            inRange = false;
+            if (objectCanvas != null) objectCanvas.enabled = false;
         }
     }
 }
