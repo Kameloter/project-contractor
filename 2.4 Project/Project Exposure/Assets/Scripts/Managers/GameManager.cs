@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
@@ -31,6 +32,16 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
 
     GameObject clickedObject;
+    Text text;
+
+    void Start() {
+        text = GameObject.Find("Time").GetComponent<Text>();
+    }
+
+    void OnLevelWasLoaded(int level) {
+        text = GameObject.Find("Time").GetComponent<Text>();
+        print("level loaded");
+    }
 
     /// <summary>
     /// Returns the Player GameObject.
@@ -81,5 +92,12 @@ public class GameManager : MonoBehaviour {
     public GameObject ClickedObject {
         get { return clickedObject; }
         set { clickedObject = value; }
+    }
+
+    public float TimeLeft = 180.0f;
+
+    void Update() {
+        TimeLeft -= Time.deltaTime;
+         text.text = Mathf.Floor((TimeLeft / 60)).ToString("#':'") + ((int)TimeLeft % 60).ToString("D2");
     }
 }
