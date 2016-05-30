@@ -27,8 +27,6 @@ public class MoveableScript : BaseInteractable {
     private Vector3 moveDirection;
     private Transform currentDestination;
 
-    bool activated = false;
-
     public TemperatureScript temperatureScript;
 
 	// Use this for initialization
@@ -119,12 +117,10 @@ public class MoveableScript : BaseInteractable {
 
     public override void Activate() {
         currentState = 2;
-        activated = true;
     }
 
     public override void DeActivate() {
         currentState = 1;
-        activated = false;
     }
 
     void OnDrawGizmos() {

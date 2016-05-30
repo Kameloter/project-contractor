@@ -3,7 +3,7 @@ using System.Collections;
 
 public class BridgeScript : Interactable {
 	// Use this for initialization
-	void Start () {
+	public override void Start () {
 	}
 	
 	// Update is called once per frame

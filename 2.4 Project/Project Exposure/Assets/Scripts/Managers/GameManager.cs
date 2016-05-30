@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour {
 
     GameObject clickedObject;
     Text text;
-    WWW www;
+   // WWW www;
 
     int score = 100;
 

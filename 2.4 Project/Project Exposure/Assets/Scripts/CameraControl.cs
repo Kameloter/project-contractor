@@ -20,7 +20,6 @@ public class CameraControl : MonoBehaviour
     public Quaternion newRotation;
 
     //Camera Position
-    Vector3 camSpeed = Vector3.zero;
     Vector3 target;
     public Vector3 offset;
 

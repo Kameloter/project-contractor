@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class DoorActivatorScript : MonoBehaviour {
-    float timer = 0.0f;
 	// Use this for initialization
 	void Start () {
 	
@@ -20,7 +19,6 @@ public class DoorActivatorScript : MonoBehaviour {
     void OnParticleCollision(GameObject go) {
         if (go.CompareTag(Tags.particleSteam)) {
             transform.parent.GetComponent<Interactable>().currentState = 2;
-            timer = 0.0f;
         }
     }
 }
