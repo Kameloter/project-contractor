@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FreezeStreamScript : BaseInteractable {
+public class FreezeStreamScript : BaseActivatable {
 
     public ParticleSystem particle;
 

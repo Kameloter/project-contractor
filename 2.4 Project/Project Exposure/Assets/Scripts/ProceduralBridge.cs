@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 
 [ExecuteInEditMode][System.Serializable]
-public class ProceduralBridge : BaseInteractable {
+public class ProceduralBridge : BaseActivatable {
 
     public GameObject bridgePart;
     public GameObject leftPart;

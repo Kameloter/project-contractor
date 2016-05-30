@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baae04971692eff41852de09cba50bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   clickable: 1
 --- !u!208 &92148189
 NavMeshObstacle:
@@ -1458,6 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baae04971692eff41852de09cba50bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   clickable: 1
 --- !u!208 &805100877
 NavMeshObstacle:
@@ -1933,6 +1935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e7427d88b1a3e4b9163f6227a24880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   interactables:
   - {fileID: 849436422}
   controlValve: {fileID: 0}
@@ -1942,7 +1945,6 @@ MonoBehaviour:
   sphereColor: {r: 0, g: 0, b: 0, a: 1}
   poweredBy: {fileID: 476444576}
   socketed: {fileID: 92148186}
-  objectCanvas: {fileID: 0}
 --- !u!135 &995738460
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2285,6 +2287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e7427d88b1a3e4b9163f6227a24880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   interactables:
   - {fileID: 1882280359}
   controlValve: {fileID: 0}
@@ -2294,7 +2297,6 @@ MonoBehaviour:
   sphereColor: {r: 0, g: 0, b: 0, a: 1}
   poweredBy: {fileID: 0}
   socketed: {fileID: 0}
-  objectCanvas: {fileID: 0}
 --- !u!135 &1192335754
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3183,7 +3185,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1613051730}
-        m_MethodName: OnCustomEvent
+        m_MethodName: OnInteractableClicked
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3206,6 +3208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baae04971692eff41852de09cba50bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   clickable: 1
 --- !u!208 &1613051731
 NavMeshObstacle:
@@ -3395,6 +3398,10 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 265753288}
+    - target: {fileID: 11430320, guid: 7f7dadfac053bfc44b3ddef6022924aa, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnInteract
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 7f7dadfac053bfc44b3ddef6022924aa, type: 2}
   m_IsPrefabParent: 0
@@ -3574,6 +3581,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e7427d88b1a3e4b9163f6227a24880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   interactables:
   - {fileID: 364617656}
   controlValve: {fileID: 0}
@@ -3583,7 +3591,6 @@ MonoBehaviour:
   sphereColor: {r: 0, g: 0, b: 0, a: 1}
   poweredBy: {fileID: 476444576}
   socketed: {fileID: 0}
-  objectCanvas: {fileID: 0}
 --- !u!135 &1753832358
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3716,6 +3723,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93e7427d88b1a3e4b9163f6227a24880, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
   interactables:
   - {fileID: 243345113}
   controlValve: {fileID: 0}
@@ -3725,7 +3733,6 @@ MonoBehaviour:
   sphereColor: {r: 0, g: 0, b: 0, a: 1}
   poweredBy: {fileID: 0}
   socketed: {fileID: 0}
-  objectCanvas: {fileID: 0}
 --- !u!135 &1755867357
 SphereCollider:
   m_ObjectHideFlags: 0

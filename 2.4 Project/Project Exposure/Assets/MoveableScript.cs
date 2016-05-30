@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(TemperatureScript))]
-public class MoveableScript : BaseInteractable {
+public class MoveableScript : BaseActivatable {
 
 
     //public

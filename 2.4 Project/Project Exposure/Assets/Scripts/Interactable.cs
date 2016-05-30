@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 
 
-public class Interactable : BaseInteractable {
+public class Interactable : BaseActivatable {
     
     public enum TypeOfInteractables
     {

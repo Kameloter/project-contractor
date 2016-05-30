@@ -5,16 +5,14 @@ using UnityEditor;
 #endif
 
 [ExecuteInEditMode]
-public class SmallValveSocket : MonoBehaviour {
+public class SmallValveSocket : BaseInteractable {
 
-    bool inRange = false;
     GameObject Player;
     PlayerScript playerScript;
 
     [SerializeField]
-    BaseInteractable[] interactables;
+    BaseActivatable[] interactables;
 
-    //[HideInInspector]
     [HideInInspector]
     public BigValve controlValve;
 
@@ -32,27 +30,27 @@ public class SmallValveSocket : MonoBehaviour {
     [Header("If starting with valvehead:")]
     public GameObject socketed = null;
 
-    [Header("Object Canvas")]
-    public Canvas objectCanvas;
+    //[Header("Object Canvas")]
+    //public Canvas objectCanvas;
 
-    void Start () {
-        
-        objectCanvas = GetComponentInChildren<Canvas>();
-        if (objectCanvas != null) objectCanvas.enabled = false;
-        else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");
+    void Start() {
+
+        //objectCanvas = GetComponentInChildren<Canvas>();
+        //if (objectCanvas != null) objectCanvas.enabled = false;
+        //else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");
 
         sphereColor.a = 1;
         if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;
 
             FindASteamJoint();
-			if (socketed != null) {
-				PlaceValve(socketed);
-			}
+            if (socketed != null) {
+                PlaceValve(socketed);
+            }
         }
     }
 
-   public void FindASteamJoint() {
+    public void FindASteamJoint() {
         colliders = Physics.OverlapSphere(transform.position, radius);
         int cashedLength = colliders.Length;
 
@@ -61,55 +59,35 @@ public class SmallValveSocket : MonoBehaviour {
             float prevShortestDist = float.MaxValue;
 
             for (int i = 0; i < cashedLength; i++) {
-                if (colliders[i].gameObject.GetComponent<SteamPipeJoint>() != null)
-                {
+                if (colliders[i].gameObject.GetComponent<SteamPipeJoint>() != null) {
                     potentialShortestDistance = Vector3.Distance(transform.position, colliders[i].transform.position);
 
-                    if (potentialShortestDistance < prevShortestDist)
-                    {
+                    if (potentialShortestDistance < prevShortestDist) {
                         poweredBy = colliders[i].GetComponent<SteamPipeJoint>();
                         prevShortestDist = potentialShortestDistance;
                     }
                 }
             }
-            if (poweredBy == null)
-            {
+            if (poweredBy == null) {
                 Debug.Log(" SMALL VALVE SOCKET WITH NAME \"" + gameObject.name + "\" DOES NOT FIND A STEAM-JOINT TO BE POWERED BY !!!");
 
-            }
-            else
-            {
+            } else {
                 Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
                 poweredBy.poweredSockets.Add(this);
             }
-              
+
         }
     }
 
 #if UNITY_EDITOR
-    void OnDrawGizmosSelected()
-    {
+    void OnDrawGizmosSelected() {
         if (Application.isPlaying) return;
         Gizmos.color = sphereColor;
         Gizmos.DrawWireSphere(transform.position, radius);
-        
+
     }
 #endif
-    public void OnCustomEvent()
-    {
-        //--------------This was to pickup without button-----------------------
-        //if (playerScript.carriedValve != null && InRange && !socketed) {
-        //    PlaceValve(playerScript.carriedValve);
-        //} else if (socketed != null && InRange) {
-        //    RemoveValve(socketed);
-        //} else if
-        //----------------------------------------------------------------------
-        if (!inRange) {
-            GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
-            GameManager.Instance.ClickedObject = this.gameObject;
-            print(GameManager.Instance.ClickedObject.name);
-        }
-    }
+
 
     void PlaceValve(GameObject valve) {
         valve.GetComponent<PickableScript>().Place(this.transform.position + this.transform.up, this.gameObject);
@@ -121,8 +99,8 @@ public class SmallValveSocket : MonoBehaviour {
 
     public void ActivateInteractables() {
         if (controlValve.currentState == valveLine) {
-         //   print("started with valve" + this.name);
-            foreach (BaseInteractable interactable in interactables) {
+            //   print("started with valve" + this.name);
+            foreach (BaseActivatable interactable in interactables) {
                 interactable.Activate();
             }
         }
@@ -132,43 +110,27 @@ public class SmallValveSocket : MonoBehaviour {
         valve.GetComponent<PickableScript>().PickUp();
         valve.GetComponent<PickableScript>().clickable = true;
         socketed = null;
-        foreach (BaseInteractable interactable in interactables) {
+        foreach (BaseActivatable interactable in interactables) {
             interactable.DeActivate();
         }
     }
 
-    public void DeactivateSocket()
-    {
-        foreach (BaseInteractable interactable in interactables)
-        {
+    public void DeactivateSocket() {
+        foreach (BaseActivatable interactable in interactables) {
             interactable.DeActivate();
         }
     }
 
-    public void Check() {
-        if (playerScript.carriedValve != null && inRange && !socketed) {
+    void Check() {
+        if (playerScript.carriedValve != null && playerInRange && !socketed) {
             PlaceValve(playerScript.carriedValve);
-        }
-        else if (socketed != null && inRange) {
+        } else if (socketed != null && playerInRange) {
             RemoveValve(socketed);
         }
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            inRange = true;
-            if (objectCanvas != null) objectCanvas.enabled = true;
-            //if (GameManager.Instance.ClickedObject == this.gameObject) {
-            //    Check();
-            //}
-        }
-    }
-
-    void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            inRange = false;
-            if (objectCanvas != null) objectCanvas.enabled = false;
-        }
+    public override void OnInteract() {
+        Check();
     }
 }
 

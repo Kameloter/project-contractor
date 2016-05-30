@@ -64,7 +64,7 @@ public class CustomEventTrigger : MonoBehaviour {
 
         // activate / deactivate interactable
         [SerializeField]
-        public BaseInteractable interactable;
+        public BaseActivatable interactable;
 
         //camera cutscene
         [SerializeField]
