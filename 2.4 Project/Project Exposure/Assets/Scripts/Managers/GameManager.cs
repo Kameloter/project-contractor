@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
@@ -33,6 +34,9 @@ public class GameManager : MonoBehaviour {
 
     GameObject clickedObject;
     Text text;
+   // WWW www;
+
+    int score = 100;
 
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
@@ -94,10 +98,16 @@ public class GameManager : MonoBehaviour {
         set { clickedObject = value; }
     }
 
-    public float TimeLeft = 180.0f;
+    public float TimeLeft = 10.0f;
 
     void Update() {
         TimeLeft -= Time.deltaTime;
-         text.text = Mathf.Floor((TimeLeft / 60)).ToString("#':'") + ((int)TimeLeft % 60).ToString("D2");
+
+        if (TimeLeft <= 0) {
+          //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
+        }
+        text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
     }
+
+
 }

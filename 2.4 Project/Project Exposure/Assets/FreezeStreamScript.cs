@@ -6,7 +6,7 @@ public class FreezeStreamScript : BaseInteractable {
     public ParticleSystem particle;
 
 	// Use this for initialization
-	void Start () {
+	public override void Start () {
 	
 	}
 	

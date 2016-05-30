@@ -25,7 +25,7 @@ public class ProceduralBridge : BaseInteractable {
     GameObject obstacle;
 
 	// Use this for initialization
-	void Start ()
+	public override void Start ()
     {
         leftTr = leftPart.transform;
         rightTr = rightPart.transform;
