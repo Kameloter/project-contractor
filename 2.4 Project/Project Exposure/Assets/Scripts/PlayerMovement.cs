@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
            // print("clicked object: " + GameManager.Instance.ClickedObject);
             RaycastHit hit;
             NavMeshHit navHit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100)) {
+            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100,clickableLayer)) {
 
                 if (hit.transform.GetComponent<CustomEvent>() != null && !eventCalled && firstFrame) {
                 //    print("ha");

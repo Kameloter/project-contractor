@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class InteractionImageScript : MonoBehaviour {
+public class HelpImageScript : MonoBehaviour {
     [Header("References")]
     [Tooltip("The GameObject with Image(script) on a Canvas.")]
     public Image helpImage;
@@ -53,10 +53,10 @@ public class InteractionImageScript : MonoBehaviour {
     void GetImageObject() {
         //Check if there is an image specified via the inspector, if not try to find it automatically.
         if (helpImage == null) {
-            if (GameObject.Find("InteractionImage") == null) Debug.LogError("Couldn't find Image(script) named 'InteractionImage', make sure its somewhere (active) or specify it via the inspector");
+            if (GameObject.Find("HelpImage") == null) Debug.LogError("Couldn't find Image(script) named 'HelpImage', make sure its somewhere (active) or specify it via the inspector");
             else {
                 Debug.LogWarning("HelpImage found automatically by script.");
-                helpImage = GameObject.Find("InteractionImage").GetComponent<Image>();
+                helpImage = GameObject.Find("HelpImage").GetComponent<Image>();
             }
         }
         helpImage.enabled = false;

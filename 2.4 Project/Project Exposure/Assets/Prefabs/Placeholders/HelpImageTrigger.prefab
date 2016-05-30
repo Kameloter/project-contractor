@@ -11,7 +11,7 @@ GameObject:
   - 135: {fileID: 13512508}
   - 114: {fileID: 11477914}
   m_Layer: 0
-  m_Name: InteractionImageTrigger
+  m_Name: HelpImageTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 4476612413928447662, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -49,6 +49,7 @@ MonoBehaviour:
   showUntilClick: 0
   showTime: 0
   activatable: 1
+  holdingDown: 0
 --- !u!135 &13512508
 SphereCollider:
   m_ObjectHideFlags: 1
