@@ -6,7 +6,6 @@ using UnityEditor;
 
 [ExecuteInEditMode]
 public class SmallValveSocket : BaseInteractable {
-
     GameObject Player;
     PlayerScript playerScript;
 
@@ -34,7 +33,6 @@ public class SmallValveSocket : BaseInteractable {
     //public Canvas objectCanvas;
 
     void Start() {
-
         //objectCanvas = GetComponentInChildren<Canvas>();
         //if (objectCanvas != null) objectCanvas.enabled = false;
         //else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");

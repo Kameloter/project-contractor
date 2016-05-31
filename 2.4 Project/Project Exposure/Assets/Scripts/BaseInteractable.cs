@@ -1,16 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 public class BaseInteractable : MonoBehaviour {
 
-    public bool playerInRange = false;
+    [ReadOnly] public bool playerInRange = false;
+    [HideInInspector] public UnityEvent onTriggerEnterEvent;
+    [HideInInspector] public UnityEvent onTriggerExitEvent;
+
+    public void Awake() {
+        onTriggerEnterEvent = new UnityEvent();
+        onTriggerExitEvent = new UnityEvent();
+    }
 
     public virtual void OnInteract() {
     
     }
 
     public virtual void OnInteractableClicked() {
-     
         if (!playerInRange) {
             GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
             GameManager.Instance.ClickedObject = this.gameObject;
@@ -18,8 +25,16 @@ public class BaseInteractable : MonoBehaviour {
         }
     }
 
-    public virtual void actionOnTriggerEnter(Collider other) { }
-    public virtual void actionOnTriggerExit(Collider other) { }
+    /// <summary>
+    /// Assuming the PLAYER enters.
+    /// </summary>
+    /// <param name="other"></param>
+    public virtual void actionOnTriggerEnter(Collider player) { if (onTriggerEnterEvent != null) onTriggerEnterEvent.Invoke(); }
+    /// <summary>
+    /// Assuming the PLAYER enters.
+    /// </summary>
+    /// <param name="other"></param>
+    public virtual void actionOnTriggerExit(Collider player) { if (onTriggerExitEvent != null) onTriggerExitEvent.Invoke(); }
 
 
     void OnTriggerEnter(Collider other) {

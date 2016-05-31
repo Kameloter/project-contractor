@@ -72,19 +72,11 @@ public class PickableScript : BaseInteractable {
         }
     }
 
-    //void OnTriggerEnter(Collider other) {
-    //    if (other.CompareTag("Player")) {
-    //        InRange = true;
-    //        if (GameManager.Instance.ClickedObject == this.gameObject) {
-    //            PickUp();
-    //            RemoveClickedObject();
-    //        }
-    //    }
-    //}
-
-    //void OnTriggerExit(Collider other) {
-    //    if (other.CompareTag("Player")) {
-    //        InRange = false;
-    //    }
-    //}
+    public override void actionOnTriggerEnter(Collider player) {
+        if (GameManager.Instance.ClickedObject == this.gameObject) {
+            PickUp();
+            RemoveClickedObject();
+        }
+        base.actionOnTriggerEnter(player);
+    }
 }
