@@ -29,14 +29,7 @@ public class SmallValveSocket : BaseInteractable {
     [Header("If starting with valvehead:")]
     public GameObject socketed = null;
 
-    //[Header("Object Canvas")]
-    //public Canvas objectCanvas;
-
     void Start() {
-        //objectCanvas = GetComponentInChildren<Canvas>();
-        //if (objectCanvas != null) objectCanvas.enabled = false;
-        //else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");
-
         sphereColor.a = 1;
         if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;

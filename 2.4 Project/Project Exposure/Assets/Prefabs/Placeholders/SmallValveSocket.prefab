@@ -50,6 +50,7 @@ GameObject:
   - 114: {fileID: 11415636}
   - 114: {fileID: 11404394}
   - 114: {fileID: 11456578}
+  - 114: {fileID: 11465296}
   m_Layer: 0
   m_Name: ObjectCanvas
   m_TagString: Untagged
@@ -217,6 +218,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useMainCamera: 1
   alignTo: {fileID: 0}
+--- !u!114 &11465296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 140408}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47058c5498cf3614fb2e50cfe954add5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectCanvas: {fileID: 0}
 --- !u!114 &11472464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,7 +312,7 @@ Canvas:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 140408}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_RenderMode: 2
   m_Camera: {fileID: 0}

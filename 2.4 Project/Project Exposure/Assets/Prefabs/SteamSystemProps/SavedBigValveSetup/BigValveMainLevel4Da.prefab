@@ -2361,6 +2361,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a290ff3a1e06fe14cb9eadc188b063df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
+  onTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   pipeLongWindow: {fileID: 150788, guid: 485b34133584a4e47a12a700da1cd36a, type: 2}
   pipeLong: {fileID: 101562, guid: 9679a763506c1564dba939c6bb5d398a, type: 2}
   pipeSmall: {fileID: 158756, guid: 8b6aa94001d16634e8a9367afe3ac4f4, type: 2}

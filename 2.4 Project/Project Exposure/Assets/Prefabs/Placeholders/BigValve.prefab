@@ -1182,6 +1182,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a290ff3a1e06fe14cb9eadc188b063df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
+  onTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   pipeLongWindow: {fileID: 0}
   pipeLong: {fileID: 0}
   pipeSmall: {fileID: 0}

@@ -8,7 +8,7 @@ public class BaseInteractable : MonoBehaviour {
     [HideInInspector] public UnityEvent onTriggerEnterEvent;
     [HideInInspector] public UnityEvent onTriggerExitEvent;
 
-    public void Awake() {
+    public virtual void Awake() {
         onTriggerEnterEvent = new UnityEvent();
         onTriggerExitEvent = new UnityEvent();
     }

@@ -7,7 +7,7 @@ using UnityEditor;
 
 [ExecuteInEditMode]
 [System.Serializable]
-public class BigValve : MonoBehaviour {
+public class BigValve : BaseInteractable {
 
     [Header("Builder Parts")]
     public Object pipeLongWindow;
@@ -65,13 +65,15 @@ public class BigValve : MonoBehaviour {
     [SerializeField] public GameObject testForUndo;
 
     bool createObjects = false;
-    void Awake() {
+
+    public override void Awake() {
         if (Application.isPlaying) {
             line1Sockets = new List<SmallValveSocket>();
             line2Sockets = new List<SmallValveSocket>();
         }
+        base.Awake();
     }
-    // Use this for initialization
+
     void Start() {
         if (Application.isPlaying) {
             valve = transform.GetChild(0);
@@ -421,10 +423,7 @@ public class BigValve : MonoBehaviour {
             } else if (next.y == 1) {
                 angleX = 270;
                 angleY = 180;
-                if (prev.x == -1) {
-                    angleX = 270;
-                    angleY = 0;
-                }
+                if (prev.x == -1) { angleX = 270; angleY = 0; }
             } else {
                 angleX = 90;
                 angleY = 180;
@@ -474,30 +473,17 @@ public class BigValve : MonoBehaviour {
                 angleX = 90;
                 angleY = 90;
                 angleZ = 0;
-                if (prev.z == -1) {
-                    angleX = 90;
-                    angleY = 270;
-                    angleZ = 0;
-                }
+                if (prev.z == -1) { angleX = 90; angleY = 270; angleZ = 0; }
             }
         } else if (Mathf.Abs(prev.y) == 1)//its coming from up/down
           {
-            if (prev.y == 1) {
-                angleZ = 270;
+            if (prev.y == 1) { angleZ = 270; } 
+            else { angleZ = 90; }
 
-            } else {
-                angleZ = 90;
-            }
-
-            if (next.x == 1) {
-                angleY = 90;
-            } else if (next.x == -1) {
-                angleY = 270;
-            } else if (next.z == 1) {
-                angleY = 0;
-            } else if (next.z == -1) {
-                angleY = 180;
-            }
+            if      (next.x == 1)   { angleY = 90;  } 
+            else if (next.x == -1)  { angleY = 270; } 
+            else if (next.z == 1)   { angleY = 0;   } 
+            else if (next.z == -1)  { angleY = 180; }
         }
 
         if (lineIndex == 1) {
@@ -510,40 +496,24 @@ public class BigValve : MonoBehaviour {
     }
 
     void ConnectJointsTogether(int index) {
-        //has to change 
         if (index == 1) {
             steamJointsLine1 = new List<SteamPipeJoint>(jointHolder1.GetComponentsInChildren<SteamPipeJoint>());
             steamJointsLine1.Add(pipeLine1End.GetComponent<SteamPipeJoint>());
             int line1Lenght = steamJointsLine1.Count;
             for (int i = 0; i < line1Lenght; i++) {
-                // print("name order -> " + line1[i].gameObject.name);
                 if (steamJointsLine1[i] != steamJointsLine1[line1Lenght - 1]) {
-                    //  Debug.Log("set " + line1[i].name + " to " + line1[i + 1].name);
                     steamJointsLine1[i].connectTo = steamJointsLine1[i + 1];
                 }
-
             }
-
         } else {
             steamJointsLine2 = new List<SteamPipeJoint>(jointHolder2.GetComponentsInChildren<SteamPipeJoint>());
             steamJointsLine2.Add(pipeLine2End.GetComponent<SteamPipeJoint>());
             int line2Lenght = steamJointsLine2.Count;
             for (int i = 0; i < line2Lenght; i++) {
-
-                if (steamJointsLine2[i] != steamJointsLine2[line2Lenght - 1]) {
-
-                    steamJointsLine2[i].connectTo = steamJointsLine2[i + 1];
-                }
-
+                if (steamJointsLine2[i] != steamJointsLine2[line2Lenght - 1]) { steamJointsLine2[i].connectTo = steamJointsLine2[i + 1]; }
             }
-
         }
-
-
-
     }
-
-
 
     void ConnectSmallValves() {
         SmallValveSocket[] smallValveSockets = FindObjectsOfType<SmallValveSocket>();
@@ -551,37 +521,11 @@ public class BigValve : MonoBehaviour {
             if (smallValveSockets[i].valveID == valveID) {
                 smallValveSockets[i].controlValve = this;
 
-                if (smallValveSockets[i].valveLine == 1)
-                    line1Sockets.Add(smallValveSockets[i]);
-                else
-                    line2Sockets.Add(smallValveSockets[i]);
+                if (smallValveSockets[i].valveLine == 1) line1Sockets.Add(smallValveSockets[i]);
+                else line2Sockets.Add(smallValveSockets[i]);
             }
         }
     }
-    void FixedUpdate() {
-        //if (inRotation)
-        //{
-
-        //    valve.transform.rotation = Quaternion.Slerp(valve.transform.rotation, targetRotation, Time.deltaTime);
-        //    while (valve.transform.rotation != targetRotation)
-        //    {
-
-        //    }
-        //    //inRotation = false;
-        //}
-
-    }
-
-    public void OnCustomEvent() {
-        if (InRange) {
-            Rotate();
-        } else if (!InRange) {
-            GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(transform.position);
-            GameManager.Instance.ClickedObject = gameObject;
-            print(GameManager.Instance.ClickedObject.name);
-        }
-    }
-
 
     void ActivateLine(int index) {
         switch (index) {
@@ -593,9 +537,11 @@ public class BigValve : MonoBehaviour {
                 break;
         }
     }
+
     void StopLine1() {
         steamJointsLine1[0].StopSteamConnection();
     }
+
     void StopLine2() {
         steamJointsLine2[0].StopSteamConnection();
     }
@@ -603,25 +549,16 @@ public class BigValve : MonoBehaviour {
     void DisableLine(int index) {
         switch (index) {
             case 1:
-
                 smoke1.Stop();
-
                 float distance = Vector3.Distance(transform.position, steamJointsLine1[0].transform.position);
                 float waitTime = distance / steamJointsLine1[0].steamParticleSpeed;
                 Invoke("StopLine1", waitTime);
-
-
-
                 break;
             case 2:
-
                 smoke2.Stop();
-
                 float distance2 = Vector3.Distance(transform.position, steamJointsLine2[0].transform.position);
                 float waitTime2 = distance2 / steamJointsLine2[0].steamParticleSpeed;
                 Invoke("StopLine2", waitTime2);
-
-
                 break;
         }
     }
@@ -648,8 +585,8 @@ public class BigValve : MonoBehaviour {
                 break;
         }
     }
-    void Rotate() {
 
+    void Rotate() {
         valve.Rotate(new Vector3(0, -90, 0));
 
         switch ((int)valve.localEulerAngles.y) {
@@ -672,27 +609,8 @@ public class BigValve : MonoBehaviour {
         }
     }
 
-    void OnParticleCollision(GameObject go) {
-
-//        if (!activated) {
-//            activated = true;
-//        }
-
-
-    }
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = true;
-            if (GameManager.Instance.ClickedObject == this.gameObject) {
-                Rotate();
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = false;
-        }
+    public override void OnInteract() {
+        Rotate();
     }
 
 
@@ -788,9 +706,6 @@ public class BigValve : MonoBehaviour {
         return obj;
     }
 
-
-
-
     GameObject CreateSmallPipe(Vector3 pos, Transform parent) {
         GameObject obj = null;
 
@@ -811,7 +726,6 @@ public class BigValve : MonoBehaviour {
 #endif
         return obj;
     }
-
 
     GameObject CreateLongPipe(Vector3 pos, Transform parent)
     {
