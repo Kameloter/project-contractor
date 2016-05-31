@@ -106,6 +106,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baae04971692eff41852de09cba50bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerInRange: 0
+  onTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
   clickable: 1
 --- !u!114 &11470442
 MonoBehaviour:

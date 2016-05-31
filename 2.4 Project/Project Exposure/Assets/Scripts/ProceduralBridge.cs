@@ -19,29 +19,20 @@ public class ProceduralBridge : BaseActivatable {
 
     float distanceBetweenParts = 0;
     float wholePartsCount = 0;
-    bool bridgeBuilt = false;
 
     [SerializeField]
     GameObject obstacle;
 
-	// Use this for initialization
-	public override void Start ()
-    {
+    // Use this for initialization
+    public override void Start() {
         base.Start();
         leftTr = leftPart.transform;
         rightTr = rightPart.transform;
 
-        if(Application.isPlaying)
-        {
-            if (holder.transform.childCount > 0)
-                bridgeBuilt = true;
-        }
     }
 
-	void Build()
-    {
-        for (int i = 0; i < wholePartsCount; i++)
-        {
+    void Build() {
+        for (int i = 0; i < wholePartsCount; i++) {
             Vector3 direction = leftTr.position - rightTr.position;
             direction.Normalize();
             GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 0.5f) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 0.5f) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
@@ -54,36 +45,26 @@ public class ProceduralBridge : BaseActivatable {
     }
 
 
-    void Destroy()
-    {
-        if(bridgeBuilt)
-        {
+    void Destroy() {
+        int cachedLenght = holder.transform.childCount;
+        print("LENGTH" + cachedLenght);
+        for (int i = cachedLenght; i > 0; i--) {
+            if (!Application.isPlaying)
+                DestroyImmediate(holder.transform.GetChild(i - 1).gameObject);
+            else
+                Destroy(holder.transform.GetChild(i - 1).gameObject);
 
-            int cachedLenght = holder.transform.childCount;
-            print("LENGTH"+cachedLenght);
-            for (int i = cachedLenght;i > 0; i--)
-            {
-                if(!Application.isPlaying)
-                    DestroyImmediate(holder.transform.GetChild(i - 1).gameObject);
-                else
-                    Destroy(holder.transform.GetChild(i - 1).gameObject);
-                
-            }
-
-            obstacle.SetActive(true);
-            bridgeBuilt = false;
-            print("Bridge deleted!");
         }
+
+        obstacle.SetActive(true);
+        print("Bridge deleted!");
     }
 
 
     public override void Activate() {
-        if (bridgeBuilt) { print("bridge already built!!!!!"); return; }
-
         RaycastHit hit;
         if (Physics.Raycast(rightTr.position, leftTr.position - rightTr.position, out hit, 1000)) {
             if (hit.transform.name == "Left") {
-                bridgeBuilt = true;
                 distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
                 wholePartsCount = Mathf.Ceil(distanceBetweenParts);
                 wholePartsCount /= bridgePart.transform.lossyScale.x;
