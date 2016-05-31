@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PickableScript : MonoBehaviour {
+public class PickableScript : BaseInteractable {
 
-    bool InRange = false;
     bool IsCarried = false;
     public bool clickable = true;
 
@@ -34,16 +33,12 @@ public class PickableScript : MonoBehaviour {
         }
     }
 
-    public void OnCustomEvent() {
+    public override void OnInteractableClicked() {
         if (clickable) {
             if (IsCarried) { Drop(); }
             else {
-                if (InRange) { PickUp(); }
-                else {
-                    GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
-                    GameManager.Instance.ClickedObject = this.gameObject;
-                    print(GameManager.Instance.ClickedObject.name);
-                }
+                if (playerInRange) { PickUp(); }
+                else base.OnInteractableClicked();
             }
         }
     }
@@ -77,19 +72,11 @@ public class PickableScript : MonoBehaviour {
         }
     }
 
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = true;
-            if (GameManager.Instance.ClickedObject == this.gameObject) {
-                PickUp();
-                RemoveClickedObject();
-            }
+    public override void actionOnTriggerEnter(Collider player) {
+        if (GameManager.Instance.ClickedObject == this.gameObject) {
+            PickUp();
+            RemoveClickedObject();
         }
-    }
-
-    void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = false;
-        }
+        base.actionOnTriggerEnter(player);
     }
 }

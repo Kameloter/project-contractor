@@ -11,6 +11,4 @@ public class CustomEvent : MonoBehaviour {
     {
         MyCustomEvent.Invoke();
     }
-
-    //{ myEvent.Invoke(); }
 }

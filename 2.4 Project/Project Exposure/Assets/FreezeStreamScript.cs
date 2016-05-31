@@ -1,25 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FreezeStreamScript : BaseInteractable {
+public class FreezeStreamScript : BaseActivatable {
 
     public ParticleSystem particle;
-
-	// Use this for initialization
-	public override void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public override void Activate() {
         particle.Play();
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         particle.Stop();
     }
 }

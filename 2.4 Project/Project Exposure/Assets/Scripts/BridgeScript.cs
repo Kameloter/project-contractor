@@ -2,20 +2,12 @@
 using System.Collections;
 
 public class BridgeScript : Interactable {
-	// Use this for initialization
-	public override void Start () {
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public override void Activate() {
         //this.gameObject.SetActive(true);
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
        // this.gameObject.SetActive(false);
         //print("deactivated");
 

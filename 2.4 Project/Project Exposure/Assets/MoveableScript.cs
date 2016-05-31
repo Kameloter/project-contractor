@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(TemperatureScript))]
-public class MoveableScript : BaseInteractable {
+public class MoveableScript : BaseActivatable {
 
 
     //public
@@ -50,7 +50,7 @@ public class MoveableScript : BaseInteractable {
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            DeActivate();
+            Deactivate();
         }
 
         if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen)
@@ -119,7 +119,7 @@ public class MoveableScript : BaseInteractable {
         currentState = 2;
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         currentState = 1;
     }
 

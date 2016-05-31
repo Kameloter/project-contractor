@@ -56,9 +56,9 @@ public class PlayerMovement : MonoBehaviour
             NavMeshHit navHit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100,clickableLayer)) {
 
-                if (hit.transform.GetComponent<CustomEvent>() != null && !eventCalled && firstFrame) {
+                if (hit.transform.GetComponent<BaseInteractable>() != null && !eventCalled && firstFrame) {
                 //    print("ha");
-                    hit.transform.GetComponent<CustomEvent>().OnCustomEvent();
+                    hit.transform.GetComponent<BaseInteractable>().OnInteractableClicked();
                     eventCalled = true;
                 }
                 else if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {

@@ -5,7 +5,7 @@ using UnityEditor;
 #endif
 
 
-public class Interactable : BaseInteractable {
+public class Interactable : BaseActivatable {
     
     public enum TypeOfInteractables
     {
@@ -122,7 +122,7 @@ public class Interactable : BaseInteractable {
     {
         SendMessage(typeOfInteractable.ToString(), 1);
     }
-    public override void DeActivate()
+    public override void Deactivate()
     {
         SendMessage(typeOfInteractable.ToString(), 2);
     }

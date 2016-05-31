@@ -34,20 +34,20 @@ public static class Game {
         return GameObject.FindGameObjectWithTag(tag);
     }
 
-    static public void ActivateInteractable (GameObject Interactable) {
-        Interactable.GetComponent<BaseInteractable>().Activate();
+    static public void ActivateActivatable (GameObject activatable) {
+        activatable.GetComponent<BaseActivatable>().Activate();
     }
 
-    static public void ActivateInteractable(BaseInteractable Interactable) {
-        Interactable.Activate();
+    static public void ActivateActivatable(BaseActivatable activatable) {
+        activatable.Activate();
     }
 
-    static public void DeactivateInteractable(GameObject Interactable) {
-        Interactable.GetComponent<BaseInteractable>().DeActivate();
+    static public void DeactivateActivatable(GameObject activatable) {
+        activatable.GetComponent<BaseActivatable>().Deactivate();
     }
 
-    static public void DeactivateInteractable(BaseInteractable Interactable) {
-        Interactable.DeActivate();
+    static public void DeactivateInteractable(BaseActivatable activatable) {
+        activatable.Deactivate();
     }
 
     static public void PlayCameraPath (GameObject path) {

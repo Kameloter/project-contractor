@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(RotatableScript))]
-public class LaserEmitter : BaseInteractable{
+public class LaserEmitter : BaseActivatable{
     [Header("Laser")]
     public Transform laserSpawn;
 
@@ -26,7 +26,7 @@ public class LaserEmitter : BaseInteractable{
        // CheckLaser(transform.position);
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         _active = false;
         DestroyLaser();
     }

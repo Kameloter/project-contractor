@@ -5,7 +5,7 @@ public class PumpScript : MonoBehaviour {
     float timer = 0.0f;
     bool activated = false;
 
-    public BaseInteractable interactable;
+    public BaseActivatable interactable;
 	// Use this for initialization
 	void Start () {
 	
@@ -27,7 +27,7 @@ public class PumpScript : MonoBehaviour {
         }
         else {
             print("yooo4");
-            interactable.DeActivate();
+            interactable.Deactivate();
         }
 	}
 
