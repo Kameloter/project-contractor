@@ -8,5 +8,5 @@ public class BaseActivatable : MonoBehaviour {
 
     public virtual void Activate() {}
 
-    public virtual void DeActivate() {}
+    public virtual void Deactivate() {}
 }

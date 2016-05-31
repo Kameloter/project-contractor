@@ -28,7 +28,7 @@ public class MovingBridgeScript : MoveableScript {
         base.Activate();
     }
 
-    public override void DeActivate() {
-        base.DeActivate();
+    public override void Deactivate() {
+        base.Deactivate();
     }
 }

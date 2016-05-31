@@ -7,7 +7,7 @@ public class BridgeScript : Interactable {
         //this.gameObject.SetActive(true);
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
        // this.gameObject.SetActive(false);
         //print("deactivated");
 

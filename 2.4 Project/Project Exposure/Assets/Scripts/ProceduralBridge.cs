@@ -92,7 +92,7 @@ public class ProceduralBridge : BaseActivatable {
         }
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         Destroy();
     }
 
@@ -113,7 +113,7 @@ public class TestBridge : Editor
         }
         if (GUILayout.Button("Destroy bridge"))
         {
-            myScript.DeActivate();
+            myScript.Deactivate();
         }
 
     }

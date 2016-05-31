@@ -27,7 +27,7 @@ public class PumpScript : MonoBehaviour {
         }
         else {
             print("yooo4");
-            interactable.DeActivate();
+            interactable.Deactivate();
         }
 	}
 

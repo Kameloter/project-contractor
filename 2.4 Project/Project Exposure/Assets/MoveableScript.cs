@@ -50,7 +50,7 @@ public class MoveableScript : BaseActivatable {
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
-            DeActivate();
+            Deactivate();
         }
 
         if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen)
@@ -119,7 +119,7 @@ public class MoveableScript : BaseActivatable {
         currentState = 2;
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         currentState = 1;
     }
 

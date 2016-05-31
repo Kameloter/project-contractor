@@ -109,13 +109,13 @@ public class SmallValveSocket : BaseInteractable {
         valve.GetComponent<PickableScript>().clickable = true;
         socketed = null;
         foreach (BaseActivatable interactable in interactables) {
-            interactable.DeActivate();
+            interactable.Deactivate();
         }
     }
 
     public void DeactivateSocket() {
         foreach (BaseActivatable interactable in interactables) {
-            interactable.DeActivate();
+            interactable.Deactivate();
         }
     }
 

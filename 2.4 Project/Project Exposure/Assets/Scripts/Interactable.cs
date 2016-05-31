@@ -122,7 +122,7 @@ public class Interactable : BaseActivatable {
     {
         SendMessage(typeOfInteractable.ToString(), 1);
     }
-    public override void DeActivate()
+    public override void Deactivate()
     {
         SendMessage(typeOfInteractable.ToString(), 2);
     }

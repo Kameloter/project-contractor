@@ -26,7 +26,7 @@ public class LaserEmitter : BaseActivatable{
        // CheckLaser(transform.position);
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         _active = false;
         DestroyLaser();
     }

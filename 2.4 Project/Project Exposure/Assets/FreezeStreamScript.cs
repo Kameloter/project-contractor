@@ -9,7 +9,7 @@ public class FreezeStreamScript : BaseActivatable {
         particle.Play();
     }
 
-    public override void DeActivate() {
+    public override void Deactivate() {
         particle.Stop();
     }
 }

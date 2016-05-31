@@ -119,7 +119,7 @@ public class CustomEventTrigger : MonoBehaviour {
                 Go[i].interactable.Activate();
                 break;
             case Action.DeactivateInteractable:
-                Go[i].interactable.DeActivate();
+                Go[i].interactable.Deactivate();
                 break;
             case Action.PlayAnimation:
                 Go[i].go.GetComponent<Animation>().clip = Go[i].animation;
