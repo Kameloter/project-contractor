@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour {
     Text text;
    // WWW www;
 
-    int score = 100;
+    int score = 0;
 
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
@@ -84,6 +84,11 @@ public class GameManager : MonoBehaviour {
     public int CollectablesCollected {
         get { return _collectablesCollected; }
         set { _collectablesCollected = value; }
+    }
+
+    public int Score {
+        get { return score; }
+        set { score = value; }
     }
 
     public int MaxCollectablesAvailable {
