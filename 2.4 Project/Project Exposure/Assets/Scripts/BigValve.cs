@@ -32,7 +32,6 @@ public class BigValve : MonoBehaviour {
     public int currentState = 0;
     bool InRange = false;
     public int valveID;
-    bool inRotation = false;
 
     Quaternion targetRotation;
 
@@ -44,8 +43,6 @@ public class BigValve : MonoBehaviour {
 
     private List<SmallValveSocket> line1Sockets;
     private List<SmallValveSocket> line2Sockets;
-
-    Quaternion startRot;
 
     bool activated = false;
 
@@ -78,7 +75,6 @@ public class BigValve : MonoBehaviour {
     void Start() {
         if (Application.isPlaying) {
             valve = transform.GetChild(0);
-            startRot = valve.transform.rotation;
 
             ConnectSmallValves();
             ConnectJointsTogether(1);

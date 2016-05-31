@@ -1,12 +1,10 @@
 fileFormatVersion: 2
-guid: 26bbe4dcdf4a2144c8f3340b4e4882f0
-timeCreated: 1463138022
-licenseType: Free
+guid: a22b3a7095a744a428c134b5e26ad68e
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - tiltShiftShader: {fileID: 4800000, guid: bf34d2a25450349699e8ae6456fa7ca9, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 
-  assetBundleVariant: 

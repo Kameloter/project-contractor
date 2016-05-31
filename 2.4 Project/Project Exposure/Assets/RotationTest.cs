@@ -3,10 +3,7 @@ using System.Collections;
 
 public class RotationTest : MonoBehaviour {
     public Transform targetPoint;
-    bool rotate = false;
     Quaternion newRotation;
-    float turnspeed = 5f;
-
 
     // Use this for initialization
     void Start()
