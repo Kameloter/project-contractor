@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
 
     GameObject clickedObject;
+    GameObject activatedObject;
+    GameObject deactivatedObject;
+
     Text text;
    // WWW www;
 
@@ -101,6 +104,22 @@ public class GameManager : MonoBehaviour {
     public GameObject ClickedObject {
         get { return clickedObject; }
         set { clickedObject = value; }
+    }
+
+
+
+    public GameObject ActivatedObject
+    {
+        get { return activatedObject; }
+        set { activatedObject = value; }
+
+    }
+
+    public GameObject DeactivatedObject
+    {
+        get { return deactivatedObject; }
+        set { deactivatedObject = value; }
+
     }
 
     public float TimeLeft = 10.0f;

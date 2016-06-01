@@ -17,14 +17,22 @@ public static class Game {
         get { return GameManager.Instance.TimeLeft; }
     }
 
+    static public GameObject LastActivatedObject
+    {
+        get { return GameManager.Instance.ActivatedObject; }
+    }
+
+    static public GameObject LastDeactivatedObject
+    {
+        get { return GameManager.Instance.DeactivatedObject; }
+    }
+
     static public int Score {
         get { return GameManager.Instance.Score; }
         set { GameManager.Instance.Score = value; }
     }
 
     //clickedObject
-
-    //activatedItem
 
     static public GameObject GetGameObject(string GameObjectName) {
         return GameObject.Find(GameObjectName);

@@ -116,10 +116,12 @@ public class MoveableScript : BaseActivatable {
     }
 
     public override void Activate() {
+        base.Activate();
         currentState = 2;
     }
 
     public override void Deactivate() {
+        base.Deactivate();
         currentState = 1;
     }
 

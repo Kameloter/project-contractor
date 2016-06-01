@@ -77,6 +77,7 @@ public class ProceduralBridge : BaseActivatable {
 
 
     public override void Activate() {
+        base.Activate();
         RaycastHit hit;
         Vector3 dir;
         dir = leftPart.position - rightPart.position;
@@ -128,6 +129,7 @@ public class ProceduralBridge : BaseActivatable {
 
 
     public override void Deactivate() {
+        base.Deactivate();
         Destroy();
     }
     void OnDrawGizmos()

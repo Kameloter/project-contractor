@@ -26,11 +26,13 @@ public class LaserEmitter : BaseActivatable{
     }
 
     public override void Activate() {
+        base.Activate();
         _active = true;
        // CheckLaser(transform.position);
     }
 
     public override void Deactivate() {
+        base.Deactivate();
         _active = false;
         DestroyLaser();
     }

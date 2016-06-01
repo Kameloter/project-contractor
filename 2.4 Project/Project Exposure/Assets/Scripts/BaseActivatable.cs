@@ -6,7 +6,12 @@ public class BaseActivatable : MonoBehaviour {
     public virtual void Start() {
     }
 
-    public virtual void Activate() {}
+    public virtual void Activate() {
+        GameManager.Instance.ActivatedObject = this.gameObject;
 
-    public virtual void Deactivate() {}
+    }
+
+    public virtual void Deactivate() {
+        GameManager.Instance.DeactivatedObject = this.gameObject;
+    }
 }
