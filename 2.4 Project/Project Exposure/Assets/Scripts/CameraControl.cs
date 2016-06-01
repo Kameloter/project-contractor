@@ -70,7 +70,7 @@ public class CameraControl : MonoBehaviour
         target = targetToFollow.transform.position;
         nextCamPos = target + offset;
         CheckForWall(target + new Vector3(0,offset.y,0), ref nextCamPos);
-        transform.position = Vector3.Lerp(transform.position, nextCamPos, Time.deltaTime * 1);
+        transform.position = Vector3.Lerp(transform.position, nextCamPos, Time.deltaTime * 3);
 
         Vector3 lookPos = target - transform.position;
         if (offset.z > 0)
@@ -81,9 +81,9 @@ public class CameraControl : MonoBehaviour
         {
             lookPos.z = 0;
         }
-        //lookPos.y = 0;
+       // lookPos.y = 0;
         Quaternion rot = Quaternion.LookRotation(lookPos);
-        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 1);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 2);
 
     }
 
@@ -95,7 +95,7 @@ public class CameraControl : MonoBehaviour
         if (Physics.Linecast(fromObject, toTarget, out wallhit))
         {
             Debug.DrawRay(wallhit.point, Vector3.left, Color.red);
-            toTarget = new Vector3(wallhit.point.x, toTarget.y, wallhit.point.z);
+            toTarget = new Vector3(wallhit.point.x, toTarget.y, wallhit.point.z) - (toTarget - fromObject).normalized * 0.1f;
         }
     }
 
