@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof (AlignRotationScript))]
 public class InteractCanvasScript : MonoBehaviour {
     BaseInteractable owner;
 
     [Header("Object Canvas")]
     public Canvas objectCanvas;
-
+    AlignRotationScript alignScript;
 
     void Start() {
         owner = transform.root.GetComponent<BaseInteractable>();
-
         objectCanvas = GetComponentInChildren<Canvas>();
+        alignScript = GetComponent<AlignRotationScript>();
+
         if (objectCanvas != null) objectCanvas.enabled = false;
         else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");
 
@@ -21,6 +23,7 @@ public class InteractCanvasScript : MonoBehaviour {
 
     void ActivateCanvas() {
         objectCanvas.enabled = true;
+        alignScript.Align();
     }
     void DeactivateCanvas() {
         objectCanvas.enabled = false;
@@ -30,5 +33,4 @@ public class InteractCanvasScript : MonoBehaviour {
         owner.onTriggerEnterEvent.RemoveListener(ActivateCanvas);
         owner.onTriggerExitEvent.RemoveListener(DeactivateCanvas);
     }
-
 }

@@ -142,7 +142,7 @@ public class CustomEventTrigger : MonoBehaviour {
                 Go[i].light.enabled = false;
                 break;
             case Action.ChangeLightValues:
-                if (Go[i].light.range != null) {
+                if (Go[i].light.range != 0) {
                     Go[i].light.range = Go[i].range;
                 }
                 Go[i].light.color = Go[i].color;
