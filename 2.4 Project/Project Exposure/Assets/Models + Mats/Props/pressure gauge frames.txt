@@ -1,0 +1,4 @@
+frames 1-8 	off idle
+frames 9-39	charging on
+frames 40-46 	on idle
+frames 47-85 	charging off
