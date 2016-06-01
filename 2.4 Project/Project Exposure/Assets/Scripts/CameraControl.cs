@@ -69,18 +69,38 @@ public class CameraControl : MonoBehaviour
     {
         target = targetToFollow.transform.position;
         nextCamPos = target + offset;
+        CheckForWall(target + new Vector3(0,offset.y,0), ref nextCamPos);
         transform.position = Vector3.Lerp(transform.position, nextCamPos, Time.deltaTime * 1);
+
+        Vector3 lookPos = target - transform.position;
+        if (offset.z > 0)
+        {
+            lookPos.x = 0;
+        } 
+        if (offset.x > 0)
+        {
+            lookPos.z = 0;
+        }
+        //lookPos.y = 0;
+        Quaternion rot = Quaternion.LookRotation(lookPos);
+        transform.rotation = Quaternion.Slerp(transform.rotation, rot, Time.deltaTime * 1);
+
     }
 
-    void Rotating()
+
+    void CheckForWall(Vector3 fromObject, ref Vector3 toTarget)
     {
-       
+        Debug.DrawLine(fromObject, toTarget, Color.cyan);
+        RaycastHit wallhit = new RaycastHit();
+        if (Physics.Linecast(fromObject, toTarget, out wallhit))
+        {
+            Debug.DrawRay(wallhit.point, Vector3.left, Color.red);
+            toTarget = new Vector3(wallhit.point.x, toTarget.y, wallhit.point.z);
+        }
     }
 
     public void DisableCutscene() {
         this.transform.rotation = currentRotation;
         playCutscene = false;
     }
-
-    
 }

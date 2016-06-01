@@ -22,11 +22,9 @@ public class PumpScript : MonoBehaviour {
         }
 
         if (activated) {
-            print("yooo2");
             interactable.Activate();
         }
         else {
-            print("yooo4");
             interactable.Deactivate();
         }
 	}
@@ -34,7 +32,6 @@ public class PumpScript : MonoBehaviour {
     void OnParticleCollision(GameObject go) {
         print(go.name);
         if (go.CompareTag(Tags.particleSteam)) {
-            print("yooo");
             activated = true;
             timer = 0.0f;
         }
