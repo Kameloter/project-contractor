@@ -1,8 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CustomEvent))]
-public class RotatableScript : MonoBehaviour {
+public class RotatableScript : BaseInteractable {
 
     public bool continuous = false;
 
@@ -11,16 +10,13 @@ public class RotatableScript : MonoBehaviour {
      [Tooltip("If continous angle/sec otherwise angle/click")]
     public float angle = 22.5f;
 
-     bool InRange = false;
+    AlignRotationScript somethingToAlign; 
 
-     [HideInInspector]
-     public int state = 0;
+    void Start() {
+        somethingToAlign = transform.root.GetComponentInChildren<AlignRotationScript>();
+    }
 
-	// Use this for initialization
-	void Start () {
-	}
-	
-	// Update is called once per frame
+
 	void FixedUpdate () {
         if (continuous) {
             RotateContinuous();
@@ -32,42 +28,13 @@ public class RotatableScript : MonoBehaviour {
     }
 
     void Rotate() {
-        if (state == 7) {
-            state = 0;
-        }
-        else {
-            state++;
-        }
 
         this.transform.Rotate(axis, angle);
     }
 
-    public void OnCustomEvent() {
-
-        print("GETTING PRINT");
-        if (InRange) {
-            print("IN RANGE PRINT");
-            Rotate();
-        }
-        else {
-            print("ELSE PRINT");
-            GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
-            GameManager.Instance.ClickedObject = this.gameObject;
-        }
-    }
-
-    void OnTriggerEnter(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = true;
-            if (GameManager.Instance.ClickedObject == this.gameObject) {
-                Rotate();
-            }
-        }
-    }
-
-    void OnTriggerExit(Collider other) {
-        if (other.CompareTag("Player")) {
-            InRange = false;
-        }
+    public override void OnInteract() {
+        Rotate();
+        if (somethingToAlign != null) { somethingToAlign.Align(); print("Yes..."); }
+        
     }
 }

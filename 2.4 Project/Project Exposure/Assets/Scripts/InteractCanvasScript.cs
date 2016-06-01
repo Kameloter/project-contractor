@@ -11,6 +11,9 @@ public class InteractCanvasScript : MonoBehaviour {
 
     void Start() {
         owner = transform.root.GetComponent<BaseInteractable>();
+        if (owner == null) owner = transform.root.GetComponentInChildren<BaseInteractable>();
+        if (owner == null) Debug.LogError("Cannot find owner.");
+
         objectCanvas = GetComponentInChildren<Canvas>();
         alignScript = GetComponent<AlignRotationScript>();
 
