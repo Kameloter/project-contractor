@@ -9,16 +9,18 @@ using UnityEditor;
 public class ProceduralBridge : BaseActivatable {
 
     public GameObject bridgePart;
-    public GameObject leftPart;
-    public GameObject rightPart;
+
+    public Transform leftPart;
+    public Transform rightPart;
     public GameObject holder;
 
-    Transform leftTr;
-    Transform rightTr;
+    public float fuckingPartSize;
 
 
     float distanceBetweenParts = 0;
     float wholePartsCount = 0;
+
+  
 
     [SerializeField]
     GameObject obstacle;
@@ -26,33 +28,46 @@ public class ProceduralBridge : BaseActivatable {
     // Use this for initialization
     public override void Start() {
         base.Start();
-        leftTr = leftPart.transform;
-        rightTr = rightPart.transform;
 
     }
 
-    void Build() {
-        for (int i = 0; i < wholePartsCount; i++) {
-            Vector3 direction = leftTr.position - rightTr.position;
-            direction.Normalize();
-            GameObject part = (GameObject)Instantiate(bridgePart, new Vector3(rightTr.position.x + ((i + 0.5f) * bridgePart.transform.lossyScale.x) * direction.x, rightTr.position.y, rightTr.position.z + ((i + 0.5f) * bridgePart.transform.lossyScale.z) * direction.z), Quaternion.identity);
-            part.transform.parent = holder.transform;
-            // bridgeParts.Add(part);
-            //yield return new WaitForSeconds(0.15f);
+    void Build(float distance,Vector3 dir) {
+
+        Vector3 offset = Vector3.zero;
+        Vector3 posToSet = Vector3.zero;
+
+
+        while (distance >= fuckingPartSize)
+        {
+            offset += dir * (fuckingPartSize / 2);
+            posToSet = rightPart.transform.position + offset;
+
+            GameObject part = (GameObject)Instantiate(bridgePart,rightPart.transform.position,Quaternion.identity);
+            part.transform.parent = rightPart.transform;
+            part.transform.position = posToSet;
+            offset += dir * (fuckingPartSize / 2);
+
+            if (Mathf.Abs(dir.z) == 1)
+            {
+                part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+            }
+
+            distance -= fuckingPartSize;
         }
-        obstacle.SetActive(false);
-        //print("Bridge constructed!");
+       
+     
+        print("Bridge constructed!");
     }
 
 
     void Destroy() {
-        int cachedLenght = holder.transform.childCount;
+        int cachedLenght = rightPart.transform.childCount;
         print("LENGTH" + cachedLenght);
         for (int i = cachedLenght; i > 0; i--) {
             if (!Application.isPlaying)
-                DestroyImmediate(holder.transform.GetChild(i - 1).gameObject);
+                DestroyImmediate(rightPart.transform.GetChild(i - 1).gameObject);
             else
-                Destroy(holder.transform.GetChild(i - 1).gameObject);
+                Destroy(rightPart.transform.GetChild(i - 1).gameObject);
 
         }
 
@@ -63,20 +78,72 @@ public class ProceduralBridge : BaseActivatable {
 
     public override void Activate() {
         RaycastHit hit;
-        if (Physics.Raycast(rightTr.position, leftTr.position - rightTr.position, out hit, 1000)) {
+        Vector3 dir;
+        dir = leftPart.position - rightPart.position;
+        dir.Normalize();
+
+        Debug.DrawRay(rightPart.position, dir * 100, Color.red, 5);
+        if (Physics.Raycast(rightPart.position, dir, out hit, 100)) {
+            
             if (hit.transform.name == "Left") {
-                distanceBetweenParts = Vector3.Distance(rightTr.position, leftTr.position);
-                wholePartsCount = Mathf.Ceil(distanceBetweenParts);
-                wholePartsCount /= bridgePart.transform.lossyScale.x;
-                Build();
+                distanceBetweenParts = Vector3.Distance(rightPart.localPosition, leftPart.localPosition);
+               // distanceBetweenParts = Mathf.Round(distanceBetweenParts);
+                Build(distanceBetweenParts,dir);
+                print("Distance " + distanceBetweenParts);
+                print("Direction " + dir);
+
+                FixObstacle(distanceBetweenParts,dir);
             }
         }
     }
 
+
+    void FixObstacle(float dist,Vector3 dir)
+    {
+        if (Mathf.Abs(dir.x) == 1)
+        {
+            Debug.Log("LEFT - RIGHT");
+            NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
+
+            obstacle.transform.localPosition = rightPart.transform.localPosition;
+            obstacle.transform.localPosition += new Vector3(0, 1, dist / 2 * dir.x);
+
+            obstacleCollider.size = new Vector3(2, obstacleCollider.size.y, dist);
+
+        }
+        else
+        {
+            Debug.Log("UP - DOWN");
+            NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
+
+            obstacle.transform.localPosition = rightPart.transform.localPosition;
+            obstacle.transform.localPosition += new Vector3(dist / 2 * -dir.z, 1,0); 
+
+            obstacleCollider.size = new Vector3(dist, obstacleCollider.size.y, 2);
+
+        }
+        obstacle.SetActive(false);
+
+    }
+
+
     public override void Deactivate() {
         Destroy();
     }
+    void OnDrawGizmos()
+    {
+        if (leftPart == null || rightPart == null) return;
+        if (Selection.activeGameObject.transform.root != transform.root) return;
+        
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireCube(leftPart.position, leftPart.localScale);
 
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(transform.position, rightPart.localScale);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(rightPart.position, rightPart.localScale);
+    }
 }
 
 #if UNITY_EDITOR

@@ -29,7 +29,7 @@ ModelImporter:
     4300002: Platform
     4300004: Support1_lPoly
     4300006: Support2_lPoly
-    7400000: Take 001
+    7400000: OpenClose
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -51,11 +51,51 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: OpenClose
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 11
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Platform
+        weight: 1
+      - path: Platform/Platform_lPoly
+        weight: 1
+      - path: Platform/Platform_lPoly/Support1_lPoly
+        weight: 1
+      - path: Platform/Platform_lPoly/Support2_lPoly
+        weight: 1
+      - path: Under_lPoly
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1.25
+    globalScale: 2.4
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
