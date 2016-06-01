@@ -46,6 +46,8 @@ GameObject:
   - 135: {fileID: 13577390}
   - 23: {fileID: 2381918}
   - 95: {fileID: 9571452}
+  - 114: {fileID: 11418028}
+  - 114: {fileID: 11477512}
   m_Layer: 0
   m_Name: LaserModel
   m_TagString: Untagged
@@ -79,9 +81,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 452852}
   - 65: {fileID: 6505694}
-  - 135: {fileID: 13574132}
-  - 114: {fileID: 11475838}
-  - 114: {fileID: 11453052}
   m_Layer: 0
   m_Name: LaserEmitter
   m_TagString: Untagged
@@ -526,7 +525,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117146}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.8314697, z: 0, w: 0.5555702}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1020,6 +1019,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 0
+--- !u!114 &11418028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 490cf2c98cfa2ea44ada9db66c971a23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserSpawn: {fileID: 417996}
+  _active: 0
 --- !u!114 &11429312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1047,31 +1059,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11453052
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ce3aeec0bf79d64b9eef0a36f9e8790, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerInRange: 0
-  onTriggerEnterEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  onTriggerExitEvent:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-  continuous: 0
-  axis: {x: 0, y: 1, z: 0}
-  angle: 22.5
 --- !u!114 &11461070
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1085,20 +1072,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useMainCamera: 1
   alignTo: {fileID: 0}
---- !u!114 &11475838
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 490cf2c98cfa2ea44ada9db66c971a23, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  laserSpawn: {fileID: 417996}
-  mat: {fileID: 2100000, guid: 6d41768963d7d8f4eb61b65c999005a2, type: 2}
-  _active: 1
 --- !u!114 &11477260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1138,7 +1111,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11453052}
+      - m_Target: {fileID: 11477512}
         m_MethodName: OnInteract
         m_Mode: 1
         m_Arguments:
@@ -1151,6 +1124,31 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11477512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 117146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ce3aeec0bf79d64b9eef0a36f9e8790, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerInRange: 0
+  onTriggerEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  onTriggerExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+  continuous: 0
+  axis: {x: 0, y: 0, z: 0}
+  angle: 22.5
 --- !u!114 &11481422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1184,18 +1182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectCanvas: {fileID: 0}
---- !u!135 &13574132
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 127770}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!135 &13577390
 SphereCollider:
   m_ObjectHideFlags: 1

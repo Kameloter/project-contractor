@@ -14,6 +14,7 @@ public class RotatableScript : BaseInteractable {
 
     void Start() {
         somethingToAlign = transform.root.GetComponentInChildren<AlignRotationScript>();
+        if (axis == Vector3.zero) axis.y = 1;
     }
 
 
@@ -34,7 +35,6 @@ public class RotatableScript : BaseInteractable {
 
     public override void OnInteract() {
         Rotate();
-        if (somethingToAlign != null) { somethingToAlign.Align(); print("Yes..."); }
-        
+        if (somethingToAlign != null) { somethingToAlign.Align(); }
     }
 }

@@ -7,7 +7,7 @@ public class LaserEmitter : BaseActivatable{
     [Header("Laser")]
     public Transform laserSpawn;
 
-    [SerializeField] Material mat;
+    Material material;
 
     [SerializeField] bool _active = false;
 
@@ -16,6 +16,10 @@ public class LaserEmitter : BaseActivatable{
 
     bool update = false;
     int index = 0;
+
+    void Awake() {
+        material = Resources.Load("Lazor") as Material;
+    }
 
     void Update() {
        if(_active) CheckLaser(laserSpawn.position);
@@ -98,7 +102,7 @@ public class LaserEmitter : BaseActivatable{
         lineRenderer.receiveShadows = false;
         lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         lineRenderer.SetWidth(0.1f, 0.1f);
-        lineRenderer.material = mat;
+        lineRenderer.material = material;
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
