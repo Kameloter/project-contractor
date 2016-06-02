@@ -39,7 +39,7 @@ public class PickableScript : BaseInteractable {
         {
            if(playerInRange)
             {
-                if(!IsCarried) 
+                if(IsCarried) 
                 {
                     Debug.Log("DROPPING BOX IN  RANGE ! ");
                     Drop();

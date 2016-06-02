@@ -19,20 +19,22 @@ public class PlayerMovement : MonoBehaviour
     private NavMeshPath path;
     public LayerMask interactablesLayer;
     public LayerMask navigationLayer;
+
     [HideInInspector]
-    public bool allowNavigationInput = true;
+    public bool allowNavigationInput;
 
     public Vector3 playerVelocity { get { return agent.velocity; }}
     float frameCount = 0;
   //  Animator anim;
     void Start()
     {
-    //    print(clickableLayer.value);
-       // anim = GetComponentInChildren<Animator>();
+        allowNavigationInput = true;
+        //    print(clickableLayer.value);
+        // anim = GetComponentInChildren<Animator>();
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-
+        
         path = new NavMeshPath();
        
     }
@@ -76,6 +78,7 @@ public class PlayerMovement : MonoBehaviour
     }
     IEnumerator dontNavigateWhenClickedOnInteractable()
     {
+        Debug.Log("set to false");
         allowNavigationInput = false; //disable navigation input.
         yield return  new WaitForSeconds(0.3f);
         allowNavigationInput = true; //alows navigation input again.
