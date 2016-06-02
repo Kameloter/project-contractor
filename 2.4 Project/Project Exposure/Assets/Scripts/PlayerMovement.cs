@@ -74,7 +74,14 @@ public class PlayerMovement : MonoBehaviour
             //for (int i = 0; i < path.corners.Length - 1; i++)
             //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
-        else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; }
+        else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; GameManager.Instance.checkForUpdate = true; }
+
+        if (!GameManager.Instance.checkForUpdate) {
+            agent.Stop();
+        }
+        else {
+            agent.Resume();
+        }
     }
 
     void Movement()
