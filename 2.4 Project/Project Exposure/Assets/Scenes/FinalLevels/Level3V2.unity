@@ -8443,7 +8443,7 @@ Transform:
   - {fileID: 1764654239}
   - {fileID: 1001467244}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!1 &676693285
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,4 +8,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/RutgerScene.unity
   - enabled: 1
-    path: Assets/Scenes/Week4Da/Level3Da.unity
+    path: Assets/Scenes/FinalLevels/Level2V1.unity
