@@ -124,6 +124,8 @@ public class GameManager : MonoBehaviour {
 
     public float TimeLeft = 10.0f;
 
+    public bool checkForUpdate = true;
+
     void Update() {
         TimeLeft -= Time.deltaTime;
 

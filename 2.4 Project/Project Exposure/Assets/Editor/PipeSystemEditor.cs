@@ -327,8 +327,8 @@ public class PipeSystemEditor : Editor
                
             else
             {
-                Undo.RecordObject(myValve.pipeLine1Points[index].transform, "Move Point");
-                EditorUtility.SetDirty(myValve.pipeLine1Points[index].transform);
+				Undo.RecordObject(myValve.pipeLine2Points[index].transform, "Move Point");
+				EditorUtility.SetDirty(myValve.pipeLine2Points[index].transform);
                 myValve.pipeLine2Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
             }
                

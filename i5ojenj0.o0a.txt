@@ -1,0 +1,73 @@
+﻿Merge remote-tracking branch 'origin/master'
+
+# Conflicts:
+#
+# It looks like you may be committing a merge.
+# If this is not correct, please remove the file
+#	.git/MERGE_HEAD
+# and try again.
+
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch and 'origin/master' have diverged,
+# and have 1 and 5 different commits each, respectively.
+#   (use "git pull" to merge the remote branch into yours)
+#
+# All conflicts fixed but you are still merging.
+#
+# Changes to be committed:
+#	renamed:    2.4 Project/Project Exposure/Assets/Models + Mats/Props/ANIMATORS.meta -> 2.4 Project/Project Exposure/Assets/ANIMATORS.meta
+#	renamed:    2.4 Project/Project Exposure/Assets/Models + Mats/Props/ANIMATORS/BridgeAnimator.controller -> 2.4 Project/Project Exposure/Assets/ANIMATORS/BridgeAnimator.controller
+#	renamed:    2.4 Project/Project Exposure/Assets/Models + Mats/Props/ANIMATORS/BridgeAnimator.controller.meta -> 2.4 Project/Project Exposure/Assets/ANIMATORS/BridgeAnimator.controller.meta
+#	new file:   2.4 Project/Project Exposure/Assets/ANIMATORS/GrayAnimator.controller
+#	new file:   2.4 Project/Project Exposure/Assets/ANIMATORS/GrayAnimator.controller.meta
+#	modified:   2.4 Project/Project Exposure/Assets/Editor/PipeSystemEditor.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Materials/Black.mat
+#	modified:   2.4 Project/Project Exposure/Assets/Models + Mats/Cold.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/FloorBevel.prefab
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/FloorBevel.prefab.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/Door_M.mat
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/Door_M.mat.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/SmallSocket_M.mat
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/SmallSocket_M.mat.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/SmallValve_M.mat
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/SmallValve_M.mat.meta
+#	modified:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/Materials/defaultMat.mat.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/SmallSocket.fbx
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/SmallSocket.fbx.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/WallBevel.prefab
+#	new file:   2.4 Project/Project Exposure/Assets/Models + Mats/Props/WallBevel.prefab.meta
+#	modified:   2.4 Project/Project Exposure/Assets/Prefabs/Placeholders/MovingBridge.prefab
+#	modified:   2.4 Project/Project Exposure/Assets/Prefabs/Placeholders/ProceduralBridge.prefab
+#	modified:   2.4 Project/Project Exposure/Assets/Prefabs/SteamSystemProps/BigValveMain.prefab
+#	modified:   2.4 Project/Project Exposure/Assets/Scenes/FinalLevels/Level1V1.unity
+#	modified:   2.4 Project/Project Exposure/Assets/Scenes/FinalLevels/Level4V1.unity
+#	modified:   2.4 Project/Project Exposure/Assets/Scenes/Week4Da/Level3Da.unity
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/LaserEmitter.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/Managers/GameManager.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/MoveableScript.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/PlayerMovement.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/ProceduralBridge.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/RotatableScript.cs
+#	modified:   2.4 Project/Project Exposure/Assets/Scripts/SmallValveSocket.cs
+#	renamed:    2.4 Project/Project Exposure/Assets/ProceduralSystem.meta -> 2.4 Project/Project Exposure/Assets/Textures/Small Valve.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/Small Valve/SmallValve_SmallValve_M_AlbedoTransparency.tga
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/Small Valve/SmallValve_SmallValve_M_AlbedoTransparency.tga.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/Small Valve/SmallValve_SmallValve_M_MetallicSmoothness.tga
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/Small Valve/SmallValve_SmallValve_M_MetallicSmoothness.tga.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/Small Valve/SmallValve_SmallValve_M_Normal.tga
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/Small Valve/SmallValve_SmallValve_M_Normal.tga.meta
+#	renamed:    2.4 Project/Project Exposure/Assets/Models + Mats/Cold/Materials.meta -> 2.4 Project/Project Exposure/Assets/Textures/SmallSocket.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/SmallSocket/SmallSocket_SmallSocket_M_AlbedoTransparency.tga
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/SmallSocket/SmallSocket_SmallSocket_M_AlbedoTransparency.tga.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/SmallSocket/SmallSocket_SmallSocket_M_MetallicSmoothness.tga
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/SmallSocket/SmallSocket_SmallSocket_M_MetallicSmoothness.tga.meta
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/SmallSocket/SmallSocket_SmallSocket_M_Normal.tga
+#	new file:   2.4 Project/Project Exposure/Assets/Textures/SmallSocket/SmallSocket_SmallSocket_M_Normal.tga.meta
+#
+# Untracked files:
+#	2.4 Project/Project Exposure/Assets/Models + Mats/Cold.meta~HEAD
+#
+

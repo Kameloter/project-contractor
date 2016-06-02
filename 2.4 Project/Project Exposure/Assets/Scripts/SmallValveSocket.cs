@@ -107,7 +107,9 @@ public class SmallValveSocket : BaseInteractable {
     }
 
     public void DeactivateSocket() {
+
         foreach (BaseActivatable interactable in interactables) {
+            if (interactable == null) { Debug.LogError("Interactable missing from SVS => " + gameObject.name); return; }
             interactable.Deactivate();
         }
     }

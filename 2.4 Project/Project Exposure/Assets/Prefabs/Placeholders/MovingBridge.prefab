@@ -27,8 +27,6 @@ GameObject:
   - 65: {fileID: 6504594}
   - 23: {fileID: 2339388}
   - 54: {fileID: 5441824}
-  - 114: {fileID: 11469402}
-  - 114: {fileID: 11453472}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
@@ -44,6 +42,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 459710}
+  - 114: {fileID: 11408466}
+  - 114: {fileID: 11403044}
   m_Layer: 0
   m_Name: MovingBridge
   m_TagString: Untagged
@@ -104,7 +104,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 170030}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.51}
+  m_LocalPosition: {x: 0, y: 0, z: 3.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459710}
@@ -116,7 +116,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 108666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 3.51}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 459710}
@@ -128,7 +128,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 142384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.009, y: 0, z: 0.56}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.9886778, y: 0.99999994, z: 1.0691329}
   m_Children: []
   m_Father: {fileID: 459710}
@@ -140,8 +140,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 155494}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.64, y: 0, z: 21.11}
-  m_LocalScale: {x: 13.280604, y: 1, z: 4.315966}
+  m_LocalPosition: {x: 12, y: -0.5, z: 12}
+  m_LocalScale: {x: 8.150233, y: 1, z: 2.3596888}
   m_Children:
   - {fileID: 459044}
   - {fileID: 451846}
@@ -228,7 +228,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &6504594
 BoxCollider:
@@ -254,28 +254,12 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &11453472
+--- !u!114 &11403044
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c32d87c3d864adf40bbe1c1f7833b82f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  temperatureState: 0
-  changeable: 1
-  frozenMaterial: {fileID: 2100000, guid: ef020cd383809c649bffd9554a7ef809, type: 2}
-  neutralMaterial: {fileID: 2100000, guid: ff31adc1e5cf3ea4b9efc4c0df263fec, type: 2}
-  hotMaterial: {fileID: 2100000, guid: c529f44bc3ff06649983f1a74cb7b008, type: 2}
---- !u!114 &11469402
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 142384}
+  m_GameObject: {fileID: 155494}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 954ecfb241eeb1a49807bce0d31e2e0d, type: 3}
@@ -286,10 +270,26 @@ MonoBehaviour:
   movableObject: {fileID: 459044}
   endPoint: {fileID: 439024}
   startPoint: {fileID: 451846}
-  moveSpeed: 3
+  moveSpeed: 5
   startState: 0
   temperatureScript: {fileID: 0}
   obstacle: {fileID: 171844}
+--- !u!114 &11408466
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 155494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32d87c3d864adf40bbe1c1f7833b82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temperatureState: 1
+  changeable: 1
+  frozenMaterial: {fileID: 2100000, guid: ef020cd383809c649bffd9554a7ef809, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: 1ab720e4dee3e6342b3573e5932f72ad, type: 2}
+  hotMaterial: {fileID: 2100000, guid: b9327bb3a6319c740ab1d8c151e0d33e, type: 2}
 --- !u!208 &20859312
 NavMeshObstacle:
   m_ObjectHideFlags: 1

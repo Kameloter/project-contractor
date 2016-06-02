@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEditor;
 #endif
 
+
 [ExecuteInEditMode][System.Serializable]
 public class ProceduralBridge : BaseActivatable {
 
@@ -20,7 +21,7 @@ public class ProceduralBridge : BaseActivatable {
     float distanceBetweenParts = 0;
     float wholePartsCount = 0;
 
-  
+    Vector3 dir;
 
     [SerializeField]
     GameObject obstacle;
@@ -30,19 +31,18 @@ public class ProceduralBridge : BaseActivatable {
         base.Start();
 
     }
-
-    void Build(float distance,Vector3 dir) {
-
+    IEnumerator buildAnimation()
+    {
         Vector3 offset = Vector3.zero;
         Vector3 posToSet = Vector3.zero;
 
-
-        while (distance >= fuckingPartSize)
+        offset.y = -0.05f;
+        while (distanceBetweenParts >= fuckingPartSize)
         {
             offset += dir * (fuckingPartSize / 2);
             posToSet = rightPart.transform.position + offset;
 
-            GameObject part = (GameObject)Instantiate(bridgePart,rightPart.transform.position,Quaternion.identity);
+            GameObject part = (GameObject)Instantiate(bridgePart, rightPart.transform.position, Quaternion.identity);
             part.transform.parent = rightPart.transform;
             part.transform.position = posToSet;
             offset += dir * (fuckingPartSize / 2);
@@ -52,11 +52,46 @@ public class ProceduralBridge : BaseActivatable {
                 part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
             }
 
-            distance -= fuckingPartSize;
+            distanceBetweenParts -= fuckingPartSize;
+            Debug.Log("Builded part");
+            yield return new WaitForSeconds(0.15f);
         }
-       
-     
+        Debug.Log("loop coroutine finish");
         print("Bridge constructed!");
+    }
+    void Build() {
+
+        if(Application.isPlaying)
+        {
+            StartCoroutine("buildAnimation");
+        }
+        else
+        {
+            Vector3 offset = Vector3.zero;
+            Vector3 posToSet = Vector3.zero;
+
+            offset.y = -0.05f;
+            while (distanceBetweenParts >= fuckingPartSize)
+            {
+                offset += dir * (fuckingPartSize / 2);
+                posToSet = rightPart.transform.position + offset;
+
+                GameObject part = (GameObject)Instantiate(bridgePart, rightPart.transform.position, Quaternion.identity);
+                part.transform.parent = rightPart.transform;
+                part.transform.position = posToSet;
+                offset += dir * (fuckingPartSize / 2);
+
+                if (Mathf.Abs(dir.z) == 1)
+                {
+                    part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+                }
+
+                distanceBetweenParts -= fuckingPartSize;
+                Debug.Log("Builded part");
+            }
+            Debug.Log("loop coroutine finish");
+            print("Bridge constructed!");
+        } 
     }
 
 
@@ -79,27 +114,27 @@ public class ProceduralBridge : BaseActivatable {
     public override void Activate() {
         base.Activate();
         RaycastHit hit;
-        Vector3 dir;
+     
         dir = leftPart.position - rightPart.position;
         dir.Normalize();
 
-        Debug.DrawRay(rightPart.position, dir * 100, Color.red, 5);
+       // Debug.DrawRay(rightPart.position, dir * 100, Color.red, 5);
         if (Physics.Raycast(rightPart.position, dir, out hit, 100)) {
             
             if (hit.transform.name == "Left") {
                 distanceBetweenParts = Vector3.Distance(rightPart.localPosition, leftPart.localPosition);
                // distanceBetweenParts = Mathf.Round(distanceBetweenParts);
-                Build(distanceBetweenParts,dir);
-                print("Distance " + distanceBetweenParts);
-                print("Direction " + dir);
+                Build();
+            //    print("Distance " + distanceBetweenParts);
+            //    print("Direction " + dir);
 
-                FixObstacle(distanceBetweenParts,dir);
+                FixObstacle();
             }
         }
     }
 
 
-    void FixObstacle(float dist,Vector3 dir)
+    void FixObstacle()
     {
         if (Mathf.Abs(dir.x) == 1)
         {
@@ -107,9 +142,9 @@ public class ProceduralBridge : BaseActivatable {
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
             obstacle.transform.localPosition = rightPart.transform.localPosition;
-            obstacle.transform.localPosition += new Vector3(0, 1, dist / 2 * dir.x);
+            obstacle.transform.localPosition += new Vector3(0, 1, distanceBetweenParts / 2 * dir.x);
 
-            obstacleCollider.size = new Vector3(2, obstacleCollider.size.y, dist);
+            obstacleCollider.size = new Vector3(2, obstacleCollider.size.y, distanceBetweenParts);
 
         }
         else
@@ -118,9 +153,9 @@ public class ProceduralBridge : BaseActivatable {
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
             obstacle.transform.localPosition = rightPart.transform.localPosition;
-            obstacle.transform.localPosition += new Vector3(dist / 2 * -dir.z, 1,0); 
+            obstacle.transform.localPosition += new Vector3(distanceBetweenParts / 2 * -dir.z, 1,0); 
 
-            obstacleCollider.size = new Vector3(dist, obstacleCollider.size.y, 2);
+            obstacleCollider.size = new Vector3(distanceBetweenParts, obstacleCollider.size.y, 2);
 
         }
         obstacle.SetActive(false);
@@ -134,9 +169,9 @@ public class ProceduralBridge : BaseActivatable {
     }
     void OnDrawGizmos()
     {
-        if (leftPart == null || rightPart == null) return;
+        if (leftPart == null || rightPart == null || Selection.activeGameObject == null) return;
         if (Selection.activeGameObject.transform.root != transform.root) return;
-        
+
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(leftPart.position, leftPart.localScale);
 

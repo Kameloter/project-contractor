@@ -27,7 +27,7 @@ public class LaserEmitter : BaseActivatable{
             GetComponent<Animator>().SetBool("Active", true);
         }
         else {
-            GetComponent<Animator>().SetBool("Active", true);
+            GetComponent<Animator>().SetBool("Active", false);
         }
     }
 

@@ -56,13 +56,12 @@ public class PlayerMovement : MonoBehaviour
             NavMeshHit navHit;
             if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100,clickableLayer)) {
 
-                if (hit.transform.GetComponent<BaseInteractable>() != null && !eventCalled && firstFrame) {
+                if (hit.transform.GetComponent<BaseInteractable>() != null && !eventCalled && firstFrame){
                 //    print("ha");
                     hit.transform.GetComponent<BaseInteractable>().OnInteractableClicked();
                     eventCalled = true;
                 }
                 else if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
-                //    print("ho");
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
                         GameManager.Instance.ClickedObject = null;
@@ -74,7 +73,14 @@ public class PlayerMovement : MonoBehaviour
             //for (int i = 0; i < path.corners.Length - 1; i++)
             //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
-        else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; }
+        else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; GameManager.Instance.checkForUpdate = true; }
+
+        if (!GameManager.Instance.checkForUpdate) {
+            agent.Stop();
+        }
+        else {
+            agent.Resume();
+        }
     }
 
     void Movement()
