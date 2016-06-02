@@ -29,6 +29,9 @@ public class SmallValveSocket : BaseInteractable {
     [Header("If starting with valvehead:")]
     public GameObject socketed = null;
 
+    public GameObject optionalPath;
+    bool playedCamera = false;
+
     void Start() {
         sphereColor.a = 1;
         if (Application.isPlaying) {
@@ -89,7 +92,13 @@ public class SmallValveSocket : BaseInteractable {
     }
 
     public void ActivateInteractables() {
+
         if (controlValve.currentState == valveLine) {
+            if (optionalPath != null && !playedCamera)
+            {
+                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath);
+                playedCamera = true;
+            }
             //   print("started with valve" + this.name);
             foreach (BaseActivatable interactable in interactables) {
                 interactable.Activate();
