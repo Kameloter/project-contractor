@@ -141,7 +141,7 @@ public class ProceduralBridge : BaseActivatable {
 
     void FixObstacle()
     {
-        if (Mathf.Abs(dir.x) == 1)
+        if (Mathf.Abs(dir.x) != 1)
         {
             Debug.Log("LEFT - RIGHT");
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
