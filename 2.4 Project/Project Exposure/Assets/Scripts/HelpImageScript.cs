@@ -56,7 +56,6 @@ public class HelpImageScript : MonoBehaviour {
             if (GameObject.Find("HelpImage") == null) Debug.LogError("Couldn't find Image(script) named 'HelpImage', make sure its somewhere (active) or specify it via the inspector");
             else {
                 helpImage = GameObject.Find("HelpImage").GetComponent<Image>();
-                Debug.LogWarning("HelpImage found automatically by script.");
             }
         }
         helpImage.enabled = false;

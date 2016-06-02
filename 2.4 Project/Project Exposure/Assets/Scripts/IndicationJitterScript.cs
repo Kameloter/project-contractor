@@ -4,13 +4,14 @@ using System.Collections;
 public class IndicationJitterScript : MonoBehaviour {
     public Transform start, end;
     Vector3 startPosition, endPosition; //cache position
-
     public float speed = 1.0f;
-
+    private Canvas parentCanvas; //to check whether its active.
+    
     float startTime;
     float distance;
 
     void Start() {
+        parentCanvas = transform.parent.GetComponent<Canvas>();
         startPosition = start.position;
         endPosition = end.position;
 
@@ -19,6 +20,6 @@ public class IndicationJitterScript : MonoBehaviour {
     }
 
     void Update() {
-        transform.position = Vector3.Lerp(startPosition, endPosition, Mathf.PingPong(Time.time, 1.0f));
+        if(parentCanvas.enabled) transform.position = Vector3.Lerp(startPosition, endPosition, Mathf.PingPong(Time.time, 1.0f / speed) * speed);
     }
 }
