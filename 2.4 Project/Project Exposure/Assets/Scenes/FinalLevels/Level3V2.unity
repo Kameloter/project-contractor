@@ -9128,8 +9128,8 @@ MonoBehaviour:
   temperatureState: 1
   changeable: 1
   frozenMaterial: {fileID: 2100000, guid: ef020cd383809c649bffd9554a7ef809, type: 2}
-  neutralMaterial: {fileID: 2100000, guid: 1ab720e4dee3e6342b3573e5932f72ad, type: 2}
-  hotMaterial: {fileID: 2100000, guid: b9327bb3a6319c740ab1d8c151e0d33e, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: fa1a740c9f0bd8f4db8f1f3c143e9546, type: 2}
+  hotMaterial: {fileID: 2100000, guid: fa1a740c9f0bd8f4db8f1f3c143e9546, type: 2}
 --- !u!1 &803171569
 GameObject:
   m_ObjectHideFlags: 0
