@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
+
 [RequireComponent(typeof(TemperatureScript))]
 public class MoveableScript : BaseActivatable {
 
 
     //public
-    public bool needsToBeActivated = false;
     public bool continuous = false;
 
     [Header("Movable:")]
@@ -43,44 +42,24 @@ public class MoveableScript : BaseActivatable {
 
     // Update is called once per frame
     void FixedUpdate()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha9))
-        {
-            Activate();
-        }
-        if (Input.GetKeyDown(KeyCode.Alpha0))
-        {
-            Deactivate();
-        }
+	{
+		if (Input.GetKeyDown (KeyCode.Alpha9)) {
+			Activate ();
+		}
+		if (Input.GetKeyDown (KeyCode.Alpha0)) {
+			Deactivate ();
+		}
 
-        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen)
-        {
-            if (needsToBeActivated)
-            {
-
-                if (continuous)
-                {
-                    MoveContinuous();
-                }
-                else
-                {
-                    Move();
-                }
-
-            }
-            else
-            {
-                if (continuous)
-                {
-                    MoveContinuous();
-                }
-                else
-                {
-                    Move();
-                }
-            }
-        }
-    }
+		if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
+           
+			if (continuous) {
+				MoveContinuous ();
+			} else {
+				Move ();
+			}
+		}
+	}
+    
 
     void Move() {
         if (currentState != 0) {
