@@ -14,16 +14,10 @@ public class BaseInteractable : MonoBehaviour {
     }
 
     public virtual void OnInteract() {
-        GameManager.Instance.checkForUpdate = false;
-    
     }
 
     public virtual void OnInteractableClicked() {
-        if (!playerInRange) {
-            GameManager.Instance.Player.GetComponent<NavMeshAgent>().SetDestination(this.transform.position);
-            GameManager.Instance.ClickedObject = this.gameObject;
-            print(GameManager.Instance.ClickedObject.name);
-        }
+       
     }
 
     /// <summary>

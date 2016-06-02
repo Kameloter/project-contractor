@@ -8,7 +8,7 @@ public class PickableScript : BaseInteractable {
 
     GameObject player;
     PlayerScript playerScript;
-
+    
     Rigidbody rigidBody;
 
 	// Use this for initialization
@@ -19,26 +19,49 @@ public class PickableScript : BaseInteractable {
 	}
 
     public void PickUp() {
+
         if (playerScript.carriedValve == null) {
-            this.transform.position = player.transform.position - player.transform.forward;
+            this.transform.position = player.transform.position - player.transform.forward + Vector3.up;
             this.transform.SetParent(player.transform);
             rigidBody.useGravity = false;
             rigidBody.isKinematic = true;
             IsCarried = true;
             rigidBody.constraints = RigidbodyConstraints.None;
 
-            if (this.CompareTag("Valve")) {
-                playerScript.carriedValve = this.gameObject;
-            }
+        
+            playerScript.carriedValve = this.gameObject;
+            
         }
     }
 
     public override void OnInteractableClicked() {
-        if (clickable) {
-            if (IsCarried) { Drop(); }
-            else {
-                if (playerInRange) { PickUp(); }
-                else base.OnInteractableClicked();
+        if (clickable)
+        {
+           if(playerInRange)
+            {
+                if(IsCarried) 
+                {
+                    Debug.Log("DROPPING BOX IN  RANGE ! ");
+                    Drop();
+                }
+                else
+                {
+                    Debug.Log("PICKING BOX IN  RANGE ! ");
+                    PickUp();
+                }
+            }else
+            {
+                Debug.Log("Player not in range ! ");
+                if(IsCarried) 
+                {
+                    Debug.Log("DROPPING BOX OUT OF RANGE ! ");
+                    Drop();
+                }
+                else
+                {
+                    Debug.Log("MOVING TO BOX OUT OF RANGE @! ");
+                    player.GetComponent<PlayerMovement>().SendAgent(transform);
+                }
             }
         }
     }
@@ -48,10 +71,9 @@ public class PickableScript : BaseInteractable {
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
         IsCarried = false;
-
-        if (this.CompareTag("Valve")) {
-            playerScript.carriedValve = null;
-        }
+        playerScript.carriedValve = null;
+        print("Name" + gameObject.name);
+        
     }
 
     void RemoveClickedObject() {
@@ -74,8 +96,11 @@ public class PickableScript : BaseInteractable {
 
     public override void actionOnTriggerEnter(Collider player) {
         if (GameManager.Instance.ClickedObject == this.gameObject) {
+
+            Debug.Log("PICKING CLICKED OBJECT WHEN PLAYHER WAS OUT OF RANGE !  ");
             PickUp();
             RemoveClickedObject();
+         
         }
         base.actionOnTriggerEnter(player);
     }
