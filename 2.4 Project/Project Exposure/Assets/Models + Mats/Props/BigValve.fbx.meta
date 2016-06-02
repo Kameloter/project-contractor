@@ -1,27 +1,35 @@
 fileFormatVersion: 2
-guid: 07523cc12027c664a94c1020c5b1a3cf
-timeCreated: 1464775815
+guid: 01509b688d889e14b8ae12a76abbe1e3
+timeCreated: 1464882287
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: Arrow_lPoly
-    100002: //RootNode
-    100004: Glass_lPoly
-    100006: MainBody_lPoly
-    400000: Arrow_lPoly
-    400002: //RootNode
-    400004: Glass_lPoly
-    400006: MainBody_lPoly
-    2300000: Arrow_lPoly
-    2300002: Glass_lPoly
-    2300004: MainBody_lPoly
-    3300000: Arrow_lPoly
-    3300002: Glass_lPoly
-    3300004: MainBody_lPoly
-    4300000: Arrow_lPoly
-    4300002: Glass_lPoly
-    4300004: MainBody_lPoly
+    100000: //RootNode
+    100002: BigValve_lPoly
+    100004: MainBody_lPoly
+    100006: polySurface1
+    100008: polySurface1 1
+    100010: polySurface3
+    100012: polySurface75
+    100014: transform1
+    100016: transform3
+    100018: transform4
+    100020: transform5
+    400000: //RootNode
+    400002: BigValve_lPoly
+    400004: MainBody_lPoly
+    400006: polySurface1
+    400008: polySurface1 1
+    400010: polySurface3
+    400012: polySurface75
+    400014: transform1
+    400016: transform3
+    400018: transform4
+    400020: transform5
+    2300000: polySurface1
+    3300000: polySurface1
+    4300000: polySurface1
   materials:
     importMaterials: 1
     materialName: 0
