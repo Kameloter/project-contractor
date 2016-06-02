@@ -71,12 +71,15 @@ public class SplineInterpolator : MonoBehaviour
 	
 	void Update()
 	{
+       
 		if (mState == "Reset" || mState == "Stopped" || mNodes.Count < 4)
 			return;
 
 		mCurrentTime += Time.deltaTime;
 
-		if (mCurrentTime >= mNodes[mCurrentIdx + 1].ArrivalTime)
+        //if (Input.GetKeyDown(KeyCode.M)) mState = "Stopped";
+
+        if (mCurrentTime >= mNodes[mCurrentIdx + 1].ArrivalTime)
 		{			
 			// advance to next point in the path
 			
