@@ -22,7 +22,13 @@ public class LaserEmitter : BaseActivatable{
     }
 
     void Update() {
-       if(_active) CheckLaser(laserSpawn.position);
+        if (_active) {
+            CheckLaser(laserSpawn.position);
+            GetComponent<Animator>().SetBool("Active", true);
+        }
+        else {
+            GetComponent<Animator>().SetBool("Active", true);
+        }
     }
 
     public override void Activate() {
