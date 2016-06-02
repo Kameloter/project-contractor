@@ -9,6 +9,9 @@ public class MoveableScript : BaseActivatable {
     //public
     public bool continuous = false;
 
+    public bool needsToBeActivated = false;
+    bool activated = false;
+
     [Header("Movable:")]
     public Transform movableObject;
     public Transform endPoint;
@@ -41,24 +44,28 @@ public class MoveableScript : BaseActivatable {
 	}
 
     // Update is called once per frame
-    void FixedUpdate()
-	{
-		if (Input.GetKeyDown (KeyCode.Alpha9)) {
-			Activate ();
-		}
-		if (Input.GetKeyDown (KeyCode.Alpha0)) {
-			Deactivate ();
-		}
-
-		if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
-           
-			if (continuous) {
-				MoveContinuous ();
-			} else {
-				Move ();
-			}
-		}
-	}
+    void FixedUpdate() {
+        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
+            if (needsToBeActivated) {
+                if (activated) {
+                    if (continuous) {
+                        MoveContinuous();
+                    }
+                    else {
+                        Move();
+                    }
+                }
+            }
+            else {
+                if (continuous) {
+                    MoveContinuous();
+                }
+                else {
+                    Move();
+                }
+            }
+        }
+    }
     
 
     void Move() {
@@ -95,11 +102,13 @@ public class MoveableScript : BaseActivatable {
     }
 
     public override void Activate() {
+        activated = true;
         base.Activate();
         currentState = 2;
     }
 
     public override void Deactivate() {
+        activated = false;
         base.Deactivate();
         currentState = 1;
     }

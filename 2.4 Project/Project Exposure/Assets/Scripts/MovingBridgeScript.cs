@@ -3,8 +3,7 @@ using System.Collections;
 
 public class MovingBridgeScript : MoveableScript {
 
-    public GameObject obstacle;
-    bool wasFrozen = false;
+    public GameObject [] obstacle;
 
 	// Use this for initialization
 	public override void Start () {
@@ -13,13 +12,17 @@ public class MovingBridgeScript : MoveableScript {
 	}
 
     void Update() {
-        if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
-            obstacle.SetActive(false);
-            wasFrozen = true;
+        if (transform.GetComponent<Rigidbody>().velocity.magnitude > 0) {
+            for (int i = 0; i < obstacle.Length; i++) {
+                obstacle[i].SetActive(true);
+            }
         }
         else {
-            if (!wasFrozen)
-            obstacle.SetActive(true);
+            for (int i = 0; i < obstacle.Length; i++) {
+                if (Vector3.Distance(this.transform.position, obstacle[i].transform.position) <= 3.0f) {
+                    obstacle[i].SetActive(false);
+                }
+            }
         }
     }
 	
