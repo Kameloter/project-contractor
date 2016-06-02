@@ -17,12 +17,12 @@ public class PlayerMovement : MonoBehaviour
     private float maxVelocityChange = 10.0f;
 
     private NavMeshPath path;
-    public LayerMask clickableLayer;
-    bool eventCalled = false;
-    bool firstFrame = true;
-
+    public LayerMask interactablesLayer;
+    public LayerMask navigationLayer;
+    [HideInInspector]
+    public bool allowNavigationInput = false;
     public Vector3 playerVelocity { get { return agent.velocity; }}
-
+    float frameCount = 0;
   //  Animator anim;
     void Start()
     {
@@ -33,54 +33,95 @@ public class PlayerMovement : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
 
         path = new NavMeshPath();
+       
     }
+ 
+    void Update()
+    {
 
-    void FixedUpdate()
+        PickUpRaycast();
+        MouseMovement();
+
+    }
+       
+        //Movement();
+        //rigibody.AddForce(new Vector3(0, -0.1f, 0));
+  
+    void PickUpRaycast()
     {
       
 
 
-        MouseMovement();
-        //Movement();
-        //rigibody.AddForce(new Vector3(0, -0.1f, 0));
-    }
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Physics.Raycast(ray, out hit,interactablesLayer))
+            {
+                Debug.DrawLine(ray.origin, hit.point);
+                Transform objectHit = hit.transform;
+             //   print(" Object hit ===>>" + objectHit.gameObject.name);
 
+                if (hit.transform.GetComponent<BaseInteractable>() != null)
+                {
+                    BaseInteractable interactable = hit.transform.GetComponent<BaseInteractable>();
+                    interactable.OnInteractableClicked();
+
+                    StartCoroutine(dontNavigateWhenClickedOnInteractable());//method name explains.
+
+                }
+            }
+        }
+    }
+    IEnumerator dontNavigateWhenClickedOnInteractable()
+    {
+        allowNavigationInput = false; //disable navigation input.
+        yield return  new WaitForSeconds(0.3f);
+        allowNavigationInput = true; //alows navigation input again.
+    }
     void MouseMovement() {
         
         //agent.areaMask = 4;
-        if (Input.GetMouseButton(0) &! eventCalled ) {
+        if (Input.GetMouseButton(0) && allowNavigationInput) {
            // print("clicked object: " + GameManager.Instance.ClickedObject);
             RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             NavMeshHit navHit;
-            if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100,clickableLayer)) {
+            if (Physics.Raycast(ray, out hit,100)) {
+                 Debug.DrawLine(ray.origin, hit.point,Color.red);
+             
 
-                if (hit.transform.GetComponent<BaseInteractable>() != null && !eventCalled && firstFrame){
-                //    print("ha");
-                    hit.transform.GetComponent<BaseInteractable>().OnInteractableClicked();
-                    eventCalled = true;
-                }
-                else if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
+               if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
-                        GameManager.Instance.ClickedObject = null;
+                      //  Debug.Log("SET PATH WHEN SHOULD NOT !");
                         agent.destination = hit.point;
                     }
                 }
             }
-            firstFrame = false;
-            //for (int i = 0; i < path.corners.Length - 1; i++)
-            //    Debug.DrawLine(path.corners[i], path.corners[i + 1], Color.red);
         }
-        else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; GameManager.Instance.checkForUpdate = true; }
+     
 
-        if (!GameManager.Instance.checkForUpdate || Camera.main.GetComponent<CameraControl>().playCutscene) {
-            agent.Stop();
-        }
-        else {
-            agent.Resume();
-        }
+
+
     }
 
+    public void SendAgent(Transform interactable)
+    {
+        agent.SetDestination(interactable.position);
+        GameManager.Instance.ClickedObject = interactable.gameObject;
+      //  print("set destination to " + interactable.gameObject.name);
+    }
+    public void StopAgent()
+    {
+        agent.Stop();
+      //  print("Stopped agent");
+    }
+    public void ResumeAgent()
+    {
+        agent.Resume();
+        //  print("Stopped agent");
+    }
     void Movement()
     {
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));

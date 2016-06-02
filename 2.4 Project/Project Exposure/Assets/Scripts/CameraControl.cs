@@ -56,6 +56,7 @@ public class CameraControl : MonoBehaviour
     }
 
     public void StartCutscene(GameObject path) {
+        FindObjectOfType<PlayerMovement>().BroadcastMessage("StopAgent");
         GetComponent<SplineController>().SplineRoot = path;
         GetComponent<SplineController>().FollowSpline();
         playCutscene = true;
@@ -94,6 +95,7 @@ public class CameraControl : MonoBehaviour
     }
 
     public void DisableCutscene() {
+        FindObjectOfType<PlayerMovement>().BroadcastMessage("ResumeAgent");
         this.transform.rotation = currentRotation;
         playCutscene = false;
     }
