@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: c55fa5962e3b4ba4fb0ad71b1fbae587
-timeCreated: 1464867090
+guid: 9306931df2dff51499b26eea066f01de
+timeCreated: 1464868159
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -8,15 +8,18 @@ ModelImporter:
     100000: Mirror_Float_lPoly
     100002: MirrorChassis_Float_lPoly
     100004: //RootNode
+    100006: MirrorFloat_lPoly
     400000: Mirror_Float_lPoly
     400002: MirrorChassis_Float_lPoly
     400004: //RootNode
+    400006: MirrorFloat_lPoly
     2300000: Mirror_Float_lPoly
     2300002: MirrorChassis_Float_lPoly
     3300000: Mirror_Float_lPoly
     3300002: MirrorChassis_Float_lPoly
     4300000: Mirror_Float_lPoly
     4300002: MirrorChassis_Float_lPoly
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -75,7 +78,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
