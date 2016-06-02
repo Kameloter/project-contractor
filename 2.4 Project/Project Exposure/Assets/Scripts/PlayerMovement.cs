@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactablesLayer;
     public LayerMask navigationLayer;
     [HideInInspector]
-    public bool allowNavigationInput = false;
+    public bool allowNavigationInput = true;
+
     public Vector3 playerVelocity { get { return agent.velocity; }}
     float frameCount = 0;
   //  Animator anim;
