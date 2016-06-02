@@ -10,12 +10,15 @@ public class AlignRotationScript : MonoBehaviour {
     void Start() {
         Align();
     }
-    
 
     public void Align() {
         if (useMainCamera) alignTo = Camera.main.transform;
+        Quaternion targetRotation = Quaternion.Euler(transform.rotation.eulerAngles.x, alignTo.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 
-        if (alignTo != null) this.transform.localRotation = alignTo.rotation;
+        if (alignTo != null) {
+            this.transform.rotation = targetRotation;
+
+        } 
         else Debug.LogError("Assign something to the 'AlignTo' variable on '" + gameObject.name + "' from '" + gameObject.transform.parent.name + "'.");
     }
 }
