@@ -53,11 +53,11 @@ public class ProceduralBridge : BaseActivatable {
             }
 
             distanceBetweenParts -= fuckingPartSize;
-            Debug.Log("Builded part");
+           // Debug.Log("Builded part");
             yield return new WaitForSeconds(0.15f);
         }
-        Debug.Log("loop coroutine finish");
-        print("Bridge constructed!");
+      //  Debug.Log("loop coroutine finish");
+      //  print("Bridge constructed!");
     }
     void Build() {
 

@@ -12,7 +12,10 @@ public class SplineNodeProperties : MonoBehaviour
 	// (additional to those of the Transform object associated to it!)
 	// these properties get copied by the SplineController into SplineNode structures
 	// (along with other properties)
-	[HideInInspector]
 	public float BreakTime = 0f;
-	public string Name;
+    public float SpeedUpSlowDown =1.0f;
+    public bool SkipToNext = false;
+
+    [HideInInspector]
+	public string Name = "";
 }

@@ -12,6 +12,7 @@ TagManager:
   - SteamParticle
   - FreezeParticle
   - Collectable
+  - Meltable
   layers:
   - Default
   - TransparentFX

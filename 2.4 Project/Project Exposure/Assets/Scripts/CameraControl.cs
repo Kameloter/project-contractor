@@ -49,10 +49,6 @@ public class CameraControl : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.B)) {
-            
-        }
-
         if (!playCutscene) {
             ApplyPosition();
         }

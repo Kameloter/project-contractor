@@ -16,19 +16,21 @@ public class SplineNode
 	internal float ArrivalTime;
 	internal float BreakTime;
 	internal Vector2 EaseIO;
+    internal float SpeedUpSlowDown;
+    internal bool SkipToNext;
 
-	internal SplineNode(string n, Vector3 p, Quaternion q, float tArrival, float tBreak, Vector2 io) 
-		{ Name = n; Point = p; Rot = q; ArrivalTime = tArrival; BreakTime = tBreak; EaseIO = io; }
+	internal SplineNode(string n, Vector3 p, Quaternion q, float tArrival, float tBreak, Vector2 io, float tSpeedUpSlowDown, bool tSkipToNext) { Name = n; Point = p; Rot = q; ArrivalTime = tArrival; BreakTime = tBreak; EaseIO = io; SpeedUpSlowDown = tSpeedUpSlowDown; SkipToNext = tSkipToNext; }
 	
 	internal SplineNode(SplineNode o) 
 		{ Name = o.Name; Point = o.Point; Rot = o.Rot; 
-		  ArrivalTime = o.ArrivalTime; BreakTime = o.BreakTime; 
-		  EaseIO = o.EaseIO; }
+		  ArrivalTime = o.ArrivalTime; BreakTime = o.BreakTime;
+          EaseIO = o.EaseIO; SpeedUpSlowDown = o.SpeedUpSlowDown;
+          SkipToNext = o.SkipToNext;
+    }
 	
 	// this is the constructor used by SplineController:
-	
-	internal SplineNode(string n, Transform t, float tBreak) 
-		{ Name = n; Point = t.position; Rot = t.rotation; BreakTime = tBreak; }
+
+    internal SplineNode(string n, Transform t, float tBreak, float tSpeedUpSlowDown, bool tSkipToNext) { Name = n; Point = t.position; Rot = t.rotation; BreakTime = tBreak; SpeedUpSlowDown = tSpeedUpSlowDown; SkipToNext = tSkipToNext; }
 	
 	
 	public float GetLeaveTime()
@@ -83,8 +85,14 @@ public class SplineInterpolator : MonoBehaviour
 				mCurrentIdx++;
 				
 				// Inform that we have just arrived to the mCurrentIdx -th node!
-				if (mOnNodeArrivalCallback != null)
-					mOnNodeArrivalCallback(mCurrentIdx, mNodes[mCurrentIdx]);
+                if (mOnNodeArrivalCallback != null) {
+                    mOnNodeArrivalCallback(mCurrentIdx, mNodes[mCurrentIdx]);
+                    if (mNodes[mCurrentIdx].SkipToNext) {
+                        transform.position = mNodes[mCurrentIdx + 1].Point;
+                        mCurrentTime += mNodes[mCurrentIdx-2].ArrivalTime;
+                        mCurrentIdx++;
+                    }
+                }
 			}
 			else
 			{
@@ -183,12 +191,12 @@ public class SplineInterpolator : MonoBehaviour
 
 	public void AddPoint(string name, Vector3 pos, Quaternion quat, 
 						 float timeInSeconds, float timeStop, 
-						 Vector2 easeInOut)
+						 Vector2 easeInOut, float speedUpSlowDown, bool skipToNext)
 	{
 		if (mState != "Reset")
 			throw new System.Exception("Cannot add points after start");
 
-		mNodes.Add(new SplineNode(name, pos, quat, timeInSeconds, timeStop, easeInOut));
+        mNodes.Add(new SplineNode(name, pos, quat, timeInSeconds, timeStop, easeInOut, speedUpSlowDown,skipToNext));
 	}
 	
 	public void SetAutoCloseMode(float joiningPointTime)

@@ -24,7 +24,8 @@ public class SplineController : MonoBehaviour
 	public bool HideOnExecute = true;
 
     bool slowDown = false;
-    float slowAmount = 0.2f;
+    float previousSlowAmount;
+    float slowAmount = 1.0f;
     float t = 0.0f;
 
 	SplineInterpolator mSplineInterp;
@@ -117,7 +118,7 @@ public class SplineController : MonoBehaviour
 		if (mSplineNodeInfo.Length > 0)
 		{
 			SetupSplineInterpolator(mSplineInterp, mSplineNodeInfo);
-            mSplineInterp.StartInterpolation(DisableCutscene, SlowDown, null, true, WrapMode);
+            mSplineInterp.StartInterpolation(DisableCutscene, ChangeValues, null, true, WrapMode);
 		}
 	}
 
@@ -137,14 +138,14 @@ public class SplineController : MonoBehaviour
 	}
 
     void Update() {
-        if (slowDown) {
-            Time.timeScale = Mathf.Lerp(1,slowAmount,t);
+      //  if (slowDown) {
+            Time.timeScale = Mathf.Lerp(previousSlowAmount,slowAmount,t);
             t += 2f * Time.deltaTime;
-        }
-        else {
-            Time.timeScale = Mathf.Lerp(slowAmount, 1, t);
-            t += 3f * Time.deltaTime;
-        }
+       // }
+        //else {
+       //     Time.timeScale = Mathf.Lerp(slowAmount, 1, t);
+       //     t += 3f * Time.deltaTime;
+       // }
 
     }
 
@@ -152,19 +153,22 @@ public class SplineController : MonoBehaviour
         this.GetComponent<CameraControl>().DisableCutscene();
     }
 
-    void SlowDown(int index, SplineNode node) {
-
-        if (node.Name != "") {
-            slowDown = true;
-            t = 0;
-            Invoke("SpeedUp", 3 * slowAmount);
-        }
-    }
-
-    void SpeedUp() {
-        slowDown = false;
+    void ChangeValues(int index, SplineNode node) {
+        previousSlowAmount = slowAmount;
+        slowAmount = node.SpeedUpSlowDown;
         t = 0;
+        
+          //  slowDown = true;
+        
+          
+            //Invoke("SpeedUp", 3 * slowAmount);
+       
     }
+
+    //void SpeedUp() {
+    //    slowDown = false;
+    //    t = 0;
+    //}
 	
 	// --------------------------------------------------------------------------------------------
 	// PRIVATE HELPERS
@@ -191,7 +195,7 @@ public class SplineController : MonoBehaviour
 				interp.AddPoint(ninfo[c].Name, ninfo[c].Point, 
 								ninfo[c].Rot, 
 								currTime, ninfo[c].BreakTime, 
-								new Vector2(0, 1));
+								new Vector2(0, 1), ninfo[c].SpeedUpSlowDown, ninfo[c].SkipToNext);
 			}
 			else if (OrientationMode == eOrientationMode.TANGENT)
 			{
@@ -206,8 +210,8 @@ public class SplineController : MonoBehaviour
 					rot = ninfo[c].Rot;
 
 				interp.AddPoint(ninfo[c].Name, ninfo[c].Point, rot, 
-								currTime, ninfo[c].BreakTime, 
-								new Vector2(0, 1));
+								currTime, ninfo[c].BreakTime,
+                                new Vector2(0, 1), ninfo[c].SpeedUpSlowDown, ninfo[c].SkipToNext);
 			}
 			
 			// when ninfo[i].StopHereForSecs == 0, then each node of the spline is reached at
@@ -249,9 +253,9 @@ public class SplineController : MonoBehaviour
     	{
 			SplineNodeProperties p = element.GetComponent<SplineNodeProperties>();
 			if (p != null)
-				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime));
+				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime,p.SpeedUpSlowDown, p.SkipToNext));
 			else
-				info.Add(new SplineNode("", element.transform, 0));
+				info.Add(new SplineNode("", element.transform, 0,1,false));
 		}
 
 		return info.ToArray();
