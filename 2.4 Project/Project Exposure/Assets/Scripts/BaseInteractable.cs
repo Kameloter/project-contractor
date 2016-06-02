@@ -14,6 +14,7 @@ public class BaseInteractable : MonoBehaviour {
     }
 
     public virtual void OnInteract() {
+        GameManager.Instance.checkForUpdate = false;
     
     }
 

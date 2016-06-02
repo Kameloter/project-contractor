@@ -34,9 +34,10 @@ public class RotatableScript : BaseInteractable {
     }
 
     public override void OnInteract() {
+        base.OnInteract();
         Rotate();
         if (somethingToAlign != null) { somethingToAlign.Align(); }
-        GameManager.Instance.checkForUpdate = false;
+        
 
     }
 }

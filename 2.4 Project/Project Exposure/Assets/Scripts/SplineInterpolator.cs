@@ -87,11 +87,7 @@ public class SplineInterpolator : MonoBehaviour
 				// Inform that we have just arrived to the mCurrentIdx -th node!
                 if (mOnNodeArrivalCallback != null) {
                     mOnNodeArrivalCallback(mCurrentIdx, mNodes[mCurrentIdx]);
-                    if (mNodes[mCurrentIdx].SkipToNext) {
-                        transform.position = mNodes[mCurrentIdx + 1].Point;
-                        mCurrentTime += mNodes[mCurrentIdx-2].ArrivalTime;
-                        mCurrentIdx++;
-                    }
+                    
                 }
 			}
 			else
@@ -123,12 +119,20 @@ public class SplineInterpolator : MonoBehaviour
 		if (mState != "Stopped")
 		{
 			if (mCurrentTime >= mNodes[mCurrentIdx].GetLeaveTime())
-			{	
+			{
+                if (mNodes[mCurrentIdx].SkipToNext) {
+                    transform.position = mNodes[mCurrentIdx + 1].Point;
+                    mCurrentTime += mNodes[mCurrentIdx - 2].ArrivalTime;
+                    mCurrentIdx++;
+                }
 				if (mLastNodeCallback < mCurrentIdx && mOnNodeLeavingCallback != null)
 				{
+                   
 					// Inform that we have just left the mCurrentIdx-th node!
 					mOnNodeLeavingCallback(mCurrentIdx, mNodes[mCurrentIdx]);
 					mLastNodeCallback++;
+
+                   
 				}
 				//else: callback has already been called
 				
