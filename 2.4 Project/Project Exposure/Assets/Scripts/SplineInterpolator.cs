@@ -122,6 +122,7 @@ public class SplineInterpolator : MonoBehaviour
 			{
                 if (mNodes[mCurrentIdx].SkipToNext) {
                     transform.position = mNodes[mCurrentIdx + 1].Point;
+                    transform.rotation = mNodes[mCurrentIdx + 1].Rot;
                     mCurrentTime += mNodes[mCurrentIdx - 2].ArrivalTime;
                     mCurrentIdx++;
                 }

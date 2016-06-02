@@ -29,7 +29,7 @@ public class CameraControl : MonoBehaviour
     //List<Transform> pathList = new List<Transform>();
 
 
-    bool playCutscene = false;
+    public bool playCutscene = false;
     //int index = 0;
     //Transform currentPos;
 
@@ -86,11 +86,9 @@ public class CameraControl : MonoBehaviour
 
     void CheckForWall(Vector3 fromObject, ref Vector3 toTarget)
     {
-        Debug.DrawLine(fromObject, toTarget, Color.cyan);
         RaycastHit wallhit = new RaycastHit();
         if (Physics.Linecast(fromObject, toTarget, out wallhit))
         {
-            Debug.DrawRay(wallhit.point, Vector3.left, Color.red);
             toTarget = new Vector3(wallhit.point.x, toTarget.y, wallhit.point.z) - (toTarget - fromObject).normalized * 0.1f;
         }
     }

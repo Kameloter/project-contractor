@@ -73,7 +73,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0)) { eventCalled = false; firstFrame = true; GameManager.Instance.checkForUpdate = true; }
 
-        if (!GameManager.Instance.checkForUpdate) {
+        if (!GameManager.Instance.checkForUpdate && Camera.main.GetComponent<CameraControl>().playCutscene) {
             agent.Stop();
         }
         else {
