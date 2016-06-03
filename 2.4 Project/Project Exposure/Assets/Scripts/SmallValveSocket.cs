@@ -45,6 +45,7 @@ public class SmallValveSocket : BaseInteractable {
     }
 
     public void FindASteamJoint() {
+        poweredBy = null;
         colliders = Physics.OverlapSphere(transform.position, radius);
         int cashedLength = colliders.Length;
 

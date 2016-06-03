@@ -29,6 +29,7 @@ public class HelpImageScript : MonoBehaviour {
 
     void Start() {
         GetImageObject();
+        DisableImage();
     }
 
     void Update() {
