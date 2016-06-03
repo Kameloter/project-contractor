@@ -141,17 +141,19 @@ public class ProceduralBridge : BaseActivatable {
 
     void FixObstacle()
     {
-        if (Mathf.Abs(dir.x) != 1)
+        if (Mathf.Abs(dir.x) == 1)
         {
             Debug.Log("LEFT - RIGHT");
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
             obstacle.transform.localPosition = rightSide.transform.localPosition;
-            obstacle.transform.localPosition += new Vector3(0, 1, distanceBetweenParts / 2 * dir.x);
-            Vector3 colliderSize = new Vector3(2, obstacleCollider.size.y, distanceBetweenParts);
+            obstacle.transform.localPosition += new Vector3(distanceBetweenParts / 2 * dir.x, 1, 0);
+            Vector3 colliderSize = new Vector3(distanceBetweenParts, obstacleCollider.size.y, 2);
             obstacleCollider.size = colliderSize;
             colliderSize.y = 0.3f;
-            colliderSize.x = 2.5f;
+            colliderSize.z = 2.5f;
+            colliderHolder.transform.localPosition = rightSide.transform.localPosition;
+            colliderHolder.transform.localPosition += new Vector3(distanceBetweenParts / 2 * dir.x, 0, 0);
             colliderHolder.GetComponent<BoxCollider>().size = colliderSize;
 
         }
@@ -161,11 +163,16 @@ public class ProceduralBridge : BaseActivatable {
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
             obstacle.transform.localPosition = rightSide.transform.localPosition;
-            obstacle.transform.localPosition += new Vector3(distanceBetweenParts / 2 * -dir.z, 1,0);
-           Vector3 colliderSize = new Vector3(distanceBetweenParts, obstacleCollider.size.y, 2);
+            obstacle.transform.localPosition += new Vector3(0, 1, distanceBetweenParts / 2 * dir.z);
+
+           Vector3 colliderSize = new Vector3(2, obstacleCollider.size.y, distanceBetweenParts);
+
             obstacleCollider.size = colliderSize;
+
             colliderSize.y = 0.2f;
-            colliderSize.z = 2.5f;
+            colliderSize.x = 2.5f;
+            colliderHolder.transform.localPosition = rightSide.transform.localPosition;
+            colliderHolder.transform.localPosition += new Vector3(0, 0, distanceBetweenParts / 2 * dir.z);
             colliderHolder.GetComponent<BoxCollider>().size = colliderSize;
 
         }
