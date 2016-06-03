@@ -179,6 +179,7 @@ public class ProceduralBridge : BaseActivatable {
         base.Deactivate();
         Destroy();
     }
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         if (leftSide == null || rightSide == null || Selection.activeGameObject == null) return;
@@ -193,6 +194,7 @@ public class ProceduralBridge : BaseActivatable {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(rightSide.position, rightSide.localScale);
     }
+#endif
 }
 
 #if UNITY_EDITOR
