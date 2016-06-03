@@ -67,7 +67,7 @@ public class SmallValveSocket : BaseInteractable {
 
             } else {
                 Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
-                poweredBy.poweredSockets.Add(this);
+                poweredBy.AddToListItem(this);
             }
 
         }
@@ -92,7 +92,7 @@ public class SmallValveSocket : BaseInteractable {
     }
 
     public void ActivateInteractables() {
-
+        print("trying to activate shit.");
         if (controlValve.currentState == valveLine) {
             if (optionalPath != null && !playedCamera)
             {
@@ -101,6 +101,7 @@ public class SmallValveSocket : BaseInteractable {
             }
             //   print("started with valve" + this.name);
             foreach (BaseActivatable interactable in interactables) {
+                print("activate " + interactable.gameObject.name);
                 interactable.Activate();
             }
         }

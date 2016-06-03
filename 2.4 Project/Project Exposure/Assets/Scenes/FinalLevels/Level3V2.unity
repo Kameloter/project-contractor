@@ -8520,6 +8520,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 0}
   _playerScript: {fileID: 0}
+  _sceneManager: {fileID: 0}
   _sceneStats: {fileID: 0}
   _collectablesCollected: 0
   _maxCollectablesAvailable: 0

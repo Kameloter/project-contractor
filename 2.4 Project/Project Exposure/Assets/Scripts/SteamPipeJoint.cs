@@ -28,10 +28,23 @@ public class SteamPipeJoint : MonoBehaviour {
     }
     void activatePoweredSockets()
     {
+        print("Joint activating ");
         foreach (SmallValveSocket poweredsocket in poweredSockets)
         {
             if (poweredsocket.socketed != null)
+            {
+                print("Joint activating2 ");
                 poweredsocket.ActivateInteractables();
+            }
+              
+        }
+    }
+
+    public void AddToListItem(SmallValveSocket socket)
+    {
+        if (!poweredSockets.Contains(socket))
+        {
+            poweredSockets.Add(socket);
         }
     }
     public void StopSteamConnection()
