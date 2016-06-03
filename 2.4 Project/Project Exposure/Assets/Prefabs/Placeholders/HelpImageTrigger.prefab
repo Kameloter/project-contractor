@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.33, y: -0.5000006, z: 2.58}
+  m_LocalPosition: {x: -2.64, y: 0.49, z: 1.9938488}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -41,15 +41,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   helpImage: {fileID: 0}
-  sprite: {fileID: 21300000, guid: 653bd6134226c4d45a9bb167529788eb, type: 3}
-  position: {x: 0, y: 100, z: 0}
-  scale: {x: 0.05, y: 0.05, z: 0.05}
+  sprite: {fileID: 21300000, guid: c5b7727af65e3ef49ade7fe982654631, type: 3}
+  position: {x: 0, y: 0, z: 0}
+  scale: {x: 0.4, y: 0.4, z: 0.4}
   useTriggerExit: 1
   pausesGameplay: 0
-  showUntilClick: 0
+  showUntilClick: 1
   showTime: 0
   activatable: 1
-  holdingDown: 0
 --- !u!135 &13512508
 SphereCollider:
   m_ObjectHideFlags: 1

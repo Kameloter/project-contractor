@@ -550,7 +550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: dsad
+  m_Text: 
 --- !u!114 &11463984
 MonoBehaviour:
   m_ObjectHideFlags: 1
