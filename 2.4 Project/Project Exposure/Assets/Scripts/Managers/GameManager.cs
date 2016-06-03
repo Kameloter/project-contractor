@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour {
     //PLAYER         //SerializeField used for debugging purposes.
     [SerializeField] private GameObject _player;
     [SerializeField] private PlayerScript _playerScript;
+    [SerializeField] private SceneManager _sceneManager;
     [SerializeField] private SceneStats _sceneStats;
     [SerializeField] private int _collectablesCollected = 0;        //total collectables the player has collected through the entire game
     [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
@@ -67,6 +68,18 @@ public class GameManager : MonoBehaviour {
         get {
             if (_playerScript == null) _playerScript = Player.GetComponent<PlayerScript>();
             return _playerScript;
+        }
+    }
+
+    /// <summary>
+    /// Returns the SceneManager.
+    /// </summary>
+    public SceneManager SceneManager
+    { 
+        get
+        {
+            if (_sceneManager == null) _sceneManager = FindObjectOfType<SceneManager>();
+            return _sceneManager;
         }
     }
 
