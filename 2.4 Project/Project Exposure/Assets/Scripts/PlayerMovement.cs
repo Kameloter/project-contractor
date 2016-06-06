@@ -52,9 +52,6 @@ public class PlayerMovement : MonoBehaviour
   
     void PickUpRaycast()
     {
-      
-
-
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Input.GetMouseButtonDown(0))
@@ -123,8 +120,8 @@ public class PlayerMovement : MonoBehaviour
     }
     public void ResumeAgent()
     {
+        agent.ResetPath();
         agent.Resume();
-        //  print("Stopped agent");
     }
     void Movement()
     {

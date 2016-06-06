@@ -16,8 +16,6 @@ public class CameraControl : MonoBehaviour
    // private float completed;
     [HideInInspector]
     public Quaternion currentRotation;
-    [HideInInspector]
-    public Quaternion newRotation;
 
     //Camera Position
     Vector3 target;
@@ -39,12 +37,10 @@ public class CameraControl : MonoBehaviour
 
 
 
-    void Start()
-    {
-      
-    //    PlayCutscene(path);
-        currentRotation = this.transform.rotation;
-        newRotation = this.transform.rotation;
+    void Start() {
+
+        SetStartPos();
+        //    PlayCutscene(path);
     }
 
     void FixedUpdate()
@@ -60,6 +56,24 @@ public class CameraControl : MonoBehaviour
         GetComponent<SplineController>().SplineRoot = path;
         GetComponent<SplineController>().FollowSpline();
         playCutscene = true;
+    }
+
+    void SetStartPos() {
+        target = targetToFollow.transform.position;
+        nextCamPos = target + offset;
+        CheckForWall(target + new Vector3(0, offset.y, 0), ref nextCamPos);
+        transform.position = nextCamPos;
+
+        Vector3 lookPos = target - transform.position;
+        if (offset.z > 0) {
+            lookPos.x = 0;
+        }
+        if (offset.x > 0) {
+            lookPos.z = 0;
+        }
+        Quaternion rot = Quaternion.LookRotation(lookPos);
+        transform.rotation = rot;
+
     }
 
     void ApplyPosition()
@@ -96,7 +110,6 @@ public class CameraControl : MonoBehaviour
 
     public void DisableCutscene() {
         FindObjectOfType<PlayerMovement>().BroadcastMessage("ResumeAgent");
-        this.transform.rotation = currentRotation;
         playCutscene = false;
     }
 }

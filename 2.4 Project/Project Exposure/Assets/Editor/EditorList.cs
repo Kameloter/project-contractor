@@ -95,6 +95,7 @@ public static class EditorList
                     GUILayout.FlexibleSpace();
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("action"), new GUIContent("Type of action"));
                     CustomEventTrigger.Action action = (CustomEventTrigger.Action)list.GetArrayElementAtIndex(i).FindPropertyRelative("action").enumValueIndex;
+                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("triggerMore"), new GUIContent("trigger more than once?"));
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("onTrigger"), new GUIContent("When to Trigger"));
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType"), new GUIContent("Fire Type"));
                     CustomEventTrigger.FireType fireType = (CustomEventTrigger.FireType)list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType").enumValueIndex;
@@ -165,6 +166,9 @@ public static class EditorList
                              break;
                         case CustomEventTrigger.Action.StopParticle:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("particle"), new GUIContent("particle to stop"));
+                             break;
+                        case CustomEventTrigger.Action.ChangeCameraOffset:
+                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("offset"), new GUIContent("offset"));
                              break;
                     }
                     GUILayout.FlexibleSpace();
