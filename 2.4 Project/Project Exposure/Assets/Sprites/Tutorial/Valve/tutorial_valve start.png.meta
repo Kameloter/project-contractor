@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: 7326e00a4332823479b058b9ae97ad45
+timeCreated: 1465210287
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: tutorial_valve start_0
+    21300002: tutorial_valve start_1
+    21300004: tutorial_valve start_2
+    21300006: tutorial_valve start_3
+    21300008: tutorial_valve start_4
+    21300010: tutorial_valve start_5
+    21300012: tutorial_valve start_6
+    21300014: tutorial_valve start_7
+    21300016: tutorial_valve start_8
+    21300018: tutorial_valve start_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -5
+  maxTextureSize: 8192
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 100
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: tutorial_valve start_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -0.3999939, y: 0.099975586}
+        - {x: -0.3999939, y: -460.90002}
+        - {x: 819.6, y: -460.90002}
+        - {x: 819.6, y: 0.099975586}
+    - name: tutorial_valve start_1
+      rect:
+        serializedVersion: 2
+        x: 1600
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -0.19995117, y: 0.099975586}
+        - {x: -0.19995117, y: -460.90002}
+        - {x: 819.80005, y: -460.90002}
+        - {x: 819.80005, y: 0.099975586}
+    - name: tutorial_valve start_2
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0, y: 0.099975586}
+        - {x: 0, y: -460.90002}
+        - {x: 820, y: -460.90002}
+        - {x: 820, y: 0.099975586}
+    - name: tutorial_valve start_3
+      rect:
+        serializedVersion: 2
+        x: 4800
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.20019531, y: 0.099975586}
+        - {x: 0.20019531, y: -460.90002}
+        - {x: 820.2002, y: -460.90002}
+        - {x: 820.2002, y: 0.099975586}
+    - name: tutorial_valve start_4
+      rect:
+        serializedVersion: 2
+        x: 6400
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.40014648, y: 0.099975586}
+        - {x: 0.40014648, y: -460.90002}
+        - {x: 820.40015, y: -460.90002}
+        - {x: 820.40015, y: 0.099975586}
+    - name: tutorial_valve start_5
+      rect:
+        serializedVersion: 2
+        x: 8000
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -0.39990234, y: 0.099975586}
+        - {x: -0.39990234, y: -460.90002}
+        - {x: 819.6001, y: -460.90002}
+        - {x: 819.6001, y: 0.099975586}
+    - name: tutorial_valve start_6
+      rect:
+        serializedVersion: 2
+        x: 9600
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -0.19970703, y: 0.099975586}
+        - {x: -0.19970703, y: -460.90002}
+        - {x: 819.8003, y: -460.90002}
+        - {x: 819.8003, y: 0.099975586}
+    - name: tutorial_valve start_7
+      rect:
+        serializedVersion: 2
+        x: 11200
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.00048828125, y: 0.099975586}
+        - {x: 0.00048828125, y: -460.90002}
+        - {x: 820.0005, y: -460.90002}
+        - {x: 820.0005, y: 0.099975586}
+    - name: tutorial_valve start_8
+      rect:
+        serializedVersion: 2
+        x: 12800
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.20019531, y: 0.099975586}
+        - {x: 0.20019531, y: -460.90002}
+        - {x: 820.2002, y: -460.90002}
+        - {x: 820.2002, y: 0.099975586}
+    - name: tutorial_valve start_9
+      rect:
+        serializedVersion: 2
+        x: 14400
+        y: 0
+        width: 1600
+        height: 900
+      alignment: 1
+      pivot: {x: 0, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: 0.40039062, y: 0.099975586}
+        - {x: 0.40039062, y: -460.90002}
+        - {x: 820.4004, y: -460.90002}
+        - {x: 820.4004, y: 0.099975586}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -5,10 +5,12 @@ using UnityEngine.UI;
 
 [System.Serializable]
 public class CustomEventTrigger : MonoBehaviour {
-
     [SerializeField]
     public enum Action {
-        PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable, DeactivateInteractable, ShowHint, PlayParticle, StopParticle, FocusOnTarget, ActivateLight, DisableLight, ChangeLightValues, ChangeImageEffects, ActivateObject, DeactivateObject, ChangeCameraOffset
+        PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable,
+        DeactivateInteractable, ShowHint, PlayParticle, StopParticle,
+        FocusOnTarget, ActivateLight, DisableLight, ChangeLightValues,
+        ChangeImageEffects, ActivateObject, DeactivateObject, ChangeCameraOffset
     };
 
     [SerializeField]
@@ -25,84 +27,45 @@ public class CustomEventTrigger : MonoBehaviour {
     public struct info {
         public Action action;
 
-        [SerializeField]
-        public OnTrigger onTrigger;
-
-        [SerializeField]
-        public bool triggerMore;
-
-        [SerializeField]
-        public bool triggered;
-
-        [SerializeField]
-        public FireType fireType;
-
-        [SerializeField]
-        public float delay;
-
-        [SerializeField]
-        public float repeatTime;
-
-        [SerializeField]
-        public float repeatAmount;
-
-
-        [SerializeField]
-        public bool activated;
-
-        //bool if activated
-        //[SerializeField]
-        //public bool activated;
+        [SerializeField] public OnTrigger onTrigger;
+        [SerializeField] public bool triggerMore;
+        [SerializeField] public bool triggered;
+        [SerializeField] public FireType fireType;
+        [SerializeField] public float delay;
+        [SerializeField] public float repeatTime;
+        [SerializeField] public float repeatAmount;
+        [SerializeField] public bool activated;
 
         //gameobject
-        [SerializeField]
-        public GameObject go;
+        [SerializeField] public GameObject go;
 
         // audioclip to play
-        [SerializeField]
-        public AudioClip audioClip;
+        [SerializeField] public AudioClip audioClip;
 
         // play animation
-        [SerializeField]
-        public AnimationClip animation;
+        [SerializeField] public AnimationClip animation;
 
         // activate / deactivate interactable
-        [SerializeField]
-        public BaseActivatable interactable;
+        [SerializeField] public BaseActivatable interactable;
 
         //camera cutscene
-        [SerializeField]
-        public GameObject path;
+        [SerializeField] public GameObject path;
 
         //start hint
-        [SerializeField]
-        public Image image;
-
-        [SerializeField]
-        public Sprite sprite;
+        [SerializeField] public Image image;
+        [SerializeField] public Sprite sprite;
 
         //particle
-        [SerializeField]
-        public ParticleSystem particle;
+        [SerializeField] public ParticleSystem particle;
 
         //light stuff
-        [SerializeField]
-        public Light light;
+        [SerializeField] public Light light;
+        [SerializeField] public Color color;
+        [SerializeField] public float intensity;
+        [SerializeField] public float bounceIntensity;
+        [SerializeField] public float range;
 
-        [SerializeField]
-        public Color color;
-
-        [SerializeField]
-        public float intensity;
-
-        [SerializeField]
-        public float bounceIntensity;
-
-        [SerializeField]
-        public float range;
-
-        [SerializeField]
-        public Vector3 offset;
+        [SerializeField] public Vector3 offset;
     }
 
     [SerializeField]
