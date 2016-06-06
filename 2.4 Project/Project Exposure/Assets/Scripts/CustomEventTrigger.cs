@@ -5,13 +5,12 @@ using UnityEngine.UI;
 
 [System.Serializable]
 public class CustomEventTrigger : MonoBehaviour {
-
     [SerializeField]
     public enum Action {
         PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable,
         DeactivateInteractable, ShowHint, PlayParticle, StopParticle,
         FocusOnTarget, ActivateLight, DisableLight, ChangeLightValues,
-        ChangeImageEffects, ActivateObject, DeactivateObject
+        ChangeImageEffects, ActivateObject, DeactivateObject, ChangeCameraOffset
     };
 
     [SerializeField]
@@ -29,6 +28,8 @@ public class CustomEventTrigger : MonoBehaviour {
         public Action action;
 
         [SerializeField] public OnTrigger onTrigger;
+        [SerializeField] public bool triggerMore;
+        [SerializeField] public bool triggered;
         [SerializeField] public FireType fireType;
         [SerializeField] public float delay;
         [SerializeField] public float repeatTime;
