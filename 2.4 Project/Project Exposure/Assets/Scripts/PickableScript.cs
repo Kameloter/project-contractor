@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
+
 
 public class PickableScript : BaseInteractable {
 
@@ -10,7 +12,7 @@ public class PickableScript : BaseInteractable {
     PlayerScript playerScript;
     
     Rigidbody rigidBody;
-
+    [HideInInspector]
 	// Use this for initialization
 	void Start () {
         player = GameManager.Instance.Player;
@@ -41,25 +43,25 @@ public class PickableScript : BaseInteractable {
             {
                 if(IsCarried) 
                 {
-                    Debug.Log("DROPPING BOX IN  RANGE ! ");
+                    //Debug.Log("DROPPING BOX IN  RANGE ! ");
                     Drop();
                 }
                 else
                 {
-                    Debug.Log("PICKING BOX IN  RANGE ! ");
+                    //Debug.Log("PICKING BOX IN  RANGE ! ");
                     PickUp();
                 }
             }else
             {
-                Debug.Log("Player not in range ! ");
+              //  Debug.Log("Player not in range ! ");
                 if(IsCarried) 
                 {
-                    Debug.Log("DROPPING BOX OUT OF RANGE ! ");
+                  // Debug.Log("DROPPING BOX OUT OF RANGE ! ");
                     Drop();
                 }
                 else
                 {
-                    Debug.Log("MOVING TO BOX OUT OF RANGE @! ");
+                   // Debug.Log("MOVING TO BOX OUT OF RANGE @! ");
                     player.GetComponent<PlayerMovement>().SendAgent(transform);
                 }
             }

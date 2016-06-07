@@ -35,7 +35,9 @@ public class SmallValveSocket : BaseInteractable {
     public GameObject optionalPath;
     bool playedCamera = false;
 
+
     void Start() {
+       
         sphereColor.a = 1;
         if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;
