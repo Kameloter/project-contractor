@@ -576,14 +576,17 @@ public class BigValve : BaseInteractable {
         switch (index)
         {
             case 1:
+                print("klike3");
                 currentState = 1;
                 DisableLine(2);
                 smoke1.Play();
                 break;
             case 2:
+                print("klike2");
                 currentState = 2;
                 DisableLine(1);
                 smoke2.Play();
+                print("klike4");
                 break;
              default:
 
@@ -622,13 +625,16 @@ public class BigValve : BaseInteractable {
     
 
     public override void OnInteract() {
+        print("klike");
         if(currentState == 0 || currentState == 1)
         {
-            ActivateLine(1);
+            print("klike1");
+            ActivateLine(2);
         }
         else
         {
-            ActivateLine(2);
+           
+            ActivateLine(1);
         }
     }
 
