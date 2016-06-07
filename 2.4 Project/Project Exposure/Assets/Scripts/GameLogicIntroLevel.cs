@@ -13,7 +13,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Game.LastInteractedObject != null && !didpath1) {
-            if (Game.LastInteractedObject.name == "object1")
+			if (Game.LastInteractedObject.name == "object1")
             Game.PlayCameraPath(path1);
             didpath1 = true;
         }
