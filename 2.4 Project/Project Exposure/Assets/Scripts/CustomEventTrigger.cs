@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 [System.Serializable]
 public class CustomEventTrigger : MonoBehaviour {
+
     [SerializeField]
     public enum Action {
         PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable,
-        DeactivateInteractable, ShowHint, PlayParticle, StopParticle,
+        DeactivateInteractable, ShowTutorial, PlayParticle, StopParticle,
         FocusOnTarget, ActivateLight, DisableLight, ChangeLightValues,
         ChangeImageEffects, ActivateObject, DeactivateObject, ChangeCameraOffset
     };
@@ -51,9 +52,8 @@ public class CustomEventTrigger : MonoBehaviour {
         //camera cutscene
         [SerializeField] public GameObject path;
 
-        //start hint
-        [SerializeField] public Image image;
-        [SerializeField] public Sprite sprite;
+        //start tutorial
+        [SerializeField] public Animator animator;
 
         //particle
         [SerializeField] public ParticleSystem particle;
@@ -93,8 +93,8 @@ public class CustomEventTrigger : MonoBehaviour {
                     Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
                     Go[i].go.GetComponent<AudioSource>().Play();
                     break;
-                case Action.ShowHint:
-                    //gotyn
+                case Action.ShowTutorial:
+                    Go[i].animator.SetTrigger("Valve");
                     break;
                 case Action.ActivateLight:
                     Go[i].light.enabled = true;

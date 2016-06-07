@@ -135,9 +135,9 @@ public static class EditorList
                         case CustomEventTrigger.Action.PlayCameraPath:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("path"), new GUIContent("Path"));
                             break;
-                        case CustomEventTrigger.Action.ShowHint:
-                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("image"), new GUIContent("Image from canvas"));
-                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("sprite"), new GUIContent("Sprite to show"));
+                        case CustomEventTrigger.Action.ShowTutorial:
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animator"), new GUIContent("Animator"));
+                            //EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("sprite"), new GUIContent("Sprite to show"));
                             break;
                         case CustomEventTrigger.Action.ActivateLight:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("light"), new GUIContent("light to activate"));
