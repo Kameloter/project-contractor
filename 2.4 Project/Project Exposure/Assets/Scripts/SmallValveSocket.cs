@@ -14,6 +14,9 @@ public class SmallValveSocket : BaseInteractable {
 
     [HideInInspector]
     public BigValve controlValve;
+	[Header("ValveHolder")]
+	public Transform valveHolder;
+
 
     [Header("Connects to : ")]
     public int valveID;
@@ -85,7 +88,7 @@ public class SmallValveSocket : BaseInteractable {
 
 
     void PlaceValve(GameObject valve) {
-        valve.GetComponent<PickableScript>().Place(this.transform.position + this.transform.up, this.gameObject);
+		valve.GetComponent<PickableScript>().Place(valveHolder.position, this.gameObject);
         valve.GetComponent<PickableScript>().clickable = false;
         socketed = valve;
         if (socketed == null) return;

@@ -66,6 +66,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &148034
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 418042}
+  m_Layer: 0
+  m_Name: ValveHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &158776
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,6 +152,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &418042
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 148034}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 437714}
+  m_RootOrder: 2
 --- !u!4 &437714
 Transform:
   m_ObjectHideFlags: 1
@@ -144,11 +171,12 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113168}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.43, y: 0.5, z: 5.67}
+  m_LocalPosition: {x: 18.42, y: 0.5, z: 9.766903}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22488800}
   - {fileID: 498064}
+  - {fileID: 418042}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &498064
@@ -158,8 +186,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.375, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -0.25, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 437714}
   m_RootOrder: 1
@@ -405,6 +433,7 @@ MonoBehaviour:
   interactables:
   - {fileID: 0}
   controlValve: {fileID: 0}
+  valveHolder: {fileID: 418042}
   valveID: 1
   valveLine: 1
   radius: 7.96
@@ -449,7 +478,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.6
   m_Center: {x: 0, y: -0.375, z: 0}
 --- !u!222 &22218054
 CanvasRenderer:
