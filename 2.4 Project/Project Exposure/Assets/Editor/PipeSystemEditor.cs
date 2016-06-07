@@ -267,72 +267,58 @@ public class PipeSystemEditor : Editor
              Quaternion.identity;
 
         //transform the point from local to world space
-
-
         Vector3 position = line == 1 ? myValveTransform.TransformPoint(myValve.pipeLine1Points[index].transform.localPosition) : myValveTransform.TransformPoint(myValve.pipeLine2Points[index].transform.localPosition);
-
         EditorGUI.BeginChangeCheck();
 
         position = Handles.DoPositionHandle(position, rotationHandle);
 
-        
-
-        if(line == 1)
+        if (index != 0)
         {
-        //   rot = Handles.RotationHandle(myValve.Pipe_Line_1[index].transform.rotation, position);
-            
+       
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
+                if (eulerRot.x == 90)
+                {
+                    Vector2 snapPoint = snapPointXZ();
+                    position.x = snapPoint.x;
+                    position.z = snapPoint.y;
+
+                }
+                else if (eulerRot.y == 180 || eulerRot.y == 0)//we are drawing a X/Y grid
+                {
+                    Vector2 snapPoint = snapPointXY();
+                    position.x = snapPoint.x;
+                    position.y = snapPoint.y;
+                }
+                else
+                {
+                    Vector2 snapPoint = snapPointZY();
+                    position.z = snapPoint.x;
+                    position.y = snapPoint.y;
+                }
+
+                if (line == 1)
+                {
+                    Undo.RecordObject(myValve.pipeLine1Points[index].transform, "Move Point");
+                    EditorUtility.SetDirty(myValve.pipeLine1Points[index].transform);
+
+                    myValve.pipeLine1Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
+                    //    myValve.Pipe_Line_1[index].transform.rotation = rot;
+                }
+
+                else
+                {
+                    Undo.RecordObject(myValve.pipeLine2Points[index].transform, "Move Point");
+                    EditorUtility.SetDirty(myValve.pipeLine2Points[index].transform);
+                    myValve.pipeLine2Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
+                }
+
+            }
         }
-    
-        // Quaternion rotation = Handles.DoRotationHandle()
-
-
-        if (EditorGUI.EndChangeCheck())
-        {
-            Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
-            if (eulerRot.x == 90)
-            {
-                Vector2 snapPoint = snapPointXZ();
-                position.x = snapPoint.x;
-                position.z = snapPoint.y;
-
-            }
-            else if (eulerRot.y == 180 || eulerRot.y == 0)//we are drawing a X/Y grid
-            {
-                Vector2 snapPoint = snapPointXY();
-                position.x = snapPoint.x;
-                position.y = snapPoint.y;
-            }
-            else
-            {
-                Vector2 snapPoint = snapPointZY();
-                position.z = snapPoint.x;
-                position.y = snapPoint.y;
-            }
-
-          
-
-           // Debug.Log("Finished dragging!");
-
-            
-
-
-            if(line == 1)
-            {
-                Undo.RecordObject(myValve.pipeLine1Points[index].transform, "Move Point");
-                EditorUtility.SetDirty(myValve.pipeLine1Points[index].transform);
-
-                myValve.pipeLine1Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
-            //    myValve.Pipe_Line_1[index].transform.rotation = rot;
-            }
-               
-            else
-            {
-				Undo.RecordObject(myValve.pipeLine2Points[index].transform, "Move Point");
-				EditorUtility.SetDirty(myValve.pipeLine2Points[index].transform);
-                myValve.pipeLine2Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
-            }
-               
-        }
+       
+       
         return position;
     }
 

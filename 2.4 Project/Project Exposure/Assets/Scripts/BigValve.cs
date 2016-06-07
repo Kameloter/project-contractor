@@ -9,27 +9,41 @@ using UnityEditor;
 [System.Serializable]
 public class BigValve : BaseInteractable {
 
-    [Header("Builder Parts")]
-    public Object pipeLongWindow;
+    [Header("                 Valve Parts")]
     public Object pipeLong;
     public Object pipeSmall;
     public Object pipeJoint;
-
     public GameObject pipeLine1Start;
     public GameObject pipeLine1End;
     public GameObject pipeLine2Start;
     public GameObject pipeLine2End;
-
-    [Header("Pipe-Line-Holders")]
-    public GameObject jointHolder1; //CHILDS ARE ONLY THE JOINTS !! so pipeLine1Points[1] => jointHolder.transform.getchild(0) -first child.
+    public GameObject jointHolder1; 
     public GameObject jointHolder2;
+    [SerializeField]
+    public GameObject[] pipeLine1Points;
+    [SerializeField]
+    public GameObject[] pipeLine2Points;
 
-    RaycastHit hit;
-    private Transform valve;
 
-    [Tooltip("0 = OFF , 1 = Line 1 , 2 = Line 2, 3 = INPUT !")]
+    [Header("               Steam particles ")]
+    public ParticleSystem smoke1;
+    public ParticleSystem smoke2;
+
+
+
+
+
+    [Header("           Control states and ID !")]
+
+ 
+    [Range(0, 2)]
+    [Tooltip("0 = OFF , 1 = Line 1 , 2 = Line 2")]
     public int startState;
+
+    [Tooltip("The current state of the valve")]
+    [ReadOnly]
     public int currentState = 0;
+
     bool InRange = false;
     public int valveID;
 
@@ -38,18 +52,18 @@ public class BigValve : BaseInteractable {
     List<SteamPipeJoint> steamJointsLine1 = null;
     List<SteamPipeJoint> steamJointsLine2 = null;
 
-    public ParticleSystem smoke1;
-    public ParticleSystem smoke2;
+    private RaycastHit hit;
 
-    private List<SmallValveSocket> line1Sockets;
-    private List<SmallValveSocket> line2Sockets;
+    /// <summary>
+    /// A list with all the SVS (small valve sockets) in Pipe-Line-1
+    /// </summary>
+    private List<SmallValveSocket> pipeLine1SmallVaveSockets;
+    /// <summary>
+    /// A list with all the SVS (small valve sockets) in Pipe-Line-1
+    /// </summary>
+    private List<SmallValveSocket> pipeLine2SmallValveSockets;
 
-    bool activated = false;
 
-    float inStateRot = 0;
-    float line2rot = 90;
-    float offRot = 180;
-    float line1rot = 270;
 
     [Header("GRID ")]
     public bool draw = false;
@@ -60,47 +74,37 @@ public class BigValve : BaseInteractable {
     public float gridWidth;
     public float gridHeight;
 
-    [SerializeField] public GameObject[] pipeLine1Points;
-    [SerializeField] public GameObject[] pipeLine2Points;
-    [SerializeField] public GameObject testForUndo;
 
     bool createObjects = false;
 
     public override void Awake() {
         if (Application.isPlaying) {
-            line1Sockets = new List<SmallValveSocket>();
-            line2Sockets = new List<SmallValveSocket>();
+            pipeLine1SmallVaveSockets = new List<SmallValveSocket>();
+            pipeLine2SmallValveSockets = new List<SmallValveSocket>();
         }
         base.Awake();
     }
 
     void Start() {
         if (Application.isPlaying) {
-            valve = transform.GetChild(0);
+          //  valve = transform.GetChild(0);
 
             ConnectSmallValves();
             ConnectJointsTogether(1);
             ConnectJointsTogether(2);
+
             if (pipeLine1Points[1] != null)
                 BuildPipeLine(1);
+
            if( pipeLine2Points[1] != null)
                  BuildPipeLine(2);
-            switch (startState) {
-                case 0:
-                    SetRotation(offRot);
-                    break;
-                case 1:
-                    SetRotation(line1rot);
-                    break;
-                case 2:
-                    SetRotation(line2rot);
-                    break;
-                case 3:
-                    SetRotation(inStateRot);
-                    break;
-            }
+
+
+
+            ActivateLine(startState);
         }
     }
+
 
 #if UNITY_EDITOR
     public void CreateLineJoints(int lineIndex) {
@@ -322,11 +326,11 @@ public class BigValve : BaseInteractable {
         Vector3 posToSet;
 
         while (remainingDistance > 0) {
-            int random = Random.Range(1, 3);
+            int random = Random.Range(1,4);
             GameObject pipePart;
             //  Debug.Log("Random numbher -> " + random);
 
-            if (random == 1)//small 
+            if (random == 3)//small 
             {
                 if (Mathf.Abs(dir.z) == 1) //we are moving along Z
                 {
@@ -357,8 +361,8 @@ public class BigValve : BaseInteractable {
                 remainingDistance--;
             }
 
-            if (random == 2) {
-                if (remainingDistance > 2) {
+            if (random == 2 || random == 1) {
+                if (remainingDistance >= 2) {
                     if (Mathf.Abs(dir.z) == 1) //we are moving along Z
                     {
                         offset += new Vector3(0, 0, dir.z);
@@ -391,7 +395,11 @@ public class BigValve : BaseInteractable {
         }
     }
 
-    void FixRotationOfJoints(Vector3 dirToPrevious, Vector3 dirToNext, int jointArrayIndex, int lineIndex) {
+
+    //Vladislav : this is the dirtiest function i've ever wrote as a coder, sorry. could not figure a way to 
+    // rotate objects based on orientation ;/
+    void FixRotationOfJoints(Vector3 dirToPrevious, Vector3 dirToNext, int jointArrayIndex, int lineIndex)
+    {
         Vector3 prev = dirToPrevious;
         Vector3 next = dirToNext;
         prev.Normalize();
@@ -410,134 +418,180 @@ public class BigValve : BaseInteractable {
                 //Debug.Log("-------------- 90 magic degrees !");
                 // angleY = 90;
                 angleZ = 180;
-            } else if (prev.x == 1 && next.z == -1) {
+            }
+            else if (prev.x == 1 && next.z == -1)
+            {
                 //Debug.Log("-------------- 180 magic degrees !");
                 angleY = 180;
-            } else if (prev.x == -1 && next.z == 1) {
+            }
+            else if (prev.x == -1 && next.z == 1)
+            {
                 //Debug.Log("-------------- 0 magic degrees !");
                 angleY = 0;
-            } else if (prev.x == -1 && next.z == -1) {
-                //Debug.Log("-------------- 270 magic degrees !");
-                //angleY = 270;
+            }
+            else if (prev.x == -1 && next.z == -1)
+            {
                 angleX = 180;
-            } else if (next.y == 1) {
+            }
+            else if (next.y == 1)
+            {
                 angleX = 270;
                 angleY = 180;
                 if (prev.x == -1) { angleX = 270; angleY = 0; }
-            } else {
+            }
+            else {
                 angleX = 90;
                 angleY = 180;
-                if (prev.x == -1) {
+                if (prev.x == -1)
+                {
                     angleY = 0;
                     angleX = 90;
                 }
             }
 
-        } else if (Mathf.Abs(prev.z) == 1)//its coming from forward/back
-          {
+        }
+        else if (Mathf.Abs(prev.z) == 1)//its coming from forward/back
+        {
             if (prev.z == 1 && next.x == 1)    //if we go up
             {
                 //Debug.Log("-------------- 90 magic degrees !");
                 angleX = 0;
                 angleY = 90;
                 angleZ = 0;
-            } else if (prev.z == 1 && next.x == -1) {
+            }
+            else if (prev.z == 1 && next.x == -1)
+            {
                 //Debug.Log("-------------- 0 magic degrees !");
                 angleX = 0;
                 angleY = 270;
                 angleZ = 180;
-            } else if (prev.z == -1 && next.x == 1) {
+            }
+            else if (prev.z == -1 && next.x == 1)
+            {
                 //Debug.Log("-------------- 180 magic degrees !");
                 angleX = 0;
                 angleY = 90;
                 angleZ = 180;
-            } else if (prev.z == -1 && next.x == -1) {
+            }
+            else if (prev.z == -1 && next.x == -1)
+            {
                 //Debug.Log("-------------- 270 magic degrees !");
                 angleX = 180;
                 angleY = 90;
                 angleZ = 180;
-            } else if (next.y == 1)//maybe needs change ? check others too
-              {
+            }
+            else if (next.y == 1)//maybe needs change ? check others too
+            {
                 //prev Z == 1 && next.y == 1
                 angleX = 270;
                 angleZ = 90;
                 angleY = 0;
-                if (prev.z == -1) {
+                if (prev.z == -1)
+                {
                     angleX = 270;
                     angleY = 270;
                     angleZ = 0;
                 }
-            } else// next Y == -1
-              {
+            }
+            else// next Y == -1
+            {
                 //prev.z ==1
                 angleX = 90;
                 angleY = 90;
                 angleZ = 0;
                 if (prev.z == -1) { angleX = 90; angleY = 270; angleZ = 0; }
             }
-        } else if (Mathf.Abs(prev.y) == 1)//its coming from up/down
-          {
-            if (prev.y == 1) { angleZ = 270; } 
-            else { angleZ = 90; }
+        }
+        else if (Mathf.Abs(prev.y) == 1)//its coming from up/down
+        {
+            if (prev.y == 1)
+            {
+                angleZ = 270;
+            }
+            else
+            {
+                angleZ = 90;
+            }
 
-            if      (next.x == 1)   { angleY = 90;  } 
-            else if (next.x == -1)  { angleY = 270; } 
-            else if (next.z == 1)   { angleY = 0;   } 
-            else if (next.z == -1)  { angleY = 180; }
+            if (next.x == 1) { angleY = 90; }
+            else if (next.x == -1) { angleY = 270; }
+            else if (next.z == 1) { angleY = 0; }
+            else if (next.z == -1) { angleY = 180; }
         }
 
-        if (lineIndex == 1) {
-            pipeLine1Points[jointArrayIndex].transform.localRotation = Quaternion.identity;
-            pipeLine1Points[jointArrayIndex].transform.Rotate(new Vector3(angleX, angleY, angleZ));
-        } else {
-            pipeLine2Points[jointArrayIndex].transform.localRotation = Quaternion.identity;
-            pipeLine2Points[jointArrayIndex].transform.Rotate(new Vector3(angleX, angleY, angleZ));
+        if (lineIndex == 1)
+        {
+            pipeLine1Points[jointArrayIndex].transform.localRotation = Quaternion.Euler(new Vector3(0,0,0));
+            pipeLine1Points[jointArrayIndex].transform.Rotate(new Vector3(angleX, angleY - transform.localRotation.eulerAngles.y, angleZ));
+        }
+        else {
+            pipeLine2Points[jointArrayIndex].transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            pipeLine2Points[jointArrayIndex].transform.Rotate(new Vector3(angleX, angleY - transform.localRotation.eulerAngles.y, angleZ));
         }
     }
 
-    void ConnectJointsTogether(int index) {
-        if (index == 1) {
+    void ConnectJointsTogether(int index)
+    { 
+        if (index == 1)
+        {
             steamJointsLine1 = new List<SteamPipeJoint>(jointHolder1.GetComponentsInChildren<SteamPipeJoint>());
             steamJointsLine1.Add(pipeLine1End.GetComponent<SteamPipeJoint>());
             int line1Lenght = steamJointsLine1.Count;
-            for (int i = 0; i < line1Lenght; i++) {
-                if (steamJointsLine1[i] != steamJointsLine1[line1Lenght - 1]) {
+            for (int i = 0; i < line1Lenght; i++)
+            {
+                if (steamJointsLine1[i] != steamJointsLine1[line1Lenght - 1])
+                {
                     steamJointsLine1[i].connectTo = steamJointsLine1[i + 1];
                 }
             }
-        } else {
+        }
+        else {
             steamJointsLine2 = new List<SteamPipeJoint>(jointHolder2.GetComponentsInChildren<SteamPipeJoint>());
             steamJointsLine2.Add(pipeLine2End.GetComponent<SteamPipeJoint>());
             int line2Lenght = steamJointsLine2.Count;
-            for (int i = 0; i < line2Lenght; i++) {
+            for (int i = 0; i < line2Lenght; i++)
+            {
                 if (steamJointsLine2[i] != steamJointsLine2[line2Lenght - 1]) { steamJointsLine2[i].connectTo = steamJointsLine2[i + 1]; }
             }
         }
     }
 
-    void ConnectSmallValves() {
+    void ConnectSmallValves()
+    {
         SmallValveSocket[] smallValveSockets = FindObjectsOfType<SmallValveSocket>();
-        for (int i = 0; i < smallValveSockets.Length; i++) {
-            if (smallValveSockets[i].valveID == valveID) {
+        for (int i = 0; i < smallValveSockets.Length; i++)
+        {
+            if (smallValveSockets[i].valveID == valveID)
+            {
                 smallValveSockets[i].controlValve = this;
 
-                if (smallValveSockets[i].valveLine == 1) line1Sockets.Add(smallValveSockets[i]);
-                else line2Sockets.Add(smallValveSockets[i]);
+                if (smallValveSockets[i].valveLine == 1) pipeLine1SmallVaveSockets.Add(smallValveSockets[i]);
+                else pipeLine2SmallValveSockets.Add(smallValveSockets[i]);
             }
         }
     }
 
-    void ActivateLine(int index) {
-        switch (index) {
+    void ActivateLine(int index)
+    {
+        switch (index)
+        {
             case 1:
+                currentState = 1;
+                DisableLine(2);
                 smoke1.Play();
                 break;
             case 2:
+                currentState = 2;
+                DisableLine(1);
                 smoke2.Play();
+                break;
+             default:
+
                 break;
         }
     }
 
+    //Stop pipe-flow
     void StopLine1() {
         steamJointsLine1[0].StopSteamConnection();
     }
@@ -563,54 +617,19 @@ public class BigValve : BaseInteractable {
         }
     }
 
-    void SetRotation(float rot) {
-        valve.Rotate(new Vector3(0, rot, 0));
+  
 
-        switch ((int)rot) {
-            case 0:
-                currentState = 0;
-                DisableLine(2);
-                break;
-            case 90:
-                currentState = 2;
-                ActivateLine(2);
-                break;
-            case 180:
-                currentState = 3;
-                DisableLine(1);
-                break;
-            case 270:
-                currentState = 1;
-                ActivateLine(1);
-                break;
-        }
-    }
-
-    void Rotate() {
-        valve.Rotate(new Vector3(0, -90, 0));
-
-        switch ((int)valve.localEulerAngles.y) {
-            case 0:
-                currentState = 0;
-                DisableLine(2);
-                break;
-            case 90:
-                currentState = 2;
-                ActivateLine(2);
-                break;
-            case 180:
-                currentState = 3;
-                DisableLine(1);
-                break;
-            case 270:
-                currentState = 1;
-                ActivateLine(1);
-                break;
-        }
-    }
+    
 
     public override void OnInteract() {
-        Rotate();
+        if(currentState == 0 || currentState == 1)
+        {
+            ActivateLine(1);
+        }
+        else
+        {
+            ActivateLine(2);
+        }
     }
 
 
@@ -706,35 +725,42 @@ public class BigValve : BaseInteractable {
         return obj;
     }
 
-    GameObject CreateSmallPipe(Vector3 pos, Transform parent) {
+    GameObject CreateSmallPipe(Vector3 pos, Transform parent)
+    {
         GameObject obj = null;
 
 
-        if (!Application.isPlaying) {
+        if (!Application.isPlaying)
+        {
 #if UNITY_EDITOR
             obj = (GameObject)PrefabUtility.InstantiatePrefab(pipeSmall);
 #endif
-        } else {
+        }
+        else {
             obj = Instantiate(pipeSmall) as GameObject;
         }
         //obj.transform.rotation = Quaternion.identity;
 
         obj.transform.position = pos;
         obj.transform.parent = parent;
+
 #if UNITY_EDITOR
         Undo.RegisterCreatedObjectUndo(obj, "Created go");
 #endif
         return obj;
     }
 
+
     GameObject CreateLongPipe(Vector3 pos, Transform parent)
     {
         GameObject obj = null;
-        if (!Application.isPlaying) {
+        if (!Application.isPlaying)
+        {
 #if UNITY_EDITOR
             obj = (GameObject)PrefabUtility.InstantiatePrefab(pipeLong);
 #endif
-        } else {
+        }
+        else {
             obj = Instantiate(pipeLong) as GameObject;
         }
         obj.transform.position = pos;
