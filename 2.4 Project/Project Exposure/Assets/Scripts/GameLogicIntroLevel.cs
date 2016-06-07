@@ -21,7 +21,6 @@ public class GameLogicIntroLevel : MonoBehaviour {
 
     void DoSomething()
     {
-        print("lalalala");
     }
 
     void OnEnable()

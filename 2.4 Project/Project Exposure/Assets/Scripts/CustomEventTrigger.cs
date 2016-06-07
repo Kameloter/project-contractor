@@ -54,6 +54,9 @@ public class CustomEventTrigger : MonoBehaviour {
 
         //start tutorial
         [SerializeField] public Animator animator;
+        [SerializeField]
+        public string animationName;
+
 
         //particle
         [SerializeField] public ParticleSystem particle;
@@ -94,7 +97,9 @@ public class CustomEventTrigger : MonoBehaviour {
                     Go[i].go.GetComponent<AudioSource>().Play();
                     break;
                 case Action.ShowTutorial:
-                    Go[i].animator.SetTrigger("Valve");
+                    GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.RemoveAllListeners();
+                    GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.AddListener(() => { Go[i].animator.SetTrigger(Go[i].animationName); });
+                    Go[i].animator.SetTrigger(Go[i].animationName);
                     break;
                 case Action.ActivateLight:
                     Go[i].light.enabled = true;
