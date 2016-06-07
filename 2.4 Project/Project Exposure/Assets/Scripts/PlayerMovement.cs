@@ -91,10 +91,7 @@ public class PlayerMovement : MonoBehaviour
             cursor.position = Input.mousePosition;
             List<RaycastResult> objectsHit = new List<RaycastResult>();
             EventSystem.current.RaycastAll(cursor, objectsHit);
-            if (objectsHit.Count > 0) {
-                print("Hello" + objectsHit.Count); return;
-            }
-
+            if (objectsHit.Count > 0) return;
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
