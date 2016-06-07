@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 2
   m_GISettings:
     serializedVersion: 2
@@ -18959,7 +18959,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetToFollow: {fileID: 419299003}
   currentRotation: {x: 0, y: 0, z: 0, w: 0}
-  newRotation: {x: 0, y: 0, z: 0, w: 0}
   offset: {x: 5, y: 3, z: 0}
   playCutscene: 0
 --- !u!81 &535922564
