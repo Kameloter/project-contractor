@@ -118,6 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   particle: {fileID: 19820688}
+  PlayAtStart: 0
 --- !u!198 &19820688
 ParticleSystem:
   m_ObjectHideFlags: 1

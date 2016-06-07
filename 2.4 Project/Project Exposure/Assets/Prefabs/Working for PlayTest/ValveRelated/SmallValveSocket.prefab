@@ -369,6 +369,7 @@ MonoBehaviour:
   sphereColor: {r: 0, g: 0, b: 0, a: 1}
   poweredBy: {fileID: 0}
   socketed: {fileID: 0}
+  optionalPath: {fileID: 0}
 --- !u!114 &11483628
 MonoBehaviour:
   m_ObjectHideFlags: 1
