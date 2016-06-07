@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
 
     GameObject clickedObject;
     GameObject activatedObject;
+    GameObject interactedObject;
     GameObject deactivatedObject;
 
     Text text;
@@ -125,6 +126,12 @@ public class GameManager : MonoBehaviour {
     {
         get { return activatedObject; }
         set { activatedObject = value; }
+
+    }
+
+    public GameObject InteractedObject {
+        get { return interactedObject; }
+        set { interactedObject = value; }
 
     }
 

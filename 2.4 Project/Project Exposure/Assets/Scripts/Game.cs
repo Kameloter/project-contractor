@@ -27,6 +27,10 @@ public static class Game {
         get { return GameManager.Instance.DeactivatedObject; }
     }
 
+    static public GameObject LastInteractedObject {
+        get { return GameManager.Instance.InteractedObject; }
+    }
+
     static public int Score {
         get { return GameManager.Instance.Score; }
         set { GameManager.Instance.Score = value; }
