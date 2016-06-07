@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
+using System.Collections.Generic;
 
 /// <summary>
 /// Attached to the player. 
@@ -25,7 +27,10 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 playerVelocity { get { return agent.velocity; }}
     float frameCount = 0;
-  //  Animator anim;
+    //  Animator anim;
+
+    EventSystem eventSystem = EventSystem.current;
+
     void Start()
     {
         allowNavigationInput = true;
@@ -67,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
                     BaseInteractable interactable = hit.transform.GetComponent<BaseInteractable>();
                     interactable.OnInteractableClicked();
 
-                    StartCoroutine(dontNavigateWhenClickedOnInteractable());//method name explains.
+                    //StartCoroutine(dontNavigateWhenClickedOnInteractable());//method name explains.
 
                 }
             }
@@ -81,21 +86,27 @@ public class PlayerMovement : MonoBehaviour
         allowNavigationInput = true; //alows navigation input again.
     }
     void MouseMovement() {
-        
-        //agent.areaMask = 4;
-        if (Input.GetMouseButton(0) && allowNavigationInput) {
-           // print("clicked object: " + GameManager.Instance.ClickedObject);
+        if (Input.GetMouseButton(0)) {
+            PointerEventData cursor = new PointerEventData(EventSystem.current);                            // This section prepares a list for all objects hit with the raycast
+            cursor.position = Input.mousePosition;
+            List<RaycastResult> objectsHit = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(cursor, objectsHit);
+            if (objectsHit.Count > 0) {
+                print("Hello" + objectsHit.Count); return;
+            }
+
+
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             NavMeshHit navHit;
-            if (Physics.Raycast(ray, out hit,100)) {
-                 Debug.DrawLine(ray.origin, hit.point,Color.red);
-             
+            if (Physics.Raycast(ray, out hit, 100)) {
+                Debug.DrawLine(ray.origin, hit.point, Color.red);
 
-               if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
+
+                if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
-                      //  Debug.Log("SET PATH WHEN SHOULD NOT !");
+                        //  Debug.Log("SET PATH WHEN SHOULD NOT !");
                         agent.destination = hit.point;
                     }
                 }
