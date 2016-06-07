@@ -215,6 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   melting: 0
+  optionalPath: {fileID: 0}
 --- !u!208 &20814954
 NavMeshObstacle:
   m_ObjectHideFlags: 1

@@ -92,16 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetToFollow: {fileID: 0}
-  startTime: 0
-  length: 0
   currentRotation: {x: 0, y: 0, z: 0, w: 0}
-  newRotation: {x: 0, y: 0, z: 0, w: 0}
   offset: {x: 15, y: 15, z: 0}
-  shake: 0
-  shakeAmount: 75
-  decreaseFactor: 1
-  lastPosBeforeShake: {x: 0, y: 0, z: 0}
-  myFieldOfView: 45
+  playCutscene: 0
 --- !u!124 &12479520
 Behaviour:
   m_ObjectHideFlags: 1

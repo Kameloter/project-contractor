@@ -265,15 +265,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 954ecfb241eeb1a49807bce0d31e2e0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  needsToBeActivated: 0
   continuous: 0
+  needsToBeActivated: 0
   movableObject: {fileID: 459044}
   endPoint: {fileID: 439024}
   startPoint: {fileID: 451846}
   moveSpeed: 5
   startState: 0
   temperatureScript: {fileID: 0}
-  obstacle: {fileID: 171844}
+  obstacle:
+  - {fileID: 0}
 --- !u!114 &11408466
 MonoBehaviour:
   m_ObjectHideFlags: 1
