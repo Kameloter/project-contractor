@@ -6,6 +6,9 @@ using System.Collections.Generic;
 /// </summary>
 public class CameraControl : MonoBehaviour
 {
+    public delegate void CameraPathEnd();
+    public static event CameraPathEnd OnCameraPathEnd;
+
     public GameObject targetToFollow;
     private Vector3 nextCamPos;
     //Camera Rotating
@@ -111,5 +114,6 @@ public class CameraControl : MonoBehaviour
     public void DisableCutscene() {
         FindObjectOfType<PlayerMovement>().BroadcastMessage("ResumeAgent");
         playCutscene = false;
+        if (OnCameraPathEnd != null) OnCameraPathEnd();
     }
 }

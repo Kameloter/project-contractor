@@ -18,4 +18,19 @@ public class GameLogicIntroLevel : MonoBehaviour {
             didpath1 = true;
         }
 	}
+
+    void DoSomething()
+    {
+        print("lalalala");
+    }
+
+    void OnEnable()
+    {
+        CameraControl.OnCameraPathEnd += DoSomething;
+    }
+
+    void OnDisable()
+    {
+        CameraControl.OnCameraPathEnd -= DoSomething;
+    }
 }
