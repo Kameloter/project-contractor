@@ -274,7 +274,7 @@ MonoBehaviour:
   startState: 0
   temperatureScript: {fileID: 0}
   obstacle:
-  - {fileID: 0}
+  - {fileID: 171844}
 --- !u!114 &11408466
 MonoBehaviour:
   m_ObjectHideFlags: 1

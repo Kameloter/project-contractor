@@ -99,7 +99,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 18c197a75a4747a40ac67aa38df4914a, type: 2}
+  - {fileID: 2100000, guid: 6692b1a7e5de92c49a392f9c483c8214, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectTo: {fileID: 0}
-  poweredSocket: {fileID: 0}
+  poweredSockets: []
 --- !u!198 &19883766
 ParticleSystem:
   m_ObjectHideFlags: 1

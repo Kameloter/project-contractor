@@ -29,6 +29,7 @@ public class MoveableScript : BaseActivatable {
     private Vector3 moveDirection;
     private Transform currentDestination;
 
+    [HideInInspector]
     public TemperatureScript temperatureScript;
 
 	// Use this for initialization

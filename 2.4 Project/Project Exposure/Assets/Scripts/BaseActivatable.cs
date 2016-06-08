@@ -3,7 +3,9 @@ using System.Collections;
 
 public class BaseActivatable : MonoBehaviour {
 
-    public virtual void Start() {
+    public virtual void Start()
+    {
+
     }
 
     public virtual void Activate() {

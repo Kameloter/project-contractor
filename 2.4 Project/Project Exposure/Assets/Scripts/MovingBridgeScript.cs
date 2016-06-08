@@ -6,7 +6,8 @@ public class MovingBridgeScript : MoveableScript {
     public GameObject [] obstacle;
 
 	// Use this for initialization
-	public override void Start () {
+	public override void Start ()
+    {
         base.Start();
         print("base");
 	}
