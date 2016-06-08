@@ -13,12 +13,19 @@ public class PickableScript : BaseInteractable {
     
     Rigidbody rigidBody;
     [HideInInspector]
+
+    Vector3 startPos;
 	// Use this for initialization
 	void Start () {
         player = GameManager.Instance.Player;
         playerScript = GameManager.Instance.PlayerScript;
         rigidBody = this.GetComponent<Rigidbody>();
+        startPos = this.transform.position;
 	}
+
+    public void ResetPos() {
+        this.transform.position = startPos;
+    }
 
     public void PickUp() {
 
@@ -34,6 +41,10 @@ public class PickableScript : BaseInteractable {
             playerScript.carriedValve = this.gameObject;
             
         }
+    }
+
+    void Update() {
+
     }
 
     public override void OnInteractableClicked() {

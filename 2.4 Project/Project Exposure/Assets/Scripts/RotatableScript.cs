@@ -10,7 +10,9 @@ public class RotatableScript : BaseInteractable {
      [Tooltip("If continous angle/sec otherwise angle/click")]
     public float angle = 22.5f;
 
-    AlignRotationScript somethingToAlign; 
+    AlignRotationScript somethingToAlign;
+
+    public bool pause = false;
 
     void Start() {
         somethingToAlign = transform.root.GetComponentInChildren<AlignRotationScript>();
@@ -29,8 +31,8 @@ public class RotatableScript : BaseInteractable {
     }
 
     void Rotate() {
-
-        this.transform.Rotate(axis, angle);
+        print(pause);
+        if (!pause) this.transform.Rotate(axis, angle);
     }
 
     public override void OnInteract() {

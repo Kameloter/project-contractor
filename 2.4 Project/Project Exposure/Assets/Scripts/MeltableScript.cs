@@ -3,15 +3,27 @@ using System.Collections;
 
 public class MeltableScript : MonoBehaviour {
 
-    public bool melting = false;
+    bool melting = false;
     float timer = 0;
 
     public GameObject optionalPath;
     bool playedCamera = false;
+    RotatableScript rotScript;
+
+    bool triggered = false;
     // Use this for initialization
     void Start () {
 	    
 	}
+
+    public void SetMelting(RotatableScript pRotScript) {
+        if (!triggered) {
+            rotScript = pRotScript;
+            melting = true;
+            rotScript.pause = true;
+            triggered = true;
+        } 
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,6 +40,7 @@ public class MeltableScript : MonoBehaviour {
             timer += Time.deltaTime;
 
             if (timer >= 3) {
+                rotScript.pause = false;
                 Destroy(gameObject);
             }
 
