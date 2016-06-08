@@ -1,16 +1,51 @@
 fileFormatVersion: 2
-guid: a7407dc00a50b7a49aa3ac17ab286a14
-timeCreated: 1464770200
+guid: 642cb83a82ae12040902f72bd790935f
+timeCreated: 1465395172
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: pump:backfaces
+    100004: pump:base
+    100006: pump:exhaust
+    100008: pump:generator
+    100010: pump:output
+    100012: pump:pipe
+    100014: pump:pump 1
+    100016: pump:turbine
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: h
-    4300002: railing
+    400002: pump:backfaces
+    400004: pump:base
+    400006: pump:exhaust
+    400008: pump:generator
+    400010: pump:output
+    400012: pump:pipe
+    400014: pump:pump 1
+    400016: pump:turbine
+    2300000: pump:backfaces
+    2300002: pump:base
+    2300004: pump:exhaust
+    2300006: pump:generator
+    2300008: pump:output
+    2300010: pump:pipe
+    2300012: pump:turbine
+    3300000: pump:backfaces
+    3300002: pump:base
+    3300004: pump:exhaust
+    3300006: pump:generator
+    3300008: pump:output
+    3300010: pump:pipe
+    3300012: pump:turbine
+    4300000: pump:pipe
+    4300002: pump:base
+    4300004: pump:generator
+    4300006: pump:backfaces
+    4300008: pump:output
+    4300010: pump:exhaust
+    4300012: pump:turbine
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -69,7 +104,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

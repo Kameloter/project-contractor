@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a7407dc00a50b7a49aa3ac17ab286a14
-timeCreated: 1464770200
+guid: e3f499ba57d46dd47ba33091a883c80e
+timeCreated: 1465395173
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,8 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: h
-    4300002: railing
+    4300000: pCube2
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,16 +1,26 @@
 fileFormatVersion: 2
-guid: a7407dc00a50b7a49aa3ac17ab286a14
-timeCreated: 1464770200
+guid: 5842f7b25726cb1469d2510f1c9c115b
+timeCreated: 1465395172
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: button:button
+    100004: buttongroup
+    100006: buttonstand
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
-    4300000: h
-    4300002: railing
+    400002: button:button
+    400004: buttongroup
+    400006: buttonstand
+    2300000: button:button
+    2300002: buttonstand
+    3300000: button:button
+    3300002: buttonstand
+    4300000: button:button
+    4300002: buttonstand
+    7400000: Take 001
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -69,7 +79,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

@@ -7,11 +7,16 @@ ModelImporter:
   fileIDToRecycleName:
     100000: polySurface3
     100002: //RootNode
+    100004: corner 1
     400000: polySurface3
     400002: //RootNode
+    400004: corner 1
     2300000: polySurface3
+    2300002: corner 1
     3300000: polySurface3
+    3300002: corner 1
     4300000: polySurface3
+    4300002: corner
   materials:
     importMaterials: 1
     materialName: 0

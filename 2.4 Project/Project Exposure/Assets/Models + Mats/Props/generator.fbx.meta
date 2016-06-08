@@ -10,23 +10,43 @@ ModelImporter:
     100004: panel_pipe
     100006: panel_screen
     100008: turbine
+    100010: backfaces
+    100012: bolt1
+    100014: case1
+    100016: railing
     400000: //RootNode
     400002: generator_case
     400004: panel_pipe
     400006: panel_screen
     400008: turbine
+    400010: backfaces
+    400012: bolt1
+    400014: case1
+    400016: railing
     2300000: generator_case
     2300002: panel_pipe
     2300004: panel_screen
     2300006: turbine
+    2300008: backfaces
+    2300010: bolt1
+    2300012: case1
+    2300014: railing
     3300000: generator_case
     3300002: panel_pipe
     3300004: panel_screen
     3300006: turbine
+    3300008: backfaces
+    3300010: bolt1
+    3300012: case1
+    3300014: railing
     4300000: turbine
     4300002: panel_screen
     4300004: panel_pipe
     4300006: generator_case
+    4300008: railing
+    4300010: bolt1
+    4300012: case1
+    4300014: backfaces
   materials:
     importMaterials: 1
     materialName: 0
