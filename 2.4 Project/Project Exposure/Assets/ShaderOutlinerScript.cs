@@ -2,25 +2,16 @@
 using System.Collections;
 
 public class ShaderOutlinerScript : MonoBehaviour {
-    public enum SizeOfObject
-    {
-        Small,Big
-    }
-
+    public enum SizeOfObject { Small, Big }
     public SizeOfObject sizeOfObject;
 
     BaseInteractable owner;
     public MeshRenderer outlinedObjectRenderer;
     Material outlineMaterial;
 
-
-
     public void Start() {
-        
-      
         outlineMaterial = new Material(Resources.Load("ObjectOutliner", typeof(Material)) as Material);
-        if (sizeOfObject == SizeOfObject.Big)
-        {
+        if (sizeOfObject == SizeOfObject.Big) {
             outlineMaterial.SetFloat("_Outline", 0.0001f);
         }
         owner = GetComponent<BaseInteractable>();
@@ -29,6 +20,7 @@ public class ShaderOutlinerScript : MonoBehaviour {
     }
 
     public void AddOutlineMaterial() {
+        if (outlinedObjectRenderer == null) { Debug.LogError("Variable 'outlinedObjectRenderer' has not been set."); return; }
         Material original = outlinedObjectRenderer.material; //store a copy of the material ON the object( shared material is THE MATERIAL INSTANCE => affects all object with that mat)
 
         Material[] newMaterials = new Material[2]; //make a new array with materials
@@ -39,6 +31,7 @@ public class ShaderOutlinerScript : MonoBehaviour {
     }
 
     public void RemoveOutlineMaterial() {
+        if (outlinedObjectRenderer == null) { Debug.LogError("Variable 'outlinedObjectRenderer' has not been set."); return; }
         Material original = outlinedObjectRenderer.materials[0];
         Material[] newMaterials = new Material[1];
         newMaterials[0] = original;
