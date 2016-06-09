@@ -14,6 +14,14 @@ ModelImporter:
     100012: pump:pipe
     100014: pump:pump 1
     100016: pump:turbine
+    100018: backfaces
+    100020: base
+    100022: exhaust
+    100024: generator
+    100026: output
+    100028: pipe
+    100030: pump2
+    100032: turbine
     400000: //RootNode
     400002: pump:backfaces
     400004: pump:base
@@ -23,6 +31,14 @@ ModelImporter:
     400012: pump:pipe
     400014: pump:pump 1
     400016: pump:turbine
+    400018: backfaces
+    400020: base
+    400022: exhaust
+    400024: generator
+    400026: output
+    400028: pipe
+    400030: pump2
+    400032: turbine
     2300000: pump:backfaces
     2300002: pump:base
     2300004: pump:exhaust
@@ -30,6 +46,13 @@ ModelImporter:
     2300008: pump:output
     2300010: pump:pipe
     2300012: pump:turbine
+    2300014: backfaces
+    2300016: base
+    2300018: exhaust
+    2300020: generator
+    2300022: output
+    2300024: pipe
+    2300026: turbine
     3300000: pump:backfaces
     3300002: pump:base
     3300004: pump:exhaust
@@ -37,6 +60,13 @@ ModelImporter:
     3300008: pump:output
     3300010: pump:pipe
     3300012: pump:turbine
+    3300014: backfaces
+    3300016: base
+    3300018: exhaust
+    3300020: generator
+    3300022: output
+    3300024: pipe
+    3300026: turbine
     4300000: pump:pipe
     4300002: pump:base
     4300004: pump:generator
@@ -44,6 +74,13 @@ ModelImporter:
     4300008: pump:output
     4300010: pump:exhaust
     4300012: pump:turbine
+    4300014: pipe
+    4300016: base
+    4300018: generator
+    4300020: backfaces
+    4300022: output
+    4300024: exhaust
+    4300026: turbine
     7400000: Take 001
     9500000: //RootNode
   materials:
