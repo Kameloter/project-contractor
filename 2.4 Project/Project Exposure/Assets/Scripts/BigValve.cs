@@ -25,15 +25,11 @@ public class BigValve : BaseInteractable {
     public GameObject[] pipeLine2Points;
 
 
-    [Header("               Steam particles ")]
+    [Header("Steam particles ")]
     public ParticleSystem smoke1;
     public ParticleSystem smoke2;
 
-
-
-
-
-    [Header("           Control states and ID !")]
+    [Header("Control states and ID !")]
 
  
     [Range(0, 2)]
@@ -76,6 +72,9 @@ public class BigValve : BaseInteractable {
 
 
     bool createObjects = false;
+
+    [HideInInspector]
+    public bool isPowered = false;
 
     public override void Awake() {
         if (Application.isPlaying) {
@@ -620,15 +619,16 @@ public class BigValve : BaseInteractable {
         }
     }
 
-  
 
+    public override void actionOnTriggerEnter(Collider player) {
+        if (isPowered)
+        base.actionOnTriggerEnter(player);
+    }
     
 
     public override void OnInteract() {
-        print("klike");
         if(currentState == 0 || currentState == 1)
         {
-            print("klike1");
             ActivateLine(2);
         }
         else
