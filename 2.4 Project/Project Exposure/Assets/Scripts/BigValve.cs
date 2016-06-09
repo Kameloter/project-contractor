@@ -74,7 +74,7 @@ public class BigValve : BaseInteractable {
     bool createObjects = false;
 
     [HideInInspector]
-    public bool isPowered = false;
+    public bool isPowered = true;
 
     public override void Awake() {
         if (Application.isPlaying) {
@@ -627,6 +627,7 @@ public class BigValve : BaseInteractable {
     
 
     public override void OnInteract() {
+        print("clicked big valve");
         if(currentState == 0 || currentState == 1)
         {
             ActivateLine(2);
