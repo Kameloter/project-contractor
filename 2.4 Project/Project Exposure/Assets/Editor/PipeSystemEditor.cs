@@ -241,9 +241,12 @@ public class PipeSystemEditor : Editor
         {
             Debug.Log("new item being exhanged.");
             myValve.pipeLine2Points[cachedLength - 1] = myValve.pipeLine2End;
-            Vector3 posForNewObject = myValve.pipeLine2Points[cachedLength - 3].transform.position + Vector3.right;
+            Vector3 posForNewObject = myValve.pipeLine2Points[cachedLength - 3].transform.localPosition + Vector3.right;
 
             myValve.pipeLine2Points[cachedLength - 2] = myValve.AddJointToPipeLine(myValve.jointHolder2.transform, posForNewObject);
+
+
+
 
             Debug.Log("new item exhanged.");
         }

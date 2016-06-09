@@ -1,24 +1,15 @@
 fileFormatVersion: 2
-guid: 26a73eb16c1519e4fa6aa515521b8e0c
-timeCreated: 1465289681
+guid: 4018a95fe3fe31748a95fcd49246195e
+timeCreated: 1465473196
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: earth
-    100004: moon
     400000: //RootNode
-    400002: earth
-    400004: moon
-    2300000: earth
-    2300002: moon
-    3300000: earth
-    3300002: moon
-    4300000: moon
-    4300002: earth
-    7400000: Take 001
-    9500000: //RootNode
+    2300000: //RootNode
+    3300000: //RootNode
+    4300000: Poster_3
   materials:
     importMaterials: 1
     materialName: 0
@@ -43,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 1.02
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -77,7 +68,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
