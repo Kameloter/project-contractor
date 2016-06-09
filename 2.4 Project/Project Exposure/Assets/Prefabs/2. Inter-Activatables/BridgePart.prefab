@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 410008}
   - 33: {fileID: 3308746}
   - 23: {fileID: 2312762}
-  - 64: {fileID: 6422816}
   m_Layer: 0
   m_Name: Platform
   m_TagString: Untagged
@@ -185,7 +184,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 133560}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.7830515, y: -2, z: 3.897512}
+  m_LocalPosition: {x: -4.1313524, y: 31.388123, z: -28.25088}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 458304}
@@ -337,18 +336,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147408}
   m_Mesh: {fileID: 4300006, guid: c44b993d56e14db479001f1cef777a62, type: 3}
---- !u!64 &6422816
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 122644}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 0
-  m_Mesh: {fileID: 4300002, guid: c44b993d56e14db479001f1cef777a62, type: 3}
 --- !u!95 &9513808
 Animator:
   serializedVersion: 3

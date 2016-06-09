@@ -461,7 +461,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: c529f44bc3ff06649983f1a74cb7b008, type: 2}
+  - {fileID: 2100000, guid: c8c430126a61c9946b3eaa7d95e2f325, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -922,7 +922,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adf3c79015cf8394bb0bf0872d025864, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  melting: 0
   optionalPath: {fileID: 0}
 --- !u!114 &11486978
 MonoBehaviour:
@@ -938,8 +937,8 @@ MonoBehaviour:
   temperatureState: 0
   changeable: 1
   frozenMaterial: {fileID: 2100000, guid: 352be7c6331e8794e9f27eae3f3d1181, type: 2}
-  neutralMaterial: {fileID: 0}
-  hotMaterial: {fileID: 2100000, guid: c529f44bc3ff06649983f1a74cb7b008, type: 2}
+  neutralMaterial: {fileID: 2100000, guid: c8c430126a61c9946b3eaa7d95e2f325, type: 2}
+  hotMaterial: {fileID: 2100000, guid: 1b0520950c5e6f94199978a47f6a7db4, type: 2}
 --- !u!208 &20806476
 NavMeshObstacle:
   m_ObjectHideFlags: 1
