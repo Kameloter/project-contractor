@@ -37157,11 +37157,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 423168, guid: 4e02df408b62eab4b87f637f4b26d593, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 413768, guid: 4e02df408b62eab4b87f637f4b26d593, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 413022, guid: 4e02df408b62eab4b87f637f4b26d593, type: 2}
       propertyPath: m_LocalScale.x
@@ -37441,6 +37441,52 @@ Prefab:
 GameObject:
   m_PrefabParentObject: {fileID: 180872, guid: 4962597242f7627459a6bdb22e0a48dc, type: 2}
   m_PrefabInternal: {fileID: 1183616134}
+--- !u!1 &1210005292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1210005294}
+  - 114: {fileID: 1210005293}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1210005293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210005292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbd6690c5c295f4095c0e25eaaaeb15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _playerScript: {fileID: 0}
+  _sceneManager: {fileID: 0}
+  _sceneStats: {fileID: 0}
+  _collectablesCollected: 0
+  _maxCollectablesAvailable: 0
+  TimeLeft: 10
+--- !u!4 &1210005294
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1210005292}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
 --- !u!1 &1227933790 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 191208, guid: 9270ca41c065db34ca23bb99dcbc4dca, type: 2}
