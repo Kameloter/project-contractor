@@ -43,6 +43,8 @@ public class GameManager : MonoBehaviour {
 
     int score = 0;
 
+    float inactiveTime = 0;
+
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
     }
@@ -147,10 +149,22 @@ public class GameManager : MonoBehaviour {
 
     void Update() {
         TimeLeft -= Time.deltaTime;
+        inactiveTime += Time.deltaTime;
+
+        if (Input.GetMouseButton(0)) {
+            inactiveTime = 0;
+        }
+
+        if (inactiveTime >= 30) {
+            print("termination");
+            Application.Quit();
+        }
 
         if (TimeLeft <= 0) {
           //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
         }
+
+
   //      text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
     }
 

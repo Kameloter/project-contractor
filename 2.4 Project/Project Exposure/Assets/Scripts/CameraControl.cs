@@ -46,12 +46,16 @@ public class CameraControl : MonoBehaviour
         //    PlayCutscene(path);
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (!playCutscene) {
             ApplyPosition();
         }
-       // }
+        if (playCutscene) {
+            if (Input.GetMouseButtonDown(0)) {
+                SkipCutScene();
+            }
+        }
     }
 
     public void StartCutscene(GameObject path) {
@@ -111,9 +115,17 @@ public class CameraControl : MonoBehaviour
         }
     }
 
+    void SkipCutScene() {
+        GetComponent<SplineController>().Skip();
+        DisableCutscene();
+    }
+
+
     public void DisableCutscene() {
+        SetStartPos();
         FindObjectOfType<PlayerMovement>().BroadcastMessage("ResumeAgent");
         playCutscene = false;
+   
         if (OnCameraPathEnd != null) OnCameraPathEnd();
     }
 }

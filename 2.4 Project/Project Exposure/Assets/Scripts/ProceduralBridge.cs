@@ -183,6 +183,7 @@ public class ProceduralBridge : BaseActivatable {
 
 
     public override void Deactivate() {
+        StopCoroutine("buildAnimation");
         base.Deactivate();
         Destroy();
     }

@@ -141,12 +141,10 @@ public class SplineController : MonoBehaviour
       //  if (slowDown) {
             Time.timeScale = Mathf.Lerp(previousSlowAmount,slowAmount,t);
             t += 2f * Time.deltaTime;
-       // }
-        //else {
-       //     Time.timeScale = Mathf.Lerp(slowAmount, 1, t);
-       //     t += 3f * Time.deltaTime;
-       // }
+    }
 
+    public void Skip() {
+        mSplineInterp.Reset();
     }
 
     void DisableCutscene() {
@@ -157,18 +155,7 @@ public class SplineController : MonoBehaviour
         previousSlowAmount = slowAmount;
         slowAmount = node.SpeedUpSlowDown;
         t = 0;
-        
-          //  slowDown = true;
-        
-          
-            //Invoke("SpeedUp", 3 * slowAmount);
-       
     }
-
-    //void SpeedUp() {
-    //    slowDown = false;
-    //    t = 0;
-    //}
 	
 	// --------------------------------------------------------------------------------------------
 	// PRIVATE HELPERS

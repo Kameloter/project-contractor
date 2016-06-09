@@ -90,10 +90,12 @@ public class SmallValveSocket : BaseInteractable {
 
 
     void PlaceValve(GameObject valve) {
+
+        if (socketed != null) return;
 		valve.GetComponent<PickableScript>().Place(valveHolder.position, this.gameObject);
         valve.GetComponent<PickableScript>().clickable = false;
         socketed = valve;
-        if (socketed == null) return;
+
         ActivateInteractables();
     }
 
@@ -132,13 +134,16 @@ public class SmallValveSocket : BaseInteractable {
 
     void Check() {
         if (playerScript.carriedValve != null && playerInRange && !socketed) {
+            print("i am clicked www");
             PlaceValve(playerScript.carriedValve);
-        } else if (socketed != null && playerInRange) {
+        } else if (socketed != null && playerInRange && playerScript.carriedValve == null) {
+            print("i am clicked sssss");
             RemoveValve(socketed);
         }
     }
 
     public override void OnInteract() {
+        print("i am clicked");
         Check();
     }
 }
