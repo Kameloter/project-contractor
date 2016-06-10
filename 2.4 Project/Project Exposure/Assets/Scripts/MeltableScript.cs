@@ -7,17 +7,23 @@ public class MeltableScript : MonoBehaviour {
     float timer = 0;
 
     public GameObject optionalPath;
+    public bool StartAtPlayer = true;
     bool playedCamera = false;
     RotatableScript rotScript;
 
     bool triggered = false;
+
+    bool _reusable = false;
+
     // Use this for initialization
     void Start () {
 	    
 	}
 
-    public void SetMelting(RotatableScript pRotScript) {
+    public void SetMelting(RotatableScript pRotScript, bool reuseable = false) {
         if (!triggered) {
+            _reusable = reuseable;
+
             rotScript = pRotScript;
             melting = true;
             rotScript.pause = true;
@@ -31,7 +37,7 @@ public class MeltableScript : MonoBehaviour {
 
             if (optionalPath != null && !playedCamera)
             {
-                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath);
+                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
                 playedCamera = true;
             }
             for (int i = 0; i < transform.childCount; i++) {
@@ -40,7 +46,7 @@ public class MeltableScript : MonoBehaviour {
             timer += Time.deltaTime;
 
             if (timer >= 3) {
-                rotScript.pause = false;
+                if (_reusable) rotScript.pause = false; //unpause rotatable
                 Destroy(gameObject);
             }
 

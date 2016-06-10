@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(RotatableScript))]
 public class LaserEmitter : BaseActivatable{
@@ -10,6 +10,7 @@ public class LaserEmitter : BaseActivatable{
     Material material;
 
     [SerializeField] bool _active = false;
+    [SerializeField] bool _reusable = false;
 
     Vector3[] points = new Vector3[100];
     Vector3[] oldPoints = new Vector3[100];
@@ -82,7 +83,7 @@ public class LaserEmitter : BaseActivatable{
                         hit.collider.gameObject.GetComponent<TemperatureScript>().ChangeState(TemperatureScript.TemperatureState.Hot);
                     }
                     if (hit.collider.CompareTag(Tags.meltable)){
-                        hit.collider.gameObject.GetComponent<MeltableScript>().SetMelting(GetComponent<RotatableScript>());
+                        hit.collider.gameObject.GetComponent<MeltableScript>().SetMelting(GetComponent<RotatableScript>(), _reusable);
                     }
                     break;     //break out of the for loop to prevent multiple end lasors.
                 }
