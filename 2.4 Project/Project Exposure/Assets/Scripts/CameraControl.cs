@@ -38,12 +38,15 @@ public class CameraControl : MonoBehaviour
     //private float startTime;
     //private float journeyLength;
 
+    GameObject button;
+
 
 
     void Start() {
 
         SetStartPos();
-        //    PlayCutscene(path);
+        button = GameObject.Find("SkipCutsceneButton");
+        button.SetActive(false);
     }
 
     void Update()
@@ -52,16 +55,19 @@ public class CameraControl : MonoBehaviour
             ApplyPosition();
         }
         if (playCutscene) {
-            if (Input.GetMouseButtonDown(0)) {
-                SkipCutScene();
-            }
+            button.SetActive(true);
+         //   if (Input.GetMouseButtonDown(0)) {
+          //      SkipCutScene();
+          //  }
         }
     }
 
-    public void StartCutscene(GameObject path) {
+    public void StartCutscene(GameObject path,bool startAtPlayer) {
         FindObjectOfType<PlayerMovement>().BroadcastMessage("StopAgent");
-        GetComponent<SplineController>().SplineRoot = path;
-        GetComponent<SplineController>().FollowSpline();
+        SplineController splineController = GetComponent<SplineController>();
+        splineController.startAtPlayer = startAtPlayer;
+        splineController.SplineRoot = path;
+        splineController.FollowSpline();
         playCutscene = true;
     }
 
@@ -115,7 +121,7 @@ public class CameraControl : MonoBehaviour
         }
     }
 
-    void SkipCutScene() {
+    public void SkipCutScene() {
         GetComponent<SplineController>().Skip();
         DisableCutscene();
     }
@@ -125,7 +131,7 @@ public class CameraControl : MonoBehaviour
         SetStartPos();
         FindObjectOfType<PlayerMovement>().BroadcastMessage("ResumeAgent");
         playCutscene = false;
-   
+        button.SetActive(false);
         if (OnCameraPathEnd != null) OnCameraPathEnd();
     }
 }

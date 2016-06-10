@@ -134,6 +134,7 @@ public static class EditorList
                             break;
                         case CustomEventTrigger.Action.PlayCameraPath:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("path"), new GUIContent("Path"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("startAtPlayer"), new GUIContent("Start at player?"));
                             break;
                         case CustomEventTrigger.Action.ShowTutorial:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animator"), new GUIContent("Animator"));
@@ -158,9 +159,6 @@ public static class EditorList
                         case CustomEventTrigger.Action.DeactivateObject:
                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to deactivate"));
                            break;
-                        case CustomEventTrigger.Action.FocusOnTarget:
-                           EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("target"));
-                             break;
                         case CustomEventTrigger.Action.PlayParticle:
                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("particle"), new GUIContent("particle to play"));
                              break;

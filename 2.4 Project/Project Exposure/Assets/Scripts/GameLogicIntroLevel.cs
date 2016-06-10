@@ -16,7 +16,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
 	void Update () {
         if (Game.LastInteractedObject != null && !didpath1) {
 			if (Game.LastInteractedObject.name == "object1")
-            Game.PlayCameraPath(path1);
+            Game.PlayCameraPath(path1,true);
             activatable.Activate();
             GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = true;
             didpath1 = true;

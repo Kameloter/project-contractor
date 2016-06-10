@@ -62,8 +62,8 @@ public static class Game {
         activatable.Deactivate();
     }
 
-    static public void PlayCameraPath (GameObject path) {
-        Camera.main.GetComponent<CameraControl>().StartCutscene(path);
+    static public void PlayCameraPath (GameObject path,bool pStartAtPlayer) {
+        Camera.main.GetComponent<CameraControl>().StartCutscene(path, pStartAtPlayer);
     }
 
     static public void PlaySound(GameObject Source) {

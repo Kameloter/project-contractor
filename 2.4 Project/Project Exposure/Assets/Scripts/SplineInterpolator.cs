@@ -229,7 +229,7 @@ public class SplineInterpolator : MonoBehaviour
 		lastNode.Point = mNodes[0].Point + vInitDir * lastLength;
 
 		mNodes.Insert(0, firstNode);
-		mNodes.Add(lastNode);
+		//mNodes.Add(lastNode);
 	}
 
 	public Vector3 GetHermiteAtTime(float t)

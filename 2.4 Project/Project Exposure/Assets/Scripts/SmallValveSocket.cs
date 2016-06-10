@@ -33,6 +33,7 @@ public class SmallValveSocket : BaseInteractable {
     public GameObject socketed = null;
 
     public GameObject optionalPath;
+    public bool StartAtPlayer = true;
     bool playedCamera = false;
 
 
@@ -104,7 +105,7 @@ public class SmallValveSocket : BaseInteractable {
         if (controlValve.currentState == valveLine) {
             if (optionalPath != null && !playedCamera)
             {
-                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath);
+                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
                 playedCamera = true;
             }
             //   print("started with valve" + this.name);

@@ -20,7 +20,7 @@ public class CameraTrigger : MonoBehaviour {
     void OnTriggerEnter(Collider other) {
         if (!activated) {
             if (other.CompareTag(Tags.player)) {
-                Camera.main.GetComponent<CameraControl>().StartCutscene(path);
+              //  Camera.main.GetComponent<CameraControl>().StartCutscene(path);
                 activated = true;
             }
         }

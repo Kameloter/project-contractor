@@ -22,6 +22,7 @@ public class SplineController : MonoBehaviour
 	public bool AutoStart = true;
 	public bool AutoClose = true;
 	public bool HideOnExecute = true;
+    public bool startAtPlayer = false;
 
     bool slowDown = false;
     float previousSlowAmount;
@@ -231,7 +232,13 @@ public class SplineController : MonoBehaviour
 			return a.name.CompareTo(b.name);
 		});
 
-        transforms.Insert(0, Camera.main.transform);
+        if (startAtPlayer) {
+            transforms.Insert(0,Camera.main.transform);
+            transforms.Add(Camera.main.transform);
+        }
+        else {
+            transforms.Add(Camera.main.transform);
+        }
 		
 		// F. Montorsi modification: look for SplineNodeProperties objects
 		// attached to the spline nodes found so far...

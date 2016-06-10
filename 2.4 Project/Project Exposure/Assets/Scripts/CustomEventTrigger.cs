@@ -10,7 +10,7 @@ public class CustomEventTrigger : MonoBehaviour {
     public enum Action {
         PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable,
         DeactivateInteractable, ShowTutorial, PlayParticle, StopParticle,
-        FocusOnTarget, ActivateLight, DisableLight, ChangeLightValues,
+        ActivateLight, DisableLight, ChangeLightValues,
         ChangeImageEffects, ActivateObject, DeactivateObject, ChangeCameraOffset
     };
 
@@ -51,6 +51,8 @@ public class CustomEventTrigger : MonoBehaviour {
 
         //camera cutscene
         [SerializeField] public GameObject path;
+        [SerializeField]
+        public bool startAtPlayer;
 
         //start tutorial
         [SerializeField] public Animator animator;
@@ -90,7 +92,7 @@ public class CustomEventTrigger : MonoBehaviour {
                     Go[i].go.GetComponent<Animation>().Play();
                     break;
                 case Action.PlayCameraPath:
-                    Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path);
+                    Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path,Go[i].startAtPlayer);
                     break;
                 case Action.PlaySound:
                     Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
@@ -126,9 +128,6 @@ public class CustomEventTrigger : MonoBehaviour {
                     break;
                 case Action.StopParticle:
                     Go[i].particle.Stop();
-                    break;
-                case Action.FocusOnTarget:
-                    Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].go);
                     break;
                 case Action.ChangeCameraOffset:
                     Camera.main.GetComponent<CameraControl>().offset = Go[i].offset;
