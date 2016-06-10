@@ -9,16 +9,21 @@ ModelImporter:
     100002: button:button
     100004: buttongroup
     100006: buttonstand
+    100008: button2
     400000: //RootNode
     400002: button:button
     400004: buttongroup
     400006: buttonstand
+    400008: button2
     2300000: button:button
     2300002: buttonstand
+    2300004: button2
     3300000: button:button
     3300002: buttonstand
+    3300004: button2
     4300000: button:button
     4300002: buttonstand
+    4300004: button2
     7400000: Take 001
     9500000: //RootNode
   materials:
