@@ -29,4 +29,9 @@ public class TutorialSelectorScript : MonoBehaviour {
         if (tutorialAnimator.GetComponent<Canvas>().enabled) tutorialAnimator.SetTrigger("Exit");
         gameObject.SetActive(true);
     }
+
+    public void Toggle() {  //changes state
+        if (gameObject.activeSelf) Exit();
+        else Enable();
+    }
 }
