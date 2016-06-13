@@ -39,19 +39,25 @@ public class GameManager : MonoBehaviour {
     GameObject deactivatedObject;
 
     Text text;
+    Text textLevel;
    // WWW www;
 
-    int score = 0;
+    public float TimeLeft = 180.0f; 
+    public float TimeSpentLevel = 0.0f;
 
     float inactiveTime = 0;
 
+    int score = 0;
+
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
+        textLevel = GameObject.Find("Timer").GetComponent<Text>();
     }
 
     void OnLevelWasLoaded(int level) {
         text = GameObject.Find("Time").GetComponent<Text>();
-        print("level loaded");
+        textLevel = GameObject.Find("Timer").GetComponent<Text>();
+        TimeSpentLevel = 0;
     }
 
     /// <summary>
@@ -110,6 +116,14 @@ public class GameManager : MonoBehaviour {
         set { score = value; }
     }
 
+    public float TimeNeededForLevel {
+        get { return GameObject.Find("UtilityManagers").GetComponent<SceneStats>().TimeNeededForLevel;}
+    }
+
+    public float TimeSpentOnLevel {
+        get { return TimeSpentLevel; }
+    }
+
     public int MaxCollectablesAvailable {
         get { return _maxCollectablesAvailable; }
         set { _maxCollectablesAvailable = value; }
@@ -144,28 +158,33 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public float TimeLeft = 10.0f;
 
 
     void Update() {
+        //changing timers
         TimeLeft -= Time.deltaTime;
         inactiveTime += Time.deltaTime;
+        TimeSpentLevel += Time.deltaTime;
 
+        //if input change inactive timer to 0
         if (Input.GetMouseButton(0)) {
             inactiveTime = 0;
         }
 
+        //if longer inactive than 30s close the game
         if (inactiveTime >= 30) {
             print("termination");
             Application.Quit();
         }
 
+        //if gametime is over save it on the server
         if (TimeLeft <= 0) {
           //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
         }
 
-
-  //      text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
+        //debug texts
+        text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
+        textLevel.text = Mathf.Floor((TimeSpentLevel / 60)).ToString("0" + "#':'") + ((int)TimeSpentLevel % 60).ToString("D2");
     }
 
 

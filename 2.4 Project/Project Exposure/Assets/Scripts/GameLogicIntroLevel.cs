@@ -28,6 +28,11 @@ public class GameLogicIntroLevel : MonoBehaviour {
         else {
             trigger.SetActive(false);
         }
+
+        if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel){
+            print("TimeSpent Here: ");
+        }
+        
 	}
 
     void DoSomething()

@@ -17,6 +17,14 @@ public static class Game {
         get { return GameManager.Instance.TimeLeft; }
     }
 
+    static public float TimeNeededForLevel {
+        get { return GameManager.Instance.TimeNeededForLevel; }
+    }
+
+    static public float TimeSpentOnLevel {
+        get { return GameManager.Instance.TimeSpentOnLevel; }
+    }
+
     static public GameObject LastActivatedObject
     {
         get { return GameManager.Instance.ActivatedObject; }

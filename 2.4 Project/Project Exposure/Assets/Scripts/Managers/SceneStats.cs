@@ -5,7 +5,8 @@ using System.Collections;
 public class SceneStats : MonoBehaviour {
 
     [Header("Level Stats")]
-    [ReadOnly] public int _collectablesAvailable = 0;   //keeps track of the amount of collectables to be found 
+    [ReadOnly] public int _collectablesAvailable = 0;   //keeps track of the amount of collectables to be found
+    public int TimeNeededForLevel = 10;
 
     void Start() {
         //Count collectables available this scene

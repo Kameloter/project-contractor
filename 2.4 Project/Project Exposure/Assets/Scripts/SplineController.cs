@@ -140,8 +140,8 @@ public class SplineController : MonoBehaviour
 
     void Update() {
       //  if (slowDown) {
-            Time.timeScale = Mathf.Lerp(previousSlowAmount,slowAmount,t);
-            t += 2f * Time.deltaTime;
+        //    Time.timeScale = Mathf.Lerp(previousSlowAmount,slowAmount,t);
+       //     t += 2f * Time.deltaTime;
     }
 
     public void Skip() {
