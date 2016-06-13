@@ -59,6 +59,8 @@ public class SplineInterpolator : MonoBehaviour
 	OnNodeLeavingCallback mOnNodeLeavingCallback;
 	int mLastNodeCallback = 0;
 
+    bool Skipped = false;
+
 	
 	// --------------------------------------------------------------------------------------------
 	// UNITY CALLBACKS
@@ -78,6 +80,12 @@ public class SplineInterpolator : MonoBehaviour
 		mCurrentTime += Time.deltaTime;
 
         //if (Input.GetKeyDown(KeyCode.M)) mState = "Stopped";
+        if(mCurrentIdx == 1 && !Skipped){
+            print("index is 0");
+            transform.position = mNodes[mCurrentIdx].Point;
+            transform.rotation = mNodes[mCurrentIdx].Rot;
+            Skipped = true;
+        }
 
         if (mCurrentTime >= mNodes[mCurrentIdx + 1].ArrivalTime)
 		{			
@@ -110,6 +118,8 @@ public class SplineInterpolator : MonoBehaviour
 						mOnNodeArrivalCallback(mCurrentIdx+1, mNodes[mCurrentIdx+1]);
 					if (mOnPathEndCallback != null)
 						mOnPathEndCallback();
+
+                    Skipped = false;
 				}
 				else
 				{
