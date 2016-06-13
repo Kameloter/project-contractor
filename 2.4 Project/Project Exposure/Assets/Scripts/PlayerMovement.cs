@@ -44,16 +44,10 @@ public class PlayerMovement : MonoBehaviour
        
     }
  
-    void Update()
-    {
-
+    void Update()     {
         PickUpRaycast();
         MouseMovement();
-
     }
-       
-        //Movement();
-        //rigibody.AddForce(new Vector3(0, -0.1f, 0));
   
     void PickUpRaycast()
     {
@@ -78,13 +72,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-    IEnumerator dontNavigateWhenClickedOnInteractable()
-    {
+
+    IEnumerator dontNavigateWhenClickedOnInteractable() {
         Debug.Log("set to false");
         allowNavigationInput = false; //disable navigation input.
         yield return  new WaitForSeconds(0.3f);
         allowNavigationInput = true; //alows navigation input again.
     }
+
     void MouseMovement() {
         if (Input.GetMouseButton(0)) {
             PointerEventData cursor = new PointerEventData(EventSystem.current);                            // This section prepares a list for all objects hit with the raycast
@@ -109,30 +104,25 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-     
-
-
-
     }
 
-    public void SendAgent(Transform interactable)
-    {
+    public void SendAgent(Transform interactable) {
         agent.SetDestination(interactable.position);
         GameManager.Instance.ClickedObject = interactable.gameObject;
       //  print("set destination to " + interactable.gameObject.name);
     }
-    public void StopAgent()
-    {
+
+    public void StopAgent() {
         agent.Stop();
       //  print("Stopped agent");
     }
-    public void ResumeAgent()
-    {
+
+    public void ResumeAgent() {
         agent.ResetPath();
         agent.Resume();
     }
-    void Movement()
-    {
+
+    void Movement() {
         Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
     
         Vector3 lookdir = cam.transform.forward;
@@ -146,8 +136,7 @@ public class PlayerMovement : MonoBehaviour
         targetVelocity *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? 0.7f : 1;
         targetVelocity *= speed;
 
-        if (targetVelocity.magnitude > 0)
-        {
+        if (targetVelocity.magnitude > 0) {
             transform.rotation = Quaternion.LookRotation(new Vector3(targetVelocity.x, 0, targetVelocity.z));
         }
 
