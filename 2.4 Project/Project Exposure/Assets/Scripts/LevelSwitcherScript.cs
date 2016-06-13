@@ -53,6 +53,12 @@ public class LevelSwitcherScript : MonoBehaviour {
         scoreScreen.SetActive(false);
     }
 
+    void UpdateScoreScreen() {
+        timeSpentText.text = Mathf.Round(timeSpent).ToString() + " seconden";
+        timeLeftText.text = Mathf.Round(timeLeft).ToString() + " seconden";
+        collectedText.text = collected.ToString();
+    }
+
     public void Continue() { //Called by button on scorescreen.
         SwitchLevel(level);
     }
@@ -66,6 +72,7 @@ public class LevelSwitcherScript : MonoBehaviour {
             GetStats(out timeSpent, out collected, out timeLeft);
 
             //show UI
+            UpdateScoreScreen();
             EnableScoreScreen();
         }
     }
