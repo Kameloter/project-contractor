@@ -2,10 +2,15 @@
 using System.Collections;
 using UnityEngine.UI;
 
-
+/// <summary>
+/// Class for a trigger system to make easy events and actions when a player hits this trigger
+/// </summary>
 [System.Serializable]
 public class CustomEventTrigger : MonoBehaviour {
 
+    /// <summary>
+    /// enum with all the avaible actions for the trigger
+    /// </summary>
     [SerializeField]
     public enum Action {
         PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable,
@@ -14,20 +19,31 @@ public class CustomEventTrigger : MonoBehaviour {
         ChangeImageEffects, ActivateObject, DeactivateObject, ChangeCameraOffset
     };
 
+    /// <summary>
+    /// enum to specify when you want to fire the event
+    /// </summary>
     [SerializeField]
     public enum OnTrigger {
         OnTriggerEnter, OnTriggerExit, OnTriggerStay
     };
 
+    /// <summary>
+    /// enum to specify the fireMode of the event, once, repeating etc
+    /// </summary>
     [SerializeField]
     public enum FireType {
         Once, Delayed, Repeat, RepeatDelayed
     };
 
+    /// <summary>
+    /// struct with all possible variable for all actions(enum)
+    /// show correct viarables in custom event editor script
+    /// </summary>
     [System.Serializable]
-    public struct info {
+    public struct CustomEvent {
         public Action action;
 
+        //fire and trigger types
         [SerializeField] public OnTrigger onTrigger;
         [SerializeField] public bool triggerMore;
         [SerializeField] public bool triggered;
@@ -37,7 +53,7 @@ public class CustomEventTrigger : MonoBehaviour {
         [SerializeField] public float repeatAmount;
         [SerializeField] public bool activated;
 
-        //gameobject
+        //Gameobject to complete the action
         [SerializeField] public GameObject go;
 
         // audioclip to play
@@ -70,94 +86,108 @@ public class CustomEventTrigger : MonoBehaviour {
         [SerializeField] public float bounceIntensity;
         [SerializeField] public float range;
 
+        //new camera offset
         [SerializeField] public Vector3 offset;
     }
 
+    /// <summary>
+    /// array of events so you can have multiple events per trigger
+    /// </summary>
     [SerializeField]
-    public info[] Go;
+    public CustomEvent[] customEvents;
 
+    /// <summary>
+    /// Enumerator to do a action based on the action enum
+    /// </summary>
+    /// <param name="i">index of the forloop</param>
+    /// <param name="waitTime">optional wait time</param>
     IEnumerator DoEvent(int i, float waitTime) {
         yield return new WaitForSeconds(waitTime);
 
-        if (!Go[i].triggered) {
-            switch (Go[i].action) {
+        if (!customEvents[i].triggered) {
+            switch (customEvents[i].action) {
                 case Action.ActivateInteractable:
-                    Go[i].interactable.Activate();
+                    customEvents[i].interactable.Activate();
                     break;
                 case Action.DeactivateInteractable:
-                    Go[i].interactable.Deactivate();
+                    customEvents[i].interactable.Deactivate();
                     break;
                 case Action.PlayAnimation:
-                    Go[i].go.GetComponent<Animation>().clip = Go[i].animation;
-                    Go[i].go.GetComponent<Animation>().Play();
+                    customEvents[i].go.GetComponent<Animation>().clip = customEvents[i].animation;
+                    customEvents[i].go.GetComponent<Animation>().Play();
                     break;
                 case Action.PlayCameraPath:
-                    Camera.main.GetComponent<CameraControl>().StartCutscene(Go[i].path,Go[i].startAtPlayer);
+                    Camera.main.GetComponent<CameraControl>().StartCutscene(customEvents[i].path,customEvents[i].startAtPlayer);
                     break;
                 case Action.PlaySound:
-                    Go[i].go.GetComponent<AudioSource>().clip = Go[i].audioClip;
-                    Go[i].go.GetComponent<AudioSource>().Play();
+                    customEvents[i].go.GetComponent<AudioSource>().clip = customEvents[i].audioClip;
+                    customEvents[i].go.GetComponent<AudioSource>().Play();
                     break;
                 case Action.ShowTutorial:
                     GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.RemoveAllListeners();
-                    GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.AddListener(() => { Go[i].animator.SetTrigger(Go[i].animationName); });
-                    Go[i].animator.SetTrigger(Go[i].animationName);
+                    GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.AddListener(() => { customEvents[i].animator.SetTrigger(customEvents[i].animationName); });
+                    customEvents[i].animator.SetTrigger(customEvents[i].animationName);
                     break;
                 case Action.ActivateLight:
-                    Go[i].light.enabled = true;
+                    customEvents[i].light.enabled = true;
                     break;
                 case Action.DisableLight:
-                    Go[i].light.enabled = false;
+                    customEvents[i].light.enabled = false;
                     break;
                 case Action.ChangeLightValues:
-                    if (Go[i].light.range != 0) {
-                        Go[i].light.range = Go[i].range;
+                    if (customEvents[i].light.range != 0) {
+                        customEvents[i].light.range = customEvents[i].range;
                     }
-                    Go[i].light.color = Go[i].color;
-                    Go[i].light.intensity = Go[i].intensity;
-                    Go[i].light.bounceIntensity = Go[i].bounceIntensity;
+                    customEvents[i].light.color = customEvents[i].color;
+                    customEvents[i].light.intensity = customEvents[i].intensity;
+                    customEvents[i].light.bounceIntensity = customEvents[i].bounceIntensity;
                     break;
                 case Action.ActivateObject:
-                    Go[i].go.SetActive(true);
+                    customEvents[i].go.SetActive(true);
                     break;
                 case Action.DeactivateObject:
-                    Go[i].go.SetActive(false);
+                    customEvents[i].go.SetActive(false);
                     break;
                 case Action.PlayParticle:
-                    Go[i].particle.Play();
+                    customEvents[i].particle.Play();
                     break;
                 case Action.StopParticle:
-                    Go[i].particle.Stop();
+                    customEvents[i].particle.Stop();
                     break;
                 case Action.ChangeCameraOffset:
-                    Camera.main.GetComponent<CameraControl>().offset = Go[i].offset;
+                    Camera.main.GetComponent<CameraControl>().offset = customEvents[i].offset;
                     break;
             }
-            if (!Go[i].triggerMore) {
-                Go[i].triggered = true;
+            if (!customEvents[i].triggerMore) {
+                customEvents[i].triggered = true;
             }
         }
     }
 
+    /// <summary>
+    /// If you trigger the object it loops trough all events and fires them based on firetype
+    /// Same for stay and exit trigger events
+    /// </summary>
+    /// <param name="other">The collider it hit with</param>
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag(Tags.player)) {
-            for (int i = 0; i < Go.Length; i++) {
-                if (Go[i].onTrigger == OnTrigger.OnTriggerEnter) {
-                    switch (Go[i].fireType) {
+            for (int i = 0; i < customEvents.Length; i++) {
+                if (customEvents[i].onTrigger == OnTrigger.OnTriggerEnter) {
+                    switch (customEvents[i].fireType) {
                         case FireType.Once:
                             StartCoroutine(DoEvent(i, 0));
                             break;
                         case FireType.Delayed:
-                            StartCoroutine(DoEvent(i, Go[i].delay));
+                            StartCoroutine(DoEvent(i, customEvents[i].delay));
                             break;
                         case FireType.Repeat:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                            for (int j = 0; j < customEvents[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, 0 + j * customEvents[i].repeatTime));
                             }
                             break;
                         case FireType.RepeatDelayed:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                            for (int j = 0; j < customEvents[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, customEvents[i].delay + j * customEvents[i].repeatTime));
                             }
                             break;
                     }
@@ -169,23 +199,23 @@ public class CustomEventTrigger : MonoBehaviour {
 
     void OnTriggerStay(Collider other) {
         if (other.CompareTag(Tags.player)) {
-            for (int i = 0; i < Go.Length; i++) {
-                if (Go[i].onTrigger == OnTrigger.OnTriggerStay) {
-                    switch (Go[i].fireType) {
+            for (int i = 0; i < customEvents.Length; i++) {
+                if (customEvents[i].onTrigger == OnTrigger.OnTriggerStay) {
+                    switch (customEvents[i].fireType) {
                         case FireType.Once:
                             StartCoroutine(DoEvent(i, 0));
                             break;
                         case FireType.Delayed:
-                            StartCoroutine(DoEvent(i, Go[i].delay));
+                            StartCoroutine(DoEvent(i, customEvents[i].delay));
                             break;
                         case FireType.Repeat:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                            for (int j = 0; j < customEvents[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, 0 + j * customEvents[i].repeatTime));
                             }
                             break;
                         case FireType.RepeatDelayed:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                            for (int j = 0; j < customEvents[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, customEvents[i].delay + j * customEvents[i].repeatTime));
                             }
                             break;
                     }
@@ -196,23 +226,23 @@ public class CustomEventTrigger : MonoBehaviour {
 
     void OnTriggerExit(Collider other) {
         if (other.CompareTag(Tags.player)) {
-            for (int i = 0; i < Go.Length; i++) {
-                if (Go[i].onTrigger == OnTrigger.OnTriggerExit) {
-                    switch (Go[i].fireType) {
+            for (int i = 0; i < customEvents.Length; i++) {
+                if (customEvents[i].onTrigger == OnTrigger.OnTriggerExit) {
+                    switch (customEvents[i].fireType) {
                         case FireType.Once:
                             StartCoroutine(DoEvent(i, 0));
                             break;
                         case FireType.Delayed:
-                            StartCoroutine(DoEvent(i, Go[i].delay));
+                            StartCoroutine(DoEvent(i, customEvents[i].delay));
                             break;
                         case FireType.Repeat:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, 0 + j * Go[i].repeatTime));
+                            for (int j = 0; j < customEvents[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, 0 + j * customEvents[i].repeatTime));
                             }
                             break;
                         case FireType.RepeatDelayed:
-                            for (int j = 0; j < Go[i].repeatAmount; j++) {
-                                StartCoroutine(DoEvent(i, Go[i].delay + j * Go[i].repeatTime));
+                            for (int j = 0; j < customEvents[i].repeatAmount; j++) {
+                                StartCoroutine(DoEvent(i, customEvents[i].delay + j * customEvents[i].repeatTime));
                             }
                             break;
                     }

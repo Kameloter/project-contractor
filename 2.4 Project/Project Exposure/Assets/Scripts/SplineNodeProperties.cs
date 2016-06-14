@@ -13,7 +13,6 @@ public class SplineNodeProperties : MonoBehaviour
 	// these properties get copied by the SplineController into SplineNode structures
 	// (along with other properties)
 	public float BreakTime = 0f;
-    public float SpeedUpSlowDown =1.0f;
     public bool SkipToNext = false;
 
     [HideInInspector]

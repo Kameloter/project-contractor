@@ -1,173 +1,165 @@
-﻿using UnityEngine;
-using System.Collections;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+﻿//using UnityEngine;
+//using System.Collections;
+//#if UNITY_EDITOR
+//using UnityEditor;
+//#endif
 
 
-public class Interactable : BaseActivatable {
-    
-    public enum TypeOfInteractables
-    {
-        Movable, Rotatable, Laser
-    }
-    
-    public TypeOfInteractables typeOfInteractable;
-    
-    [Header("Movable:")]
-    public Transform movableObject;
-    public Transform endPoint;
-    public Transform startPoint;
-    public float moveSpeed = 0;
+//public class Interactable : BaseActivatable {
 
-    [Header("State options:")]
-    public int currentState;
+//    public enum TypeOfInteractables {
+//        Movable, Rotatable, Laser
+//    }
 
-    [Tooltip("  0 => Inactive , 1 => open , 2 => closed")]
-    [SerializeField]
-    private int startState;
+//    public TypeOfInteractables typeOfInteractable;
 
-    [Header("Rotatable:")]
-    public float degrees;
-    public Vector3 axisToRotate = Vector3.zero;
+//    [Header("Movable:")]
+//    public Transform movableObject;
+//    public Transform endPoint;
+//    public Transform startPoint;
+//    public float moveSpeed = 0;
 
-    private Vector3 moveDirection;
-    private Transform currentDestination;
+//    [Header("State options:")]
+//    public int currentState;
 
-    public TemperatureScript temperatureScript;
+//    [Tooltip("  0 => Inactive , 1 => open , 2 => closed")]
+//    [SerializeField]
+//    private int startState;
 
-    void Awake()
-    {
-        currentState = startState;
-        temperatureScript = GetComponent<TemperatureScript>();
-        if (temperatureScript == null) {
-            temperatureScript = GetComponentInChildren<TemperatureScript>();
-        }
-    }
-    public virtual void FixedUpdate() {
-       // if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
-            switch (typeOfInteractable) {
-                case TypeOfInteractables.Movable:
-                    if (currentState != 0) {
-                        movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
+//    [Header("Rotatable:")]
+//    public float degrees;
+//    public Vector3 axisToRotate = Vector3.zero;
 
-                        if (currentState == 2) {
-                            SetDestination(endPoint);
-                        }
+//    private Vector3 moveDirection;
+//    private Transform currentDestination;
 
-                        if (currentState == 1) {
-                            SetDestination(startPoint);
-                        }
+//    public TemperatureScript temperatureScript;
 
-                        if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
-                            currentState = 0;
-                            moveDirection = Vector3.zero;
-                            movableObject.position = currentDestination.position;
-                        }
-
-                    }
-                    break;
-
-                case TypeOfInteractables.Rotatable:
-                    switch (currentState) {
-                        case 1:
-                            this.transform.rotation = Quaternion.AngleAxis(degrees, axisToRotate);
-                            break;
-
-                        case 2:
-                            this.transform.rotation = Quaternion.AngleAxis(0, axisToRotate);
-                            break;
-                    }
-                    break;
-            }
-      //  }
-        //should handle when an object started rotating 
-
-        //should handle when an object started moving 
-
-        //should not update object ALL the time.
-        if (Input.GetKeyDown(KeyCode.O)) {
-            currentState = 1;
-        }
-        if (Input.GetKeyDown(KeyCode.C)) {
-            currentState = 2;
-        }
-    }
-
-    void SetDestination(Transform dest)
-    {
-        currentDestination = dest;
-        moveDirection = (currentDestination.position - movableObject.position).normalized;
-    }
-    public virtual void Movable(int state)
-    {
-        //moves object
-        print("Door state - > " + state);
-        currentState = state;
-
-    }
-
-    public void Rotatable(int rotateState)
-    {
-        print("Rotation state -> " + rotateState);
-        currentState = rotateState;
-    }
-
-    public virtual void RotateAroundAxis(float angle,Vector3 axis)
-    {
-        //rotates object.
-    }
-
-    public override void Activate()
-    {
-        SendMessage(typeOfInteractable.ToString(), 1);
-    }
-    public override void Deactivate()
-    {
-        SendMessage(typeOfInteractable.ToString(), 2);
-    }
-
-    void OnDrawGizmos() {
-        if (typeOfInteractable == TypeOfInteractables.Movable) {
-            if (movableObject == null || startPoint == null || endPoint == null) return;
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireCube(startPoint.position, movableObject.localScale);
-
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(endPoint.position, movableObject.localScale);
-        }
-    }
-}
-
-
-
-//[CustomEditor(typeof(Interactable))]
-//public class MyScriptEditor : Editor
-//{
-//    public Interactable.TypeOfInteractables myEnum;
-
-//    override public void OnInspectorGUI()
-//    {
-//        var myScript = target as Interactable;
-
-//        myEnum = (Interactable.TypeOfInteractables)EditorGUILayout.EnumPopup("Type of interactable:", myEnum);
-  
-//        switch(myEnum)
-//        {
-//            case Interactable.TypeOfInteractables.Moveable:
-//            myScript.startPoint = EditorGUILayout.ObjectField(myScript.startPoint, typeof(Transform), true) as Transform;
-//            myScript.endPoint = EditorGUILayout.ObjectField(myScript.endPoint, typeof(Transform), true) as Transform;
-//                break;
-
-//            case Interactable.TypeOfInteractables.Rotateable:
-//                myScript.degrees = EditorGUILayout.FloatField(myScript.degrees);
-//                myScript.axisToRotate = EditorGUILayout.Vector3Field("Rotate around axis : ", myScript.axisToRotate);
-//                break;
-
+//    void Awake() {
+//        currentState = startState;
+//        temperatureScript = GetComponent<TemperatureScript>();
+//        if (temperatureScript == null) {
+//            temperatureScript = GetComponentInChildren<TemperatureScript>();
 //        }
+//    }
+//    public virtual void FixedUpdate() {
+//        // if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
+//        switch (typeOfInteractable) {
+//            case TypeOfInteractables.Movable:
+//                if (currentState != 0) {
+//                    movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
 
+//                    if (currentState == 2) {
+//                        SetDestination(endPoint);
+//                    }
 
+//                    if (currentState == 1) {
+//                        SetDestination(startPoint);
+//                    }
 
+//                    if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
+//                        currentState = 0;
+//                        moveDirection = Vector3.zero;
+//                        movableObject.position = currentDestination.position;
+//                    }
+
+//                }
+//                break;
+
+//            case TypeOfInteractables.Rotatable:
+//                switch (currentState) {
+//                    case 1:
+//                        this.transform.rotation = Quaternion.AngleAxis(degrees, axisToRotate);
+//                        break;
+
+//                    case 2:
+//                        this.transform.rotation = Quaternion.AngleAxis(0, axisToRotate);
+//                        break;
+//                }
+//                break;
+//        }
+//        //  }
+//        //should handle when an object started rotating 
+
+//        //should handle when an object started moving 
+
+//        //should not update object ALL the time.
+//        if (Input.GetKeyDown(KeyCode.O)) {
+//            currentState = 1;
+//        }
+//        if (Input.GetKeyDown(KeyCode.C)) {
+//            currentState = 2;
+//        }
+//    }
+
+//    void SetDestination(Transform dest) {
+//        currentDestination = dest;
+//        moveDirection = (currentDestination.position - movableObject.position).normalized;
+//    }
+//    public virtual void Movable(int state) {
+//        //moves object
+//        print("Door state - > " + state);
+//        currentState = state;
 
 //    }
+
+//    public void Rotatable(int rotateState) {
+//        print("Rotation state -> " + rotateState);
+//        currentState = rotateState;
+//    }
+
+//    public virtual void RotateAroundAxis(float angle, Vector3 axis) {
+//        //rotates object.
+//    }
+
+//    public override void Activate() {
+//        SendMessage(typeOfInteractable.ToString(), 1);
+//    }
+//    public override void Deactivate() {
+//        SendMessage(typeOfInteractable.ToString(), 2);
+//    }
+
+//    void OnDrawGizmos() {
+//        if (typeOfInteractable == TypeOfInteractables.Movable) {
+//            if (movableObject == null || startPoint == null || endPoint == null) return;
+//            Gizmos.color = Color.green;
+//            Gizmos.DrawWireCube(startPoint.position, movableObject.localScale);
+
+//            Gizmos.color = Color.red;
+//            Gizmos.DrawWireCube(endPoint.position, movableObject.localScale);
+//        }
+//    }
 //}
+
+
+
+////[CustomEditor(typeof(Interactable))]
+////public class MyScriptEditor : Editor
+////{
+////    public Interactable.TypeOfInteractables myEnum;
+
+////    override public void OnInspectorGUI()
+////    {
+////        var myScript = target as Interactable;
+
+////        myEnum = (Interactable.TypeOfInteractables)EditorGUILayout.EnumPopup("Type of interactable:", myEnum);
+
+////        switch(myEnum)
+////        {
+////            case Interactable.TypeOfInteractables.Moveable:
+////            myScript.startPoint = EditorGUILayout.ObjectField(myScript.startPoint, typeof(Transform), true) as Transform;
+////            myScript.endPoint = EditorGUILayout.ObjectField(myScript.endPoint, typeof(Transform), true) as Transform;
+////                break;
+
+////            case Interactable.TypeOfInteractables.Rotateable:
+////                myScript.degrees = EditorGUILayout.FloatField(myScript.degrees);
+////                myScript.axisToRotate = EditorGUILayout.Vector3Field("Rotate around axis : ", myScript.axisToRotate);
+////                break;
+
+////        }
+
+
+
+
+////    }
+////}

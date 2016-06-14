@@ -1,11 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// class to make a particle start to make object freeze
+/// </summary>
 public class FreezeStreamScript : BaseActivatable {
 
-    public ParticleSystem particle;
+    //particlesystem to use
+    [SerializeField] ParticleSystem particle;
 
-    public bool PlayAtStart = false;
+    //start playing a start
+    [SerializeField] bool PlayAtStart = false;
 
     public override void Start()
     {
@@ -14,6 +19,7 @@ public class FreezeStreamScript : BaseActivatable {
             particle.Play();
         }
     }
+
     public override void Activate() {
         particle.Play();
     }

@@ -1,8 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// gamelogic script for simple scripting
+/// Game class hold functions and variables you can easely use to make some simple actions.
+/// </summary>
 public class GameLogicIntroLevel : MonoBehaviour {
-
     public GameObject path1;
     bool didpath1= false;
     public BaseActivatable activatable;

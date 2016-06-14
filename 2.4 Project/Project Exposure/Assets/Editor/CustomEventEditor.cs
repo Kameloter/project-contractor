@@ -13,7 +13,7 @@ public class CustomEventEditor : Editor {
 
     void OnEnable() {
         trigger = (CustomEventTrigger) target;
-        prop = serializedObject.FindProperty("Go");
+        prop = serializedObject.FindProperty("customEvents");
         script = MonoScript.FromMonoBehaviour((CustomEventTrigger)target);
         foldouts = new bool[20];
     }

@@ -24,11 +24,6 @@ public class SplineController : MonoBehaviour
 	public bool HideOnExecute = true;
     public bool startAtPlayer = false;
 
-    bool slowDown = false;
-    float previousSlowAmount;
-    float slowAmount = 1.0f;
-    float t = 0.0f;
-
 	SplineInterpolator mSplineInterp;
 	
 	// for better performance we precompute the list of nodes and we re-use the
@@ -104,7 +99,6 @@ public class SplineController : MonoBehaviour
 	{
 		if (SplineRoot != null)
 		{
-			//SplineRoot.SetActiveRecursively(false);		// deprecated in Unity 4
 			SplineRoot.SetActive(false);
 		}
 	}
@@ -119,7 +113,7 @@ public class SplineController : MonoBehaviour
 		if (mSplineNodeInfo.Length > 0)
 		{
 			SetupSplineInterpolator(mSplineInterp, mSplineNodeInfo);
-            mSplineInterp.StartInterpolation(DisableCutscene, ChangeValues, null, true, WrapMode);
+            mSplineInterp.StartInterpolation(DisableCutscene, null, null, true, WrapMode);
 		}
 	}
 
@@ -141,24 +135,12 @@ public class SplineController : MonoBehaviour
 		}
 	}
 
-    void Update() {
-      //  if (slowDown) {
-        //    Time.timeScale = Mathf.Lerp(previousSlowAmount,slowAmount,t);
-       //     t += 2f * Time.deltaTime;
-    }
-
     public void Skip() {
         mSplineInterp.Reset();
     }
 
     void DisableCutscene() {
         this.GetComponent<CameraControl>().DisableCutscene();
-    }
-
-    void ChangeValues(int index, SplineNode node) {
-        previousSlowAmount = slowAmount;
-        slowAmount = node.SpeedUpSlowDown;
-        t = 0;
     }
 	
 	// --------------------------------------------------------------------------------------------
@@ -186,7 +168,7 @@ public class SplineController : MonoBehaviour
 				interp.AddPoint(ninfo[c].Name, ninfo[c].Point, 
 								ninfo[c].Rot, 
 								currTime, ninfo[c].BreakTime, 
-								new Vector2(0, 1), ninfo[c].SpeedUpSlowDown, ninfo[c].SkipToNext);
+								new Vector2(0, 1), ninfo[c].SkipToNext);
 			}
 			else if (OrientationMode == eOrientationMode.TANGENT)
 			{
@@ -202,7 +184,7 @@ public class SplineController : MonoBehaviour
 
 				interp.AddPoint(ninfo[c].Name, ninfo[c].Point, rot, 
 								currTime, ninfo[c].BreakTime,
-                                new Vector2(0, 1), ninfo[c].SpeedUpSlowDown, ninfo[c].SkipToNext);
+                                new Vector2(0, 1), ninfo[c].SkipToNext);
 			}
 			
 			// when ninfo[i].StopHereForSecs == 0, then each node of the spline is reached at
@@ -250,9 +232,9 @@ public class SplineController : MonoBehaviour
     	{
 			SplineNodeProperties p = element.GetComponent<SplineNodeProperties>();
 			if (p != null)
-				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime,p.SpeedUpSlowDown, p.SkipToNext));
+				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime, p.SkipToNext));
 			else
-				info.Add(new SplineNode("", element.transform, 0,1,false));
+				info.Add(new SplineNode("", element.transform, 0,false));
 		}
 
 		return info.ToArray();

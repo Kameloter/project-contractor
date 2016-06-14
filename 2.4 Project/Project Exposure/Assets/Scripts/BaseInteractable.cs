@@ -2,6 +2,9 @@
 using UnityEngine.Events;
 using System.Collections;
 
+/// <summary>
+/// Class as base for all objects that need to be interactable/clickable
+/// </summary>
 public class BaseInteractable : MonoBehaviour {
 
     [ReadOnly] public bool playerInRange = false;
