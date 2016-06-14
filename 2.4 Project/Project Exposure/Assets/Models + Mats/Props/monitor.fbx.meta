@@ -13,6 +13,7 @@ ModelImporter:
     100010: wire1
     100012: wire2
     100014: monitor
+    100016: monitor 1
     400000: back
     400002: back2
     400004: //RootNode
@@ -21,6 +22,7 @@ ModelImporter:
     400010: wire1
     400012: wire2
     400014: monitor
+    400016: monitor 1
     2300000: back
     2300002: back2
     2300004: pipe
@@ -28,6 +30,7 @@ ModelImporter:
     2300008: wire1
     2300010: wire2
     2300012: monitor
+    2300014: monitor 1
     3300000: back
     3300002: back2
     3300004: pipe
@@ -35,6 +38,7 @@ ModelImporter:
     3300008: wire1
     3300010: wire2
     3300012: monitor
+    3300014: monitor 1
     4300000: screen
     4300002: back
     4300004: pipe
