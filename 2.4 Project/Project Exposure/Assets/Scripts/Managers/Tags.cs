@@ -24,5 +24,6 @@ public class Tags : MonoBehaviour {
     public const string particleSteam = "SteamParticle";
     public const string particleFreeze = "FreezeParticle";
     public const string meltable = "Meltable";
+    public const string skipButton = "SkipButton";
 
 }

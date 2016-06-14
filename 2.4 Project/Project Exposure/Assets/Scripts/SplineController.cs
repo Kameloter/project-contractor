@@ -126,8 +126,11 @@ public class SplineController : MonoBehaviour
 
 
 	/// <summary>
-	/// Starts the interpolation
+    /// Starts the interpolation
 	/// </summary>
+	/// <param name="endCallback"> event call when spline has ended </param>
+	/// <param name="nodeCallback1"></param>
+	/// <param name="nodeCallback2"></param>
 	public void FollowSpline(OnPathEndCallback endCallback, 
 							 OnNodeArrivalCallback nodeCallback1, OnNodeLeavingCallback nodeCallback2)
 	{

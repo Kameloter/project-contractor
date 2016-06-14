@@ -114,7 +114,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void StopAgent() {
         agent.Stop();
-      //  print("Stopped agent");
     }
 
     public void ResumeAgent() {
@@ -151,5 +150,15 @@ public class PlayerMovement : MonoBehaviour
 
         //Add gravity
         rigibody.AddForce(new Vector3(0, -gravity * rigibody.mass, 0));
+    }
+
+    void OnEnable() {
+        CameraControl.OnCameraPathEnd.AddListener(ResumeAgent);
+        CameraControl.OnCameraPathStart.AddListener(StopAgent);
+    }
+
+    void OnDisable() {
+        CameraControl.OnCameraPathEnd.RemoveListener(ResumeAgent);
+        CameraControl.OnCameraPathStart.RemoveListener(StopAgent);
     }
 }

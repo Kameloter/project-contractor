@@ -14,6 +14,8 @@ public class MeltableScript : MonoBehaviour {
     bool triggered = false;
 
     bool _reusable = false;
+    [SerializeField]
+    ParticleSystem particleSystem;
 
     // Use this for initialization
     void Start () {
@@ -30,6 +32,7 @@ public class MeltableScript : MonoBehaviour {
             triggered = true;
 
             transform.parent.gameObject.GetComponent<Animator>().SetBool("Melting",true);
+        //    particleSystem.Play();
         } 
     }
 	
@@ -42,9 +45,6 @@ public class MeltableScript : MonoBehaviour {
                 Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
                 playedCamera = true;
             }
-            //for (int i = 0; i < transform.childCount; i++) {
-            //    transform.GetChild(i).transform.localScale = Vector3.Lerp(transform.GetChild(i).transform.localScale, new Vector3(0.01f,0.01f,0.01f), 0.3f * Time.deltaTime);
-            //}
             timer += Time.deltaTime;
 
             if (timer >= 3) {

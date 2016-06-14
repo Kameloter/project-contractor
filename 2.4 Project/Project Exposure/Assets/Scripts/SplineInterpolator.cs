@@ -81,7 +81,6 @@ public class SplineInterpolator : MonoBehaviour
 
         //if (Input.GetKeyDown(KeyCode.M)) mState = "Stopped";
         if(mCurrentIdx == 1 && !Skipped){
-            print("index is 0");
             transform.position = mNodes[mCurrentIdx].Point;
             transform.rotation = mNodes[mCurrentIdx].Rot;
             Skipped = true;

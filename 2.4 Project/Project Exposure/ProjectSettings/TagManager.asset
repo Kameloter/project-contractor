@@ -13,6 +13,7 @@ TagManager:
   - FreezeParticle
   - Collectable
   - Meltable
+  - SkipButton
   layers:
   - Default
   - TransparentFX

@@ -30,9 +30,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
         }
 
         if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel){
-            print("TimeSpent Here: ");
         }
-        
 	}
 
     void DoSomething()
@@ -41,11 +39,11 @@ public class GameLogicIntroLevel : MonoBehaviour {
 
     void OnEnable()
     {
-        CameraControl.OnCameraPathEnd += DoSomething;
+        CameraControl.OnCameraPathEnd.AddListener( DoSomething);
     }
 
     void OnDisable()
     {
-        CameraControl.OnCameraPathEnd -= DoSomething;
+        CameraControl.OnCameraPathEnd.RemoveListener(DoSomething);
     }
 }

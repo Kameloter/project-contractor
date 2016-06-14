@@ -28,11 +28,11 @@ public class GameLogicLevel1 : MonoBehaviour {
 
     void OnEnable()
     {
-        CameraControl.OnCameraPathEnd += ShowHint;
+       // CameraControl.OnCameraPathEnd += ShowHint;
     }
 
     void OnDisable()
     {
-        CameraControl.OnCameraPathEnd -= ShowHint;
+      //  CameraControl.OnCameraPathEnd -= ShowHint;
     }
 }
