@@ -12,6 +12,7 @@ ModelImporter:
     100008: screen
     100010: wire1
     100012: wire2
+    100014: monitor
     400000: back
     400002: back2
     400004: //RootNode
@@ -19,25 +20,30 @@ ModelImporter:
     400008: screen
     400010: wire1
     400012: wire2
+    400014: monitor
     2300000: back
     2300002: back2
     2300004: pipe
     2300006: screen
     2300008: wire1
     2300010: wire2
+    2300012: monitor
     3300000: back
     3300002: back2
     3300004: pipe
     3300006: screen
     3300008: wire1
     3300010: wire2
+    3300012: monitor
     4300000: screen
     4300002: back
     4300004: pipe
     4300006: back2
     4300008: wire1
     4300010: wire2
-    7400000: Take 001
+    4300012: monitor
+    7400000: ShowMonitor
+    7400002: Idle
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -59,11 +65,75 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: ShowMonitor
+      takeName: Take 001
+      firstFrame: 2
+      lastFrame: 60
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: monitor
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
+    - serializedVersion: 16
+      name: Idle
+      takeName: Take 001
+      firstFrame: 1
+      lastFrame: 2
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: monitor
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 1
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 2500
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
