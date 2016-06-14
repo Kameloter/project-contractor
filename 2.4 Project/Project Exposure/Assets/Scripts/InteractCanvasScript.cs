@@ -3,18 +3,41 @@ using UnityEngine.UI;
 using System.Collections;
 
 /// <summary>
-/// Adds listeners to enable / disable the ObjectCanvas.
+/// This script can be attached to any GameObject (as a CHILD!) that has a script inheriting from BaseInteractable. 
+/// It subscribes listeners to the BaseInteractable events.
+/// 
+/// The script contains a WORLD space canvas and its used to detect TOUCH interactions with objects.
 /// </summary>
 [RequireComponent(typeof (AlignRotationScript))]
-public class InteractCanvasScript : MonoBehaviour {
-    BaseInteractable owner;
-    AlignRotationScript alignScript;
+public class InteractCanvasScript : MonoBehaviour
+{
 
+    /// <summary>
+    /// A refference to the owner so that we have access to his public events and we can 
+    /// subscribe THIS scripts listeners.
+    /// </summary>
+    BaseInteractable owner;
+
+    /// <summary>
+    /// Comes as a package with InteractCanvasScript.
+    /// See AlignRotationScript summary for detailed info.
+    /// </summary>
+    private AlignRotationScript alignScript;
+
+    /// <summary>
+    /// World space canvas used to contain a clickable Image to detect touch input.
+    /// </summary>
     [Header("References (auto)")]
     public Canvas objectCanvas;
+
+    /// <summary>
+    /// An image that is on the canvas used as a button
+    /// Optionally image can be left empty(transparent) and can be placed over the whole object(so it gives illusion that you click on the object)
+    /// </summary>
     public Image imageObject;
     
-    void Start() {
+    void Start()
+    {
         FindOwner();
         FindObjectCanvas();
         MakeSpriteInvisible();
@@ -23,34 +46,45 @@ public class InteractCanvasScript : MonoBehaviour {
 
         owner.onTriggerEnterEvent.AddListener(ActivateCanvas);
         owner.onTriggerExitEvent.AddListener(DeactivateCanvas);
+
     }
 
-    void FindOwner() {
-        owner = transform.parent.GetComponent<BaseInteractable>(); //Try to get the owner from the parent
-        if (owner == null) owner = transform.root.GetComponentInChildren<BaseInteractable>(); //if previous failed, try to get owner from any of the parents children
-        if (owner == null) Debug.LogError("Cannot find owner.");
+    void FindOwner()
+    {
+        //Try to get the owner from the parent
+        owner = transform.parent.GetComponent<BaseInteractable>();
+        if (owner == null) { Debug.LogError(gameObject.name + " <- This canvas could not find its owner. Make sure it is a child of a GameObjct with a Component of type BaseInteractable(BigValve,SmallValve,etc",transform); }
     }
 
-    void FindObjectCanvas() {
+    void FindObjectCanvas()
+    {
         objectCanvas = GetComponent<Canvas>();
         if (objectCanvas != null) objectCanvas.enabled = false;
-        else Debug.LogError("Assign something to the 'objectCanvas' variable on '" + gameObject.name + "'.");
+        else Debug.LogError("Something wrong with 'objectCanvas' variable on '" + gameObject.name + "'. Make sure canvas exists.",transform);
     }
 
-    void MakeSpriteInvisible() {
+    void MakeSpriteInvisible()
+    {
         imageObject = GetComponentInChildren<Image>();
-        imageObject.color = new Color(1, 1, 1, 0); 
+        if(imageObject != null)
+            imageObject.color = new Color(1, 1, 1, 0);
+        else
+            Debug.LogError("Something wrong with 'Image Object' variable on '" + gameObject.name + "'. Make sure image exists AS a child.",transform);
+
     }
     
-    void ActivateCanvas() {
+    void ActivateCanvas()
+    {
         objectCanvas.enabled = true;
         alignScript.Align();
     }
-    void DeactivateCanvas() {
+    void DeactivateCanvas()
+    {
         objectCanvas.enabled = false;
     }
 
-    void OnDestroy() {
+    void OnDestroy()
+    {
         owner.onTriggerEnterEvent.RemoveListener(ActivateCanvas);
         owner.onTriggerExitEvent.RemoveListener(DeactivateCanvas);
     }

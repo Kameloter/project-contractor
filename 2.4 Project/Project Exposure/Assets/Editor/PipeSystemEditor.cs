@@ -14,9 +14,16 @@ public class PipeSystemEditor : Editor
     private Transform myValveTransform;
     private Quaternion handleRotation;
 
-    private Color Line_1_debugColor;
-    private Color Line_2_debugColor;
+    Color Line_1_debugColor;
+    Color Line_2_debugColor;
+
+    /// <summary>
+    /// Used to checked wether the list size has changed, so it adds/removes an object.
+    /// </summary>
     int prevLine1CachedLength = 0;
+    /// <summary>
+    /// Used to checked wether the list size has changed, so it adds/removes an object.
+    /// </summary>
     int prevLine2CachedLength = 0;
 
     [SerializeField]
@@ -27,17 +34,21 @@ public class PipeSystemEditor : Editor
 
     public void OnEnable()
     {
+        
+        //Set our MonoBehaviour script as Editor target.
         myValve = (BigValve)target;
-        Line_1_debugColor.a = 1;
+
+        Line_1_debugColor.a = 1;//set default value for debug color, because on creation alpha is '0'
         Line_2_debugColor.a = 1;
-        Debug.Log("Hi ! " + myValve.gameObject.name + " <- Activated!");
 
+        //Debug.Log("Hi ! " + myValve.gameObject.name + " <- Activated!");
 
+        //Get back stored bools in order to keep the same shown/hidden line
         showLine1 = EditorPrefs.GetBool("ShowLine1");
         showLine2 = EditorPrefs.GetBool("ShowLine2");
     }
 
-
+   
     private void OnSceneGUI()
     {
         Event e = Event.current;
@@ -48,68 +59,75 @@ public class PipeSystemEditor : Editor
 
         myValveTransform = myValve.transform;
 
+        //If we are drawing line 1
         if (showLine1)
         {
-            //myValve.pipeLine1Start.SetActive(true);
-            //myValve.pipeLine1End.SetActive(true);
-            //myValve.pipeLine2Start.SetActive(false);
-            //myValve.pipeLine2End.SetActive(false);
-
+            //Draw nothing if we have no points to draw
             if (myValve.pipeLine1Points.Length == 0)
             {
                 return;
             }
             else
             {
+                //if ACCIDENTLY the start is null (pipe-line got deleted) restart the cached lenght and safely return!
                 if (myValve.pipeLine1Points[0] == null) { prevLine1CachedLength = 0; return; }
+                
+                //Finally draw the line if its safe.
                 DrawPipeLine1();
             }
         }
        
 
 
-
+        //If we are drawing line 2 
         if (showLine2)
         {
-            //myValve.pipeLine1Start.SetActive(false);
-            //myValve.pipeLine1End.SetActive(false);
-            //myValve.pipeLine2Start.SetActive(true);
-            //myValve.pipeLine2End.SetActive(true);
+            //Draw nothing if we have no points to draw
             if (myValve.pipeLine2Points.Length == 0)
             {
-                //Debug.Log("EMPTY POINT ARRAY");
                 return;
             }
             else
             {
+                //if ACCIDENTLY the start is null (pipe-line got deleted) restart the cached lenght and safely return!
                 if (myValve.pipeLine2Points[0] == null) { prevLine2CachedLength = 0; return; }
+
+                //Finally draw the line if its safe.
                 DrawPipeLine2();
             }
         }
     }
 
+   // GUILayoutOption label = GUI.skin.label;
+
     public override void OnInspectorGUI()
     {
-  
+        //Shows inspector of (target) script
         DrawDefaultInspector();
 
+     
+        EditorGUILayout.BeginVertical();   //Align objects in a vertical rect
+     //   GUILayout.FlexibleSpace();
+        EditorGUILayout.LabelField("EDITOR PART");
 
-   
-        EditorGUILayout.LabelField("EDITOR PART !");
-        EditorGUILayout.BeginVertical();
 
+  
         showLine1 = EditorGUILayout.Toggle("Show Line 1", showLine1);
         showLine2 = EditorGUILayout.Toggle("Show Line 2", showLine2);
-
+      //  GUILayout.FlexibleSpace();
+        EditorGUILayout.EndVertical(); //end aligning
+     
         EditorPrefs.SetBool("ShowLine1", showLine1);
         EditorPrefs.SetBool("ShowLine2", showLine2);
 
-        EditorGUILayout.EndVertical();
+       
+
+        //Before working with the serializedobject (myValve) we have to use .Update()
 
         serializedObject.Update();
-        if(showLine1)
+
+        if(showLine1) //if we are drawing line 1 => show available options to the designer
         {
-          
             EditorGUILayout.LabelField("Line 1");
             if (GUILayout.Button("Build corner base"))
             {
@@ -308,7 +326,6 @@ public class PipeSystemEditor : Editor
                     EditorUtility.SetDirty(myValve.pipeLine1Points[index].transform);
 
                     myValve.pipeLine1Points[index].transform.localPosition = myValveTransform.InverseTransformPoint(position);
-                    //    myValve.Pipe_Line_1[index].transform.rotation = rot;
                 }
 
                 else

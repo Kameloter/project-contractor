@@ -642,10 +642,17 @@ public class BigValve : BaseInteractable {
 
 #if UNITY_EDITOR
     void OnDrawGizmos() {
-        if (Selection.activeGameObject == null) return;
-        if (Application.isPlaying) return;
-        if (!draw) return;
-        if (cellSizeY == 0 || cellSizeX == 0 || gridWidth == 0 || gridHeight == 0) return;
+        if (Application.isPlaying) return; //if we are in play mode , dont care about this grid (no play mode pipe editing)
+        if (!draw) return; //if we do not wish to draw => return
+        if (Selection.activeGameObject == null) return; //if there is no selected object => return (no error spam in Console)
+
+
+        if (cellSizeY == 0 || cellSizeX == 0 || gridWidth == 0 || gridHeight == 0)//in case we f*cked up and some of grid sizes are 0 => safely return
+        {                                                                         // errors resulted in division by 0 and Unity crash:)
+       
+            Debug.LogError(" Some of the grid sizes are 0 safely returning.....!");
+            return;
+        }                                                                                 
 
         //   print("on draw gizmo running !");
         // Debug.Log(SceneView.lastActiveSceneView.rotation.eulerAngles);
