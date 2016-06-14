@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// controls the temperature of the gameobject this is attached t
+/// </summary>
 public class TemperatureScript : MonoBehaviour {
-
+    //different temperature states
     public enum TemperatureState { Frozen, Neutral, Hot
     }
-
+    //current temperatureState
     public TemperatureState temperatureState = TemperatureState.Neutral;
 
     public bool changeable = true;
 
+    //different materials for different states
     public Material frozenMaterial;
     public Material neutralMaterial;
     public Material hotMaterial;
@@ -19,20 +23,12 @@ public class TemperatureScript : MonoBehaviour {
     void Start() {
         rend = GetComponent<Renderer>();
         ChangeMaterial();
-        
-    }
-    void Update() {
-        //if (Input.GetKeyDown(KeyCode.I)) {
-        //    ChangeState(TemperatureState.Frozen);
-        //}
-        //if (Input.GetKeyDown(KeyCode.O)) {
-        //    ChangeState(TemperatureState.Neutral);
-        //}
-        //if (Input.GetKeyDown(KeyCode.P)) {
-        //    ChangeState(TemperatureState.Hot);
-        //}
     }
 
+    /// <summary>
+    /// method to change the current state
+    /// </summary>
+    /// <param name="state">state to change to</param>
     public void ChangeState(TemperatureState state) {
         if (changeable) {
             temperatureState = state;
@@ -40,6 +36,10 @@ public class TemperatureScript : MonoBehaviour {
         }
     } 
 
+
+    /// <summary>
+    /// method to change the material
+    /// </summary>
     void ChangeMaterial() {
         switch (temperatureState) {
             case TemperatureState.Frozen:
@@ -54,6 +54,10 @@ public class TemperatureScript : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// change state when hit by a particle
+    /// </summary>
+    /// <param name="go"></param>
     void OnParticleCollision(GameObject go) {
         print(go.name);
         if (go.CompareTag("FreezeParticle")) {

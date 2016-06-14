@@ -6,13 +6,14 @@
 using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// properties for a node in a spline camera path
+/// </summary>
 public class SplineNodeProperties : MonoBehaviour
 {
-	// this is just a simple placeholder for properties of a spline node
-	// (additional to those of the Transform object associated to it!)
-	// these properties get copied by the SplineController into SplineNode structures
-	// (along with other properties)
+	//time to wait at this noce
 	public float BreakTime = 0f;
+    //if it should skip to next node instead of interpolation
     public bool SkipToNext = false;
 
     [HideInInspector]

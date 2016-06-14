@@ -1,57 +1,57 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// this script plays an animation and makes objects interactable and walkable etc
+/// </summary>
 public class MeltableScript : MonoBehaviour {
-
     bool melting = false;
+    bool triggered = false;
+    bool _reusable = false;
+
     float timer = 0;
 
-    public GameObject optionalPath;
-    public bool StartAtPlayer = true;
-    bool playedCamera = false;
     RotatableScript rotScript;
 
-    bool triggered = false;
+    //camera variables
+    public GameObject optionalPath;
+    public bool StartAtPlayer = true;
 
-    bool _reusable = false;
-    [SerializeField]
-    ParticleSystem particleSystem;
-
-    // Use this for initialization
-    void Start () {
-	    
-	}
-
+    /// <summary>
+    /// set the object melting and doing the actions for it
+    /// </summary>
+    /// <param name="pRotScript"></param>
+    /// <param name="reuseable"></param>
     public void SetMelting(RotatableScript pRotScript, bool reuseable = false) {
-        if (!triggered) {
-            _reusable = reuseable;
+        if (!triggered) { // prevent calling this multiple times
+            _reusable = reuseable; // store the reusable bool
 
             rotScript = pRotScript;
-            melting = true;
             rotScript.pause = true;
-            triggered = true;
 
-            transform.parent.gameObject.GetComponent<Animator>().SetBool("Melting",true);
-        //    particleSystem.Play();
+            transform.parent.gameObject.GetComponent<Animator>().SetBool("Melting", true);
+
+            if (optionalPath != null) {
+                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
+            }
+
+            melting = true;
+            triggered = true;
         } 
     }
 	
-	// Update is called once per frame
+    /// <summary>
+    /// if it is metling we increase the timer and destroy it after 3 seconds
+    /// </summary>
 	void Update () {
         if (melting) {
-
-            if (optionalPath != null && !playedCamera)
-            {
-                Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
-                playedCamera = true;
-            }
             timer += Time.deltaTime;
 
+            //after 3 seconds destroy this gameobject
             if (timer >= 3) {
                 if (_reusable) rotScript.pause = false; //unpause rotatable
                 Destroy(gameObject);
             }
-
         }
 	}
 }
