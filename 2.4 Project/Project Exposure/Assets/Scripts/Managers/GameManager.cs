@@ -13,10 +13,7 @@ public class GameManager : MonoBehaviour {
 
                 if (gameManager != null) {
                     _instance = gameManager.AddComponent<GameManager>();
-                    //Debug.Log("Game Manager created !");
-                } else {
-                   // Debug.Log("Manager GameObject not present. Make sure the Tag is proper or the game object Managers exists");
-                }
+                } 
             }
             return _instance;
         }
@@ -40,7 +37,6 @@ public class GameManager : MonoBehaviour {
     [Header("UI")]
     [SerializeField] private ScoreScreenScript _scoreScreen;
     [SerializeField] private MonitorScript _uiMonitor;
-
 
     GameObject clickedObject;
     GameObject activatedObject;
@@ -66,7 +62,6 @@ public class GameManager : MonoBehaviour {
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
-
     }
 
     void OnLevelWasLoaded(int level) {
@@ -175,8 +170,6 @@ public class GameManager : MonoBehaviour {
         set { _maxCollectablesAvailable = value; }
     }
 
-    //private bool clickedOnObject = false;
-
     public GameObject ClickedObject {
         get { return clickedObject; }
         set { clickedObject = value; }
@@ -186,20 +179,17 @@ public class GameManager : MonoBehaviour {
     {
         get { return activatedObject; }
         set { activatedObject = value; }
-
     }
 
     public GameObject InteractedObject {
         get { return interactedObject; }
         set { interactedObject = value; }
-
     }
 
     public GameObject DeactivatedObject
     {
         get { return deactivatedObject; }
         set { deactivatedObject = value; }
-
     }
 
     void Update() {
@@ -215,7 +205,6 @@ public class GameManager : MonoBehaviour {
 
         //if longer inactive than 30s close the game
         if (inactiveTime >= 30) {
-            print("termination");
             Application.Quit();
         }
 
@@ -228,6 +217,4 @@ public class GameManager : MonoBehaviour {
         text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
         textLevel.text = Mathf.Floor((TimeSpentLevel / 60)).ToString("0" + "#':'") + ((int)TimeSpentLevel % 60).ToString("D2");
     }
-
-
 }

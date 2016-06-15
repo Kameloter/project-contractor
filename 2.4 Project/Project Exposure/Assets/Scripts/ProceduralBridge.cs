@@ -9,8 +9,6 @@ using UnityEditor;
 [ExecuteInEditMode][System.Serializable]
 public class ProceduralBridge : BaseActivatable {
 
-
-    
     [SerializeField]
     GameObject bridgePart;
     [SerializeField]
@@ -21,20 +19,17 @@ public class ProceduralBridge : BaseActivatable {
     public Transform leftSide;
     public Transform rightSide;
 
-
     [Header("Editor part !!!!")]
     public float partSize;
     float distanceBetweenParts = 0;
     float wholePartsCount = 0;
     Vector3 dir;
 
-   
-
-    // Use this for initialization
     public override void Start() {
         base.Start();
         colliderHolder.SetActive(false);
     }
+
     IEnumerator buildAnimation()
     {
         Vector3 offset = Vector3.zero;
@@ -57,15 +52,11 @@ public class ProceduralBridge : BaseActivatable {
             }
 
             currentDistance -= partSize;
-           // Debug.Log("Builded part");
             yield return new WaitForSeconds(0.15f);
         }
-      //  Debug.Log("loop coroutine finish");
-      //  print("Bridge constructed!");
     }
+
     void Build() {
-
-
         if(Application.isPlaying)
         {
             StartCoroutine("buildAnimation");
@@ -92,30 +83,23 @@ public class ProceduralBridge : BaseActivatable {
                 }
 
                 currentDistance -= partSize;
-                Debug.Log("Builded part");
             }
-            Debug.Log("loop coroutine finish");
-            print("Bridge constructed!");
         } 
     }
 
-
     void Destroy() {
         int cachedLenght = rightSide.transform.childCount;
-        print("LENGTH" + cachedLenght);
+
         for (int i = cachedLenght; i > 0; i--) {
             if (!Application.isPlaying)
                 DestroyImmediate(rightSide.transform.GetChild(i - 1).gameObject);
             else
                 Destroy(rightSide.transform.GetChild(i - 1).gameObject);
-
         }
 
         obstacle.SetActive(true);
         colliderHolder.SetActive(false);
-        print("Bridge deleted!");
     }
-
 
     public override void Activate() {
         if(partSize == 0 ) { Debug.LogError(" Part size of procedural bridge " + gameObject.name + " is 0 , please set size !"); return; }
@@ -125,7 +109,6 @@ public class ProceduralBridge : BaseActivatable {
         dir = leftSide.position - rightSide.position;
         dir.Normalize();
 
-       // Debug.DrawRay(rightPart.position, dir * 100, Color.red, 5);
         if (Physics.Raycast(rightSide.position, dir, out hit, 100)) {
             
             if (hit.transform.name == "Left") {
@@ -137,7 +120,6 @@ public class ProceduralBridge : BaseActivatable {
         
         base.Activate();
     }
-
 
     void FixObstacle()
     {
@@ -178,15 +160,14 @@ public class ProceduralBridge : BaseActivatable {
         }
         obstacle.SetActive(false);
         colliderHolder.SetActive(true);
-
     }
-
 
     public override void Deactivate() {
         StopCoroutine("buildAnimation");
         base.Deactivate();
         Destroy();
     }
+
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
@@ -222,7 +203,6 @@ public class TestBridge : Editor
         {
             myScript.Deactivate();
         }
-
     }
 }
 #endif

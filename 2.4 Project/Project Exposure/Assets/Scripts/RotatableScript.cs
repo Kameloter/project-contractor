@@ -42,7 +42,6 @@ public class RotatableScript : BaseInteractable {
     /// rotate around axis with angle
     /// </summary>
     void Rotate() {
-        print(pause);
         if (!pause) this.transform.Rotate(axis, angle);
     }
 
@@ -53,7 +52,5 @@ public class RotatableScript : BaseInteractable {
         base.OnInteract();
         Rotate();
         if (somethingToAlign != null) { somethingToAlign.Align(); }
-        
-
     }
 }
