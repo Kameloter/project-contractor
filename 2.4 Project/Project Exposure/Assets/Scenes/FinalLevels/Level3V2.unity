@@ -7240,7 +7240,7 @@ Transform:
   m_Children:
   - {fileID: 172824674}
   m_Father: {fileID: 0}
-  m_RootOrder: 24
+  m_RootOrder: 23
 --- !u!1 &219570792
 GameObject:
   m_ObjectHideFlags: 0
@@ -7269,7 +7269,7 @@ Transform:
   - {fileID: 558191895}
   - {fileID: 1656547704}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
 --- !u!1001 &236481749
 Prefab:
   m_ObjectHideFlags: 0
@@ -7875,7 +7875,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 431128, guid: ac8d4d03aafc0af4aa00f88df17657aa, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 19838220, guid: ac8d4d03aafc0af4aa00f88df17657aa, type: 2}
       propertyPath: looping
@@ -8240,6 +8240,7 @@ MonoBehaviour:
   _collectablesCollected: 0
   _maxCollectablesAvailable: 0
   _scoreScreen: {fileID: 0}
+  _uiMonitor: {fileID: 0}
   TimeLeft: 10
   TimeSpentLevel: 0
 --- !u!4 &524957413
@@ -8369,7 +8370,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 26a73eb16c1519e4fa6aa515521b8e0c, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 26a73eb16c1519e4fa6aa515521b8e0c, type: 3}
       propertyPath: m_IsActive
@@ -8484,7 +8485,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 459710, guid: 9ec3d6126cdbe614b8414079ebbb390f, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 439024, guid: 9ec3d6126cdbe614b8414079ebbb390f, type: 2}
       propertyPath: m_LocalPosition.z
@@ -8580,7 +8581,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 410586, guid: 9609128d5af95af49bc0dee5e5c1ef82, type: 2}
       propertyPath: m_RootOrder
-      value: 14
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 177248, guid: 9609128d5af95af49bc0dee5e5c1ef82, type: 2}
       propertyPath: m_IsActive
@@ -8813,6 +8814,7 @@ MonoBehaviour:
   _collectablesCollected: 0
   _maxCollectablesAvailable: 0
   _scoreScreen: {fileID: 0}
+  _uiMonitor: {fileID: 0}
   TimeLeft: 180
   TimeSpentLevel: 0
 --- !u!4 &719790376
@@ -8826,7 +8828,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
 --- !u!1 &800922060
 GameObject:
   m_ObjectHideFlags: 0
@@ -8854,7 +8856,7 @@ Transform:
   m_Children:
   - {fileID: 935959635}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &803171569
 GameObject:
   m_ObjectHideFlags: 0
@@ -15520,7 +15522,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 450712, guid: 0732143098059734db3a8477c4352f85, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 142200, guid: 0732143098059734db3a8477c4352f85, type: 2}
       propertyPath: m_Name
@@ -22777,7 +22779,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 420612, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 470662, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
       propertyPath: m_LocalPosition.y
@@ -22972,7 +22974,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 402666, guid: 4faf7041ae1390d43946476f6f384b0a, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 140338, guid: 4faf7041ae1390d43946476f6f384b0a, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -23218,7 +23220,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_RootOrder
-      value: 17
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: interactables.Array.data[0]
@@ -30658,7 +30660,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 488132, guid: b3972699d8004284eb48fd844b12cb85, type: 2}
       propertyPath: m_RootOrder
-      value: 24
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 158132, guid: b3972699d8004284eb48fd844b12cb85, type: 2}
       propertyPath: m_IsActive
@@ -37614,7 +37616,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 460898, guid: a357be1c4e128d5458ebe6dade1bf3ef, type: 2}
       propertyPath: m_RootOrder
-      value: 20
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 11451088, guid: a357be1c4e128d5458ebe6dade1bf3ef, type: 2}
       propertyPath: targetToFollow
@@ -37680,7 +37682,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 113168, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: m_Name
@@ -37793,7 +37795,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 494698, guid: 4e02df408b62eab4b87f637f4b26d593, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6594932, guid: 4e02df408b62eab4b87f637f4b26d593, type: 2}
       propertyPath: m_Size.x
@@ -38188,7 +38190,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 445204, guid: b28362bff87b66349add821071484cd4, type: 2}
       propertyPath: m_RootOrder
-      value: 16
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 181016, guid: b28362bff87b66349add821071484cd4, type: 2}
       propertyPath: m_IsActive
@@ -38334,7 +38336,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 452852, guid: a94bfc30afacd1e4895c97715fa5d6bf, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 150044, guid: a94bfc30afacd1e4895c97715fa5d6bf, type: 2}
       propertyPath: m_StaticEditorFlags
@@ -38470,7 +38472,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 409750, guid: 5bf4e93ba662ae14aad9a6af8989032e, type: 2}
       propertyPath: m_RootOrder
-      value: 18
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 11411152, guid: 5bf4e93ba662ae14aad9a6af8989032e, type: 2}
       propertyPath: pipeLine2Points.Array.data[0]
