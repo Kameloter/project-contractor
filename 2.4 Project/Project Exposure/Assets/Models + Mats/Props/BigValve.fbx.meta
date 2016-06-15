@@ -28,8 +28,11 @@ ModelImporter:
     400018: transform4
     400020: transform5
     2300000: polySurface1
+    2300002: //RootNode
     3300000: polySurface1
+    3300002: //RootNode
     4300000: polySurface1
+    4300002: BigValve_Mesh
   materials:
     importMaterials: 1
     materialName: 0
