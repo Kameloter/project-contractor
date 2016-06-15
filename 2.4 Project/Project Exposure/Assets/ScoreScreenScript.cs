@@ -49,16 +49,30 @@ public class ScoreScreenScript : MonoBehaviour {
         scoreScreen.SetActive(false);
     }
 
+    /// <summary>
+    /// Updates the ScoreScreen.
+    /// </summary>
+    /// <param name="timeSpent"> will be rounded </param>
+    /// <param name="timeLeft"> will be rounded </param>
+    /// <param name="collected"></param>
     public void UpdateScoreScreen(float timeSpent, float timeLeft, int collected) {
         timeSpentText.text = Mathf.Round(timeSpent).ToString() + " seconden";
         timeLeftText.text = Mathf.Round(timeLeft).ToString() + " seconden";
         collectedText.text = collected.ToString();
     }
 
+    /// <summary>
+    /// Called by ContinueButton on ScoreScreen. It uses a LevelSwitcher to advance to the in the levelSwitcher specified level.
+    /// </summary>
     void Continue() { //Called by button on scorescreen.
-        GameObject.FindGameObjectWithTag(Tags.levelSwitcher).GetComponent<LevelSwitcherScript>().SwitchLevel();
+        GameObject levelSwitcher = GameObject.FindGameObjectWithTag(Tags.levelSwitcher);
+        if (levelSwitcher != null) levelSwitcher.GetComponent<LevelSwitcherScript>().SwitchLevel();
+        else Debug.LogError("Couldn't find LevelSwitcher.");
     }
 
+    /// <summary>
+    /// Called by StayButton on ScoreScreen. It disables the score screen.
+    /// </summary>
     void Stay() { //Called by button on scorescreen.
         DisableScoreScreen();
     }

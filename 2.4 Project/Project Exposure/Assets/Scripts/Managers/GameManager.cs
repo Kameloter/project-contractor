@@ -37,8 +37,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private int _collectablesCollected = 0;        //total collectables the player has collected through the entire game
     [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
 
-    [Header("Score Screen")]
+    [Header("UI")]
     [SerializeField] private ScoreScreenScript _scoreScreen;
+    [SerializeField] private MonitorScript _uiMonitor;
 
 
     GameObject clickedObject;
@@ -48,8 +49,9 @@ public class GameManager : MonoBehaviour {
 
     Text text;
     Text textLevel;
-   // WWW www;
+    //WWW www;
 
+    [Header("Time")]
     public float TimeLeft = 180.0f; 
     public float TimeSpentLevel = 0.0f;
 
@@ -126,10 +128,23 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Returns the ScoreScreenScript from the first GameObject tagged as 'ScoreScreen'.
+    /// </summary>
     public ScoreScreenScript ScoreScreen {
         get {
             if (_scoreScreen == null) _scoreScreen = GameObject.FindGameObjectWithTag(Tags.scoreScreen).GetComponent<ScoreScreenScript>();
             return _scoreScreen;
+        }
+    }
+    
+    /// <summary>
+    /// Returns the MonitorScript.
+    /// </summary>
+    public MonitorScript UiMonitor {
+        get {
+            if (_uiMonitor == null) _uiMonitor = GameObject.FindGameObjectWithTag(Tags.uiMonitor).GetComponent<MonitorScript>();
+            return _uiMonitor;
         }
     }
 

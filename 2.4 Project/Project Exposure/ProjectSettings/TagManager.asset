@@ -16,6 +16,7 @@ TagManager:
   - SkipButton
   - ScoreScreen
   - LevelSwitcher
+  - UI Monitor
   layers:
   - Default
   - TransparentFX
