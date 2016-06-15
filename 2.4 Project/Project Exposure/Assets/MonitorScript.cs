@@ -5,6 +5,8 @@ using System.Collections;
 /// This script is used to automatically set the Main Camera as Render Camera for the 
 /// canvas the monitor is on, if there is none specified.
 /// </summary>
+
+[ExecuteInEditMode]
 public class MonitorScript : MonoBehaviour {
      Canvas canvas;
 

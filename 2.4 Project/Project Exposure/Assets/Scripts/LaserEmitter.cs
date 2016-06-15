@@ -7,17 +7,14 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(RotatableScript))]
 public class LaserEmitter : BaseActivatable{
-    //place where the laser starts
     [Header("Laser")]
-    [SerializeField] Transform laserSpawn;
+    [SerializeField] Transform laserSpawn; //place where the laser starts
+    [SerializeField] Particle hitParticle; //sparkle particle at the tip of the laser
 
-    // material for the line renderer
-    Material material;
+    Material lineRendererMaterial;
 
-    //if you want to fire laser in the beginning
-    [SerializeField] bool _active = false;
-    //after you hit correctly the object should it still be useable?
-    [SerializeField] bool _reusable = false;
+    [SerializeField] bool _active = false;   //if you want to fire laser in the beginning
+    [SerializeField] bool _reusable = false; //after you hit correctly the object should it still be useable?
 
     //two arrays to check if the laser has changed so that we dont have to update the laser constantly
     Vector3[] points = new Vector3[10];
@@ -28,7 +25,7 @@ public class LaserEmitter : BaseActivatable{
     int index = 0;
 
     void Awake() {
-        material = Resources.Load("Lazor") as Material;
+        lineRendererMaterial = Resources.Load("Lazor") as Material;
     }
 
     /// <summary>
@@ -151,7 +148,7 @@ public class LaserEmitter : BaseActivatable{
         lineRenderer.receiveShadows = false;
         lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         lineRenderer.SetWidth(0.1f, 0.1f);
-        lineRenderer.material = material;
+        lineRenderer.material = lineRendererMaterial;
 
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
