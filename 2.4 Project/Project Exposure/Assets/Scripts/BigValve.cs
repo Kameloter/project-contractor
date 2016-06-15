@@ -11,6 +11,7 @@ public class BigValve : BaseInteractable {
 
     [Header("                 Valve Parts")]
     public Object pipeLong;
+    public Object pipeLongWindow;
     public Object pipeSmall;
     public Object pipeJoint;
     public GameObject pipeLine1Start;
@@ -325,42 +326,48 @@ public class BigValve : BaseInteractable {
         Vector3 posToSet;
 
         while (remainingDistance > 0) {
-            int random = Random.Range(1,4);
+            int random = Random.Range(1,3);
             GameObject pipePart;
             //  Debug.Log("Random numbher -> " + random);
 
-            if (random == 3)//small 
+            if (random == 2)//small 
             {
-                if (Mathf.Abs(dir.z) == 1) //we are moving along Z
+                if (remainingDistance <= 1)
                 {
-                    offset += new Vector3(0, 0, dir.z / 2);
 
-                    posToSet = start + offset;
 
-                    pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
+                    if (Mathf.Abs(dir.z) == 1) //we are moving along Z
+                    {
+                        offset += new Vector3(0, 0, dir.z / 2);
 
-                    pipePart.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
-                    offset += new Vector3(0, 0, dir.z / 2);
-                } else if (Mathf.Abs(dir.x) == 1)//we are moving along X
-                  {
-                    offset += new Vector3(dir.x / 2, 0, 0);
-                    posToSet = start + offset;
-                    pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
-                    offset += new Vector3(dir.x / 2, 0, 0);
+                        posToSet = start + offset;
 
-                } else //we move on Y
-                  {
-                    offset += new Vector3(0, dir.y / 2, 0);
-                    posToSet = start + offset;
-                    pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
-                    pipePart.transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
-                    offset += new Vector3(0, dir.y / 2, 0);
+                        pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
+
+                        pipePart.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+                        offset += new Vector3(0, 0, dir.z / 2);
+                    }
+                    else if (Mathf.Abs(dir.x) == 1)//we are moving along X
+                    {
+                        offset += new Vector3(dir.x / 2, 0, 0);
+                        posToSet = start + offset;
+                        pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
+                        offset += new Vector3(dir.x / 2, 0, 0);
+
+                    }
+                    else //we move on Y
+                    {
+                        offset += new Vector3(0, dir.y / 2, 0);
+                        posToSet = start + offset;
+                        pipePart = CreateSmallPipe(posToSet, line == 1 ? pipeLine1Start.transform : pipeLine2Start.transform);
+                        pipePart.transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+                        offset += new Vector3(0, dir.y / 2, 0);
+                    }
+                    //  Debug.Log("picked small");
+                    remainingDistance--;
                 }
-                //  Debug.Log("picked small");
-                remainingDistance--;
             }
-
-            if (random == 2 || random == 1) {
+            if (random == 1) {
                 if (remainingDistance >= 2) {
                     if (Mathf.Abs(dir.z) == 1) //we are moving along Z
                     {
@@ -768,17 +775,18 @@ public class BigValve : BaseInteractable {
     GameObject CreateLongPipe(Vector3 pos, Transform parent)
     {
         GameObject obj = null;
+        int rnd = Random.Range(1, 4);
+
         if (!Application.isPlaying)
         {
 #if UNITY_EDITOR
-            obj = (GameObject)PrefabUtility.InstantiatePrefab(pipeLong);
+            obj = (GameObject)PrefabUtility.InstantiatePrefab(rnd == 1 ? pipeLongWindow : pipeLong);
 #endif
         }
         else {
-            obj = Instantiate(pipeLong) as GameObject;
+            obj = Instantiate(rnd == 1 ? pipeLongWindow : pipeLong) as GameObject;
         }
         obj.transform.position = pos;
-        //obj.transform.rotation = Quaternion.identity;
         obj.transform.parent = parent;
 #if UNITY_EDITOR
         Undo.RegisterCreatedObjectUndo(obj, "Created go");

@@ -16,6 +16,8 @@ ModelImporter:
     100016: transform3
     100018: transform4
     100020: transform5
+    100022: Bigvalve_Mesh
+    100024: Window_Mesh
     400000: //RootNode
     400002: BigValve_lPoly
     400004: MainBody_lPoly
@@ -27,15 +29,23 @@ ModelImporter:
     400016: transform3
     400018: transform4
     400020: transform5
+    400022: Bigvalve_Mesh
+    400024: Window_Mesh
     2300000: polySurface1
     2300002: //RootNode
+    2300004: Bigvalve_Mesh
+    2300006: Window_Mesh
     3300000: polySurface1
     3300002: //RootNode
+    3300004: Bigvalve_Mesh
+    3300006: Window_Mesh
     4300000: polySurface1
     4300002: BigValve_Mesh
+    4300004: Window_Mesh
+    4300006: Bigvalve_Mesh
   materials:
     importMaterials: 1
-    materialName: 0
+    materialName: 1
     materialSearch: 1
   animations:
     legacyGenerateAnimations: 4
