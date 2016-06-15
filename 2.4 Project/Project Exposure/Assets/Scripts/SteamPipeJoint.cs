@@ -32,21 +32,15 @@ public class SteamPipeJoint : MonoBehaviour {
         foreach (SmallValveSocket poweredsocket in poweredSockets)
         {
             if (poweredsocket.socketed != null)
-            {
                 poweredsocket.ActivateInteractables();
-            }
-            else {
+            else 
                 poweredsocket.particle.Play();
-            }
         }
     }
 
     public void AddToListItem(SmallValveSocket socket)
     {
-        if (!poweredSockets.Contains(socket))
-        {
-            poweredSockets.Add(socket);
-        }
+        if (!poweredSockets.Contains(socket)) poweredSockets.Add(socket);
     }
 
     public void StopSteamConnection() {

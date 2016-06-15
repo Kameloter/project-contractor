@@ -29,9 +29,7 @@ public class RotatableScript : BaseInteractable {
     /// rotate if it is continuous
     /// </summary>
 	void FixedUpdate () {
-        if (continuous) {
-            RotateContinuous();
-        }
+        if (continuous) RotateContinuous();
 	}
 
     void RotateContinuous() {

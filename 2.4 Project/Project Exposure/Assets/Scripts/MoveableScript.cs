@@ -7,7 +7,6 @@ using System.Collections;
 /// </summary>
 [RequireComponent(typeof(TemperatureScript))]
 public class MoveableScript : BaseActivatable {
-
     //variables to set the functionality
     [SerializeField] bool continuous = false;
     [SerializeField] bool needsToBeActivated = false;
@@ -36,16 +35,15 @@ public class MoveableScript : BaseActivatable {
     public TemperatureScript temperatureScript;
 
 	// Use this for initialization
-	public override void Start () {
+    public override void Start() {
         base.Start();
         currentState = startState;
         SetDestination(startPoint);
 
         temperatureScript = GetComponent<TemperatureScript>();
-        if (temperatureScript == null) {
-            temperatureScript = GetComponentInChildren<TemperatureScript>();
-        }
-	}
+
+        if (temperatureScript == null) temperatureScript = GetComponentInChildren<TemperatureScript>();
+    }
 
     /// <summary>
     /// check what movement the object should do based on variables
@@ -54,21 +52,13 @@ public class MoveableScript : BaseActivatable {
         if (temperatureScript.temperatureState != TemperatureScript.TemperatureState.Frozen) {
             if (needsToBeActivated) {
                 if (activated) {
-                    if (continuous) {
-                        MoveContinuous();
-                    }
-                    else {
-                        Move();
-                    }
+                    if (continuous) MoveContinuous();
+                    else Move();
                 }
             }
             else {
-                if (continuous) {
-                    MoveContinuous();
-                }
-                else {
-                    Move();
-                }
+                if (continuous) MoveContinuous();
+                else Move();
             }
         }
     }
@@ -81,13 +71,8 @@ public class MoveableScript : BaseActivatable {
         if (currentState != 0) {
             movableObject.GetComponent<Rigidbody>().MovePosition(movableObject.position + moveDirection * moveSpeed * Time.deltaTime);
 
-            if (currentState == 2) {
-                SetDestination(endPoint);
-            }
-
-            if (currentState == 1) {
-                SetDestination(startPoint);
-            }
+            if (currentState == 2) SetDestination(endPoint);
+            if (currentState == 1) SetDestination(startPoint);
 
             if (Vector3.Distance(movableObject.position, currentDestination.position) < 0.1f) {
                 currentState = 0;

@@ -24,7 +24,6 @@ public class SceneManager : MonoBehaviour {
             case GameState.InGame:
                 break;
             case GameState.Paused:
-                //Time.timeScale = 0; // stop time when paused.
                 break;
         }
         currentState = newGameState;
@@ -37,7 +36,6 @@ public class SceneManager : MonoBehaviour {
             case GameState.InGame:
                 break;
             case GameState.Paused:
-                //deactivate pause menu
                 break;
         }
     }

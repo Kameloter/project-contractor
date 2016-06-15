@@ -81,8 +81,6 @@ public class BigValve : BaseInteractable {
 
     void Start() {
         if (Application.isPlaying) {
-          //  valve = transform.GetChild(0);
-
             ConnectSmallValves();
             ConnectJointsTogether(1);
             ConnectJointsTogether(2);
@@ -90,13 +88,12 @@ public class BigValve : BaseInteractable {
             if (pipeLine1Points[1] != null)
                 BuildPipeLine(1);
 
-           if( pipeLine2Points[1] != null)
-                 BuildPipeLine(2);
+            if (pipeLine2Points[1] != null)
+                BuildPipeLine(2);
 
             ActivateLine(startState);
         }
     }
-
 
 #if UNITY_EDITOR
     public void CreateLineJoints(int lineIndex) {

@@ -59,8 +59,6 @@ public class TemperatureScript : MonoBehaviour {
     /// </summary>
     /// <param name="go"></param>
     void OnParticleCollision(GameObject go) {
-        if (go.CompareTag("FreezeParticle")) {
-            ChangeState(TemperatureState.Frozen);
-        }
+        if (go.CompareTag("FreezeParticle")) ChangeState(TemperatureState.Frozen);
     }
 }

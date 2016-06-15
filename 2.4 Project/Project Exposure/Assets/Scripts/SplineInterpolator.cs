@@ -60,7 +60,6 @@ public class SplineInterpolator : MonoBehaviour
 
     bool Skipped = false;
 
-	
 	// --------------------------------------------------------------------------------------------
 	// UNITY CALLBACKS
 	// --------------------------------------------------------------------------------------------
@@ -72,7 +71,6 @@ public class SplineInterpolator : MonoBehaviour
 	
 	void Update()
 	{
-       
 		if (mState == "Reset" || mState == "Stopped" || mNodes.Count < 4)
 			return;
 
@@ -88,7 +86,6 @@ public class SplineInterpolator : MonoBehaviour
         if (mCurrentTime >= mNodes[mCurrentIdx + 1].ArrivalTime)
 		{			
 			// advance to next point in the path
-			
 			if (mCurrentIdx < mNodes.Count - 3)
 			{
 				mCurrentIdx++;
@@ -96,7 +93,6 @@ public class SplineInterpolator : MonoBehaviour
 				// Inform that we have just arrived to the mCurrentIdx -th node!
                 if (mOnNodeArrivalCallback != null) {
                     mOnNodeArrivalCallback(mCurrentIdx, mNodes[mCurrentIdx]);
-                    
                 }
 			}
 			else
@@ -104,7 +100,6 @@ public class SplineInterpolator : MonoBehaviour
 				if (mState != "Loop")
 				{
 					mState = "Stopped";
-
 					// We stop right in the end point
 					transform.position = mNodes[mNodes.Count - 2].Point;
 
@@ -139,12 +134,9 @@ public class SplineInterpolator : MonoBehaviour
                 }
 				if (mLastNodeCallback < mCurrentIdx && mOnNodeLeavingCallback != null)
 				{
-                   
 					// Inform that we have just left the mCurrentIdx-th node!
 					mOnNodeLeavingCallback(mCurrentIdx, mNodes[mCurrentIdx]);
 					mLastNodeCallback++;
-
-                   
 				}
 				//else: callback has already been called
 				
@@ -172,7 +164,6 @@ public class SplineInterpolator : MonoBehaviour
 			// else: we are in the "stop time" for the mCurrentIdx-th node
 		}
 	}
-	
 	
 	// --------------------------------------------------------------------------------------------
 	// PUBLIC MEMBERS
@@ -365,7 +356,6 @@ public class SplineInterpolator : MonoBehaviour
 	
 			return Blend1 * P1 + Blend2 * P2 + Blend3 * T1 + Blend4 * T2;
 		}
-		
 		throw new System.Exception("logic error");
 		//return new Vector3();		// to avoid warnings
 	}

@@ -25,8 +25,6 @@ public class HelpImageScript : MonoBehaviour {
 
     bool holdingDown;
 
-    
-
     void Start() {
         GetImageObject();
         DisableImage();

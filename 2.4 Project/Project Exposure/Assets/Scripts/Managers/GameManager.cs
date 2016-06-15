@@ -11,9 +11,7 @@ public class GameManager : MonoBehaviour {
                 GameObject gameManager = new GameObject("GameController");
                 gameManager.tag = Tags.gameController;
 
-                if (gameManager != null) {
-                    _instance = gameManager.AddComponent<GameManager>();
-                } 
+                if (gameManager != null) _instance = gameManager.AddComponent<GameManager>();
             }
             return _instance;
         }

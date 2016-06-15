@@ -35,59 +35,19 @@ public class SplineController : MonoBehaviour
 	//   - BreakTime
 	//   - Name
 	SplineNode[] mSplineNodeInfo;
-	
-	
+
 	// --------------------------------------------------------------------------------------------
 	// UNITY CALLBACKS
 	// --------------------------------------------------------------------------------------------
-
-	void OnDrawGizmos()
-	{
-        ////Debug.Log("drawing gizmos SplineController");
-        //SplineNode[] info = GetSplineNodes();
-        //if (info.Length < 2)
-        //    return;
-
-        //SplineInterpolator interp = GetComponent(typeof(SplineInterpolator)) as SplineInterpolator;
-        //SetupSplineInterpolator(interp, info);
-        //interp.StartInterpolation(null, null, null, /* callbacks */
-        //                          false /* no rotations */, WrapMode);
-
-        //Vector3 prevPos = info[0].Point;
-        //float endTime = GetDuration(info);
-		
-        //Gizmos.color = Color.red;
-        //for (int c = 0; c <= 100; c++)
-        //{
-        //    Vector3 currPos = interp.GetHermiteAtTime((float)c * endTime / 100.0f);
-			
-        //    /* USEFUL SANITY CHECK TO DO IN THE DEBUGGER*/
-        //    if (float.IsNaN(currPos.x))
-        //        Debug.Log("NaN while drawing gizmos!!!!"); // should never arrive here!
-		
-        //    //float mag = (currPos-prevPos).magnitude * 2;
-        //    //Gizmos.color = new Color(mag, 0, 0, 1);
-        //    Gizmos.DrawLine(prevPos, currPos);
-			
-        //    prevPos = currPos;
-        //}
-	}
 
 	void Start()
 	{
 		mSplineInterp = GetComponent(typeof(SplineInterpolator)) as SplineInterpolator;
 
-		//mSplineNodeInfo = GetSplineNodes();
-
-		if (HideOnExecute)
-			DisableNodeObjects();
-
-		if (AutoStart)
-			FollowSpline();
+		if (HideOnExecute) DisableNodeObjects();
+		if (AutoStart) FollowSpline();
 	}
-	
-	
-	
+
 	// --------------------------------------------------------------------------------------------
 	// PUBLIC METHODS
 	// --------------------------------------------------------------------------------------------
@@ -97,12 +57,8 @@ public class SplineController : MonoBehaviour
 	/// </summary>
 	public void DisableNodeObjects()
 	{
-		if (SplineRoot != null)
-		{
-			SplineRoot.SetActive(false);
-		}
-	}
-
+		if (SplineRoot != null)	SplineRoot.SetActive(false);
+    }
 
 	/// <summary>
 	/// Starts the interpolation

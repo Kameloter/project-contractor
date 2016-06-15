@@ -91,7 +91,6 @@ public class CameraControl : MonoBehaviour
         }
         Quaternion rot = Quaternion.LookRotation(lookPos);
         transform.rotation = rot;
-
     }
 
     /// <summary>

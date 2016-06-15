@@ -5,10 +5,8 @@ using System.Collections;
 using UnityEditor;
 #endif
 
-
 [ExecuteInEditMode][System.Serializable]
 public class ProceduralBridge : BaseActivatable {
-
     [SerializeField]
     GameObject bridgePart;
     [SerializeField]
@@ -46,10 +44,7 @@ public class ProceduralBridge : BaseActivatable {
             part.transform.position = posToSet;
             offset += dir * (partSize / 2);
 
-            if (Mathf.Abs(dir.z) == 1)
-            {
-                part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
-            }
+            if (Mathf.Abs(dir.z) == 1) part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
 
             currentDistance -= partSize;
             yield return new WaitForSeconds(0.15f);
@@ -77,10 +72,7 @@ public class ProceduralBridge : BaseActivatable {
                 part.transform.position = posToSet;
                 offset += dir * (partSize / 2);
 
-                if (Mathf.Abs(dir.z) == 1)
-                {
-                    part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
-                }
+                if (Mathf.Abs(dir.z) == 1) part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
 
                 currentDistance -= partSize;
             }
@@ -91,10 +83,8 @@ public class ProceduralBridge : BaseActivatable {
         int cachedLenght = rightSide.transform.childCount;
 
         for (int i = cachedLenght; i > 0; i--) {
-            if (!Application.isPlaying)
-                DestroyImmediate(rightSide.transform.GetChild(i - 1).gameObject);
-            else
-                Destroy(rightSide.transform.GetChild(i - 1).gameObject);
+            if (!Application.isPlaying) DestroyImmediate(rightSide.transform.GetChild(i - 1).gameObject);
+            else Destroy(rightSide.transform.GetChild(i - 1).gameObject);
         }
 
         obstacle.SetActive(true);
@@ -110,14 +100,12 @@ public class ProceduralBridge : BaseActivatable {
         dir.Normalize();
 
         if (Physics.Raycast(rightSide.position, dir, out hit, 100)) {
-            
             if (hit.transform.name == "Left") {
                 distanceBetweenParts = Vector3.Distance(rightSide.localPosition, leftSide.localPosition);
                 Build();
                 FixObstacle();
             }
         }
-        
         base.Activate();
     }
 
@@ -125,7 +113,6 @@ public class ProceduralBridge : BaseActivatable {
     {
         if (Mathf.Abs(dir.x) == 1)
         {
-            Debug.Log("LEFT - RIGHT");
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
             obstacle.transform.localPosition = rightSide.transform.localPosition;
@@ -137,17 +124,15 @@ public class ProceduralBridge : BaseActivatable {
             colliderHolder.transform.localPosition = rightSide.transform.localPosition;
             colliderHolder.transform.localPosition += new Vector3(distanceBetweenParts / 2 * dir.x, 0, 0);
             colliderHolder.GetComponent<BoxCollider>().size = colliderSize;
-
         }
         else
         {
-            Debug.Log("UP - DOWN");
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
             obstacle.transform.localPosition = rightSide.transform.localPosition;
             obstacle.transform.localPosition += new Vector3(0, 1, distanceBetweenParts / 2 * dir.z);
 
-           Vector3 colliderSize = new Vector3(2, obstacleCollider.size.y, distanceBetweenParts);
+            Vector3 colliderSize = new Vector3(2, obstacleCollider.size.y, distanceBetweenParts);
 
             obstacleCollider.size = colliderSize;
 
@@ -156,7 +141,6 @@ public class ProceduralBridge : BaseActivatable {
             colliderHolder.transform.localPosition = rightSide.transform.localPosition;
             colliderHolder.transform.localPosition += new Vector3(0, 0, distanceBetweenParts / 2 * dir.z);
             colliderHolder.GetComponent<BoxCollider>().size = colliderSize;
-
         }
         obstacle.SetActive(false);
         colliderHolder.SetActive(true);

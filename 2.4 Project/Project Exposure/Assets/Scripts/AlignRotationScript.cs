@@ -17,7 +17,6 @@ public class AlignRotationScript : MonoBehaviour {
 
         if (alignTo != null) {
             this.transform.rotation = targetRotation;
-
         } 
         else Debug.LogError("Assign something to the 'AlignTo' variable on '" + gameObject.name + "' from '" + gameObject.transform.parent.name + "'.");
     }

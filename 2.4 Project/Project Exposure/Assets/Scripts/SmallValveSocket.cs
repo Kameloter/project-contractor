@@ -43,9 +43,7 @@ public class SmallValveSocket : BaseInteractable {
         if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;
             FindASteamJoint();
-            if (socketed != null) {
-                PlaceValve(socketed);
-            }
+            if (socketed != null) PlaceValve(socketed);
         }
 
         particle = GetComponentInChildren<ParticleSystem>();
@@ -118,9 +116,7 @@ public class SmallValveSocket : BaseInteractable {
         foreach (BaseActivatable interactable in interactables) {
             interactable.Deactivate();
         }
-        if (controlValve.currentState == valveLine) {
-            particle.Play();
-        }
+        if (controlValve.currentState == valveLine) particle.Play();
     }
 
     public void DeactivateSocket() {
@@ -131,11 +127,8 @@ public class SmallValveSocket : BaseInteractable {
     }
 
     void Check() {
-        if (playerScript.carriedValve != null && playerInRange && !socketed) {
-            PlaceValve(playerScript.carriedValve);
-        } else if (socketed != null && playerInRange && playerScript.carriedValve == null) {
-            RemoveValve(socketed);
-        }
+        if (playerScript.carriedValve != null && playerInRange && !socketed) PlaceValve(playerScript.carriedValve);
+        else if (socketed != null && playerInRange && playerScript.carriedValve == null) RemoveValve(socketed);
     }
 
     public override void OnInteract() {

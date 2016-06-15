@@ -2,7 +2,6 @@
 using System.Collections;
 
 public static class Game {
-
     static public GameObject Player {
         get {
             return GameManager.Instance.Player;;
@@ -43,8 +42,6 @@ public static class Game {
         get { return GameManager.Instance.Score; }
         set { GameManager.Instance.Score = value; }
     }
-
-    //clickedObject
 
     static public GameObject GetGameObject(string GameObjectName) {
         return GameObject.Find(GameObjectName);
