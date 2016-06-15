@@ -26,13 +26,20 @@ public class GameManager : MonoBehaviour {
     public GameState CurrentState { get { return _currentState; } }
 
     //PLAYER         //SerializeField used for debugging purposes.
+    [Header("Player")]
     [SerializeField] private GameObject _player;
     [SerializeField] private PlayerScript _playerScript;
     [SerializeField] private PlayerMovement _playerMovement;
+
+    [Header("Scene")]
     [SerializeField] private SceneManager _sceneManager;
     [SerializeField] private SceneStats _sceneStats;
     [SerializeField] private int _collectablesCollected = 0;        //total collectables the player has collected through the entire game
     [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
+
+    [Header("Score Screen")]
+    [SerializeField] private ScoreScreenScript _scoreScreen;
+
 
     GameObject clickedObject;
     GameObject activatedObject;
@@ -113,6 +120,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public ScoreScreenScript ScoreScreen {
+        get {
+            if (_scoreScreen == null) _scoreScreen = GameObject.FindGameObjectWithTag(Tags.scoreScreen).GetComponent<ScoreScreenScript>();
+            return _scoreScreen;
+        }
+    }
+
     public void IncreaseCollectables(int amount = 1) {
         PlayerScript.collectables += amount;
     }
@@ -147,8 +161,6 @@ public class GameManager : MonoBehaviour {
         set { clickedObject = value; }
     }
 
-
-
     public GameObject ActivatedObject
     {
         get { return activatedObject; }
@@ -168,8 +180,6 @@ public class GameManager : MonoBehaviour {
         set { deactivatedObject = value; }
 
     }
-
-
 
     void Update() {
         //changing timers
