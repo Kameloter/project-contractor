@@ -64,6 +64,5 @@ public class TemperatureScript : MonoBehaviour {
             print("test2");
             ChangeState(TemperatureState.Frozen);
         }
-    
     }
 }

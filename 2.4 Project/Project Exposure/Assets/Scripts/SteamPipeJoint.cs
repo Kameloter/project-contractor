@@ -23,6 +23,7 @@ public class SteamPipeJoint : MonoBehaviour {
     {
         foreach (SmallValveSocket poweredsocket in poweredSockets)
         {
+            poweredsocket.particle.Stop();
             poweredsocket.DeactivateSocket();
         }
     }
@@ -35,6 +36,9 @@ public class SteamPipeJoint : MonoBehaviour {
             {
                 print("Joint activating2 ");
                 poweredsocket.ActivateInteractables();
+            }
+            else {
+                poweredsocket.particle.Play();
             }
               
         }

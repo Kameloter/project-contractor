@@ -43,10 +43,6 @@ public class PickableScript : BaseInteractable {
         }
     }
 
-    void Update() {
-
-    }
-
     public override void OnInteractableClicked() {
         if (clickable)
         {
@@ -54,25 +50,20 @@ public class PickableScript : BaseInteractable {
             {
                 if(IsCarried) 
                 {
-                    //Debug.Log("DROPPING BOX IN  RANGE ! ");
                     Drop();
                 }
                 else
                 {
-                    //Debug.Log("PICKING BOX IN  RANGE ! ");
                     PickUp();
                 }
             }else
             {
-              //  Debug.Log("Player not in range ! ");
                 if(IsCarried) 
                 {
-                  // Debug.Log("DROPPING BOX OUT OF RANGE ! ");
                     Drop();
                 }
                 else
                 {
-                   // Debug.Log("MOVING TO BOX OUT OF RANGE @! ");
                     player.GetComponent<PlayerMovement>().SendAgent(transform);
                 }
             }
@@ -95,6 +86,7 @@ public class PickableScript : BaseInteractable {
 
     public void Place(Vector3 position, GameObject parent) {
         this.transform.position = position;
+        this.transform.rotation = Quaternion.Euler(0, 0, 0); ;
         this.transform.SetParent(parent.transform);
 
         rigidBody.constraints = RigidbodyConstraints.FreezeAll;

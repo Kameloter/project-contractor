@@ -16,7 +16,11 @@ public class MeltableScript : MonoBehaviour {
     //camera variables
     public GameObject optionalPath;
     public bool StartAtPlayer = true;
+     [SerializeField]
+    GameObject[] destroy;
 
+    [SerializeField]
+     ParticleSystem particle;
     /// <summary>
     /// set the object melting and doing the actions for it
     /// </summary>
@@ -35,6 +39,8 @@ public class MeltableScript : MonoBehaviour {
                 Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
             }
 
+            particle.Play();
+
             melting = true;
             triggered = true;
         } 
@@ -47,9 +53,12 @@ public class MeltableScript : MonoBehaviour {
         if (melting) {
             timer += Time.deltaTime;
 
-            //after 3 seconds destroy this gameobject
-            if (timer >= 3) {
+            //after 1.9 seconds destroy this gameobject
+            if (timer >= 1.9f) {
                 if (_reusable) rotScript.pause = false; //unpause rotatable
+                foreach (GameObject obj in destroy) {
+                    Destroy(obj);
+                }
                 Destroy(gameObject);
             }
         }

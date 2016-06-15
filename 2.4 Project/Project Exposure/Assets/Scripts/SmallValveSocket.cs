@@ -36,6 +36,8 @@ public class SmallValveSocket : BaseInteractable {
     public bool StartAtPlayer = true;
     bool playedCamera = false;
 
+    [HideInInspector]
+    public ParticleSystem particle;
 
     void Start() {
        
@@ -48,7 +50,11 @@ public class SmallValveSocket : BaseInteractable {
                 PlaceValve(socketed);
             }
         }
+
+        particle = GetComponentInChildren<ParticleSystem>();
+        if (particle == null) Debug.LogError("No particle in "+ gameObject.name, transform);
     }
+
 
     public void FindASteamJoint() {
         poweredBy = null;
@@ -96,6 +102,7 @@ public class SmallValveSocket : BaseInteractable {
 		valve.GetComponent<PickableScript>().Place(valveHolder.position, this.gameObject);
         valve.GetComponent<PickableScript>().clickable = false;
         socketed = valve;
+        particle.Stop();
 
         ActivateInteractables();
     }
@@ -122,6 +129,9 @@ public class SmallValveSocket : BaseInteractable {
         socketed = null;
         foreach (BaseActivatable interactable in interactables) {
             interactable.Deactivate();
+        }
+        if (controlValve.currentState == valveLine) {
+            particle.Play();
         }
     }
 
