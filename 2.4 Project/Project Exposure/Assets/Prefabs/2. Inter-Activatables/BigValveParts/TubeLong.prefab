@@ -25,7 +25,7 @@ GameObject:
   - 4: {fileID: 471072}
   - 33: {fileID: 3379802}
   - 23: {fileID: 2379040}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: TubeLong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,8 +38,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 101562}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.4053097, y: 34.8815, z: -22.534958}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0.0000023245811}
+  m_LocalPosition: {x: -40.000095, y: 20, z: 19.999744}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 471072}
@@ -67,7 +67,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 5182369c17da1da4d8f16923f5d10e9a, type: 2}
+  - {fileID: 2100000, guid: aabe19a7a514af349a8624fd9c9f1856, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1

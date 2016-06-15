@@ -17,7 +17,6 @@ public class SmallValveSocket : BaseInteractable {
 	[Header("ValveHolder")]
 	public Transform valveHolder;
 
-
     [Header("Connects to : ")]
     public int valveID;
     public int valveLine;
@@ -40,11 +39,9 @@ public class SmallValveSocket : BaseInteractable {
     public ParticleSystem particle;
 
     void Start() {
-       
         sphereColor.a = 1;
         if (Application.isPlaying) {
             playerScript = GameManager.Instance.PlayerScript;
-
             FindASteamJoint();
             if (socketed != null) {
                 PlaceValve(socketed);
@@ -54,7 +51,6 @@ public class SmallValveSocket : BaseInteractable {
         particle = GetComponentInChildren<ParticleSystem>();
         if (particle == null) Debug.LogError("No particle in "+ gameObject.name, transform);
     }
-
 
     public void FindASteamJoint() {
         poweredBy = null;
@@ -82,7 +78,6 @@ public class SmallValveSocket : BaseInteractable {
                 Debug.Log("Valve socket with name \"" + gameObject.name + "\" connected to steam-joint with name \"" + poweredBy.gameObject.name + "\"");
                 poweredBy.AddToListItem(this);
             }
-
         }
     }
 
@@ -91,33 +86,26 @@ public class SmallValveSocket : BaseInteractable {
         if (Application.isPlaying) return;
         Gizmos.color = sphereColor;
         Gizmos.DrawWireSphere(transform.position, radius);
-
     }
 #endif
 
-
     void PlaceValve(GameObject valve) {
-
         if (socketed != null) return;
 		valve.GetComponent<PickableScript>().Place(valveHolder.position, this.gameObject);
         valve.GetComponent<PickableScript>().clickable = false;
         socketed = valve;
         particle.Stop();
-
         ActivateInteractables();
     }
 
     public void ActivateInteractables() {
-        print("trying to activate shit.");
         if (controlValve.currentState == valveLine) {
             if (optionalPath != null && !playedCamera)
             {
                 Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
                 playedCamera = true;
             }
-            //   print("started with valve" + this.name);
             foreach (BaseActivatable interactable in interactables) {
-                print("activate " + interactable.gameObject.name);
                 interactable.Activate();
             }
         }
@@ -136,7 +124,6 @@ public class SmallValveSocket : BaseInteractable {
     }
 
     public void DeactivateSocket() {
-
         foreach (BaseActivatable interactable in interactables) {
             if (interactable == null) { Debug.LogError("Interactable missing from SVS => " + gameObject.name); return; }
             interactable.Deactivate();
@@ -145,16 +132,13 @@ public class SmallValveSocket : BaseInteractable {
 
     void Check() {
         if (playerScript.carriedValve != null && playerInRange && !socketed) {
-            print("i am clicked www");
             PlaceValve(playerScript.carriedValve);
         } else if (socketed != null && playerInRange && playerScript.carriedValve == null) {
-            print("i am clicked sssss");
             RemoveValve(socketed);
         }
     }
 
     public override void OnInteract() {
-        print("i am clicked");
         Check();
     }
 }

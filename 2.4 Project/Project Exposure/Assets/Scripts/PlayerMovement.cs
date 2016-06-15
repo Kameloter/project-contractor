@@ -34,14 +34,10 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         allowNavigationInput = true;
-        //    print(clickableLayer.value);
-        // anim = GetComponentInChildren<Animator>();
         cam = Camera.main;
         rigibody = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
-        
         path = new NavMeshPath();
-       
     }
  
     void Update()     {
@@ -59,22 +55,18 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.DrawLine(ray.origin, hit.point);
                 Transform objectHit = hit.transform;
-             //   print(" Object hit ===>>" + objectHit.gameObject.name);
 
                 if (hit.transform.GetComponent<BaseInteractable>() != null)
                 {
                     BaseInteractable interactable = hit.transform.GetComponent<BaseInteractable>();
                     interactable.OnInteractableClicked();
-
                     //StartCoroutine(dontNavigateWhenClickedOnInteractable());//method name explains.
-
                 }
             }
         }
     }
 
     IEnumerator dontNavigateWhenClickedOnInteractable() {
-        Debug.Log("set to false");
         allowNavigationInput = false; //disable navigation input.
         yield return  new WaitForSeconds(0.3f);
         allowNavigationInput = true; //alows navigation input again.
@@ -93,12 +85,9 @@ public class PlayerMovement : MonoBehaviour
             NavMeshHit navHit;
             if (Physics.Raycast(ray, out hit, 100)) {
                 Debug.DrawLine(ray.origin, hit.point, Color.red);
-
-
                 if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
-                        //  Debug.Log("SET PATH WHEN SHOULD NOT !");
                         agent.destination = hit.point;
                     }
                 }
@@ -109,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
     public void SendAgent(Transform interactable) {
         agent.SetDestination(interactable.position);
         GameManager.Instance.ClickedObject = interactable.gameObject;
-      //  print("set destination to " + interactable.gameObject.name);
     }
 
     public void StopAgent() {
@@ -147,7 +135,6 @@ public class PlayerMovement : MonoBehaviour
         velocityChange.y = 0;
 
         rigibody.AddForce(velocityChange, ForceMode.VelocityChange);
-
         //Add gravity
         rigibody.AddForce(new Vector3(0, -gravity * rigibody.mass, 0));
     }

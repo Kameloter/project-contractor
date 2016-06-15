@@ -9,10 +9,6 @@ using System.Collections;
 public class testscript : MonoBehaviour {
     public Animator anim;
     public Image image;
-
-	void Start () {
-        //print(transform.lossyScale.z);
-	}
 	
 	void Update () {
 	    if (Input.GetKey(KeyCode.Alpha1)) {

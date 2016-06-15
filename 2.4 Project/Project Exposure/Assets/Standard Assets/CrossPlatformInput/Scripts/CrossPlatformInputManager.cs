@@ -82,7 +82,8 @@ namespace UnityStandardAssets.CrossPlatformInput
 		}
 
 
-		// returns a reference to a named virtual axis if it exists otherwise null
+		
+        returns a reference to a named virtual axis if it exists otherwise null
 		public static VirtualAxis VirtualAxisReference(string name)
 		{
 			return activeInput.VirtualAxisReference(name);
