@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("UI")]
     [SerializeField] private ScoreScreenScript _scoreScreen;
+    [SerializeField] private TutorialSelectorScript _tutorialSelector;
     [SerializeField] private MonitorScript _uiMonitor;
 
     GameObject clickedObject;
@@ -57,6 +58,7 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         _scoreScreen = ScoreScreen;
+        _tutorialSelector = TutorialSelector;
     }
 
     void Start() {
@@ -68,7 +70,9 @@ public class GameManager : MonoBehaviour {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
         TimeSpentLevel = 0;
+
         _scoreScreen = ScoreScreen;
+        _tutorialSelector = TutorialSelector;
     }
 
     /// <summary>
@@ -140,6 +144,17 @@ public class GameManager : MonoBehaviour {
         get {
             if (_uiMonitor == null) _uiMonitor = GameObject.FindGameObjectWithTag(Tags.uiMonitor).GetComponent<MonitorScript>();
             return _uiMonitor;
+        }
+    }
+
+    /// <summary>
+    /// Returns the TutorialSelectorScript.
+    /// This should be called before it turns itself off.
+    /// </summary>
+    public TutorialSelectorScript TutorialSelector {
+        get {
+            if (_tutorialSelector == null) _tutorialSelector = GameObject.FindGameObjectWithTag(Tags.tutorialSelector).GetComponent<TutorialSelectorScript>();
+            return _tutorialSelector;
         }
     }
 

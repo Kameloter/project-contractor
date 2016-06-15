@@ -9,7 +9,6 @@ public class CustomEventEditor : Editor {
     CustomEventTrigger trigger;
     SerializedProperty prop;
     MonoScript script;
-	// Use this for initialization
 
     void OnEnable() {
         trigger = (CustomEventTrigger) target;
@@ -17,15 +16,6 @@ public class CustomEventEditor : Editor {
         script = MonoScript.FromMonoBehaviour((CustomEventTrigger)target);
         foldouts = new bool[20];
     }
-
-	void Start () {
-	    
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     public override void OnInspectorGUI() {
        // DrawDefaultInspector();
