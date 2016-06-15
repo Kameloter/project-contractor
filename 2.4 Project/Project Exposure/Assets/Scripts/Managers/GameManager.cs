@@ -57,15 +57,21 @@ public class GameManager : MonoBehaviour {
 
     int score = 0;
 
+    void Awake() {
+        _scoreScreen = ScoreScreen;
+    }
+
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
+
     }
 
     void OnLevelWasLoaded(int level) {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
         TimeSpentLevel = 0;
+        _scoreScreen = ScoreScreen;
     }
 
     /// <summary>

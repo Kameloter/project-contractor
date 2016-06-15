@@ -15,6 +15,7 @@ TagManager:
   - Meltable
   - SkipButton
   - ScoreScreen
+  - LevelSwitcher
   layers:
   - Default
   - TransparentFX

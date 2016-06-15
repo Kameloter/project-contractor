@@ -25,7 +25,7 @@ public class LevelSwitcherScript : MonoBehaviour {
         pTimeLeft = GameManager.Instance.TimeLeft;
     }
 
-    public void SwitchLevel (int level){
+    public void SwitchLevel (){
         GameManager.Instance.SceneManager.SwitchToLevel(level);
     }
 }

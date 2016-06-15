@@ -56,11 +56,10 @@ public class ScoreScreenScript : MonoBehaviour {
     }
 
     void Continue() { //Called by button on scorescreen.
-        //SwitchLevel(level);
+        GameObject.FindGameObjectWithTag(Tags.levelSwitcher).GetComponent<LevelSwitcherScript>().SwitchLevel();
     }
 
     void Stay() { //Called by button on scorescreen.
         DisableScoreScreen();
     }
-
 }
