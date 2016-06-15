@@ -17,6 +17,7 @@ TagManager:
   - ScoreScreen
   - LevelSwitcher
   - UI Monitor
+  - TutorialSelector
   layers:
   - Default
   - TransparentFX

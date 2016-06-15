@@ -28,5 +28,5 @@ public class Tags : MonoBehaviour {
     public const string scoreScreen = "ScoreScreen";
     public const string levelSwitcher = "LevelSwitcher";
     public const string uiMonitor = "UI Monitor";
-
+    public const string tutorialSelector = "TutorialSelector";
 }
