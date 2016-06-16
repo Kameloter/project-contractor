@@ -5,7 +5,6 @@ using System.Collections;
 /// calss holding player stats/info
 /// </summary>
 public class PlayerScript : MonoBehaviour {
-
     //the valve carried by the player
     [HideInInspector]
     public GameObject carriedValve;
@@ -13,6 +12,5 @@ public class PlayerScript : MonoBehaviour {
 
     //amount of collectables
     [Header("Player Stats")]
-    [Tooltip("Collected Collectables")] public int collectables = 0;      
-
+    [Tooltip("Collected Collectables")] public int collectables = 0;
 }

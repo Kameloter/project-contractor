@@ -14,34 +14,6 @@ public class SceneManager : MonoBehaviour {
 
     void Start() {
         currentState = GameManager.Instance.CurrentState;
-
-        //if (currentState == GameState.InGame)
-        //{
-        //    Cursor.lockState = CursorLockMode.Locked;
-        //    Cursor.visible = false;
-        //}
-        //if (currentState == GameState.Menu)
-        //{
-        //    Cursor.lockState = CursorLockMode.None;
-        //    Cursor.visible = true;
-        //}
-    }
-
-
-    void Update() {
-        //if (Input.GetKeyDown(KeyCode.Escape)) {
-        //    switch (currentState) {
-        //        case GameState.InGame:
-        //            SetState(GameState.Paused);
-        //            break;
-        //        case GameState.Paused:
-        //            SetState(GameState.InGame);
-        //            break;
-        //        default:
-        //            print(string.Format("Current state is '{0}'. If not expected state check build settings !!", currentState));
-        //            break;
-        //    }
-        //}
     }
 
     public void SetState(GameState newGameState) {
@@ -50,15 +22,12 @@ public class SceneManager : MonoBehaviour {
             case GameState.Menu:
                 break;
             case GameState.InGame:
-                //Time.timeScale = 1; //reset time scale
                 break;
             case GameState.Paused:
-                //Time.timeScale = 0; // stop time when paused.
                 break;
         }
         currentState = newGameState;
     }
-
 
     void DisablePreviousState(GameState previousState) {
         switch (previousState) {
@@ -67,7 +36,6 @@ public class SceneManager : MonoBehaviour {
             case GameState.InGame:
                 break;
             case GameState.Paused:
-                //deactivate pause menu
                 break;
         }
     }
@@ -75,16 +43,15 @@ public class SceneManager : MonoBehaviour {
     public void UnpauseGame() {
         SetState(GameState.InGame);
     }
+
     public void PauseGame() {
         SetState(GameState.Paused);
     }
 
     public void SwitchToLevel(int index) {
         ExportSaveData();
-        //print("loading level " + index);
         SetState(GameState.InGame);
         UnityEngine.SceneManagement.SceneManager.LoadScene(index);
-        //print("loaded level " + index);
     }
 
     /// <summary>
@@ -96,7 +63,6 @@ public class SceneManager : MonoBehaviour {
     }
 
     public void QuitGame() {
-        print("Application terminated.");
         Application.Quit();
     }
 }

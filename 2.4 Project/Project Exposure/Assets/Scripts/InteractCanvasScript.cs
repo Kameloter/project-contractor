@@ -11,7 +11,6 @@ using System.Collections;
 [RequireComponent(typeof (AlignRotationScript))]
 public class InteractCanvasScript : MonoBehaviour
 {
-
     /// <summary>
     /// A refference to the owner so that we have access to his public events and we can 
     /// subscribe THIS scripts listeners.
@@ -41,12 +40,9 @@ public class InteractCanvasScript : MonoBehaviour
         FindOwner();
         FindObjectCanvas();
         MakeSpriteInvisible();
-
         alignScript = GetComponent<AlignRotationScript>();
-
         owner.onTriggerEnterEvent.AddListener(ActivateCanvas);
         owner.onTriggerExitEvent.AddListener(DeactivateCanvas);
-
     }
 
     void FindOwner()
@@ -70,7 +66,6 @@ public class InteractCanvasScript : MonoBehaviour
             imageObject.color = new Color(1, 1, 1, 0);
         else
             Debug.LogError("Something wrong with 'Image Object' variable on '" + gameObject.name + "'. Make sure image exists AS a child.",transform);
-
     }
     
     void ActivateCanvas()
@@ -78,6 +73,7 @@ public class InteractCanvasScript : MonoBehaviour
         objectCanvas.enabled = true;
         alignScript.Align();
     }
+
     void DeactivateCanvas()
     {
         objectCanvas.enabled = false;

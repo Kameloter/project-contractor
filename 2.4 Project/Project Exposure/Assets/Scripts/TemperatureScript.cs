@@ -8,6 +8,7 @@ public class TemperatureScript : MonoBehaviour {
     //different temperature states
     public enum TemperatureState { Frozen, Neutral, Hot
     }
+
     //current temperatureState
     public TemperatureState temperatureState = TemperatureState.Neutral;
 
@@ -36,7 +37,6 @@ public class TemperatureScript : MonoBehaviour {
         }
     } 
 
-
     /// <summary>
     /// method to change the material
     /// </summary>
@@ -59,10 +59,6 @@ public class TemperatureScript : MonoBehaviour {
     /// </summary>
     /// <param name="go"></param>
     void OnParticleCollision(GameObject go) {
-        print(go.name);
-        if (go.CompareTag("FreezeParticle")) {
-            print("test2");
-            ChangeState(TemperatureState.Frozen);
-        }
+        if (go.CompareTag("FreezeParticle")) ChangeState(TemperatureState.Frozen);
     }
 }

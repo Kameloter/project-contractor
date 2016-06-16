@@ -9,7 +9,7 @@ using UnityEditor;
 [System.Serializable]
 public class BigValve : BaseInteractable {
 
-    [Header("                 Valve Parts")]
+    [Header("Valve Parts")]
     public Object pipeLong;
     public Object pipeLongWindow;
     public Object pipeSmall;
@@ -25,14 +25,11 @@ public class BigValve : BaseInteractable {
     [SerializeField]
     public GameObject[] pipeLine2Points;
 
-
     [Header("Steam particles ")]
     public ParticleSystem smoke1;
     public ParticleSystem smoke2;
 
     [Header("Control states and ID !")]
-
- 
     [Range(0, 2)]
     [Tooltip("0 = OFF , 1 = Line 1 , 2 = Line 2")]
     public int startState;
@@ -60,8 +57,6 @@ public class BigValve : BaseInteractable {
     /// </summary>
     private List<SmallValveSocket> pipeLine2SmallValveSockets;
 
-
-
     [Header("GRID ")]
     public bool draw = false;
 
@@ -70,7 +65,6 @@ public class BigValve : BaseInteractable {
 
     public float gridWidth;
     public float gridHeight;
-
 
     bool createObjects = false;
 
@@ -87,8 +81,6 @@ public class BigValve : BaseInteractable {
 
     void Start() {
         if (Application.isPlaying) {
-          //  valve = transform.GetChild(0);
-
             ConnectSmallValves();
             ConnectJointsTogether(1);
             ConnectJointsTogether(2);
@@ -96,15 +88,12 @@ public class BigValve : BaseInteractable {
             if (pipeLine1Points[1] != null)
                 BuildPipeLine(1);
 
-           if( pipeLine2Points[1] != null)
-                 BuildPipeLine(2);
-
-
+            if (pipeLine2Points[1] != null)
+                BuildPipeLine(2);
 
             ActivateLine(startState);
         }
     }
-
 
 #if UNITY_EDITOR
     public void CreateLineJoints(int lineIndex) {
@@ -214,7 +203,6 @@ public class BigValve : BaseInteractable {
         if (index == 1) {
             int line1Lenght = pipeLine1Start.transform.childCount;
             for (int i = line1Lenght; i > 0; i--) {
-
                 if (!Application.isPlaying) {
                     Undo.DestroyObjectImmediate(pipeLine1Start.transform.GetChild(i - 1).gameObject);
                 } else {
@@ -239,7 +227,6 @@ public class BigValve : BaseInteractable {
         if (lineIndex == 1) {
             int line1Lenght = pipeLine1Points.Length;
             Vector3 v0, v1, v2;
-
             //Debug.Log("array lenght" + line1Lenght);
             v0 = pipeLine1Points[0].transform.position;
             for (int i = 1; i < line1Lenght; i += 2) //we start at 1 and we increment by 2
@@ -329,13 +316,10 @@ public class BigValve : BaseInteractable {
             int random = Random.Range(1,3);
             GameObject pipePart;
             //  Debug.Log("Random numbher -> " + random);
-
             if (random == 2)//small 
             {
                 if (remainingDistance <= 1)
                 {
-
-
                     if (Mathf.Abs(dir.z) == 1) //we are moving along Z
                     {
                         offset += new Vector3(0, 0, dir.z / 2);
@@ -400,7 +384,6 @@ public class BigValve : BaseInteractable {
             //Debug.Log("Remaining dist -> " + remainingDistance);
         }
     }
-
 
     //Vladislav : this is the dirtiest function i've ever wrote as a coder, sorry. could not figure a way to 
     // rotate objects based on orientation ;/
@@ -582,17 +565,14 @@ public class BigValve : BaseInteractable {
         switch (index)
         {
             case 1:
-                print("klike3");
                 currentState = 1;
                 DisableLine(2);
                 smoke1.Play();
                 break;
             case 2:
-                print("klike2");
                 currentState = 2;
                 DisableLine(1);
                 smoke2.Play();
-                print("klike4");
                 break;
              default:
 
@@ -626,26 +606,21 @@ public class BigValve : BaseInteractable {
         }
     }
 
-
     public override void actionOnTriggerEnter(Collider player) {
         if (isPowered)
         base.actionOnTriggerEnter(player);
     }
-    
 
     public override void OnInteract() {
-        print("clicked big valve");
         if(currentState == 0 || currentState == 1)
         {
             ActivateLine(2);
         }
         else
         {
-           
             ActivateLine(1);
         }
     }
-
 
 #if UNITY_EDITOR
     void OnDrawGizmos() {
@@ -653,19 +628,14 @@ public class BigValve : BaseInteractable {
         if (!draw) return; //if we do not wish to draw => return
         if (Selection.activeGameObject == null) return; //if there is no selected object => return (no error spam in Console)
 
-
         if (cellSizeY == 0 || cellSizeX == 0 || gridWidth == 0 || gridHeight == 0)//in case we f*cked up and some of grid sizes are 0 => safely return
-        {                                                                         // errors resulted in division by 0 and Unity crash:)
-       
+        {            
             Debug.LogError(" Some of the grid sizes are 0 safely returning.....!");
             return;
         }                                                                                 
 
-        //   print("on draw gizmo running !");
-        // Debug.Log(SceneView.lastActiveSceneView.rotation.eulerAngles);
         Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
         if (eulerRot.x == 90) {
-
             if (Selection.activeGameObject.transform.root == transform.root) {
                 Vector3 pos = transform.position;
 
@@ -770,7 +740,6 @@ public class BigValve : BaseInteractable {
 #endif
         return obj;
     }
-
 
     GameObject CreateLongPipe(Vector3 pos, Transform parent)
     {

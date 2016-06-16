@@ -5,7 +5,6 @@ using System.Collections;
 /// class to make a particle start to make object freeze
 /// </summary>
 public class FreezeStreamScript : BaseActivatable {
-
     //particlesystem to use
     [SerializeField] ParticleSystem particle;
 

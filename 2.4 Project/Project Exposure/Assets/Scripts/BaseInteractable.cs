@@ -20,9 +20,7 @@ public class BaseInteractable : MonoBehaviour {
         GameManager.Instance.InteractedObject = this.gameObject;
     }
 
-    public virtual void OnInteractableClicked() {
-       
-    }
+    public virtual void OnInteractableClicked() {}
 
     /// <summary>
     /// Assuming the PLAYER enters.
@@ -34,7 +32,6 @@ public class BaseInteractable : MonoBehaviour {
     /// </summary>
     /// <param name="other"></param>
     public virtual void actionOnTriggerExit(Collider player) { if (onTriggerExitEvent != null) onTriggerExitEvent.Invoke(); }
-
 
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
@@ -49,5 +46,4 @@ public class BaseInteractable : MonoBehaviour {
             actionOnTriggerExit(other);
         }
     }
-
 }

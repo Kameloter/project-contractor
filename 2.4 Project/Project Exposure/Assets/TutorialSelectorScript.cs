@@ -23,7 +23,8 @@ public class TutorialSelectorScript : MonoBehaviour {
         tutorialAnimator.SetTrigger(tutorialName);
         repeatButton.GetComponent<Button>().onClick.RemoveAllListeners();
         repeatButton.GetComponent<Button>().onClick.AddListener(() => { tutorialAnimator.SetTrigger(tutorialName); });
-        CloseSelector();
+        GameManager.Instance.UiMonitor.ShowMonitor(); //show monitor if its not shown yet.
+        DisableSelector(); //disable TutorialSelector (for if its on).
     }
 
     /// <summary>

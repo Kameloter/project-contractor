@@ -11,12 +11,7 @@ public class GameManager : MonoBehaviour {
                 GameObject gameManager = new GameObject("GameController");
                 gameManager.tag = Tags.gameController;
 
-                if (gameManager != null) {
-                    _instance = gameManager.AddComponent<GameManager>();
-                    //Debug.Log("Game Manager created !");
-                } else {
-                   // Debug.Log("Manager GameObject not present. Make sure the Tag is proper or the game object Managers exists");
-                }
+                if (gameManager != null) _instance = gameManager.AddComponent<GameManager>();
             }
             return _instance;
         }
@@ -39,8 +34,8 @@ public class GameManager : MonoBehaviour {
 
     [Header("UI")]
     [SerializeField] private ScoreScreenScript _scoreScreen;
+    [SerializeField] private TutorialSelectorScript _tutorialSelector;
     [SerializeField] private MonitorScript _uiMonitor;
-
 
     GameObject clickedObject;
     GameObject activatedObject;
@@ -61,19 +56,21 @@ public class GameManager : MonoBehaviour {
 
     void Awake() {
         _scoreScreen = ScoreScreen;
+        _tutorialSelector = TutorialSelector;
     }
 
     void Start() {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
-
     }
 
     void OnLevelWasLoaded(int level) {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
         TimeSpentLevel = 0;
+
         _scoreScreen = ScoreScreen;
+        _tutorialSelector = TutorialSelector;
     }
 
     /// <summary>
@@ -148,6 +145,17 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Returns the TutorialSelectorScript.
+    /// This should be called before it turns itself off.
+    /// </summary>
+    public TutorialSelectorScript TutorialSelector {
+        get {
+            if (_tutorialSelector == null) _tutorialSelector = GameObject.FindGameObjectWithTag(Tags.tutorialSelector).GetComponent<TutorialSelectorScript>();
+            return _tutorialSelector;
+        }
+    }
+
     public void IncreaseCollectables(int amount = 1) {
         PlayerScript.collectables += amount;
     }
@@ -175,8 +183,6 @@ public class GameManager : MonoBehaviour {
         set { _maxCollectablesAvailable = value; }
     }
 
-    //private bool clickedOnObject = false;
-
     public GameObject ClickedObject {
         get { return clickedObject; }
         set { clickedObject = value; }
@@ -186,20 +192,17 @@ public class GameManager : MonoBehaviour {
     {
         get { return activatedObject; }
         set { activatedObject = value; }
-
     }
 
     public GameObject InteractedObject {
         get { return interactedObject; }
         set { interactedObject = value; }
-
     }
 
     public GameObject DeactivatedObject
     {
         get { return deactivatedObject; }
         set { deactivatedObject = value; }
-
     }
 
     void Update() {
@@ -215,7 +218,6 @@ public class GameManager : MonoBehaviour {
 
         //if longer inactive than 30s close the game
         if (inactiveTime >= 30) {
-            print("termination");
             Application.Quit();
         }
 
@@ -228,6 +230,4 @@ public class GameManager : MonoBehaviour {
         text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
         textLevel.text = Mathf.Floor((TimeSpentLevel / 60)).ToString("0" + "#':'") + ((int)TimeSpentLevel % 60).ToString("D2");
     }
-
-
 }

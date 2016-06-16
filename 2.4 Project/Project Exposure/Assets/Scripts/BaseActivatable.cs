@@ -8,14 +8,11 @@ using System.Collections;
 /// </summary>
 public class BaseActivatable : MonoBehaviour {
 
-    public virtual void Start()
-    {
-    }
+    public virtual void Start() {}
 
     public virtual void Activate() {
         //save the list activated object so you can use it in the gamelogic scripts
         GameManager.Instance.ActivatedObject = this.gameObject;
-
     }
 
     public virtual void Deactivate() {

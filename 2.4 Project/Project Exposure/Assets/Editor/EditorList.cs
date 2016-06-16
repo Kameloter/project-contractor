@@ -137,8 +137,8 @@ public static class EditorList
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("startAtPlayer"), new GUIContent("Start at player?"));
                             break;
                         case CustomEventTrigger.Action.ShowTutorial:
-                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animator"), new GUIContent("Animator"));
-                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animationName"), new GUIContent("Animation trigger name"));
+                            //EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animator"), new GUIContent("Animator"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("tutorialName"), new GUIContent("Tutorial Trigger Name"));
                             break;
                         case CustomEventTrigger.Action.ActivateLight:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("light"), new GUIContent("light to activate"));

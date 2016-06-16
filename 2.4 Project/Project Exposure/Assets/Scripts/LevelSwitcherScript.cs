@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class LevelSwitcherScript : MonoBehaviour {
-
     public int level = 0;
 
     float timeSpent;

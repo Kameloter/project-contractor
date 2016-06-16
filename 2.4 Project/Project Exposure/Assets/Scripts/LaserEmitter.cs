@@ -83,11 +83,7 @@ public class LaserEmitter : BaseActivatable{
         for (int i = 1; i < 10; i++) {  //Max 10 bounces
             if (Physics.Raycast(startPoint, RayDir, out hit, 1000.0f)) {
                 if (hit.collider.CompareTag(Tags.mirror)) {
-                    //Debug.DrawLine(startPoint, hit.point, Color.red);                 //laser
-                    //Debug.DrawLine(hit.point, hit.point + hit.normal, Color.yellow);  //normal
-
                     RayDir = Vector3.Reflect(hit.point - startPoint, hit.normal);       //calculate reflected ray direction
-                    //Debug.DrawLine(hit.point, hit.point + RayDir, Color.blue);        //reflected laser
 
                     startPoint = hit.point;
                     points[i] = hit.point;
@@ -120,7 +116,6 @@ public class LaserEmitter : BaseActivatable{
 
         index = 0;
         update = false;
-
     }
 
     /// <summary>
@@ -149,7 +144,6 @@ public class LaserEmitter : BaseActivatable{
         lineRenderer.shadowCastingMode = UnityEngine.Rendering.ShadowCastingMode.Off;
         lineRenderer.SetWidth(0.1f, 0.1f);
         lineRenderer.material = lineRendererMaterial;
-
         lineRenderer.SetPosition(0, startPoint);
         lineRenderer.SetPosition(1, endPoint);
     }
