@@ -18,6 +18,7 @@ TagManager:
   - LevelSwitcher
   - UI Monitor
   - TutorialSelector
+  - BigValve
   layers:
   - Default
   - TransparentFX

@@ -37,7 +37,6 @@ public class ScoreScreenScript : MonoBehaviour {
     /// Stops player movement and shows the ScoreScreen.
     /// </summary>
     public void EnableScoreScreen() {
-        GameManager.Instance.PlayerMovement.StopAgent();
         GameManager.Instance.UiMonitor.ShowMonitor();
         scoreScreen.SetActive(true);
     }
@@ -46,7 +45,6 @@ public class ScoreScreenScript : MonoBehaviour {
     /// Resumes player movement and removes the scorescreen from view.
     /// </summary>
     public void DisableScoreScreen() {
-        GameManager.Instance.PlayerMovement.ResumeAgent();
         GameManager.Instance.UiMonitor.HideMonitor();
         scoreScreen.SetActive(false);
     }

@@ -32,7 +32,6 @@ public class TutorialSelectorScript : MonoBehaviour {
     /// Stops playerMovement.
     /// </summary>
     public void OpenSelector() {
-        GameManager.Instance.PlayerMovement.StopAgent();
         GameManager.Instance.UiMonitor.ShowMonitor();
 
         //if any tutorial is showing right now, disable it.
@@ -45,7 +44,6 @@ public class TutorialSelectorScript : MonoBehaviour {
     /// Resumes playerMovement.
     /// </summary>
     public void CloseSelector() {
-        GameManager.Instance.PlayerMovement.ResumeAgent();
         GameManager.Instance.UiMonitor.HideMonitor();
         DisableSelector();
     }

@@ -8,8 +8,8 @@ public class SceneStats : MonoBehaviour {
     [ReadOnly] public int _collectablesAvailable = 0;   //keeps track of the amount of collectables to be found
     public int TimeNeededForLevel = 10;
 
-    void Start() {
-        //Count collectables available this scene
+    void Awake() { 
+        //Count collectables available this scene -- needs to be in awake to prevent the hud getting updated before counting.
         _collectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
     }
 

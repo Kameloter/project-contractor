@@ -25,6 +25,7 @@ public class MonitorScript : MonoBehaviour {
     /// </summary>
     public void ShowMonitor() {
         if (uiMonitorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Down")) uiMonitorAnimator.SetTrigger("Up");
+        GameManager.Instance.PlayerMovement.StopAgent();
     }
 
     /// <summary>
@@ -32,6 +33,7 @@ public class MonitorScript : MonoBehaviour {
     /// </summary>
     public void HideMonitor() {
         if (uiMonitorAnimator.GetCurrentAnimatorStateInfo(0).IsName("Up")) uiMonitorAnimator.SetTrigger("Down");
+        GameManager.Instance.PlayerMovement.ResumeAgent();
     }
 
 }

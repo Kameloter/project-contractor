@@ -9,7 +9,7 @@ using UnityEngine;
 public class LaserEmitter : BaseActivatable{
     [Header("Laser")]
     [SerializeField] Transform laserSpawn; //place where the laser starts
-    [SerializeField] Particle hitParticle; //sparkle particle at the tip of the laser
+    [SerializeField] ParticleSystem hitParticleSystem; //sparkle particle at the tip of the laser
 
     Material lineRendererMaterial;
 
@@ -63,8 +63,10 @@ public class LaserEmitter : BaseActivatable{
     /// </summary>
     void DestroyLaser() {
         for (int i = 0; i < transform.childCount; i++) {
-            if (transform.GetChild(i).gameObject.name.Contains("las0r"))
+            if (transform.GetChild(i).gameObject.name.Contains("las0r") || transform.GetChild(i).gameObject.name.Contains("Spark")) {
+                print("Called");
                 Destroy(transform.GetChild(i).gameObject);
+            }
         }
     }
 
@@ -97,7 +99,7 @@ public class LaserEmitter : BaseActivatable{
                 } else {
                     points[i] = hit.point;
                     if (oldPoints[i] != points[i]) {
-                        update = true;
+                        update = true;                  
                     }
                     if (hit.collider.GetComponent<TemperatureScript>() != null) {
                         hit.collider.gameObject.GetComponent<TemperatureScript>().ChangeState(TemperatureScript.TemperatureState.Hot);
@@ -125,6 +127,8 @@ public class LaserEmitter : BaseActivatable{
         DestroyLaser();
         for (int i = 0; i < index + 1; i++) {
             AddLineRenderer(points[i], points[i + 1], i.ToString());
+            ParticleSystem ps = Instantiate(hitParticleSystem, points[i + 1], Quaternion.identity) as ParticleSystem;
+            ps.transform.parent = this.transform;
         }
         points.CopyTo(oldPoints, 0);  //copy points to OldPoints array
     }
