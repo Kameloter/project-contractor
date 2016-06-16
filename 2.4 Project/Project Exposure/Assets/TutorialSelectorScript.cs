@@ -5,11 +5,13 @@ using System.Collections;
 public class TutorialSelectorScript : MonoBehaviour {
     [Header("Reference (optional)")]
     [SerializeField] Animator tutorialAnimator;
+    public Button helpButton; //the questionmark button -- accessible via GameManager this way.
 
     GameObject repeatButton;
 
     void Start() {
         if (tutorialAnimator == null) tutorialAnimator = GameObject.Find("Tutorial").GetComponent<Animator>();
+        if (helpButton == null) helpButton = GameObject.Find("TutorialButton").GetComponent<Button>();
         repeatButton = GameObject.Find("Repeat_Button");
         Invoke("CloseSelector", 0.1f); //disable tutorialselector (invoke to prevent early call errors)
     }

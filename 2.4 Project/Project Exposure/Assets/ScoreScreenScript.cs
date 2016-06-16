@@ -38,6 +38,7 @@ public class ScoreScreenScript : MonoBehaviour {
     /// </summary>
     public void EnableScoreScreen() {
         GameManager.Instance.UiMonitor.ShowMonitor();
+        GameManager.Instance.TutorialSelector.helpButton.interactable = false;
         scoreScreen.SetActive(true);
     }
     
@@ -46,6 +47,7 @@ public class ScoreScreenScript : MonoBehaviour {
     /// </summary>
     public void DisableScoreScreen() {
         GameManager.Instance.UiMonitor.HideMonitor();
+        GameManager.Instance.TutorialSelector.helpButton.interactable = true;
         scoreScreen.SetActive(false);
     }
 
