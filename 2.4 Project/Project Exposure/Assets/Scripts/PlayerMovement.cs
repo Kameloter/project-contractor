@@ -11,7 +11,7 @@ using System.Collections.Generic;
 public class PlayerMovement : MonoBehaviour
 {
     NavMeshAgent agent;
-
+    public Object movePointer;
     private Camera cam;
     private Rigidbody rigibody;
     public float speed = 10.0f;
@@ -65,7 +65,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
     }
-
+    bool work = false;
     IEnumerator dontNavigateWhenClickedOnInteractable() {
         allowNavigationInput = false; //disable navigation input.
         yield return  new WaitForSeconds(0.3f);
@@ -88,11 +88,23 @@ public class PlayerMovement : MonoBehaviour
                 if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
+                        if (!work)
+                        {
+                            GameObject pointer = (GameObject)Instantiate(movePointer, hit.point + hit.normal * 0.1f , Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                            Destroy(pointer, 1f);
+                            work = true;
+                        }
+                       
                         agent.destination = hit.point;
                     }
                 }
             }
         }
+        else
+        {
+            work = false;
+        }
+        
     }
 
     public void SendAgent(Transform interactable) {

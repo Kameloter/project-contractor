@@ -12,7 +12,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
     public GameObject trigger;
 	// Use this for initialization
 	void Start () {
-        GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = false;
+       // GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = false;
 	}
 	
 	// Update is called once per frame
@@ -21,23 +21,22 @@ public class GameLogicIntroLevel : MonoBehaviour {
 			if (Game.LastInteractedObject.name == "object1")
             Game.PlayCameraPath(path1,true);
             activatable.Activate();
-            GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = true;
+            //GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = true;
             didpath1 = true;
         }
 
-        if (GameObject.Find("BigValve").GetComponent<BigValve>().currentState == 1) {
-            trigger.SetActive(true);
-        }
-        else {
-            trigger.SetActive(false);
+       
+
+        if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel)
+        {
+
         }
 
-        if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel){
-        }
 	}
 
     void DoSomething()
     {
+
     }
 
     void OnEnable()
