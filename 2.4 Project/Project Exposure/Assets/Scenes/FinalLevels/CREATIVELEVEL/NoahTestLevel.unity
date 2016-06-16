@@ -143,12 +143,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b11f5b418b7be0d4c8b8259b803d07fe, type: 3}
   m_IsPrefabParent: 0
---- !u!114 &11331566 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 11425736, guid: 4e02df408b62eab4b87f637f4b26d593,
-    type: 2}
-  m_PrefabInternal: {fileID: 1865194644}
-  m_Script: {fileID: 11500000, guid: e2542826b4ac44a44a5ca65802430f54, type: 3}
 --- !u!4 &11331567 stripped
 Transform:
   m_PrefabParentObject: {fileID: 494698, guid: 4e02df408b62eab4b87f637f4b26d593, type: 2}
@@ -582,7 +576,7 @@ Prefab:
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: particle
       value: 
-      objectReference: {fileID: 1745469950}
+      objectReference: {fileID: 0}
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: interactables.Array.data[0]
       value: 
@@ -3582,7 +3576,7 @@ Prefab:
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: particle
       value: 
-      objectReference: {fileID: 684843434}
+      objectReference: {fileID: 0}
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: interactables.Array.data[0]
       value: 
@@ -4910,11 +4904,6 @@ GameObject:
 Transform:
   m_PrefabParentObject: {fileID: 465318, guid: 4962597242f7627459a6bdb22e0a48dc, type: 2}
   m_PrefabInternal: {fileID: 1883782486}
---- !u!198 &684843434 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 19804986, guid: 42d9304fabff0de4b806081ad7c58756,
-    type: 2}
-  m_PrefabInternal: {fileID: 280873845}
 --- !u!1001 &713800306
 Prefab:
   m_ObjectHideFlags: 0
@@ -7384,11 +7373,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1784912081}
   m_RootOrder: 3
---- !u!198 &865051891 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 19804986, guid: 42d9304fabff0de4b806081ad7c58756,
-    type: 2}
-  m_PrefabInternal: {fileID: 1992262395}
 --- !u!1 &899078522
 GameObject:
   m_ObjectHideFlags: 0
@@ -19206,11 +19190,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1724887230}
---- !u!198 &1745469950 stripped
-ParticleSystem:
-  m_PrefabParentObject: {fileID: 19804986, guid: 42d9304fabff0de4b806081ad7c58756,
-    type: 2}
-  m_PrefabInternal: {fileID: 74516476}
 --- !u!1 &1750933148
 GameObject:
   m_ObjectHideFlags: 0
@@ -21930,7 +21909,7 @@ Prefab:
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: particle
       value: 
-      objectReference: {fileID: 865051891}
+      objectReference: {fileID: 0}
     - target: {fileID: 11472464, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
       propertyPath: interactables.Array.data[0]
       value: 
@@ -24011,8 +23990,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  interactables:
-  - {fileID: 11331566}
+  activatables: []
   controlValve: {fileID: 0}
   valveHolder: {fileID: 1322969739}
   valveID: 1
@@ -24189,4 +24167,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
