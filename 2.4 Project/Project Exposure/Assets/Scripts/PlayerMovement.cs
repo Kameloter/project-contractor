@@ -88,12 +88,12 @@ public class PlayerMovement : MonoBehaviour
                 if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
                     if (path.status == NavMeshPathStatus.PathComplete) {
-                        if (!work)
-                        {
-                            GameObject pointer = (GameObject)Instantiate(movePointer, hit.point + hit.normal * 0.1f , Quaternion.FromToRotation(Vector3.forward, hit.normal));
-                            Destroy(pointer, 1f);
-                            work = true;
-                        }
+                        //if (!work)
+                        //{
+                        //    GameObject pointer = (GameObject)Instantiate(movePointer, hit.point + hit.normal * 0.1f , Quaternion.FromToRotation(Vector3.forward, hit.normal));
+                        //    Destroy(pointer, 1f);
+                        //    work = true;
+                        //}
                        
                         agent.destination = hit.point;
                     }
