@@ -12,34 +12,26 @@ public class SteamPipeJoint : MonoBehaviour {
     ParticleSystem smoke;
     bool activated = false;
     
-    void Awake()
-    {
+    void Awake() {
         smoke = GetComponentInChildren<ParticleSystem>();
         smoke.Pause();
     }
 
-    void deactivatePoweredSockets()
-    {
-        foreach (SmallValveSocket poweredsocket in poweredSockets)
-        {
+    void deactivatePoweredSockets() {
+        foreach (SmallValveSocket poweredsocket in poweredSockets) {
             poweredsocket.particle.Stop();
             poweredsocket.DeactivateSocket();
         }
     }
 
-    void activatePoweredSockets()
-    {
-        foreach (SmallValveSocket poweredsocket in poweredSockets)
-        {
-            if (poweredsocket.socketed != null)
-                poweredsocket.ActivateInteractables();
-            else 
-                poweredsocket.particle.Play();
+    void activatePoweredSockets() {
+        foreach (SmallValveSocket poweredsocket in poweredSockets) {
+            if (poweredsocket.socketed != null) poweredsocket.ActivateInteractables();
+            else poweredsocket.particle.Play();
         }
     }
 
-    public void AddToListItem(SmallValveSocket socket)
-    {
+    public void AddToListItem(SmallValveSocket socket) {
         if (!poweredSockets.Contains(socket)) poweredSockets.Add(socket);
     }
 
@@ -54,17 +46,13 @@ public class SteamPipeJoint : MonoBehaviour {
         }
     }
 
-    void StopSmoke()
-    {
+    void StopSmoke() {
         connectTo.StopSteamConnection();
     }
 
-    void OnParticleCollision(GameObject go)
-    {
-        if (connectTo != null)
-        {
-            if (!activated)
-            {
+    void OnParticleCollision(GameObject go) {
+        if (connectTo != null) {
+            if (!activated) {
                 if (poweredSockets.Count > 0) activatePoweredSockets();
                 activated = true;
                 smoke.Play();

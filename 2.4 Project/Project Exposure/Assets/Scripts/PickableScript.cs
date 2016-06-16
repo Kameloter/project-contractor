@@ -73,7 +73,7 @@ public class PickableScript : BaseInteractable {
         rigidBody.isKinematic = false;
         IsCarried = false;
 
-        if (this.CompareTag("Valve")) playerScript.carriedValve = null;
+        if (this.CompareTag(Tags.valve)) playerScript.carriedValve = null;
     }
 
     public override void actionOnTriggerEnter(Collider player) {
