@@ -10,11 +10,9 @@ public class GameLogicIntroLevel : MonoBehaviour {
     bool didpath1= false;
     public BaseActivatable activatable;
     public GameObject trigger;
-    private BigValve bigValve;
 	// Use this for initialization
 	void Start () {
-        bigValve = GameObject.FindWithTag(Tags.bigValve).GetComponent<BigValve>();
-        bigValve.isPowered = false;
+       // GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = false;
 	}
 	
 	// Update is called once per frame
@@ -23,21 +21,31 @@ public class GameLogicIntroLevel : MonoBehaviour {
 			if (Game.LastInteractedObject.name == "object1")
             Game.PlayCameraPath(path1,true);
             activatable.Activate();
-            bigValve.isPowered = true;
+            //GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = true;
             didpath1 = true;
         }
 
-        if (bigValve.currentState == 1) trigger.SetActive(true);
-        else trigger.SetActive(false);
+       
 
-        if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel){
-            //then?
+        if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel)
+        {
+
         }
+
 	}
 
-    void DoSomething() { }
+    void DoSomething()
+    {
 
-    void OnEnable() { CameraControl.OnCameraPathEnd.AddListener( DoSomething); }
+    }
 
-    void OnDisable() { CameraControl.OnCameraPathEnd.RemoveListener(DoSomething); }
+    void OnEnable()
+    {
+        CameraControl.OnCameraPathEnd.AddListener( DoSomething);
+    }
+
+    void OnDisable()
+    {
+        CameraControl.OnCameraPathEnd.RemoveListener(DoSomething);
+    }
 }

@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 
 /// <summary>
@@ -11,11 +12,18 @@ using System.Collections;
 /// </summary>
 public class SplineNodeProperties : MonoBehaviour
 {
-	//time to wait at this noce
+
+
+    
+    public UnityEvent onArrivalEvent = new UnityEvent();
+
+    //time to wait at this noce
 	public float BreakTime = 0f;
     //if it should skip to next node instead of interpolation
     public bool SkipToNext = false;
 
     [HideInInspector]
 	public string Name = "";
+
+
 }

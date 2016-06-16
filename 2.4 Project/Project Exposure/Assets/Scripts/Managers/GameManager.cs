@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour {
     [SerializeField] private SceneStats _sceneStats;
     [SerializeField] private int _collectablesCollected = 0;        //total collectables the player has collected through the entire game
     [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
+    [SerializeField] private SplineInterpolator _splineInterpolator;
 
     [Header("UI")]
     [SerializeField] private ScoreScreenScript _scoreScreen;
@@ -55,16 +56,15 @@ public class GameManager : MonoBehaviour {
     int score = 0;
 
     void Awake() {
-        _scoreScreen = ScoreScreen;
-        _tutorialSelector = TutorialSelector;
-    }
-
-    void Start() {
-        text = GameObject.Find("Time").GetComponent<Text>();
-        textLevel = GameObject.Find("Timer").GetComponent<Text>();
+        FindObjectRefs();
     }
 
     void OnLevelWasLoaded(int level) {
+        FindObjectRefs();
+    }
+
+    void FindObjectRefs()
+    {
         text = GameObject.Find("Time").GetComponent<Text>();
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
         TimeSpentLevel = 0;
@@ -72,7 +72,6 @@ public class GameManager : MonoBehaviour {
         _scoreScreen = ScoreScreen;
         _tutorialSelector = TutorialSelector;
     }
-
     /// <summary>
     /// Returns the Player GameObject.
     /// </summary>

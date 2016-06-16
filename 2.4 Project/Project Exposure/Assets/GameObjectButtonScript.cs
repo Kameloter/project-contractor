@@ -3,8 +3,14 @@ using System.Collections;
 
 public class GameObjectButtonScript : BaseInteractable {
 
-	// Use this for initialization
-	void Start () {
+
+    [SerializeField]
+    BaseActivatable[] activatables;
+
+
+
+    // Use this for initialization
+    void Start () {
 	
 	}
 	
@@ -13,7 +19,25 @@ public class GameObjectButtonScript : BaseInteractable {
 	
 	}
 
+    private void TriggerActivatables()
+    {
+        int index = 0;
+        foreach (BaseActivatable activatable in activatables)
+        {
+            index++;
+            if (activatable != null)
+            {
+                activatable.Activate();
+            }
+            else
+            {
+                Debug.LogError("Activatable in " + gameObject.name + " is NULL in collection at -> " + index + ".", transform);
+            }
+        }
+    }
+
     public override void OnInteract() {
         base.OnInteract();
+        TriggerActivatables();
     }
 }
