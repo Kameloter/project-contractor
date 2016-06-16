@@ -10,7 +10,7 @@ public class SmallValveSocket : BaseInteractable {
     PlayerScript playerScript;
 
     [SerializeField]
-    BaseActivatable[] interactables;
+    BaseActivatable[] activatables;
 
     [HideInInspector]
     public BigValve controlValve;
@@ -103,7 +103,7 @@ public class SmallValveSocket : BaseInteractable {
                 Camera.main.GetComponent<CameraControl>().StartCutscene(optionalPath, StartAtPlayer);
                 playedCamera = true;
             }
-            foreach (BaseActivatable interactable in interactables) {
+            foreach (BaseActivatable interactable in activatables) {
                 interactable.Activate();
             }
         }
@@ -113,14 +113,14 @@ public class SmallValveSocket : BaseInteractable {
         valve.GetComponent<PickableScript>().PickUp();
         valve.GetComponent<PickableScript>().clickable = true;
         socketed = null;
-        foreach (BaseActivatable interactable in interactables) {
+        foreach (BaseActivatable interactable in activatables) {
             interactable.Deactivate();
         }
         if (controlValve.currentState == valveLine) particle.Play();
     }
 
     public void DeactivateSocket() {
-        foreach (BaseActivatable interactable in interactables) {
+        foreach (BaseActivatable interactable in activatables) {
             if (interactable == null) { Debug.LogError("Interactable missing from SVS => " + gameObject.name); return; }
             interactable.Deactivate();
         }

@@ -15,65 +15,71 @@ public enum eOrientationMode { NODE = 0, TANGENT }
 
 public class SplineController : MonoBehaviour
 {
-	public GameObject SplineRoot;
-	public float TimeBetweenAdjacentNodes = 10;
-	public eOrientationMode OrientationMode = eOrientationMode.NODE;
-	public eWrapMode WrapMode = eWrapMode.ONCE;
-	public bool AutoStart = true;
-	public bool AutoClose = true;
-	public bool HideOnExecute = true;
+    public GameObject SplineRoot;
+    public float TimeBetweenAdjacentNodes = 10;
+    public eOrientationMode OrientationMode = eOrientationMode.NODE;
+    public eWrapMode WrapMode = eWrapMode.ONCE;
+    public bool AutoStart = true;
+    public bool AutoClose = true;
+    public bool HideOnExecute = true;
     public bool startAtPlayer = false;
 
-	SplineInterpolator mSplineInterp;
-	
-	// for better performance we precompute the list of nodes and we re-use the
-	// same SplineNode class used by SplineInterpolator (which is what does the real job);
-	// however, we only fill in a small number of fields of each SplineNode;
-	// in particular we copy here only the fields:
-	//   - Point
-	//   - Rot
-	//   - BreakTime
-	//   - Name
-	SplineNode[] mSplineNodeInfo;
+    SplineInterpolator mSplineInterp;
 
-	// --------------------------------------------------------------------------------------------
-	// UNITY CALLBACKS
-	// --------------------------------------------------------------------------------------------
+    // for better performance we precompute the list of nodes and we re-use the
+    // same SplineNode class used by SplineInterpolator (which is what does the real job);
+    // however, we only fill in a small number of fields of each SplineNode;
+    // in particular we copy here only the fields:
+    //   - Point
+    //   - Rot
+    //   - BreakTime
+    //   - Name
+    SplineNode[] mSplineNodeInfo;
 
-	void Start()
-	{
-		mSplineInterp = GetComponent(typeof(SplineInterpolator)) as SplineInterpolator;
+    // --------------------------------------------------------------------------------------------
+    // UNITY CALLBACKS
+    // --------------------------------------------------------------------------------------------
 
-		if (HideOnExecute) DisableNodeObjects();
-		if (AutoStart) FollowSpline();
-	}
+    void Start()
+    {
+        mSplineInterp = GetComponent(typeof(SplineInterpolator)) as SplineInterpolator;
 
-	// --------------------------------------------------------------------------------------------
-	// PUBLIC METHODS
-	// --------------------------------------------------------------------------------------------
-	
-	/// <summary>
-	/// Disables the spline objects, we don't need them outside design-time.
-	/// </summary>
-	public void DisableNodeObjects()
-	{
-		if (SplineRoot != null)	SplineRoot.SetActive(false);
+        if (HideOnExecute) DisableNodeObjects();
+        if (AutoStart) FollowSpline();
     }
 
-	/// <summary>
-	/// Starts the interpolation
-	/// </summary>
-	public void FollowSpline()
-	{
+    // --------------------------------------------------------------------------------------------
+    // PUBLIC METHODS
+    // --------------------------------------------------------------------------------------------
+
+    /// <summary>
+    /// Disables the spline objects, we don't need them outside design-time.
+    /// </summary>
+    public void DisableNodeObjects()
+    {
+        if (SplineRoot != null) SplineRoot.SetActive(false);
+    }
+
+    /// <summary>
+    /// Starts the interpolation
+    /// </summary>
+    public void FollowSpline()
+    {
         mSplineNodeInfo = GetSplineNodes();
-		if (mSplineNodeInfo.Length > 0)
-		{
-			SetupSplineInterpolator(mSplineInterp, mSplineNodeInfo);
-            mSplineInterp.StartInterpolation(DisableCutscene, null, null, true, WrapMode);
-		}
-	}
+        if (mSplineNodeInfo.Length > 0)
+        {
+            SetupSplineInterpolator(mSplineInterp, mSplineNodeInfo);
+            mSplineInterp.StartInterpolation(DisableCutscene, NodeArrival, null, true, WrapMode);
+        }
+    }
 
-
+    void NodeArrival(int index, SplineNode thenode)
+    {
+        if(index == 2 )
+        {
+            Debug.Log("hey im at second /third node ");
+        }
+    }
 
 	/// <summary>
     /// Starts the interpolation
@@ -188,9 +194,9 @@ public class SplineController : MonoBehaviour
     	{
 			SplineNodeProperties p = element.GetComponent<SplineNodeProperties>();
 			if (p != null)
-				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime, p.SkipToNext));
+				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime, p.SkipToNext,p.onArrivalEvent));
 			else
-				info.Add(new SplineNode("", element.transform, 0,false));
+				info.Add(new SplineNode("", element.transform, 0,false, p.onArrivalEvent));
 		}
 
 		return info.ToArray();

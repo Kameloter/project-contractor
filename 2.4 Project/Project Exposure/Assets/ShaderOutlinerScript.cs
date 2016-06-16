@@ -14,14 +14,9 @@ public class ShaderOutlinerScript : MonoBehaviour {
 
         outlineMaterial = new Material(Resources.Load("ObjectOutliner", typeof(Material)) as Material);
 
-        //if (sizeOfObject == SizeOfObject.Big)
-        //{
-        //    outlineMaterial.SetFloat("_Outline", 0.0001f);
-        //}
-        //else
-        //{
-            outlineMaterial.SetFloat("_Outline", 0.0075f);
-        //}
+      
+        outlineMaterial.SetFloat("_Outline", 0.0075f);
+
 
         owner = GetComponent<BaseInteractable>();
         owner.onTriggerEnterEvent.AddListener(AddOutlineMaterial);
