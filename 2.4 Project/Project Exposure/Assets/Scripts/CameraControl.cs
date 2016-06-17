@@ -83,10 +83,10 @@ public class CameraControl : MonoBehaviour
 
         //set rotation of camera
         Vector3 lookPos = target - transform.position;
-        if (offset.z > 0) {
+        if (offset.z != 0) {
             lookPos.x = 0;
         }
-        if (offset.x > 0) {
+        if (offset.x != 0) {
             lookPos.z = 0;
         }
         Quaternion rot = Quaternion.LookRotation(lookPos);
@@ -106,11 +106,11 @@ public class CameraControl : MonoBehaviour
 
         //set camera rotation
         Vector3 lookPos = target - transform.position;
-        if (offset.z > 0)
+        if (offset.z != 0)
         {
             lookPos.x = 0;
         } 
-        if (offset.x > 0)
+        if (offset.x != 0)
         {
             lookPos.z = 0;
         }
