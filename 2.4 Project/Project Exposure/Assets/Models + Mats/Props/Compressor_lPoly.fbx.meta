@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5a1075fe41dbb7a4984b68e50c70f8fe
-timeCreated: 1466085698
+guid: a90b1ab41d7ea6c41af409b6afeb57a7
+timeCreated: 1466164477
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -42,9 +42,6 @@ ModelImporter:
     4300008: Fan2_lPoly
     4300010: Arrow1_lPoly
     4300012: Arrow2_lPoly
-    7400000: Idle
-    7400002: Working
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -65,95 +62,7 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Idle
-      takeName: Props2
-      firstFrame: 1
-      lastFrame: 1
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Arrow1_lPoly
-        weight: 1
-      - path: Arrow2_lPoly
-        weight: 1
-      - path: Ball_lPoly
-        weight: 1
-      - path: Body_lPoly
-        weight: 1
-      - path: Fan1_lPoly
-        weight: 1
-      - path: Fan2_lPoly
-        weight: 1
-      - path: Vent_lPoly
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Working
-      takeName: Props2
-      firstFrame: 2
-      lastFrame: 15
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask:
-      - path: 
-        weight: 1
-      - path: Arrow1_lPoly
-        weight: 1
-      - path: Arrow2_lPoly
-        weight: 1
-      - path: Ball_lPoly
-        weight: 1
-      - path: Body_lPoly
-        weight: 1
-      - path: Fan1_lPoly
-        weight: 1
-      - path: Fan2_lPoly
-        weight: 1
-      - path: Vent_lPoly
-        weight: 1
-      maskType: 0
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -191,7 +100,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
