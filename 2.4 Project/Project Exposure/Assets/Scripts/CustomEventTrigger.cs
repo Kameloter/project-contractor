@@ -35,6 +35,11 @@ public class CustomEventTrigger : MonoBehaviour {
         Once, Delayed, Repeat, RepeatDelayed
     };
 
+    [SerializeField]
+    public enum TypeOfTutorial {
+        Geothermal, Valve, Laser, Bridge, Door, Ice, Walking
+    };
+
     /// <summary>
     /// struct with all possible variable for all actions(enum)
     /// show correct viarables in custom event editor script
@@ -52,6 +57,8 @@ public class CustomEventTrigger : MonoBehaviour {
         [SerializeField] public float repeatTime;
         [SerializeField] public float repeatAmount;
         [SerializeField] public bool activated;
+        [SerializeField] public TypeOfTutorial tutorialType;
+
 
         //Gameobject to complete the action
         [SerializeField] public GameObject go;
@@ -123,7 +130,7 @@ public class CustomEventTrigger : MonoBehaviour {
                     customEvents[i].go.GetComponent<AudioSource>().Play();
                     break;
                 case Action.ShowTutorial:
-                    GameManager.Instance.TutorialSelector.ShowTutorial(customEvents[i].tutorialName);
+                    GameManager.Instance.TutorialSelector.ShowTutorial(customEvents[i].tutorialType.ToString());
                     break;
                 case Action.ActivateLight:
                     customEvents[i].light.enabled = true;

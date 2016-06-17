@@ -95,7 +95,7 @@ public static class EditorList
                     GUILayout.FlexibleSpace();
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("action"), new GUIContent("Type of action"));
                     CustomEventTrigger.Action action = (CustomEventTrigger.Action)list.GetArrayElementAtIndex(i).FindPropertyRelative("action").enumValueIndex;
-                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("triggerMore"), new GUIContent("trigger more than once?"));
+                    EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("triggerMore"), new GUIContent("Trigger more than once?"));
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("onTrigger"), new GUIContent("When to Trigger"));
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType"), new GUIContent("Fire Type"));
                     CustomEventTrigger.FireType fireType = (CustomEventTrigger.FireType)list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType").enumValueIndex;
@@ -137,8 +137,7 @@ public static class EditorList
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("startAtPlayer"), new GUIContent("Start at player?"));
                             break;
                         case CustomEventTrigger.Action.ShowTutorial:
-                            //EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("animator"), new GUIContent("Animator"));
-                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("tutorialName"), new GUIContent("Tutorial Trigger Name"));
+                            EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("tutorialType"), new GUIContent("Type of Tutorial"));
                             break;
                         case CustomEventTrigger.Action.ActivateLight:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("light"), new GUIContent("light to activate"));
