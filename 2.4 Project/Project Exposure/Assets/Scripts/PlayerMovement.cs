@@ -10,91 +10,107 @@ using System.Collections.Generic;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+    /// <summary>
+    /// The navmesh agent component.
+    /// </summary>
     NavMeshAgent agent;
+    /// <summary>
+    /// Prefab of the movement click pointer
+    /// </summary>
     public Object movePointer;
-    private Camera cam;
-    private Rigidbody rigibody;
-    public float speed = 10.0f;
-    private float gravity = 10.0f;
-    private float maxVelocityChange = 10.0f;
-
+    /// <summary>
+    /// A ref to navmeshpath so we can calculate a valid path on navmesh click and store it here, so it can be used everywhere in the class.
+    /// </summary>
     private NavMeshPath path;
+    /// <summary>
+    /// The layer with all interactable objects (clickable objects)
+    /// </summary>
     public LayerMask interactablesLayer;
-    public LayerMask navigationLayer;
-
-    [HideInInspector]
-    public bool allowNavigationInput;
 
     public Vector3 playerVelocity { get { return agent.velocity; }}
-    float frameCount = 0;
-    //  Animator anim;
 
     EventSystem eventSystem = EventSystem.current;
 
     void Start()
-    {
-        allowNavigationInput = true;
-        cam = Camera.main;
-        rigibody = GetComponent<Rigidbody>();
+    { 
         agent = GetComponent<NavMeshAgent>();
+        if (agent == null) Debug.LogError("Nav mesh not found on player where PlayerMovement component is attached", transform);
         path = new NavMeshPath();
     }
  
-    void Update()     {
-        PickUpRaycast();
-        MouseMovement();
+    void Update()
+    {
+        //Interraction raycast
+        PlayerInterraction();
+        //player touch movement
+        PlayerTouchMovement();
     }
   
-    void PickUpRaycast()
+    /// <summary>
+    /// One time ray cast per click, used to detect if we clicked any interactable object.
+    /// </summary>
+    void PlayerInterraction()
     {
+        //Ref to store back what we hit
         RaycastHit hit;
+        //The ray it self from screen to world space.
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)) //if we clicked the left mouse button
         {
-            if (Physics.Raycast(ray, out hit,interactablesLayer))
+            if (Physics.Raycast(ray, out hit,interactablesLayer)) //check if we hit something
             {
-                Debug.DrawLine(ray.origin, hit.point);
+                //Debug.DrawLine(ray.origin, hit.point);
                 Transform objectHit = hit.transform;
 
-                if (hit.transform.GetComponent<BaseInteractable>() != null)
+                if (hit.transform.GetComponent<BaseInteractable>() != null) //if the object we hit has the interactable script
                 {
+                    //call the base function for ANY interactable, then derrived classes override that and
+                    // do their own behaviour.
                     BaseInteractable interactable = hit.transform.GetComponent<BaseInteractable>();
                     interactable.OnInteractableClicked();
-                    //StartCoroutine(dontNavigateWhenClickedOnInteractable());//method name explains.
                 }
             }
         }
     }
-    bool work = false;
-    IEnumerator dontNavigateWhenClickedOnInteractable() {
-        allowNavigationInput = false; //disable navigation input.
-        yield return  new WaitForSeconds(0.3f);
-        allowNavigationInput = true; //alows navigation input again.
-    }
 
-    void MouseMovement() {
-        if (Input.GetMouseButton(0)) {
-            PointerEventData cursor = new PointerEventData(EventSystem.current);                            // This section prepares a list for all objects hit with the raycast
-            cursor.position = Input.mousePosition;
-            List<RaycastResult> objectsHit = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(cursor, objectsHit);
-            if (objectsHit.Count > 0) return;
+    /// <summary>
+    /// Nav-mesh raycast movement
+    /// </summary>
+    void PlayerTouchMovement() {    // This section prepares a list for all objects hit with the raycast
+        //If we are pressing left mouse button
+        if (Input.GetMouseButton(0))
+        {
 
+       
+            //Basicly we make a pointer thats used for UI raycast
+            PointerEventData cursor = new PointerEventData(EventSystem.current);                        
+            cursor.position = Input.mousePosition;     //set its position to our cursor.
+            List<RaycastResult> objectsHit = new List<RaycastResult>(); //make a list of possible hit objects
+            EventSystem.current.RaycastAll(cursor, objectsHit); //raycast from the created pointer and store back anything we hit
+            if (objectsHit.Count > 0) return; //if we hit an ui -> return dont navigate there.
+
+            //If so , proceed to normal raycast (Screen space to world space)
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             NavMeshHit navHit;
+            //If we hit something
             if (Physics.Raycast(ray, out hit, 100)) {
-                Debug.DrawLine(ray.origin, hit.point, Color.red);
+                //Debug.DrawLine(ray.origin, hit.point, Color.red);
+                //Sample the pos on the nav mesh
                 if (NavMesh.SamplePosition(hit.point, out navHit, 1.0f, NavMesh.AllAreas)) {
+                    //Calculate a valid path and store it back in "path" variable
                     NavMesh.CalculatePath(transform.position, hit.point, NavMesh.AllAreas, path);
+                    //If its a legit path 
                     if (path.status == NavMeshPathStatus.PathComplete) {
+                    
                         //if (!work)
                         //{
                         //    GameObject pointer = (GameObject)Instantiate(movePointer, hit.point + hit.normal * 0.1f , Quaternion.FromToRotation(Vector3.forward, hit.normal));
                         //    Destroy(pointer, 1f);
                         //    work = true;
                         //}
-                       
+
+                        //Instruct agent to go there.
                         agent.destination = hit.point;
                     }
                 }
@@ -102,60 +118,47 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            work = false;
+            //work = false;
         }
         
     }
-
-    public void SendAgent(Transform interactable) {
+    /// <summary>
+    /// Sends the agent to a destination (interactable) and then stores the last clicked object of that interactable.
+    /// </summary>
+    /// <param name="interactable"></param>
+    public void SendAgent(Transform interactable)
+    {
         agent.SetDestination(interactable.position);
         GameManager.Instance.ClickedObject = interactable.gameObject;
     }
 
+    /// <summary>
+    /// Stops the agent from moving. For example when cut scenes are played
+    /// or at the end of the level when the finish screen is showed.
+    /// </summary>
     public void StopAgent() {
         agent.Stop();
     }
-
+    /// <summary>
+    /// When the agent was stopped , this function can be used to resume his behaviour.
+    /// The path the agent had when was stopped will be reset.
+    /// </summary>
     public void ResumeAgent() {
         agent.ResetPath();
         agent.Resume();
     }
 
-    void Movement() {
-        Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-    
-        Vector3 lookdir = cam.transform.forward;
-        lookdir.y = 0;
-        lookdir.Normalize();
 
-        Vector3 targetVelocity = Vector3.zero;
-        targetVelocity += lookdir * input.z;
-        targetVelocity -= cam.transform.right * -input.x;
-
-        targetVelocity *= (Mathf.Abs(input.x) == 1 && Mathf.Abs(input.z) == 1) ? 0.7f : 1;
-        targetVelocity *= speed;
-
-        if (targetVelocity.magnitude > 0) {
-            transform.rotation = Quaternion.LookRotation(new Vector3(targetVelocity.x, 0, targetVelocity.z));
-        }
-
-        // Apply a force that attempts to reach our target velocity
-        Vector3 velocity = rigibody.velocity;
-        Vector3 velocityChange = (targetVelocity - velocity);
-        velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-        velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-        velocityChange.y = 0;
-
-        rigibody.AddForce(velocityChange, ForceMode.VelocityChange);
-        //Add gravity
-        rigibody.AddForce(new Vector3(0, -gravity * rigibody.mass, 0));
-    }
-
+    /// <summary>
+    /// Subscribe to camera events
+    /// </summary>
     void OnEnable() {
         CameraControl.OnCameraPathEnd.AddListener(ResumeAgent);
         CameraControl.OnCameraPathStart.AddListener(StopAgent);
     }
-
+    /// <summary>
+    /// Unsubscribe from camera events
+    /// </summary>
     void OnDisable() {
         CameraControl.OnCameraPathEnd.RemoveListener(ResumeAgent);
         CameraControl.OnCameraPathStart.RemoveListener(StopAgent);
