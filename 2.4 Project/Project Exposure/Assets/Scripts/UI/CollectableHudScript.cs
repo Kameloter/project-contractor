@@ -4,9 +4,6 @@ using System.Collections;
 
 public class CollectableHudScript : MonoBehaviour {
     [Header("Textfields")]
-    //public Text divider;  
-    //public Text collectables;
-
     public Text found; //will show the amount of collectables found this level
     public Text total; //will show the total amount of collectables in a level
 
@@ -16,6 +13,11 @@ public class CollectableHudScript : MonoBehaviour {
         UpdateHudTotal();
     }
 
+    /// <summary>
+    /// Gets called when a collectable got picked up.
+    /// Increases the number of collectables found this level and updates the 'Found' part of the CollectableHud.
+    /// </summary>
+    /// <param name="value"></param>
     public void OnCollectCollectable(int value) {
         GameManager.Instance.IncreaseCollectables(value);
         UpdateHudFound();
