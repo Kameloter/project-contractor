@@ -14,11 +14,8 @@ public enum EditorListOption {
 	All = Default | Buttons , Events
 }
 
-
-
 public static class EditorList
 {
-
     private static GUIContent
         moveButtonContent = new GUIContent("\u21b4", "move down"),
         duplicateButtonContent = new GUIContent("+", "duplicate"),
@@ -66,33 +63,42 @@ public static class EditorList
         }
     }
 
+    /// <summary>
+    /// function to check if the list is actually a list or array
+    /// if yes then draw the custom inspector in the ShowElementsCustom function
+    /// </summary>
+    /// <param name="list">the list you want to draw the inspector for</param>
+    /// <param name="booleans">array of booleans for the foldouts</param>
+    /// <param name="options"></param>
     public static void ShowWithBool(SerializedProperty list, bool[] booleans, EditorListOption options = EditorListOption.Default) {
         if (!list.isArray) {
             EditorGUILayout.HelpBox(list.name + " is neither an array nor a list!", MessageType.Error);
             return;
         }
 
-        bool
-            showEvents = (options == EditorListOption.Events);
+        bool showEvents = (options == EditorListOption.Events);
 
         if (showEvents) {
             ShowElementsCustom(list, booleans, options);
         }
     }
 
-
+    /// <summary>
+    /// drawing the custom inspector for the custom event trigger script
+    /// </summary>
+    /// <param name="list">the list you want to draw the inspector for</param>
+    /// <param name="booleans">array of booleans for the foldouts</param>
+    /// <param name="options"></param>
     private static void ShowElementsCustom(SerializedProperty list, bool[] booleans, EditorListOption options) {
-        bool
-            showEvents = (options == EditorListOption.Events);
+        bool showEvents = (options == EditorListOption.Events);
 
         if (showEvents) {
-          
             for (int i = 0; i < list.arraySize; i++) {
-
-                //   EditorGUILayout.TextField ("Event " + i.ToString());
+                //making the foldouts
                 booleans[i] = EditorGUILayout.Foldout(booleans[i], new GUIContent("Event " + i.ToString()));
                 if (booleans[i]) {
                     GUILayout.FlexibleSpace();
+                    // drawing the variales which occur for every event (action, triggerType etc)
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("action"), new GUIContent("Type of action"));
                     CustomEventTrigger.Action action = (CustomEventTrigger.Action)list.GetArrayElementAtIndex(i).FindPropertyRelative("action").enumValueIndex;
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("triggerMore"), new GUIContent("Trigger more than once?"));
@@ -100,6 +106,7 @@ public static class EditorList
                     EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType"), new GUIContent("Fire Type"));
                     CustomEventTrigger.FireType fireType = (CustomEventTrigger.FireType)list.GetArrayElementAtIndex(i).FindPropertyRelative("fireType").enumValueIndex;
                   
+                    //change variables to show in default inspector based on firetype
                     switch (fireType) {
                         case CustomEventTrigger.FireType.Delayed:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Delay Time"));
@@ -107,7 +114,6 @@ public static class EditorList
                         case CustomEventTrigger.FireType.Repeat:
                              EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatTime"), new GUIContent("Time Between fires"));
                              EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatAmount"), new GUIContent("Amount of fires"));
-                         
                             break;
                         case CustomEventTrigger.FireType.RepeatDelayed:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("delay"), new GUIContent("Delay Time"));
@@ -115,8 +121,7 @@ public static class EditorList
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("repeatAmount"), new GUIContent("Amount of fires"));
                             break;
                     }
-
-              
+                    //change variables to show in default inspector based on what action is gonna be fired
                     switch (action) {
                         case CustomEventTrigger.Action.PlayAnimation:
                             EditorGUILayout.PropertyField(list.GetArrayElementAtIndex(i).FindPropertyRelative("go"), new GUIContent("Gameobject to perform action"));
@@ -173,6 +178,7 @@ public static class EditorList
             }
         }
 
+        //making the inspector be able to change size of the event array and making buttons for it
         EditorGUILayout.BeginHorizontal();
         GUILayout.FlexibleSpace();
         if (list.arraySize != 15) {
@@ -232,31 +238,5 @@ public static class EditorList
 
     private static void ShowButtons(SerializedProperty list, int index)
     {
-      
-        //if (GUILayout.Button(addButtonContent, EditorStyles.miniButtonLeft, miniButtonWidth))
-        //{
-        //    list.arraySize += 1;
-        //}
-      
-        //if (GUILayout.Button(deleteButtonContent, EditorStyles.miniButtonRight, miniButtonWidth))
-        //{
-        //    list.arraySize -= 1;
-        //}
-        //if (GUILayout.Button(moveButtonContent, EditorStyles.miniButtonLeft, miniButtonWidth))
-        //{
-        //    list.MoveArrayElement(index, index + 1);
-        //}
-        //if (GUILayout.Button(duplicateButtonContent, EditorStyles.miniButtonMid, miniButtonWidth))
-        //{
-        //    list.InsertArrayElementAtIndex(index);
-
-        //}
-        //if (GUILayout.Button(deleteButtonContent, EditorStyles.miniButtonRight, miniButtonWidth)) {
-        //	int oldSize = list.arraySize;
-        //	list.DeleteArrayElementAtIndex(index);
-        //	if (list.arraySize == oldSize) {
-        //		list.DeleteArrayElementAtIndex(index);
-        //	}
-        //}
     }
 }

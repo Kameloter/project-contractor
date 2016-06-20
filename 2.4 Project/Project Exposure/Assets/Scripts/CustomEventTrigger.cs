@@ -5,13 +5,11 @@ using UnityEngine.UI;
 /// <summary>
 /// Class for a trigger system to make easy events and actions when a player hits this trigger
 /// </summary>
-[System.Serializable]
 public class CustomEventTrigger : MonoBehaviour {
-
     /// <summary>
     /// enum with all the avaible actions for the trigger
     /// </summary>
-    [SerializeField]
+   // [SerializeField]
     public enum Action {
         PlaySound, PlayAnimation, PlayCameraPath, ActivateInteractable,
         DeactivateInteractable, ShowTutorial, PlayParticle, StopParticle,
@@ -22,7 +20,7 @@ public class CustomEventTrigger : MonoBehaviour {
     /// <summary>
     /// enum to specify when you want to fire the event
     /// </summary>
-    [SerializeField]
+   // [SerializeField]
     public enum OnTrigger {
         OnTriggerEnter, OnTriggerExit, OnTriggerStay
     };
@@ -30,12 +28,13 @@ public class CustomEventTrigger : MonoBehaviour {
     /// <summary>
     /// enum to specify the fireMode of the event, once, repeating etc
     /// </summary>
-    [SerializeField]
     public enum FireType {
         Once, Delayed, Repeat, RepeatDelayed
     };
 
-    [SerializeField]
+    /// <summary>
+    /// enum to specify what tutorial you want to show
+    /// </summary>
     public enum TypeOfTutorial {
         Geothermal, Valve, Laser, Bridge, Door, Ice, Walking
     };
@@ -46,60 +45,57 @@ public class CustomEventTrigger : MonoBehaviour {
     /// </summary>
     [System.Serializable]
     public struct CustomEvent {
+        //action
         public Action action;
 
         //fire and trigger types
-        [SerializeField] public OnTrigger onTrigger;
-        [SerializeField] public bool triggerMore;
-        [SerializeField] public bool triggered;
-        [SerializeField] public FireType fireType;
-        [SerializeField] public float delay;
-        [SerializeField] public float repeatTime;
-        [SerializeField] public float repeatAmount;
-        [SerializeField] public bool activated;
-        [SerializeField] public TypeOfTutorial tutorialType;
-
+        public OnTrigger onTrigger;
+        public bool triggerMore;
+        public bool triggered;
+        public FireType fireType;
+        public float delay;
+        public float repeatTime;
+        public float repeatAmount;
+        public bool activated;
+        public TypeOfTutorial tutorialType;
 
         //Gameobject to complete the action
-        [SerializeField] public GameObject go;
+        public GameObject go;
 
         // audioclip to play
-        [SerializeField] public AudioClip audioClip;
+        public AudioClip audioClip;
 
         // play animation
-        [SerializeField] public AnimationClip animation;
+        public AnimationClip animation;
 
         // activate / deactivate interactable
-        [SerializeField] public BaseActivatable interactable;
+        public BaseActivatable interactable;
 
         //camera cutscene
-        [SerializeField] public GameObject path;
-        [SerializeField]
+        public GameObject path;
         public bool startAtPlayer;
 
         //start tutorial
         //[SerializeField] public TutorialSelectorScript tutorialSelector;
-        [SerializeField] public string tutorialName;
-
+        public string tutorialName;
 
         //particle
-        [SerializeField] public ParticleSystem particle;
+        public ParticleSystem particle;
 
         //light stuff
-        [SerializeField] public Light light;
-        [SerializeField] public Color color;
-        [SerializeField] public float intensity;
-        [SerializeField] public float bounceIntensity;
-        [SerializeField] public float range;
+        public Light light;
+        public Color color;
+        public float intensity;
+        public float bounceIntensity;
+        public float range;
 
         //new camera offset
-        [SerializeField] public Vector3 offset;
+        public Vector3 offset;
     }
 
     /// <summary>
     /// array of events so you can have multiple events per trigger
     /// </summary>
-    [SerializeField]
     public CustomEvent[] customEvents;
 
     /// <summary>
