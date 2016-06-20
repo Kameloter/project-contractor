@@ -2202,6 +2202,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useMainCamera: 1
   alignTo: {fileID: 0}
+  x: 1
+  y: 1
+  z: 1
 --- !u!114 &11414468
 MonoBehaviour:
   m_ObjectHideFlags: 1
