@@ -12,5 +12,5 @@ public class PlayerScript : MonoBehaviour {
 
     //amount of collectables
     [Header("Player Stats")]
-    [Tooltip("Collected Collectables")] public int collectables = 0;
+    [Tooltip("Collected Collectables")] public int collectables = 0; //total collectables collected during level
 }

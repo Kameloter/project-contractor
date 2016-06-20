@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour {
     GameObject interactedObject;
     GameObject deactivatedObject;
 
+    //time
     Text text;
     Text textLevel;
     //WWW www;
@@ -69,9 +70,10 @@ public class GameManager : MonoBehaviour {
         textLevel = GameObject.Find("Timer").GetComponent<Text>();
         TimeSpentLevel = 0;
 
-        _scoreScreen = ScoreScreen;
-        _tutorialSelector = TutorialSelector;
+        _scoreScreen = ScoreScreen;             //ref needed before it disables itself
+        _tutorialSelector = TutorialSelector;   //ref needed before it disables itself
     }
+
     /// <summary>
     /// Returns the Player GameObject.
     /// </summary>
@@ -105,10 +107,8 @@ public class GameManager : MonoBehaviour {
     /// <summary>
     /// Returns the SceneManager.
     /// </summary>
-    public SceneManager SceneManager
-    { 
-        get
-        {
+    public SceneManager SceneManager { 
+        get {
             if (_sceneManager == null) _sceneManager = FindObjectOfType<SceneManager>();
             return _sceneManager;
         }
@@ -155,15 +155,25 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Increases the number of found collectables this level by amount.
+    /// </summary>
+    /// <param name="amount">Defaults to '1'</param>
     public void IncreaseCollectables(int amount = 1) {
         PlayerScript.collectables += amount;
     }
 
+    /// <summary>
+    /// Collectables collected through the entire game.
+    /// </summary>
     public int CollectablesCollected {
         get { return _collectablesCollected; }
         set { _collectablesCollected = value; }
     }
 
+    /// <summary>
+    /// Score. Based on amount of Stars earned.
+    /// </summary>
     public int Score {
         get { return score; }
         set { score = value; }
@@ -177,6 +187,9 @@ public class GameManager : MonoBehaviour {
         get { return TimeSpentLevel; }
     }
 
+    /// <summary>
+    /// Used to set max available collectables in the entire game played so far.
+    /// </summary>
     public int MaxCollectablesAvailable {
         get { return _maxCollectablesAvailable; }
         set { _maxCollectablesAvailable = value; }
