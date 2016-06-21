@@ -31,7 +31,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &123912
 GameObject:
@@ -81,7 +81,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &143594
 GameObject:
@@ -100,7 +100,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &148862
 GameObject:
@@ -145,7 +145,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &169310
 GameObject:
@@ -162,7 +162,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!1 &169852
 GameObject:
@@ -390,8 +390,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 143594}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.28199, y: 2.7748537, z: -0.60963535}
+  m_LocalRotation: {x: 0, y: 0.9238792, z: 0, w: 0.38268447}
+  m_LocalPosition: {x: 6.8899994, y: -4.9893966, z: 16.494}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22432164}
@@ -485,6 +485,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useMainCamera: 1
   alignTo: {fileID: 0}
+  x: 1
+  y: 1
+  z: 1
 --- !u!114 &11405264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -528,11 +531,12 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  activatables: []
+  activatables:
+  - {fileID: 0}
   controlValve: {fileID: 0}
   valveHolder: {fileID: 413134}
   valveID: 1
-  valveLine: 2
+  valveLine: 1
   radius: 9
   sphereColor: {r: 0, g: 0, b: 0, a: 1}
   poweredBy: {fileID: 0}
