@@ -8,10 +8,6 @@ public static class Game {
         }
     }
 
-    static public int Collectables {
-        get { return GameManager.Instance.CollectablesCollected; }
-    }
-
     static public float TimeLeft {
         get { return GameManager.Instance.TimeLeft; }
     }
@@ -39,8 +35,8 @@ public static class Game {
     }
 
     static public int Score {
-        get { return GameManager.Instance.Score; }
-        set { GameManager.Instance.Score = value; }
+        get { return GameManager.Instance.GameScore; }
+        set { GameManager.Instance.GameScore = value; }
     }
 
     static public GameObject GetGameObject(string GameObjectName) {
