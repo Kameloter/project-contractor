@@ -10,6 +10,7 @@ using System.Collections;
 /// and enable/disable their actions.
 /// </summary>
 public class BaseInteractable : MonoBehaviour {
+
    /// <summary>
    /// Bool to know if the player is in range of hte interactable object.
    /// </summary>

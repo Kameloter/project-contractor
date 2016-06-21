@@ -5,46 +5,60 @@ using System.Collections;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Class speaks by itself. 
+/// </summary>
 [ExecuteInEditMode][System.Serializable]
 public class ProceduralBridge : BaseActivatable {
+    
+    /// <summary>
+    /// The part used to build the bridge
+    /// </summary>
     [SerializeField]
     GameObject bridgePart;
+    //The nav mesh obstacle
     [SerializeField]
     GameObject obstacle;
+    //Collider
     [SerializeField]
-    GameObject colliderHolder;
+    GameObject colliderOfBridge;
 
-    public Transform leftSide;
-    public Transform rightSide;
+    public Transform end;
+    public Transform start;
 
     [Header("Editor part !!!!")]
+    [Tooltip("From top down perspective the part WIDTH")]
     public float partSize;
-    float distanceBetweenParts = 0;
-    float wholePartsCount = 0;
-    Vector3 dir;
+    [Tooltip("From top down perspective the bridge HEIGHT(gap to go trough)")]
+    public float bridgeWidth;
+
+    //make it here so we can access it it the whole script.
+    float distanceBetweenStartEnd = 0;
+    //the direction the bridge is getting built in world space.
+    Vector3 buidDirection;
 
     public override void Start() {
         base.Start();
-        colliderHolder.SetActive(false);
+        colliderOfBridge.SetActive(false);
     }
 
     IEnumerator buildAnimation()
     {
         Vector3 offset = Vector3.zero;
         Vector3 posToSet = Vector3.zero;
-        float currentDistance = distanceBetweenParts;
+        float currentDistance = distanceBetweenStartEnd;
         offset.y = -0.05f;
         while (currentDistance >= partSize)
         {
-            offset += dir * (partSize / 2);
-            posToSet = rightSide.transform.position + offset;
+            offset += buidDirection * (partSize / 2);
+            posToSet = start.transform.position + offset;
 
-            GameObject part = (GameObject)Instantiate(bridgePart, rightSide.transform.position, Quaternion.identity);
-            part.transform.parent = rightSide.transform;
+            GameObject part = (GameObject)Instantiate(bridgePart, start.transform.position, Quaternion.identity);
+            part.transform.parent = start.transform;
             part.transform.position = posToSet;
-            offset += dir * (partSize / 2);
+            offset += buidDirection * (partSize / 2);
 
-            if (Mathf.Abs(dir.z) == 1) part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+            if (Mathf.Abs(buidDirection.z) == 1) part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
 
             currentDistance -= partSize;
             yield return new WaitForSeconds(0.15f);
@@ -60,19 +74,19 @@ public class ProceduralBridge : BaseActivatable {
         {
             Vector3 offset = Vector3.zero;
             Vector3 posToSet = Vector3.zero;
-            float currentDistance = distanceBetweenParts;
+            float currentDistance = distanceBetweenStartEnd;
             offset.y = -0.05f;
             while (currentDistance >= partSize)
             {
-                offset += dir * (partSize / 2);
-                posToSet = rightSide.transform.position + offset;
+                offset += buidDirection * (partSize / 2);
+                posToSet = start.transform.position + offset;
 
-                GameObject part = (GameObject)Instantiate(bridgePart, rightSide.transform.position, Quaternion.identity);
-                part.transform.parent = rightSide.transform;
+                GameObject part = (GameObject)Instantiate(bridgePart, start.transform.position, Quaternion.identity);
+                part.transform.parent = start.transform;
                 part.transform.position = posToSet;
-                offset += dir * (partSize / 2);
+                offset += buidDirection * (partSize / 2);
 
-                if (Mathf.Abs(dir.z) == 1) part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+                if (Mathf.Abs(buidDirection.z) == 1) part.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
 
                 currentDistance -= partSize;
             }
@@ -80,15 +94,15 @@ public class ProceduralBridge : BaseActivatable {
     }
 
     void Destroy() {
-        int cachedLenght = rightSide.transform.childCount;
+        int cachedLenght = start.transform.childCount;
 
         for (int i = cachedLenght; i > 0; i--) {
-            if (!Application.isPlaying) DestroyImmediate(rightSide.transform.GetChild(i - 1).gameObject);
-            else Destroy(rightSide.transform.GetChild(i - 1).gameObject);
+            if (!Application.isPlaying) DestroyImmediate(start.transform.GetChild(i - 1).gameObject);
+            else Destroy(start.transform.GetChild(i - 1).gameObject);
         }
 
         obstacle.SetActive(true);
-        colliderHolder.SetActive(false);
+        colliderOfBridge.SetActive(false);
     }
 
     public override void Activate() {
@@ -96,55 +110,65 @@ public class ProceduralBridge : BaseActivatable {
        
         RaycastHit hit;
      
-        dir = leftSide.position - rightSide.position;
-        dir.Normalize();
+        buidDirection = end.position - start.position;
+        buidDirection.Normalize();
 
-        if (Physics.Raycast(rightSide.position, dir, out hit, 100)) {
-            if (hit.transform.name == "Left") {
-                distanceBetweenParts = Vector3.Distance(rightSide.localPosition, leftSide.localPosition);
+        if (Physics.Raycast(start.position, buidDirection, out hit, 100)) {
+            if (hit.transform.name == end.gameObject.name) {
+                distanceBetweenStartEnd = Vector3.Distance(start.localPosition, end.localPosition);
                 Build();
-                FixObstacle();
+                FixNavMeshObstacleAndCollider();
             }
         }
         base.Activate();
     }
 
-    void FixObstacle()
+    /// <summary>
+    /// This function fixes the nav-mesh-obstacle on the procedural bridge so the designer does not have to
+    /// worry about it. Also it makes a collider for the bridge so we dont have a separate collider 
+    /// for each object.
+    /// </summary>
+    void FixNavMeshObstacleAndCollider()
     {
-        if (Mathf.Abs(dir.x) == 1)
+        if (Mathf.Abs(buidDirection.x) == 1)
         {
+            //ref to the navmeshobstacle
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
-            obstacle.transform.localPosition = rightSide.transform.localPosition;
-            obstacle.transform.localPosition += new Vector3(distanceBetweenParts / 2 * dir.x, 1, 0);
-            Vector3 colliderSize = new Vector3(distanceBetweenParts, obstacleCollider.size.y, 2);
+            //set its pos to the start of the bridge
+            obstacle.transform.localPosition = start.transform.localPosition;
+            obstacle.transform.localPosition += new Vector3(distanceBetweenStartEnd / 2 * buidDirection.x, 1, 0); // add half distance multiplied by direction
+
+            Vector3 colliderSize = new Vector3(distanceBetweenStartEnd, obstacleCollider.size.y, 2); 
             obstacleCollider.size = colliderSize;
             colliderSize.y = 0.3f;
             colliderSize.z = 2.5f;
-            colliderHolder.transform.localPosition = rightSide.transform.localPosition;
-            colliderHolder.transform.localPosition += new Vector3(distanceBetweenParts / 2 * dir.x, 0, 0);
-            colliderHolder.GetComponent<BoxCollider>().size = colliderSize;
+
+            colliderOfBridge.transform.localPosition = start.transform.localPosition; 
+            colliderOfBridge.transform.localPosition += new Vector3(distanceBetweenStartEnd / 2 * buidDirection.x, 0, 0);
+            colliderOfBridge.GetComponent<BoxCollider>().size = colliderSize;
         }
         else
         {
             NavMeshObstacle obstacleCollider = obstacle.GetComponent<NavMeshObstacle>();
 
-            obstacle.transform.localPosition = rightSide.transform.localPosition;
-            obstacle.transform.localPosition += new Vector3(0, 1, distanceBetweenParts / 2 * dir.z);
+            obstacle.transform.localPosition = start.transform.localPosition;
+            obstacle.transform.localPosition += new Vector3(0, 1, distanceBetweenStartEnd / 2 * buidDirection.z);
 
-            Vector3 colliderSize = new Vector3(2, obstacleCollider.size.y, distanceBetweenParts);
+            Vector3 colliderSize = new Vector3(2, obstacleCollider.size.y, distanceBetweenStartEnd);
 
             obstacleCollider.size = colliderSize;
 
             colliderSize.y = 0.2f;
             colliderSize.x = 2.5f;
-            colliderHolder.transform.localPosition = rightSide.transform.localPosition;
-            colliderHolder.transform.localPosition += new Vector3(0, 0, distanceBetweenParts / 2 * dir.z);
-            colliderHolder.GetComponent<BoxCollider>().size = colliderSize;
+            colliderOfBridge.transform.localPosition = start.transform.localPosition;
+            colliderOfBridge.transform.localPosition += new Vector3(0, 0, distanceBetweenStartEnd / 2 * buidDirection.z);
+            colliderOfBridge.GetComponent<BoxCollider>().size = colliderSize;
         }
         obstacle.SetActive(false);
-        colliderHolder.SetActive(true);
+        colliderOfBridge.SetActive(true);
     }
+
 
     public override void Deactivate() {
         StopCoroutine("buildAnimation");
@@ -155,21 +179,23 @@ public class ProceduralBridge : BaseActivatable {
 #if UNITY_EDITOR
     void OnDrawGizmos()
     {
-        if (leftSide == null || rightSide == null || Selection.activeGameObject == null) return;
+        if (end == null || start == null || Selection.activeGameObject == null) return;
         if (Selection.activeGameObject.transform.root != transform.root) return;
 
         Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(leftSide.position, leftSide.localScale);
+        Gizmos.DrawWireCube(end.position, end.localScale);
 
         Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(transform.position, rightSide.localScale);
+        Gizmos.DrawWireCube(transform.position, start.localScale);
 
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(rightSide.position, rightSide.localScale);
+        Gizmos.DrawWireCube(start.position, start.localScale);
     }
 #endif
 }
 
+//Just some quick way to make buttons in the inspector:)
+//Did not feel the need to create new class for JUST that.
 #if UNITY_EDITOR
 [CustomEditor(typeof(ProceduralBridge))]
 public class TestBridge : Editor
