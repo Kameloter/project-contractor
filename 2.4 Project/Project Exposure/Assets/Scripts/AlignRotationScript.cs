@@ -17,6 +17,9 @@ public class AlignRotationScript : MonoBehaviour {
     Vector3 ownRot;
 
     void Start() {
+        //if designer does not  want to align to mainCam expecting him to drag a transform to follow
+        if(!useMainCamera) { if (alignTo == null) Debug.LogError(" AlignTo variable is null, if camera is desired check bool useMainCam. If not drag desired transform.", transform); return;  }
+
         Align();
     }
 
