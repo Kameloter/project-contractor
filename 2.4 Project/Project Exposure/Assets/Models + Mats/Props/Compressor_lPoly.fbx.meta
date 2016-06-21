@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: a90b1ab41d7ea6c41af409b6afeb57a7
-timeCreated: 1466164477
+guid: ad3e4a76fd16c514a98510312098f550
+timeCreated: 1466514921
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -42,6 +42,8 @@ ModelImporter:
     4300008: Fan2_lPoly
     4300010: Arrow1_lPoly
     4300012: Arrow2_lPoly
+    7400000: Props2
+    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -100,7 +102,7 @@ ModelImporter:
     rootMotionBoneName: 
     hasTranslationDoF: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
