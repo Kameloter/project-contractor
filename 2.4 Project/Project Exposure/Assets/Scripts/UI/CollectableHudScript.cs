@@ -4,29 +4,29 @@ using System.Collections;
 
 public class CollectableHudScript : MonoBehaviour {
     [Header("Textfields")]
-    //public Text divider;  
-    //public Text collectables;
-
     public Text found; //will show the amount of collectables found this level
     public Text total; //will show the total amount of collectables in a level
 
     public void Start() {
         if (referenceErrorCheck()) return; //invalid references
-        UpdateHudFound();
-        UpdateHudTotal();
+        UpdateHudCollectablesFound();
+        UpdateHudCollectablesTotal();
     }
 
-    public void OnCollectCollectable(int value) {
-        GameManager.Instance.IncreaseCollectables(value);
-        UpdateHudFound();
+    void OnEnable() {
+        GameManager.OnCollectableCollect.AddListener(UpdateHudCollectablesFound);
     }
 
-    public void UpdateHudFound() {
+    void OnDisable() {
+        GameManager.OnCollectableCollect.RemoveListener(UpdateHudCollectablesFound);
+    }
+
+    public void UpdateHudCollectablesFound() { //this level!
         //The amount of collectables found this level is stored in the player script
-        found.text = GameManager.Instance.PlayerScript.collectables.ToString();
+        found.text = GameManager.Instance.PlayerScript.Collectables.ToString();
     }
 
-    public void UpdateHudTotal() {
+    public void UpdateHudCollectablesTotal() { //this level!
         //The amount of total collectables available this level is stored in the scenestats script
         total.text = GameManager.Instance.SceneStats.CollectablesAvailable.ToString();
     }

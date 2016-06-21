@@ -7,8 +7,6 @@ using System.Collections;
 /// It notifies the CollectableHudScript that it was picked up and tells him its value.
 /// </summary>
 public class CollectableScript : MonoBehaviour {
-    [Tooltip("Amount of points awarded")] public int value = 1;
-
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             Collect();
@@ -16,7 +14,8 @@ public class CollectableScript : MonoBehaviour {
     }
 
     void Collect() {
-        GameObject.FindObjectOfType<CollectableHudScript>().OnCollectCollectable(value);
+        //notify GameManager that a collectable has been picked up.
+        GameManager.Instance.CollectCollectable();
         Destroy(gameObject);
     }
 }
