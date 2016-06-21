@@ -8,6 +8,10 @@ public class LevelSwitcherScript : MonoBehaviour {
     int collected;
     float timeLeft;
             
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) { GameManager.Instance.ScoreScreen.UpdateScoreScreen(timeSpent, timeLeft, collected); GameManager.Instance.ScoreScreen.EnableScoreScreen(); }
+    }
+
     void OnTriggerEnter(Collider other) {
         if (other.name == "Player") {
             GetStats(out timeSpent, out collected, out timeLeft);

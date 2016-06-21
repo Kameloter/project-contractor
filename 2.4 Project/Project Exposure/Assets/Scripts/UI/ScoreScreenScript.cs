@@ -10,17 +10,21 @@ public class ScoreScreenScript : MonoBehaviour {
     [SerializeField] Text timeSpentText, timeLeftText, collectedText;
     [SerializeField] Animator star_1, star_2, star_3;
 
+    bool completedUnderMinute, foundAllCollectables;
+    int _levelScore;
+
+
     void Start() {
         scoreScreen = transform.gameObject;
         
         SetupScoreScreenElements();
     }
 
+    //cheats
     void Update() {
         if (Input.GetKeyDown(KeyCode.U)) AddStar(1);
         if (Input.GetKeyDown(KeyCode.I)) AddStar(2);
         if (Input.GetKeyDown(KeyCode.O)) AddStar(3);
-        if (Input.GetKeyDown(KeyCode.P)) AddStar(4);
     }
 
     /// <summary>
@@ -56,7 +60,9 @@ public class ScoreScreenScript : MonoBehaviour {
     public void EnableScoreScreen() {
         GameManager.Instance.UiMonitor.ShowMonitor();
         GameManager.Instance.TutorialSelector.helpButton.interactable = false;
+
         scoreScreen.SetActive(true);
+        ScoreLogic(); //needs to be called after activating the scorescreen
     }
     
     /// <summary>
@@ -75,8 +81,8 @@ public class ScoreScreenScript : MonoBehaviour {
     /// <param name="timeLeft"> will be rounded </param>
     /// <param name="collected"></param>
     public void UpdateScoreScreen(float timeSpent, float timeLeft, int collected) {
-        timeSpentText.text = Mathf.Round(timeSpent).ToString() + " seconden";
-        timeLeftText.text = Mathf.Round(timeLeft).ToString() + " seconden";
+        timeSpentText.text = Mathf.Round(timeSpent).ToString() + " s";
+        timeLeftText.text = Mathf.Round(timeLeft).ToString() + " s";
         collectedText.text = collected.ToString();
     }
 
@@ -112,5 +118,21 @@ public class ScoreScreenScript : MonoBehaviour {
                 Debug.LogError("AddStar: Insert a valid number (1-3).", transform);
                 break;
         }
+    }
+
+    void ScoreLogic() {
+        completedUnderMinute = false;
+        foundAllCollectables = false;
+        if (GameManager.Instance.TimeSpentLevel <= 60) completedUnderMinute = true;
+        if (GameManager.Instance.PlayerScript.Collectables >= GameManager.Instance.SceneStats.CollectablesAvailable) foundAllCollectables = true;
+
+        if      (completedUnderMinute && foundAllCollectables)  { AddStar(3); LevelScore = 30; } 
+        else if (completedUnderMinute || foundAllCollectables)  { AddStar(2); LevelScore = 20; } 
+        else                                                    { AddStar(1); LevelScore = 10; }
+    }
+
+    public int LevelScore {
+        get { return _levelScore; }
+        set { _levelScore = value; }
     }
 }

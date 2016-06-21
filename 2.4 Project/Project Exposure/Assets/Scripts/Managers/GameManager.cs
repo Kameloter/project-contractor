@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour {
         if (OnCollectableCollect != null) OnCollectableCollect.Invoke();
     }
 
+    [Header("Game")]
+    [ReadOnly]
+    [SerializeField] int _gameScore = 0;
     //PLAYER         //SerializeField used for debugging purposes.
     [Header("Player")]
     [SerializeField] private GameObject _player;
@@ -59,8 +62,6 @@ public class GameManager : MonoBehaviour {
     public float TimeSpentLevel = 0.0f;
 
     float inactiveTime = 0;
-
-    int score = 0;
 
     void Awake() {
         FindObjectRefs();
@@ -162,27 +163,11 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Collectables collected through the entire game.
-    /// </summary>
-    public int CollectablesCollected {
-        get { return _collectablesCollected; }
-        set { _collectablesCollected = value; }
-    }
-
-    /// <summary>
-    /// Used to set max available collectables in the entire game played so far.
-    /// </summary>
-    public int MaxCollectablesAvailable {
-        get { return _maxCollectablesAvailable; }
-        set { _maxCollectablesAvailable = value; }
-    }
-
-    /// <summary>
     /// Score. Based on amount of Stars earned.
     /// </summary>
-    public int Score {
-        get { return score; }
-        set { score = value; }
+    public int GameScore {
+        get { return _gameScore; }
+        set { _gameScore = value; }
     }
 
     public float TimeNeededForLevel {

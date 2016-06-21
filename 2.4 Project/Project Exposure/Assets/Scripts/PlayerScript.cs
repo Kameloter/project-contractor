@@ -29,7 +29,5 @@ public class PlayerScript : MonoBehaviour {
 
     void IncreaseCollectables() {
         _collectables += 1;
-        print("Yes." + 1);
     }
-
 }
