@@ -75,9 +75,9 @@ public class SplineController : MonoBehaviour
 
     void NodeArrival(int index, SplineNode thenode)
     {
-        if(index == 2 )
+        if(thenode.Activatable != null )
         {
-            Debug.Log("hey im at second /third node ");
+            thenode.Activatable.Activate();
         }
     }
 
@@ -130,7 +130,7 @@ public class SplineController : MonoBehaviour
 				interp.AddPoint(ninfo[c].Name, ninfo[c].Point, 
 								ninfo[c].Rot, 
 								currTime, ninfo[c].BreakTime, 
-								new Vector2(0, 1), ninfo[c].SkipToNext);
+								new Vector2(0, 1), ninfo[c].SkipToNext,ninfo[c].Activatable);
 			}
 			else if (OrientationMode == eOrientationMode.TANGENT)
 			{
@@ -146,7 +146,7 @@ public class SplineController : MonoBehaviour
 
 				interp.AddPoint(ninfo[c].Name, ninfo[c].Point, rot, 
 								currTime, ninfo[c].BreakTime,
-                                new Vector2(0, 1), ninfo[c].SkipToNext);
+                                new Vector2(0, 1), ninfo[c].SkipToNext, ninfo[c].Activatable);
 			}
 			
 			// when ninfo[i].StopHereForSecs == 0, then each node of the spline is reached at
@@ -194,9 +194,9 @@ public class SplineController : MonoBehaviour
     	{
 			SplineNodeProperties p = element.GetComponent<SplineNodeProperties>();
 			if (p != null)
-				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime, p.SkipToNext,p.onArrivalEvent));
+				info.Add(new SplineNode(p.Name, element.transform, p.BreakTime, p.SkipToNext,p.activatable));
 			else
-				info.Add(new SplineNode("", element.transform, 0,false, p.onArrivalEvent));
+				info.Add(new SplineNode("", element.transform, 0,false, null));
 		}
 
 		return info.ToArray();
