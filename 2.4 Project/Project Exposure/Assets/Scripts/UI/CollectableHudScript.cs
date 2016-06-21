@@ -9,26 +9,24 @@ public class CollectableHudScript : MonoBehaviour {
 
     public void Start() {
         if (referenceErrorCheck()) return; //invalid references
-        UpdateHudFound();
-        UpdateHudTotal();
+        UpdateHudCollectablesFound();
+        UpdateHudCollectablesTotal();
     }
 
-    /// <summary>
-    /// Gets called when a collectable got picked up.
-    /// Increases the number of collectables found this level and updates the 'Found' part of the CollectableHud.
-    /// </summary>
-    /// <param name="value"></param>
-    public void OnCollectCollectable(int value) {
-        GameManager.Instance.IncreaseCollectables(value);
-        UpdateHudFound();
+    void OnEnable() {
+        GameManager.OnCollectableCollect.AddListener(UpdateHudCollectablesFound);
     }
 
-    public void UpdateHudFound() {
+    void OnDisable() {
+        GameManager.OnCollectableCollect.RemoveListener(UpdateHudCollectablesFound);
+    }
+
+    public void UpdateHudCollectablesFound() { //this level!
         //The amount of collectables found this level is stored in the player script
-        found.text = GameManager.Instance.PlayerScript.collectables.ToString();
+        found.text = GameManager.Instance.PlayerScript.Collectables.ToString();
     }
 
-    public void UpdateHudTotal() {
+    public void UpdateHudCollectablesTotal() { //this level!
         //The amount of total collectables available this level is stored in the scenestats script
         total.text = GameManager.Instance.SceneStats.CollectablesAvailable.ToString();
     }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
@@ -19,6 +19,12 @@ public class GameManager : MonoBehaviour {
 
     private GameState _currentState;
     public GameState CurrentState { get { return _currentState; } }
+
+    //COLLECTABLES
+    public static UnityEvent OnCollectableCollect = new UnityEvent();
+    public void CollectCollectable() {
+        if (OnCollectableCollect != null) OnCollectableCollect.Invoke();
+    }
 
     //PLAYER         //SerializeField used for debugging purposes.
     [Header("Player")]
@@ -156,19 +162,19 @@ public class GameManager : MonoBehaviour {
     }
 
     /// <summary>
-    /// Increases the number of found collectables this level by amount.
-    /// </summary>
-    /// <param name="amount">Defaults to '1'</param>
-    public void IncreaseCollectables(int amount = 1) {
-        PlayerScript.collectables += amount;
-    }
-
-    /// <summary>
     /// Collectables collected through the entire game.
     /// </summary>
     public int CollectablesCollected {
         get { return _collectablesCollected; }
         set { _collectablesCollected = value; }
+    }
+
+    /// <summary>
+    /// Used to set max available collectables in the entire game played so far.
+    /// </summary>
+    public int MaxCollectablesAvailable {
+        get { return _maxCollectablesAvailable; }
+        set { _maxCollectablesAvailable = value; }
     }
 
     /// <summary>
@@ -185,14 +191,6 @@ public class GameManager : MonoBehaviour {
 
     public float TimeSpentOnLevel {
         get { return TimeSpentLevel; }
-    }
-
-    /// <summary>
-    /// Used to set max available collectables in the entire game played so far.
-    /// </summary>
-    public int MaxCollectablesAvailable {
-        get { return _maxCollectablesAvailable; }
-        set { _maxCollectablesAvailable = value; }
     }
 
     public GameObject ClickedObject {

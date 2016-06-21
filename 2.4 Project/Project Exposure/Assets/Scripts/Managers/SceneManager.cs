@@ -58,7 +58,8 @@ public class SceneManager : MonoBehaviour {
     /// Export some data. This should be called just before switching levels.s
     /// </summary>
     public void ExportSaveData() {
-        GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.collectables; //Total collectables collected this level
+        //This should change.
+        GameManager.Instance.CollectablesCollected += GameManager.Instance.PlayerScript.Collectables; //Total collectables collected this level
         GameManager.Instance.MaxCollectablesAvailable += gameObject.GetComponent<SceneStats>().CollectablesAvailable; //Total collectables available this level
     }
 
