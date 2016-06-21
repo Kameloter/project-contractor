@@ -12,15 +12,12 @@ using System.Collections;
 /// </summary>
 public class SplineNodeProperties : MonoBehaviour
 {
-
-
-    
-    public UnityEvent onArrivalEvent = new UnityEvent();
-
     //time to wait at this noce
 	public float BreakTime = 0f;
     //if it should skip to next node instead of interpolation
     public bool SkipToNext = false;
+
+    public BaseActivatable activatable;
 
     [HideInInspector]
 	public string Name = "";

@@ -18,20 +18,21 @@ public class SplineNode
 	internal float BreakTime;
 	internal Vector2 EaseIO;
     internal bool SkipToNext;
-    internal UnityEvent onNodeArrived;
+    internal BaseActivatable Activatable;
 
-	internal SplineNode(string n, Vector3 p, Quaternion q, float tArrival, float tBreak, Vector2 io, bool tSkipToNext,UnityEvent pOnNodeArrived) { onNodeArrived = pOnNodeArrived;  Name = n; Point = p; Rot = q; ArrivalTime = tArrival; BreakTime = tBreak; EaseIO = io; SkipToNext = tSkipToNext; }
+    internal SplineNode(string n, Vector3 p, Quaternion q, float tArrival, float tBreak, Vector2 io, bool tSkipToNext, BaseActivatable tBaseActivatable) { Name = n; Point = p; Rot = q; ArrivalTime = tArrival; BreakTime = tBreak; EaseIO = io; SkipToNext = tSkipToNext; Activatable = tBaseActivatable; }
 	
 	internal SplineNode(SplineNode o) 
 		{ Name = o.Name; Point = o.Point; Rot = o.Rot; 
 		  ArrivalTime = o.ArrivalTime; BreakTime = o.BreakTime;
           EaseIO = o.EaseIO;
           SkipToNext = o.SkipToNext;
+          Activatable = o.Activatable;
     }
 	
 	// this is the constructor used by SplineController:
 
-    internal SplineNode(string n, Transform t, float tBreak, bool tSkipToNext, UnityEvent pOnNodeArrived) { onNodeArrived = pOnNodeArrived; Name = n; Point = t.position; Rot = t.rotation; BreakTime = tBreak; SkipToNext = tSkipToNext; }
+    internal SplineNode(string n, Transform t, float tBreak, bool tSkipToNext, BaseActivatable tBaseActivatable) { Name = n; Point = t.position; Rot = t.rotation; BreakTime = tBreak; SkipToNext = tSkipToNext; Activatable = tBaseActivatable; }
 	
 	
 	public float GetLeaveTime()
@@ -210,12 +211,12 @@ public class SplineInterpolator : MonoBehaviour
 
 	public void AddPoint(string name, Vector3 pos, Quaternion quat, 
 						 float timeInSeconds, float timeStop, 
-						 Vector2 easeInOut, bool skipToNext)
+						 Vector2 easeInOut, bool skipToNext, BaseActivatable activatable)
 	{
 		if (mState != "Reset")
 			throw new System.Exception("Cannot add points after start");
 
-        mNodes.Add(new SplineNode(name, pos, quat, timeInSeconds, timeStop, easeInOut,skipToNext, null));
+        mNodes.Add(new SplineNode(name, pos, quat, timeInSeconds, timeStop, easeInOut,skipToNext, activatable));
 	}
 	
 	public void SetAutoCloseMode(float joiningPointTime)
