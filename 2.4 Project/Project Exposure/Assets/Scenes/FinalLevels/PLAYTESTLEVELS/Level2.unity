@@ -26562,7 +26562,7 @@ GameObject:
   - 23: {fileID: 2110884517}
   - 114: {fileID: 2110884516}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: LevelSwitcher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
