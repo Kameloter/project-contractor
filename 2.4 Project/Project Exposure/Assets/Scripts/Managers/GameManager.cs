@@ -38,8 +38,6 @@ public class GameManager : MonoBehaviour {
     [Header("Scene")]
     [SerializeField] private SceneManager _sceneManager;
     [SerializeField] private SceneStats _sceneStats;
-    [SerializeField] private int _collectablesCollected = 0;        //total collectables the player has collected through the entire game
-    [SerializeField] private int _maxCollectablesAvailable = 0;     //total collectables the player *could have* collected through the entire game
     [SerializeField] private SplineInterpolator _splineInterpolator;
 
     [Header("UI")]

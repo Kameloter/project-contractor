@@ -4,7 +4,6 @@ using UnityEngine.UI;
 
 public class GameLogicLevel2 : MonoBehaviour
 {
-    bool triggered = false;
     // Use this for initialization
     void Start()
     {

@@ -38,7 +38,6 @@ public class BigValve : BaseInteractable {
     [ReadOnly]
     public int currentState = 0;
 
-    bool InRange = false;
     public int valveID;
 
     Quaternion targetRotation;
@@ -65,8 +64,6 @@ public class BigValve : BaseInteractable {
 
     public float gridWidth;
     public float gridHeight;
-
-    bool createObjects = false;
 
     [HideInInspector]
     public bool isPowered = true;

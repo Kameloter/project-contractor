@@ -51,8 +51,6 @@ public class PipeSystemEditor : Editor
    
     private void OnSceneGUI()
     {
-        Event e = Event.current;
-
         Vector2 mousePos = Event.current.mousePosition;
         mousePos.y = SceneView.currentDrawingSceneView.camera.pixelHeight - mousePos.y;
         worldMousePos = SceneView.currentDrawingSceneView.camera.ScreenPointToRay(mousePos).origin;

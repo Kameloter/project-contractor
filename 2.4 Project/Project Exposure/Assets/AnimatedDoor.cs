@@ -3,7 +3,6 @@ using System.Collections;
 
 public class AnimatedDoor : BaseActivatable
 {
-    bool activated = false;
     Animator myAnimator;
 	// Use this for initialization
 	public override void Start () {

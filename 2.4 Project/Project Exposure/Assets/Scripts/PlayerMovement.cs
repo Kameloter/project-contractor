@@ -28,9 +28,6 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask interactablesLayer;
 
     public Vector3 playerVelocity { get { return agent.velocity; }}
-
-    EventSystem eventSystem = EventSystem.current;
-
     void Start()
     { 
         agent = GetComponent<NavMeshAgent>();
@@ -59,9 +56,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Physics.Raycast(ray, out hit,interactablesLayer)) //check if we hit something
             {
-                //Debug.DrawLine(ray.origin, hit.point);
-                Transform objectHit = hit.transform;
-
                 if (hit.transform.GetComponent<BaseInteractable>() != null) //if the object we hit has the interactable script
                 {
                     //call the base function for ANY interactable, then derrived classes override that and
@@ -80,8 +74,6 @@ public class PlayerMovement : MonoBehaviour
         //If we are pressing left mouse button
         if (Input.GetMouseButton(0))
         {
-
-       
             //Basicly we make a pointer thats used for UI raycast
             PointerEventData cursor = new PointerEventData(EventSystem.current);                        
             cursor.position = Input.mousePosition;     //set its position to our cursor.

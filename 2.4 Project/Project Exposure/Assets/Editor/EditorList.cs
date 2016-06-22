@@ -1,4 +1,8 @@
-﻿using UnityEditor;
+﻿#pragma warning disable 0168 // variable declared but not used.
+#pragma warning disable 0219 // variable assigned but not used.
+#pragma warning disable 0414 // private field assigned but not used.
+
+using UnityEditor;
 using UnityEngine;
 using System;
 
@@ -201,8 +205,7 @@ public static class EditorList
     private static void ShowElements(SerializedProperty list, EditorListOption options) {
         bool
             showElementLabels = (options & EditorListOption.ElementLabels) != 0,
-            showButtons = (options & EditorListOption.Buttons) != 0,
-        showEvents = (options == EditorListOption.Events);
+            showButtons = (options & EditorListOption.Buttons) != 0;
         for (int i = 0; i < list.arraySize; i++) {
             if (showButtons) {
                 EditorGUILayout.BeginHorizontal();
