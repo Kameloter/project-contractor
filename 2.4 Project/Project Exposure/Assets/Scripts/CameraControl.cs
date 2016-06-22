@@ -102,6 +102,10 @@ public class CameraControl : MonoBehaviour
         target = targetToFollow.transform.position;
         nextCamPos = target + offset;
         CheckForWall(target + new Vector3(0,offset.y,0), ref nextCamPos);
+        //RaycastHit hit = new RaycastHit();
+       // if (Physics.Raycast(nextCamPos, this.transform.right,out hit,0.5f)) {
+       //     nextCamPos -= this.transform.right.normalized * 0.5f;
+       // }
         transform.position = Vector3.Slerp(transform.position, nextCamPos, Time.deltaTime * cameraSpeed);
 
         //set camera rotation
@@ -131,6 +135,22 @@ public class CameraControl : MonoBehaviour
         if (Physics.Linecast(fromObject, toTarget, out wallhit))
         {
             toTarget = new Vector3(wallhit.point.x, toTarget.y, wallhit.point.z) - (toTarget - fromObject).normalized * 0.1f;
+            Debug.DrawRay(this.transform.position, toTarget - this.transform.position, Color.blue);
+        }
+
+        RaycastHit wallhit2 = new RaycastHit();
+        if (Physics.Linecast(this.transform.position, toTarget, out wallhit2)) {
+            Vector3 newVeccie = Vector3.Cross(wallhit2.normal, Vector3.up).normalized;
+            Vector3 direction = toTarget - this.transform.position;
+            if (offset.x != 0) {
+                if (direction.z > 0) newVeccie *= -1;
+            }
+            else {
+                if (direction.x < 0) newVeccie *= -1;
+            }
+            Debug.DrawRay(transform.position, direction, Color.yellow);
+            toTarget = new Vector3(wallhit2.point.x, toTarget.y, wallhit2.point.z) + wallhit2.normal.normalized / 2.0f + newVeccie / 2.0f;
+           // print("wall intersection");
         }
     }
 
@@ -146,6 +166,10 @@ public class CameraControl : MonoBehaviour
         playCutscene = true;
         SkipButtonObject.SetActive(true);
         OnCameraPathStart.Invoke();
+    }
+
+    public void StartOverview(GameObject path) {
+
     }
 
     /// <summary>
