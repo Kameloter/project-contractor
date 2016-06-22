@@ -7,7 +7,7 @@ public class ScoreScreenScript : MonoBehaviour {
     //scorescreen
     GameObject scoreScreen;
     [SerializeField] Button continueBtn, stayBtn;
-    [SerializeField] Text timeSpentText, timeLeftText, collectedText;
+    [SerializeField] Text levelTimeSpent, gameTimeLeft, collectedText;
     [SerializeField] Animator star_1, star_2, star_3;
 
     bool completedUnderMinute, foundAllCollectables;
@@ -18,13 +18,6 @@ public class ScoreScreenScript : MonoBehaviour {
         scoreScreen = transform.gameObject;
         
         SetupScoreScreenElements();
-    }
-
-    //cheats
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.U)) AddStar(1);
-        if (Input.GetKeyDown(KeyCode.I)) AddStar(2);
-        if (Input.GetKeyDown(KeyCode.O)) AddStar(3);
     }
 
     /// <summary>
@@ -47,7 +40,7 @@ public class ScoreScreenScript : MonoBehaviour {
     /// </summary>
     /// <returns></returns>
     bool NullCheck() {
-        if (!continueBtn || !stayBtn || !timeSpentText || !timeLeftText || !collectedText || !star_1 || !star_2 || !star_3) {
+        if (!continueBtn || !stayBtn || !levelTimeSpent || !gameTimeLeft || !collectedText || !star_1 || !star_2 || !star_3) {
             Debug.LogError("At least one of the ScoreScreen references is missing. Please check the ScoreScreen gameObject.", transform);
             Debug.Break();
             return true;
@@ -63,6 +56,7 @@ public class ScoreScreenScript : MonoBehaviour {
 
         scoreScreen.SetActive(true);
         ScoreLogic(); //needs to be called after activating the scorescreen
+        InvokeRepeating("UpdateGameTimeLeft", 0, 0.01f); //sync GameTimeLeft
     }
     
     /// <summary>
@@ -75,14 +69,14 @@ public class ScoreScreenScript : MonoBehaviour {
     }
 
     /// <summary>
-    /// Updates the ScoreScreen.
+    /// Updates the ScoreScreen. Called by LevelSwitcher.
     /// </summary>
     /// <param name="timeSpent"> will be rounded </param>
     /// <param name="timeLeft"> will be rounded </param>
     /// <param name="collected"></param>
     public void UpdateScoreScreen(float timeSpent, float timeLeft, int collected) {
-        timeSpentText.text = Mathf.Round(timeSpent).ToString() + " s";
-        timeLeftText.text = Mathf.Round(timeLeft).ToString() + " s";
+        levelTimeSpent.text = Mathf.Round(timeSpent).ToString() + " s";
+        gameTimeLeft.text = Mathf.Round(timeLeft).ToString() + " s";
         collectedText.text = collected.ToString();
     }
 
@@ -123,7 +117,7 @@ public class ScoreScreenScript : MonoBehaviour {
     void ScoreLogic() {
         completedUnderMinute = false;
         foundAllCollectables = false;
-        if (GameManager.Instance.TimeSpentLevel <= 60) completedUnderMinute = true;
+        if (GameManager.Instance.timeSpentLevel <= 60) completedUnderMinute = true;
         if (GameManager.Instance.PlayerScript.Collectables >= GameManager.Instance.SceneStats.CollectablesAvailable) foundAllCollectables = true;
 
         if      (completedUnderMinute && foundAllCollectables)  { AddStar(3); LevelScore = 30; } 
@@ -134,5 +128,12 @@ public class ScoreScreenScript : MonoBehaviour {
     public int LevelScore {
         get { return _levelScore; }
         set { _levelScore = value; }
+    }
+
+    /// <summary>
+    /// Updates the GameTimeLeft shown on the scorescreen.
+    /// </summary>
+    void UpdateGameTimeLeft() {
+        gameTimeLeft.text = GameManager.Instance.UpdateGameTimerText();
     }
 }

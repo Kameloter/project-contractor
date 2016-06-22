@@ -53,13 +53,13 @@ public class GameManager : MonoBehaviour {
     GameObject deactivatedObject;
 
     //time
-    Text text;
-    Text textLevel;
+    Text gameTimeText;
+    //Text levelTimeText;
     //WWW www;
 
     [Header("Time")]
-    public float TimeLeft = 180.0f; 
-    public float TimeSpentLevel = 0.0f;
+    public float gameTimeLeft = 180.0f; 
+    public float timeSpentLevel = 0.0f;
 
     float inactiveTime = 0;
 
@@ -73,9 +73,9 @@ public class GameManager : MonoBehaviour {
 
     void FindObjectRefs()
     {
-        text = GameObject.Find("Time").GetComponent<Text>();
-        textLevel = GameObject.Find("Timer").GetComponent<Text>();
-        TimeSpentLevel = 0;
+        gameTimeText = GameObject.Find("GameTimerText").GetComponent<Text>();
+        //levelTimeText = GameObject.Find("LevelTimerText").GetComponent<Text>();
+        timeSpentLevel = 0;
 
         _scoreScreen = ScoreScreen;             //ref needed before it disables itself
         _tutorialSelector = TutorialSelector;   //ref needed before it disables itself
@@ -175,7 +175,7 @@ public class GameManager : MonoBehaviour {
     }
 
     public float TimeSpentOnLevel {
-        get { return TimeSpentLevel; }
+        get { return timeSpentLevel; }
     }
 
     public GameObject ClickedObject {
@@ -200,11 +200,15 @@ public class GameManager : MonoBehaviour {
         set { deactivatedObject = value; }
     }
 
+    //void Start() {
+    //    InvokeRepeating("UpdateGameTimer", 0, 1);
+    //}
+
     void Update() {
         //changing timers
-        TimeLeft -= Time.deltaTime;
+        gameTimeLeft -= Time.deltaTime;
         inactiveTime += Time.deltaTime;
-        TimeSpentLevel += Time.deltaTime;
+        timeSpentLevel += Time.deltaTime;
 
         //if input change inactive timer to 0
         if (Input.GetMouseButton(0)) {
@@ -217,12 +221,16 @@ public class GameManager : MonoBehaviour {
         }
 
         //if gametime is over save it on the server
-        if (TimeLeft <= 0) {
+        if (gameTimeLeft <= 0) {
           //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
         }
 
-        //debug texts
-        text.text = Mathf.Floor((TimeLeft / 60)).ToString("0"+"#':'") + ((int)TimeLeft % 60).ToString("D2");
-        textLevel.text = Mathf.Floor((TimeSpentLevel / 60)).ToString("0" + "#':'") + ((int)TimeSpentLevel % 60).ToString("D2");
+        //Timer
+        gameTimeText.text = UpdateGameTimerText();
+        //levelTimeText.text = Mathf.Floor((timeSpentLevel / 60)).ToString("0" + "#':'") + ((int)timeSpentLevel % 60).ToString("D2");
+    }
+
+    public string UpdateGameTimerText() {
+        return Mathf.Floor((gameTimeLeft / 60)).ToString("0" + "#':'") + ((int)gameTimeLeft % 60).ToString("D2");
     }
 }

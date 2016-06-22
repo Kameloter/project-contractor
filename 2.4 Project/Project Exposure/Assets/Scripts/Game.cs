@@ -8,8 +8,8 @@ public static class Game {
         }
     }
 
-    static public float TimeLeft {
-        get { return GameManager.Instance.TimeLeft; }
+    static public float GameTimeLeft {
+        get { return GameManager.Instance.gameTimeLeft; }
     }
 
     static public float TimeNeededForLevel {

@@ -25,7 +25,7 @@ public class LevelSwitcherScript : MonoBehaviour {
     void GetStats(out float pTimeSpent, out int pCollected, out float pTimeLeft) {
         pTimeSpent = GameManager.Instance.TimeSpentOnLevel;
         pCollected = GameManager.Instance.PlayerScript.Collectables;
-        pTimeLeft = GameManager.Instance.TimeLeft;
+        pTimeLeft = GameManager.Instance.gameTimeLeft;
     }
 
     public void SwitchLevel (){
