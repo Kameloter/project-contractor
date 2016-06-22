@@ -23,10 +23,14 @@ public class GameLogicIntroLevel : MonoBehaviour {
 
     bool activatedButton2 = false;
     bool clickedButton2 = false;
-	
-    
+
+    public GameObject waterTankPath;
+    public GameObject steamPath;
+
+
+
     // Use this for initialization
-	void Start ()
+    void Start ()
     {
          
         light_1_control = light_1.gameObject.GetComponent<BlinkRedLightControl>();
@@ -47,7 +51,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
         {
             if (GameManager.Instance.InteractedObject == buttonWaterTank)
             {
-
+                Camera.main.GetComponent<CameraControl>().StartCutscene(waterTankPath, true);
                 StartCoroutine("activateButton2", 5f);
                 activatedButton2 = true;
 
@@ -58,6 +62,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
         {
             if (GameManager.Instance.InteractedObject == buttonCompressor)
             {
+                Camera.main.GetComponent<CameraControl>().StartCutscene(steamPath, true);
                 light_2_control.StopBlinking();
                 light_2.enabled = false;
              
