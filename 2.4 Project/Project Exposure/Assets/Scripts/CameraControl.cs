@@ -44,18 +44,19 @@ public class CameraControl : MonoBehaviour
     void Start() {
         SetStartPos();
         SkipButtonObject = GameObject.FindGameObjectWithTag(Tags.skipButton);
-        overviewObject = GameObject.Find("ZoomOutButton");
+        overviewObject = GameObject.Find("OverviewButton");
+
         if (SkipButtonObject == null) {
-            Debug.LogError("Button not found");
+            Debug.LogError("Skip Button not found.");
             return;
         }
         if (overviewObject == null) {
-            Debug.LogError("ZoomOut Button not found");
+            Debug.LogError("Overview Button not found.");
             return;
         }
         splineController = GetComponent<SplineController>();
         if (splineController == null) {
-            Debug.LogError("SplineController not found");
+            Debug.LogError("SplineController not found.");
             return;
         }
 
