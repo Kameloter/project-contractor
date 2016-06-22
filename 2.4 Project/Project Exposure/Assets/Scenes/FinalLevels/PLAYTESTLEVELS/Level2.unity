@@ -26563,7 +26563,7 @@ GameObject:
   - 114: {fileID: 2110884516}
   m_Layer: 0
   m_Name: LevelSwitcher
-  m_TagString: Untagged
+  m_TagString: LevelSwitcher
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26579,7 +26579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 183371c83325b274695b45af5643b630, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: 2
+  level: 3
 --- !u!23 &2110884517
 MeshRenderer:
   m_ObjectHideFlags: 0

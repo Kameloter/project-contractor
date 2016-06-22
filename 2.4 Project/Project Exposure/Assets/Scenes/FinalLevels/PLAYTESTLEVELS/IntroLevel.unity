@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 6
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000032, guid: 1a290261262d3474ba91e7821a0e5f82,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -23496,7 +23497,7 @@ Transform:
   - {fileID: 190514199}
   - {fileID: 333222938}
   m_Father: {fileID: 1848470126}
-  m_RootOrder: 20
+  m_RootOrder: 2
 --- !u!1 &1089031563
 GameObject:
   m_ObjectHideFlags: 0
@@ -33768,7 +33769,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1722595720}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -36239,6 +36240,7 @@ Transform:
   m_Children:
   - {fileID: 767397418}
   - {fileID: 846367289}
+  - {fileID: 1072679499}
   - {fileID: 1634250978}
   - {fileID: 498182973}
   - {fileID: 1942756670}
@@ -36257,7 +36259,6 @@ Transform:
   - {fileID: 1229134174}
   - {fileID: 156993158}
   - {fileID: 1277475727}
-  - {fileID: 1072679499}
   - {fileID: 2057432717}
   m_Father: {fileID: 0}
   m_RootOrder: 9
