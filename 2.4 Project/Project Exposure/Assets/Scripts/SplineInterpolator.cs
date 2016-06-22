@@ -209,6 +209,10 @@ public class SplineInterpolator : MonoBehaviour
 		mEndPointsMode = eEndPointsMode.AUTO;
 	}
 
+    public void ChangeTime() {
+        Reset();
+    }
+
 	public void AddPoint(string name, Vector3 pos, Quaternion quat, 
 						 float timeInSeconds, float timeStop, 
 						 Vector2 easeInOut, bool skipToNext, BaseActivatable activatable)

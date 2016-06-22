@@ -36,6 +36,7 @@ public class CameraControl : MonoBehaviour
     [HideInInspector]public bool playCutscene = false;
     //GuiButtonObject to skip a cutscene 
     GameObject SkipButtonObject;
+    GameObject overviewObject;
 
     //reference to splinecontroler
     SplineController splineController;
@@ -43,8 +44,13 @@ public class CameraControl : MonoBehaviour
     void Start() {
         SetStartPos();
         SkipButtonObject = GameObject.FindGameObjectWithTag(Tags.skipButton);
+        overviewObject = GameObject.Find("ZoomOutButton");
         if (SkipButtonObject == null) {
             Debug.LogError("Button not found");
+            return;
+        }
+        if (overviewObject == null) {
+            Debug.LogError("ZoomOut Button not found");
             return;
         }
         splineController = GetComponent<SplineController>();
@@ -165,11 +171,19 @@ public class CameraControl : MonoBehaviour
         splineController.FollowSpline();
         playCutscene = true;
         SkipButtonObject.SetActive(true);
+        overviewObject.SetActive(false);
         OnCameraPathStart.Invoke();
+        
     }
 
     public void StartOverview(GameObject path) {
-
+        splineController.startAtPlayer = true;
+        splineController.SplineRoot = path;
+        splineController.FollowSpline();
+        playCutscene = true;
+        SkipButtonObject.SetActive(true);
+        overviewObject.SetActive(false);
+        OnCameraPathStart.Invoke();
     }
 
     /// <summary>
@@ -189,6 +203,7 @@ public class CameraControl : MonoBehaviour
         SetStartPos();
         playCutscene = false;
         SkipButtonObject.SetActive(false);
+        overviewObject.SetActive(true);
         OnCameraPathEnd.Invoke();
     }
 }
