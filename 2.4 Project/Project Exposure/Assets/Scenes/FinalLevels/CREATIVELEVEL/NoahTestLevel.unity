@@ -7085,6 +7085,14 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
+    - target: {fileID: 11477512, guid: a94bfc30afacd1e4895c97715fa5d6bf, type: 2}
+      propertyPath: pause
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11418028, guid: a94bfc30afacd1e4895c97715fa5d6bf, type: 2}
+      propertyPath: _reusable
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a94bfc30afacd1e4895c97715fa5d6bf, type: 2}
   m_IsPrefabParent: 0
@@ -7256,6 +7264,25 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 437714, guid: 42d9304fabff0de4b806081ad7c58756, type: 2}
   m_PrefabInternal: {fileID: 74516476}
+--- !u!1 &507170747 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 147940, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
+  m_PrefabInternal: {fileID: 1751635779}
+--- !u!114 &507170749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 507170747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d65704cb84286fc4186b3b3dbf08331a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  optionalPath: {fileID: 0}
+  StartAtPlayer: 1
+  destroy:
+  - {fileID: 507170747}
 --- !u!1 &518999865 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 187890, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
@@ -11548,14 +11575,12 @@ MonoBehaviour:
   _playerMovement: {fileID: 0}
   _sceneManager: {fileID: 0}
   _sceneStats: {fileID: 0}
-  _collectablesCollected: 0
-  _maxCollectablesAvailable: 0
   _splineInterpolator: {fileID: 0}
   _scoreScreen: {fileID: 0}
   _tutorialSelector: {fileID: 0}
   _uiMonitor: {fileID: 0}
-  TimeLeft: 180
-  TimeSpentLevel: 0
+  gameTimeLeft: 180
+  timeSpentLevel: 0
 --- !u!4 &962642916
 Transform:
   m_ObjectHideFlags: 0
@@ -17573,7 +17598,7 @@ Transform:
   - {fileID: 1084955791}
   - {fileID: 933931184}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 7
 --- !u!1 &1380760861
 GameObject:
   m_ObjectHideFlags: 0
@@ -18824,7 +18849,7 @@ Transform:
   - {fileID: 1447663963}
   - {fileID: 2122286077}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!1001 &1446209262
 Prefab:
   m_ObjectHideFlags: 0
@@ -19480,7 +19505,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &1594725377
 GameObject:
   m_ObjectHideFlags: 0
@@ -21803,7 +21828,12 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 147940, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
+      propertyPath: m_TagString
+      value: Snow
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11486504, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: c17cda74bd6070a4586cb42f4db7ccb5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1784912080
@@ -21833,7 +21863,7 @@ Transform:
   m_Children:
   - {fileID: 274208467}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 8
 --- !u!1001 &1789564975
 Prefab:
   m_ObjectHideFlags: 0
@@ -24020,14 +24050,12 @@ MonoBehaviour:
   _playerMovement: {fileID: 0}
   _sceneManager: {fileID: 0}
   _sceneStats: {fileID: 0}
-  _collectablesCollected: 0
-  _maxCollectablesAvailable: 0
   _splineInterpolator: {fileID: 0}
   _scoreScreen: {fileID: 0}
   _tutorialSelector: {fileID: 0}
   _uiMonitor: {fileID: 0}
-  TimeLeft: 180
-  TimeSpentLevel: 0
+  gameTimeLeft: 180
+  timeSpentLevel: 0
 --- !u!4 &1956971793
 Transform:
   m_ObjectHideFlags: 0
@@ -26237,4 +26265,4 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16

@@ -30,5 +30,6 @@ public class Tags : MonoBehaviour {
     public const string uiMonitor = "UI Monitor";
     public const string tutorialSelector = "TutorialSelector";
     public const string bigValve = "BigValve";
+    public const string snow = "Snow";
 
 }

@@ -108,6 +108,9 @@ public class LaserEmitter : BaseActivatable{
                     if (hit.collider.CompareTag(Tags.meltable)){
                         hit.collider.gameObject.GetComponent<MeltableScript>().SetMelting(GetComponent<RotatableScript>(), _reusable);
                     }
+                    if (hit.collider.CompareTag(Tags.snow)) {
+                        hit.collider.gameObject.GetComponent<SnowScript>().SetMelting(GetComponent<RotatableScript>(), _reusable);
+                    }
                     break;     //break out of the for loop to prevent multiple end lasors.
                 }
             }

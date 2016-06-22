@@ -19,6 +19,7 @@ TagManager:
   - UI Monitor
   - TutorialSelector
   - BigValve
+  - Snow
   layers:
   - Default
   - TransparentFX
