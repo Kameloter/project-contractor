@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.137, y: 1.16, z: 10.615}
+  m_LocalPosition: {x: 8.1, y: 1.16, z: 3.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 402982}
@@ -254,7 +254,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: ab05400376eec9a468399a5c2135f1e6, type: 2}
+  - {fileID: 2100000, guid: 9c3e767be317cb744a19fc0c38680238, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -421,7 +421,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-  activatables: []
+  activatables:
+  - {fileID: 0}
 --- !u!114 &11412232
 MonoBehaviour:
   m_ObjectHideFlags: 1

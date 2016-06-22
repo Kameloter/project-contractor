@@ -6,46 +6,81 @@ using System.Collections;
 /// Game class hold functions and variables you can easely use to make some simple actions.
 /// </summary>
 public class GameLogicIntroLevel : MonoBehaviour {
-    public GameObject path1;
-    bool didpath1= false;
-    public BaseActivatable activatable;
-    public GameObject trigger;
+
+
+    public CompressorControlScript CompressorObject;
+
+    public GameObject buttonWaterTank;
+    public Light light_1;
+    public GameObject buttonCompressor;
+    public Light light_2;
+
+
+
+    private BlinkRedLightControl light_1_control;
+    private BlinkRedLightControl light_2_control;
+
+
+
+    bool activatedButton2 = false;
+    bool clickedButton2 = false;
 	// Use this for initialization
 	void Start () {
-       // GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = false;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        if (Game.LastInteractedObject != null && !didpath1) {
-			if (Game.LastInteractedObject.name == "object1")
-            Game.PlayCameraPath(path1,true);
-            activatable.Activate();
-            //GameObject.Find("BigValve").GetComponent<BigValve>().isPowered = true;
-            didpath1 = true;
-        }
+         
 
-       
 
-        if (Game.TimeSpentOnLevel > Game.TimeNeededForLevel)
+        light_1_control = light_1.gameObject.GetComponent<BlinkRedLightControl>();
+        light_2_control = light_2.gameObject.GetComponent<BlinkRedLightControl>();
+
+
+        buttonCompressor.GetComponent<BaseInteractable>().enabled = false; //disable compressor button
+        light_1_control.StartBlinking();
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+        if (!activatedButton2) //activate button 2
         {
+            if (GameManager.Instance.InteractedObject == buttonWaterTank)
+            {
 
+                StartCoroutine("activateButton2", 5f);
+                activatedButton2 = true;
+
+            }
         }
 
-	}
+        if (!clickedButton2)
+        {
+            if (GameManager.Instance.InteractedObject == buttonCompressor)
+            {
+                light_2_control.StopBlinking();
+                light_2.enabled = false;
+                buttonCompressor.GetComponent<BaseInteractable>().enabled = false;
 
-    void DoSomething()
-    {
+
+              
+                clickedButton2 = true;
+            }
+        }
+
+
 
     }
 
-    void OnEnable()
+    
+    IEnumerator activateButton2 (float time)
     {
-        CameraControl.OnCameraPathEnd.AddListener( DoSomething);
-    }
+        yield return new WaitForSeconds(time);
+        light_1_control.StopBlinking();
+        light_1.enabled = false;
 
-    void OnDisable()
-    {
-        CameraControl.OnCameraPathEnd.RemoveListener(DoSomething);
+        light_2_control.StartBlinking();
+        buttonCompressor.GetComponent<BaseInteractable>().enabled = true;
+        CompressorObject.RunSteamCompressor();
     }
+   
 }

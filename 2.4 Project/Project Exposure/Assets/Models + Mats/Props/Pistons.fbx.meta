@@ -80,7 +80,8 @@ ModelImporter:
     4300020: polySurface11
     4300022: polySurface12
     4300024: Side2
-    7400000: Activated
+    7400000: Idle
+    7400002: Working
     9500000: //RootNode
   materials:
     importMaterials: 1
@@ -104,9 +105,73 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: Activated
+      name: Idle
       takeName: Props2
-      firstFrame: 0
+      firstFrame: 1
+      lastFrame: 1
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: BigMiddle
+        weight: 1
+      - path: Piston1
+        weight: 1
+      - path: Piston1/polySurface5
+        weight: 1
+      - path: Piston1/polySurface6
+        weight: 1
+      - path: Piston2
+        weight: 1
+      - path: Piston2/polySurface7
+        weight: 1
+      - path: Piston2/polySurface8
+        weight: 1
+      - path: Piston3
+        weight: 1
+      - path: Piston3/polySurface9
+        weight: 1
+      - path: Piston3/polySurface10
+        weight: 1
+      - path: Piston4
+        weight: 1
+      - path: Piston4/polySurface11
+        weight: 1
+      - path: Piston4/polySurface12
+        weight: 1
+      - path: Side1
+        weight: 1
+      - path: Side2
+        weight: 1
+      - path: SmallMiddle1
+        weight: 1
+      - path: SmallMiddle2
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Working
+      takeName: Props2
+      firstFrame: 1
       lastFrame: 15
       wrapMode: 0
       orientationOffsetY: 0
