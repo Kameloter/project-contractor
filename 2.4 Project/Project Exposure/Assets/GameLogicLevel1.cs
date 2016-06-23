@@ -3,36 +3,26 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class GameLogicLevel1 : MonoBehaviour {
+    public GameObject tapHereValveHead, tapHereValveSocket;
+    bool tapValveHeadActivated = true, tapValveSocketActivated = true;
 
-    bool triggered = false;
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    void Start() {
+        tapHereValveSocket.SetActive(false);
+    }
 
-    void ShowHint()
-    {
-        if (!triggered)
-        {
-            GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.RemoveAllListeners();
-            GameObject.Find("Repeat_Button").GetComponent<Button>().onClick.AddListener(() =>{ GameObject.Find("Tutorial").GetComponent<Animator>().SetTrigger("Valve");});
-            GameObject.Find("Tutorial").GetComponent<Animator>().SetTrigger("Valve");
-            triggered = true;
+    void Update() {
+        if (tapValveHeadActivated && GameManager.Instance.ClickedObject) {
+            tapHereValveHead.SetActive(false);
+            tapHereValveSocket.SetActive(true);
+
+            tapValveHeadActivated = false;
+        } 
+    }
+
+    public void OnInteract() {
+        if (tapValveSocketActivated) {
+            tapHereValveSocket.SetActive(false);
+            tapValveSocketActivated = false;
         }
-    }
-
-    void OnEnable()
-    {
-       // CameraControl.OnCameraPathEnd += ShowHint;
-    }
-
-    void OnDisable()
-    {
-      //  CameraControl.OnCameraPathEnd -= ShowHint;
     }
 }
