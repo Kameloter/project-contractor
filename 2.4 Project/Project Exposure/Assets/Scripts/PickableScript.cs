@@ -50,6 +50,10 @@ public class PickableScript : BaseInteractable {
             if (playerInRange) {
                 if (IsCarried) Drop();
                 else PickUp();
+
+                //used for TapHere icons in level1
+                GameManager.Instance.ClickedObject = this.gameObject; 
+                Invoke("RemoveClickedObject", 0.1f);
             }
             else {
                 if (IsCarried) Drop();
