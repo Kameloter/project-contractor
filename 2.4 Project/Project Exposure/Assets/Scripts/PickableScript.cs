@@ -31,9 +31,11 @@ public class PickableScript : BaseInteractable {
     public void PickUp() {
         if (playerScript.carriedValve == null) {
             navMeshObs.enabled = false;
-            this.transform.rotation = Quaternion.identity;
-            this.transform.position = player.transform.position - player.transform.forward/3.0f + player.transform.up/3.0f;
+            
+            this.transform.position = player.transform.position /*- player.transform.forward/10.0f*/ +  player.transform.up/2.2f;
             this.transform.SetParent(player.transform);
+            this.transform.localRotation = Quaternion.Euler(0, 270, 90);
+
             rigidBody.useGravity = false;
             rigidBody.isKinematic = true;
             IsCarried = true;
