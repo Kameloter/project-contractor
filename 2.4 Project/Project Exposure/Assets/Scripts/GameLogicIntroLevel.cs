@@ -6,9 +6,9 @@ using System.Collections;
 /// Game class hold functions and variables you can easely use to make some simple actions.
 /// </summary>
 public class GameLogicIntroLevel : MonoBehaviour {
-    public GameObject player;
+    GameObject player;
 
-    public LevelSwitcherScript levelSwitcher;
+    public GameObject levelSwitcher;
     public GameObject endDoorToOpen;
 
     public CompressorControlScript CompressorObject;
@@ -43,7 +43,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
         buttonCompressor.GetComponent<SphereCollider>().enabled = false;
         light_1_control.StartBlinking();
 
-        levelSwitcher.enabled = false;
+        levelSwitcher.SetActive(false);
     }
 
     // Update is called once per frame
@@ -78,7 +78,7 @@ public class GameLogicIntroLevel : MonoBehaviour {
              
                 clickedButton2 = true;
                 
-                levelSwitcher.enabled = true;
+                levelSwitcher.SetActive(true);
 
                 StartCoroutine("openFinalDoor", 2.0f);
             }

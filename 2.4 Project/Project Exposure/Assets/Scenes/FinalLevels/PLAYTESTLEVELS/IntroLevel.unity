@@ -12281,7 +12281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  levelSwitcher: {fileID: 1722595721}
+  levelSwitcher: {fileID: 1722595720}
   endDoorToOpen: {fileID: 1573559047}
   CompressorObject: {fileID: 1349587174}
   buttonWaterTank: {fileID: 1064360810}
