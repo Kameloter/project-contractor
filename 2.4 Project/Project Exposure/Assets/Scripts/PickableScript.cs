@@ -14,11 +14,14 @@ public class PickableScript : BaseInteractable {
 
     Vector3 startPos;
 
+    NavMeshObstacle navMeshObs;
+
 	void Start () {
         player = GameManager.Instance.Player;
         playerScript = GameManager.Instance.PlayerScript;
         rigidBody = this.GetComponent<Rigidbody>();
         startPos = this.transform.position;
+        navMeshObs = this.GetComponent<NavMeshObstacle>();
 	}
 
     public void ResetPos() {
@@ -27,7 +30,9 @@ public class PickableScript : BaseInteractable {
 
     public void PickUp() {
         if (playerScript.carriedValve == null) {
-            this.transform.position = player.transform.position - player.transform.forward + Vector3.up;
+            navMeshObs.enabled = false;
+            this.transform.rotation = Quaternion.identity;
+            this.transform.position = player.transform.position - player.transform.forward/3.0f + player.transform.up/3.0f;
             this.transform.SetParent(player.transform);
             rigidBody.useGravity = false;
             rigidBody.isKinematic = true;
@@ -52,11 +57,16 @@ public class PickableScript : BaseInteractable {
     }
 
     void Drop() {
+        Invoke("EnableNavMeshObstacke", 0.2f);
         this.transform.parent = null;
         rigidBody.useGravity = true;
         rigidBody.isKinematic = false;
         IsCarried = false;
         playerScript.carriedValve = null;
+    }
+
+    void EnableNavMeshObstacke() {
+        if (navMeshObs) navMeshObs.enabled = true;
     }
 
     void RemoveClickedObject() {

@@ -12,6 +12,8 @@ public class AlignRotationScript : MonoBehaviour {
     [SerializeField] bool y = true;
     [SerializeField] bool z = true;
 
+    [Header("Update Behaviour")]
+    [SerializeField] bool updateContinuesly = false;
 
     Vector3 alignRot;
     Vector3 ownRot;
@@ -21,6 +23,10 @@ public class AlignRotationScript : MonoBehaviour {
         if(!useMainCamera) { if (alignTo == null) Debug.LogError(" AlignTo variable is null, if camera is desired check bool useMainCam. If not drag desired transform.", transform); return;  }
 
         Align();
+    }
+
+    void Update() {
+        if (updateContinuesly) Align();
     }
 
     public void Align() {
