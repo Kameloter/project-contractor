@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class AlignRotationScript : MonoBehaviour {
-    [SerializeField] bool useMainCamera;
+    [SerializeField] bool useMainCamera = true;
 
     [Tooltip("Automatically gets the maincam assigned if boolean is true.")]
     public Transform alignTo;

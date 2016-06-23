@@ -6,7 +6,7 @@ using System.Collections;
 /// Game class hold functions and variables you can easely use to make some simple actions.
 /// </summary>
 public class GameLogicIntroLevel : MonoBehaviour {
-
+    public GameObject player;
 
     public LevelSwitcherScript levelSwitcher;
     public GameObject endDoorToOpen;
@@ -27,12 +27,15 @@ public class GameLogicIntroLevel : MonoBehaviour {
     public GameObject waterTankPath;
     public GameObject steamPath;
 
-
+    //tap here
+    public GameObject tapHereWalk, tapHerePump;
+    bool tapHereWalkActive = true;
 
     // Use this for initialization
     void Start ()
     {
-         
+        player = Game.Player;
+
         light_1_control = light_1.gameObject.GetComponent<BlinkRedLightControl>();
         light_2_control = light_2.gameObject.GetComponent<BlinkRedLightControl>();
 
@@ -46,6 +49,11 @@ public class GameLogicIntroLevel : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //if player moved towards the tapherewalk, remove it.
+        if (tapHereWalkActive && Vector3.Distance(player.transform.position, tapHereWalk.transform.position) < 2.0f) {
+            tapHereWalk.SetActive(false);
+            tapHereWalkActive = false;
+        }
 
         if (!activatedButton2) //activate button 2
         {
@@ -55,6 +63,8 @@ public class GameLogicIntroLevel : MonoBehaviour {
                 StartCoroutine("activateButton2", 5f);
                 activatedButton2 = true;
 
+                //if player tapped the button, remove tapherepump.
+                tapHerePump.SetActive(false);
             }
         }
 
@@ -73,10 +83,8 @@ public class GameLogicIntroLevel : MonoBehaviour {
                 StartCoroutine("openFinalDoor", 2.0f);
             }
         }
-
-
-
     }
+
     IEnumerator openFinalDoor(float time)
     {
         yield return new WaitForSeconds(time);
@@ -96,5 +104,4 @@ public class GameLogicIntroLevel : MonoBehaviour {
 
         CompressorObject.RunSteamCompressor();
     }
-   
 }
