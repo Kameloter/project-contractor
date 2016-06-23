@@ -94,7 +94,7 @@ public class PickableScript : BaseInteractable {
 
     public override void actionOnTriggerEnter(Collider player) {
         if (GameManager.Instance.ClickedObject == this.gameObject) {
-            Debug.Log("PICKING CLICKED OBJECT WHEN PLAYHER WAS OUT OF RANGE !  ");
+            //Debug.Log("PICKING CLICKED OBJECT WHEN PLAYHER WAS OUT OF RANGE !  ");
             PickUp();
             RemoveClickedObject();
         }
