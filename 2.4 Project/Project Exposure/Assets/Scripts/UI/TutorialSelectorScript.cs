@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+/// <summary>
+/// Controls the tutorial selector feature.
+/// </summary>
 public class TutorialSelectorScript : MonoBehaviour {
     [Header("Reference (optional)")]
     [SerializeField] Animator tutorialAnimator;

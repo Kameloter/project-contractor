@@ -4,9 +4,13 @@ using System.Collections;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// This script controls the smal valve socket. It is working only when the big-valve pipeline powering it is active.
+/// When it is "feeded" with the missing valve from it , it activates all "Activatables" that are linked to it and vice versa.
+/// </summary>
 [ExecuteInEditMode]
 public class SmallValveSocket : BaseInteractable {
-    GameObject Player;
+   // GameObject Player;
     PlayerScript playerScript;
 
     [SerializeField]

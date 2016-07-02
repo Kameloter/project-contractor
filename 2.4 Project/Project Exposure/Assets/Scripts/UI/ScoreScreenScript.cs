@@ -3,6 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
+/// <summary>
+/// This script is controlling the final score screen. 
+/// </summary>
 public class ScoreScreenScript : MonoBehaviour {
     //scorescreen
     GameObject scoreScreen;

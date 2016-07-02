@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// This script is used as a helper script to the InterractCanvas (world space canvas).
+/// It alligns the canvas so it is always facing the players point of view.
+/// </summary>
 public class AlignRotationScript : MonoBehaviour {
     [SerializeField] bool useMainCamera = true;
 
@@ -29,6 +34,9 @@ public class AlignRotationScript : MonoBehaviour {
         if (updateContinuesly) Align();
     }
 
+	/// <summary>
+	/// Aligns the rotation to the provided "AlignTo" transform.
+	/// </summary>
     public void Align() {
         if (useMainCamera) alignTo = Camera.main.transform;         
 

@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This script controls the compressor(a component of the geothermal process)
+/// </summary>
 public class CompressorControlScript : BaseActivatable {
+	
     [Tooltip("The object that holds all the pistons.")]
     [SerializeField]
     private GameObject pistonsObject;
@@ -32,11 +36,8 @@ public class CompressorControlScript : BaseActivatable {
         else { myAnimator = compressorModel.GetComponent<Animator>(); if (myAnimator == null) Debug.LogError("Unable to find animator in compressor model IN + " + gameObject.name); }
 
 
-
+		//stop particle on start.
         sphereSteams.Stop();
-
-
-
     }
 
     /// <summary>
@@ -53,10 +54,12 @@ public class CompressorControlScript : BaseActivatable {
         sphereSteams.Play();
     }
 
-
+    /// <summary>
+    /// Releases steam to the other rooms, as in the tutorial.
+    /// </summary>
     public void ReleaseSteam()
     {
-        Debug.Log("HEEEY RELEASE THE DAMMN STEEEAAM ");
+      
         startSteam.Play();
     }
 

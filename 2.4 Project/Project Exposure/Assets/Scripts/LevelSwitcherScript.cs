@@ -1,6 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This script is attached on a trigger that will eventually switch to a new level.
+/// 
+/// Also it pops up the final score screen. (Has to change to a different script .. a note to the one that added it here)
+/// </summary>
 public class LevelSwitcherScript : MonoBehaviour {
     public int level = 0;
 
@@ -28,6 +33,9 @@ public class LevelSwitcherScript : MonoBehaviour {
         pTimeLeft = GameManager.Instance.gameTimeLeft;
     }
 
+	/// <summary>
+	/// Switches the level to the index "level" provided on the script 
+	/// </summary>
     public void SwitchLevel (){
         GameManager.Instance.SceneManager.SwitchToLevel(level);
     }

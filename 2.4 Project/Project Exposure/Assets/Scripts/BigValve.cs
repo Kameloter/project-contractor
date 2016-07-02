@@ -5,27 +5,33 @@ using System.Collections.Generic;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// This script is used to control the big valve behaviour.
+/// </summary>
 [ExecuteInEditMode]
 [System.Serializable]
 public class BigValve : BaseInteractable {
 
+	//Editor building parts
     [Header("Valve Parts")]
     public Object pipeLong;
     public Object pipeLongWindow;
     public Object pipeSmall;
     public Object pipeJoint;
+	//Important game objects references used by the editor script that uses this script as a target.
     public GameObject pipeLine1Start;
     public GameObject pipeLine1End;
     public GameObject pipeLine2Start;
     public GameObject pipeLine2End;
     public GameObject jointHolder1; 
     public GameObject jointHolder2;
+
     [SerializeField]
-    public GameObject[] pipeLine1Points;
+    public GameObject[] pipeLine1Points; //holding all points of a piple line.
     [SerializeField]
     public GameObject[] pipeLine2Points;
 
-    [Header("Steam particles ")]
+    [Header("Steam particles ")] //the steam particles of the big valve.
     public ParticleSystem smoke1;
     public ParticleSystem smoke2;
 
@@ -97,34 +103,29 @@ public class BigValve : BaseInteractable {
     // build functions both in this class and in the editor class i implemented them here so i can use them
     // in both classes. Editor script has access to its target(this script). 
     // The drawback of this is that i have to use the pre-processor tags if UNITY_EDIOTR to wrap
-    // every EDITOR utily so when building the game we have no issues.
+    // every EDITOR utily so when building the game we have no issues. 
+
+	// EDIT: NOW FIXED PROPERLY , EVERYTHING MOVED TO THE EDITOR SCRIPT.
     
-    
-#if UNITY_EDITOR
-    
-
-    
-
-  
-
-   
-
-   
-#endif
-
-    
-
     
 
    
-
+	//Connects the provided joints in a pipeline to each other so steam particle can be properly timed.(start and end)
     void ConnectJointsTogether(int index)
     { 
+		//working on line 1
         if (index == 1)
         {
-            steamJointsLine1 = new List<SteamPipeJoint>(jointHolder1.GetComponentsInChildren<SteamPipeJoint>());
-            steamJointsLine1.Add(pipeLine1End.GetComponent<SteamPipeJoint>());
+
+			//make a list from the joints in the join holder.
+            steamJointsLine1 = new List<SteamPipeJoint>(jointHolder1.GetComponentsInChildren<SteamPipeJoint>()); 
+			//add the end aswell as it is treated as a joint aswell (so steam goes to it and stops there)
+			steamJointsLine1.Add(pipeLine1End.GetComponent<SteamPipeJoint>());
+
+
+			//cache the lenght
             int line1Lenght = steamJointsLine1.Count;
+			//loop through the array and connect them as "0 -> 1" , "1 -> 2", etc etc.
             for (int i = 0; i < line1Lenght; i++)
             {
                 if (steamJointsLine1[i] != steamJointsLine1[line1Lenght - 1])
@@ -133,28 +134,40 @@ public class BigValve : BaseInteractable {
                 }
             }
         }
-        else {
+		else {//working on line 2
+			
+			//same procedure for line 2
             steamJointsLine2 = new List<SteamPipeJoint>(jointHolder2.GetComponentsInChildren<SteamPipeJoint>());
             steamJointsLine2.Add(pipeLine2End.GetComponent<SteamPipeJoint>());
             int line2Lenght = steamJointsLine2.Count;
             for (int i = 0; i < line2Lenght; i++)
             {
-                if (steamJointsLine2[i] != steamJointsLine2[line2Lenght - 1]) { steamJointsLine2[i].connectTo = steamJointsLine2[i + 1]; }
+                if (steamJointsLine2[i] != steamJointsLine2[line2Lenght - 1]) 
+				{ 
+					steamJointsLine2[i].connectTo = steamJointsLine2[i + 1]; 
+				}
             }
         }
     }
 
+	//Finds ALL the small valve scripts in the scene, connects them to the proper pipeline
+	// and also feeds each valve a refference to the BigValve controlling them.
     void ConnectSmallValves()
     {
+		//get small vave sockets
         SmallValveSocket[] smallValveSockets = FindObjectsOfType<SmallValveSocket>();
+
         for (int i = 0; i < smallValveSockets.Length; i++)
         {
-            if (smallValveSockets[i].valveID == valveID)
+            if (smallValveSockets[i].valveID == valveID) // if the socket matches the BigValve powering it.
             {
-                smallValveSockets[i].controlValve = this;
+                smallValveSockets[i].controlValve = this; // give it a ref to me
 
-                if (smallValveSockets[i].valveLine == 1) pipeLine1SmallVaveSockets.Add(smallValveSockets[i]);
-                else pipeLine2SmallValveSockets.Add(smallValveSockets[i]);
+				//add it to the proper pipeline
+                if (smallValveSockets[i].valveLine == 1) 
+					pipeLine1SmallVaveSockets.Add(smallValveSockets[i]);
+                else 
+					pipeLine2SmallValveSockets.Add(smallValveSockets[i]);
             }
         }
     }
@@ -222,6 +235,9 @@ public class BigValve : BaseInteractable {
     }
 
 #if UNITY_EDITOR
+	/// <summary>
+	/// Debug grid for the pipe editor.
+	/// </summary>
     void OnDrawGizmos() {
         if (Application.isPlaying) return; //if we are in play mode , dont care about this grid (no play mode pipe editing)
         if (!draw) return; //if we do not wish to draw => return
@@ -233,7 +249,7 @@ public class BigValve : BaseInteractable {
             return;
         }                                                                                 
 
-        Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles;
+        Vector3 eulerRot = SceneView.lastActiveSceneView.rotation.eulerAngles; //depending on the view , change the grid
         if (eulerRot.x == 90) {
             if (Selection.activeGameObject.transform.root == transform.root) {
                 Vector3 pos = transform.position;

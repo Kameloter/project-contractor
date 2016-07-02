@@ -2,7 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
-
+/// <summary>
+/// This script is a singleton. IT remains throught the WHOLE game and is used to hold important variables
+/// in scene transitions. Also it stores usefull references to important game scripts and caches them.
+/// </summary>
 public class GameManager : MonoBehaviour {
     private static GameManager _instance;
     public static GameManager Instance { //singleton
@@ -198,9 +201,6 @@ public class GameManager : MonoBehaviour {
         set { deactivatedObject = value; }
     }
 
-    //void Start() {
-    //    InvokeRepeating("UpdateGameTimer", 0, 1);
-    //}
 
     void Update() {
         //changing timers
@@ -228,6 +228,10 @@ public class GameManager : MonoBehaviour {
         //levelTimeText.text = Mathf.Floor((timeSpentLevel / 60)).ToString("0" + "#':'") + ((int)timeSpentLevel % 60).ToString("D2");
     }
 
+	/// <summary>
+	/// Updgrades the in-game timer text.
+	/// </summary>
+	/// <returns>The game timer text.</returns>
     public string UpdateGameTimerText() {
         return Mathf.Floor((gameTimeLeft / 60)).ToString("0" + "#':'") + ((int)gameTimeLeft % 60).ToString("D2");
     }

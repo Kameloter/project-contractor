@@ -2,6 +2,10 @@
 using System.Collections;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// This script shows an image that can help the player.
+/// </summary>
 public class HelpImageScript : MonoBehaviour {
     [Header("References")]
     [Tooltip("The GameObject with Image(script) on a Canvas.")]

@@ -176,7 +176,8 @@ public class ProceduralBridge : BaseActivatable {
         Destroy();
     }
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR 
+	//drawing cubes on the position of the start and end of the bridge parts so designers can see what they are doing.
     void OnDrawGizmos()
     {
         if (end == null || start == null || Selection.activeGameObject == null) return;
@@ -191,12 +192,11 @@ public class ProceduralBridge : BaseActivatable {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(start.position, start.localScale);
     }
-#endif
+
 }
 
 //Just some quick way to make buttons in the inspector:)
 //Did not feel the need to create new class for JUST that.
-#if UNITY_EDITOR
 [CustomEditor(typeof(ProceduralBridge))]
 public class TestBridge : Editor
 {

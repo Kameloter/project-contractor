@@ -1,12 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+/// <summary>
+/// This script is attached to a pipe-join which is part of the pipeline of a bigvalve. 
+/// It activates and deactivates closest smallvavesockets to it so that when
+///  steam reaches a joint it makes visual SENSE to the player.
+/// </summary>
 public class SteamPipeJoint : MonoBehaviour {
 
     public SteamPipeJoint connectTo;
     public List<SmallValveSocket> poweredSockets;
 
     [HideInInspector]
+	/// <summary>
+	/// used to calculate approx time for the particle to reach its point.
+	/// </summary>
+	/// <value>The steam particle speed.</value>
     public float steamParticleSpeed { get { return smoke.startSpeed; } }
 
     ParticleSystem smoke;
@@ -35,14 +45,17 @@ public class SteamPipeJoint : MonoBehaviour {
         if (!poweredSockets.Contains(socket)) poweredSockets.Add(socket);
     }
 
+	/// <summary>
+	/// Stops the steam connection based on time required for the particle to reach the joint.
+	/// </summary>
     public void StopSteamConnection() {
-        if (connectTo != null) {
-            if (poweredSockets.Count > 0) deactivatePoweredSockets();
-            smoke.Stop();
+        if (connectTo != null) { //if we are connected to the joint
+            if (poweredSockets.Count > 0) deactivatePoweredSockets(); //deactivate any powered sockets
+            smoke.Stop(); //stop our smoke 
             activated = false;
-            float distance = Vector3.Distance(transform.position, connectTo.transform.position);
-            float waitTime = distance / connectTo.steamParticleSpeed;
-            Invoke("StopSmoke", waitTime);
+            float distance = Vector3.Distance(transform.position, connectTo.transform.position); //calculate distance to our next joint
+            float waitTime = distance / connectTo.steamParticleSpeed; //calculate the time it will need  for the last particle to get to the next jooint
+            Invoke("StopSmoke", waitTime);//tell the next joint to stop steam after that time.
         }
     }
 

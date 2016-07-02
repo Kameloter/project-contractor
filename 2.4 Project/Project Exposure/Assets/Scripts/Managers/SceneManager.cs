@@ -5,6 +5,9 @@ public enum GameState {
     Menu, InGame, Paused
 }
 
+/// <summary>
+/// This script controls the scene transitioning between levels / menu.
+/// </summary>
 public class SceneManager : MonoBehaviour {
     GameState currentState;
 
@@ -16,6 +19,10 @@ public class SceneManager : MonoBehaviour {
         currentState = GameManager.Instance.CurrentState;
     }
 
+	/// <summary>
+	/// Sets the game state.
+	/// </summary>
+	/// <param name="newGameState">New game state.</param>
     public void SetState(GameState newGameState) {
         DisablePreviousState(currentState);
         switch (newGameState) {
@@ -40,14 +47,24 @@ public class SceneManager : MonoBehaviour {
         }
     }
 
+	/// <summary>
+	/// Unpauses the game.
+	/// </summary>
     public void UnpauseGame() {
         SetState(GameState.InGame);
     }
 
+	/// <summary>
+	/// Pauses the game.
+	/// </summary>
     public void PauseGame() {
         SetState(GameState.Paused);
     }
 
+	/// <summary>
+	/// Swithes the level to the provided index.
+	/// </summary>
+	/// <param name="index">Index of level in build settings.</param>
     public void SwitchToLevel(int index) {
         ExportSaveData();
         SetState(GameState.InGame);
@@ -62,6 +79,9 @@ public class SceneManager : MonoBehaviour {
         GameManager.Instance.GameScore += GameManager.Instance.ScoreScreen.LevelScore;
     }
 
+	/// <summary>
+	/// Shuts down the game.
+	/// </summary>
     public void QuitGame() {
         Application.Quit();
     }

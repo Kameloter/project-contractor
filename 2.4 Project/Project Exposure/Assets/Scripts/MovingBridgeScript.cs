@@ -2,7 +2,7 @@
 using System.Collections;
 
 /// <summary>
-/// moving bridge
+/// This script controls a moving bridge, which is part of the puzzles.
 /// </summary>
 public class MovingBridgeScript : MoveableScript {
     //array of object with navmeshobstacle to block the player

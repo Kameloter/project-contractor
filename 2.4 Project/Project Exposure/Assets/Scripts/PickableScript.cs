@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.Events;
 
+/// <summary>
+/// This script is used on an object thtat is meant to be pickable in the game ... like the small valve :).
+/// </summary>
 public class PickableScript : BaseInteractable {
     bool IsCarried = false;
     public bool clickable = true;

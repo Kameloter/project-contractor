@@ -1,23 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// A button that activates any BaseActiavatable
+/// </summary>
 public class GameObjectButtonScript : BaseInteractable {
 
-
+    //Array for possigle activatavbles
     [SerializeField]
     BaseActivatable[] activatables;
-
-
-
-    // Use this for initialization
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
     private void TriggerActivatables()
     {
@@ -36,6 +27,9 @@ public class GameObjectButtonScript : BaseInteractable {
         }
     }
 
+	/// <summary>
+	/// When interracted with object , activate all Activatables linked to it.
+	/// </summary>
     public override void OnInteract() {
         base.OnInteract();
         TriggerActivatables();

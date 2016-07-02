@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/// <summary>
+/// This script makes the indication allign its position properly so it does not jitter.
+/// </summary>
 public class IndicationJitterScript : MonoBehaviour {
     public Transform start, end;
     Vector3 startPosition, endPosition; //cache position

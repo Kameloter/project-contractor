@@ -2,6 +2,9 @@
 using System.Collections;
 
 [ExecuteInEditMode]
+/// <summary>
+/// This script holds important scene stats.
+/// </summary>
 public class SceneStats : MonoBehaviour {
 
     [Header("Level Stats")]
@@ -17,6 +20,9 @@ public class SceneStats : MonoBehaviour {
         if (!Application.isPlaying) CollectablesAvailable = GameObject.FindGameObjectsWithTag(Tags.collectable).Length;
     }
 
+	/// <summary>
+	/// The collectables in this level. get/set.
+	/// </summary>
     public int CollectablesAvailable {
         get { return _collectablesAvailable; }
         set { _collectablesAvailable = value; }

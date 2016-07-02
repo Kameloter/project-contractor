@@ -2,6 +2,9 @@
 using UnityEngine.UI;
 using System.Collections;
 
+/// <summary>
+/// This scripts updates the collectable HUD. 
+/// </summary>
 public class CollectableHudScript : MonoBehaviour {
     [Header("Textfields")]
     public Text found; //will show the amount of collectables found this level

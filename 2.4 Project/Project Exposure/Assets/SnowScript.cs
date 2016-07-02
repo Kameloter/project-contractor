@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// This scripts melts the snow that is used to block players path. Can be melted by lasors.
+/// </summary>
 public class SnowScript : MonoBehaviour {
     bool melting = false;
     bool triggered = false;
@@ -16,16 +20,11 @@ public class SnowScript : MonoBehaviour {
     [SerializeField]
     GameObject[] destroy;
 
-   // [SerializeField]
-   // ParticleSystem particle;
     /// <summary>
     /// set the object melting and doing the actions for it
     /// </summary>
     /// <param name="pRotScript"></param>
     /// <param name="reuseable"></param>
-	// Use this for initialization
-	
-
     public void SetMelting(RotatableScript pRotScript, bool reuseable = false) {
         if (!triggered) { // prevent calling this multiple times
             _reusable = reuseable; // store the reusable bool
