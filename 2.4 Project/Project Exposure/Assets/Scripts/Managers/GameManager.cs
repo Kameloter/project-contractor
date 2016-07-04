@@ -59,6 +59,7 @@ public class GameManager : MonoBehaviour {
     //Text levelTimeText;
     WWW www;
     GameObject inactiveScreen;
+    GameObject QuitButton;
 
     [Header("Time")]
     public float gameTimeLeft = 1000.0f; 
@@ -86,6 +87,12 @@ public class GameManager : MonoBehaviour {
 
         inactiveScreen = GameObject.Find("InactiveScreen");
         inactiveScreen.SetActive(false);
+
+        QuitButton = GameObject.Find("Quit");
+        Button button = QuitButton.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() => { Quit(); });
+        QuitButton.SetActive(false);
     }
 
     /// <summary>
@@ -215,11 +222,18 @@ public class GameManager : MonoBehaviour {
         timeSpentLevel += Time.deltaTime;
 
         //if input change inactive timer to 0
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButtonUp(0)) {
             inactiveTime = 0;
             if (inactiveScreen.activeInHierarchy) {
                 inactiveScreen.SetActive(false);
             }
+            if (QuitButton.activeInHierarchy) {
+                QuitButton.SetActive(false);
+            }
+        }
+
+        if (inactiveTime >= 10) {
+            QuitButton.SetActive(true);
         }
 
         if (inactiveTime >= 20) {
@@ -246,5 +260,10 @@ public class GameManager : MonoBehaviour {
 	/// <returns>The game timer text.</returns>
     public string UpdateGameTimerText() {
         return Mathf.Floor((gameTimeLeft / 60)).ToString("0" + "#':'") + ((int)gameTimeLeft % 60).ToString("D2");
+    }
+
+    public void Quit() {
+        print("closing");
+        Application.Quit();
     }
 }
