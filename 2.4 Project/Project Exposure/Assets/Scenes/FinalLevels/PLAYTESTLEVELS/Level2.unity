@@ -3790,57 +3790,6 @@ Mesh:
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshOptimized: 0
---- !u!1 &328453410
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 328453412}
-  - 114: {fileID: 328453411}
-  m_Layer: 0
-  m_Name: GameController
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &328453411
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328453410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fbd6690c5c295f4095c0e25eaaaeb15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameScore: 0
-  _player: {fileID: 0}
-  _playerScript: {fileID: 0}
-  _playerMovement: {fileID: 0}
-  _sceneManager: {fileID: 0}
-  _sceneStats: {fileID: 0}
-  _splineInterpolator: {fileID: 0}
-  _scoreScreen: {fileID: 0}
-  _tutorialSelector: {fileID: 0}
-  _uiMonitor: {fileID: 0}
-  gameTimeLeft: 180
-  timeSpentLevel: 0
---- !u!4 &328453412
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 328453410}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 61
 --- !u!1 &373916421
 GameObject:
   m_ObjectHideFlags: 0
@@ -23827,57 +23776,6 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 450954, guid: f910c6c0aea75a34d8cff10971199b84, type: 2}
   m_PrefabInternal: {fileID: 1842888854}
---- !u!1 &1855790669
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1855790671}
-  - 114: {fileID: 1855790670}
-  m_Layer: 0
-  m_Name: GameController
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1855790670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1855790669}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fbd6690c5c295f4095c0e25eaaaeb15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameScore: 0
-  _player: {fileID: 0}
-  _playerScript: {fileID: 0}
-  _playerMovement: {fileID: 0}
-  _sceneManager: {fileID: 0}
-  _sceneStats: {fileID: 0}
-  _splineInterpolator: {fileID: 0}
-  _scoreScreen: {fileID: 0}
-  _tutorialSelector: {fileID: 0}
-  _uiMonitor: {fileID: 0}
-  gameTimeLeft: 180
-  timeSpentLevel: 0
---- !u!4 &1855790671
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1855790669}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 62
 --- !u!1001 &1857431832
 Prefab:
   m_ObjectHideFlags: 0
