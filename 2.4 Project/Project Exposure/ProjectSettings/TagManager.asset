@@ -20,6 +20,7 @@ TagManager:
   - TutorialSelector
   - BigValve
   - Snow
+  - EndScreen
   layers:
   - Default
   - TransparentFX

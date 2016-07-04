@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour {
 
     [Header("UI")]
     [SerializeField] private ScoreScreenScript _scoreScreen;
+    [SerializeField] private EndScreenScript _endScreen;
     [SerializeField] private TutorialSelectorScript _tutorialSelector;
     [SerializeField] private MonitorScript _uiMonitor;
 
@@ -79,6 +80,7 @@ public class GameManager : MonoBehaviour {
         timeSpentLevel = 0;
 
         _scoreScreen = ScoreScreen;             //ref needed before it disables itself
+        _endScreen = EndScreen;                 //ref needed before it disables itself
         _tutorialSelector = TutorialSelector;   //ref needed before it disables itself
     }
 
@@ -141,7 +143,17 @@ public class GameManager : MonoBehaviour {
             return _scoreScreen;
         }
     }
-    
+
+    /// <summary>
+    /// Returns the EndScreenScript from the first GameObject tagged as 'ScoreScreen'.
+    /// </summary>
+    public EndScreenScript EndScreen {
+        get {
+            if (_endScreen == null) _endScreen = GameObject.FindGameObjectWithTag(Tags.endScreen).GetComponent<EndScreenScript>();
+            return _endScreen;
+        }
+    }
+
     /// <summary>
     /// Returns the MonitorScript.
     /// </summary>
@@ -219,8 +231,12 @@ public class GameManager : MonoBehaviour {
         }
 
         //if gametime is over save it on the server
+        if (gameTimeLeft <= 10) {
+            EndScreen.EnableEndScreen();
+        }
+
         if (gameTimeLeft <= 0) {
-          //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
+            //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
         }
 
         //Timer
