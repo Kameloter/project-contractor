@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -56,7 +57,8 @@ public class GameManager : MonoBehaviour {
     //time
     Text gameTimeText;
     //Text levelTimeText;
-    //WWW www;
+    WWW www;
+    GameObject inactiveScreen;
 
     [Header("Time")]
     public float gameTimeLeft = 180.0f; 
@@ -80,6 +82,9 @@ public class GameManager : MonoBehaviour {
 
         _scoreScreen = ScoreScreen;             //ref needed before it disables itself
         _tutorialSelector = TutorialSelector;   //ref needed before it disables itself
+
+        inactiveScreen = GameObject.Find("InactiveScreen");
+        inactiveScreen.SetActive(false);
     }
 
     /// <summary>
@@ -211,16 +216,21 @@ public class GameManager : MonoBehaviour {
         //if input change inactive timer to 0
         if (Input.GetMouseButton(0)) {
             inactiveTime = 0;
+            if (inactiveScreen.activeInHierarchy) {
+                inactiveScreen.SetActive(false);
+            }
         }
 
+        if (inactiveTime >= 20) {
+            inactiveScreen.SetActive(true);
+        }
         //if longer inactive than 30s close the game
         if (inactiveTime >= 30) {
             Application.Quit();
         }
-
         //if gametime is over save it on the server
         if (gameTimeLeft <= 0) {
-          //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
+            www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?" + "userID=" + Environment.GetCommandLineArgs()[2] + "&gameID=" + Environment.GetCommandLineArgs()[3] + "&score=" + _gameScore.ToString());
         }
 
         //Timer
