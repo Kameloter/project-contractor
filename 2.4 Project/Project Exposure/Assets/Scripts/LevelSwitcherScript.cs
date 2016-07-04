@@ -12,10 +12,11 @@ public class LevelSwitcherScript : MonoBehaviour {
     float timeSpent;
     int collected;
     float timeLeft;
-            
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) { GameManager.Instance.ScoreScreen.UpdateScoreScreen(timeSpent, timeLeft, collected); GameManager.Instance.ScoreScreen.EnableScoreScreen(); }
-    }
+
+    //void Update() {
+    //    if (Input.GetKeyDown(KeyCode.P)) { GameManager.Instance.ScoreScreen.UpdateScoreScreen(timeSpent, timeLeft, collected); GameManager.Instance.ScoreScreen.EnableScoreScreen(); }
+    //    if (Input.GetKeyDown(KeyCode.O)) { GameManager.Instance.EndScreen.EnableEndScreen(); }
+    //}
 
     void OnTriggerEnter(Collider other) {
         if (other.name == "Player") {
