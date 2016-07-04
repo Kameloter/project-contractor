@@ -61,12 +61,13 @@ public class GameManager : MonoBehaviour {
     GameObject inactiveScreen;
 
     [Header("Time")]
-    public float gameTimeLeft = 180.0f; 
+    public float gameTimeLeft = 1000.0f; 
     public float timeSpentLevel = 0.0f;
 
     float inactiveTime = 0;
 
     void Awake() {
+        gameTimeLeft = float.Parse(Environment.GetCommandLineArgs()[5]);
         FindObjectRefs();
     }
 
@@ -231,6 +232,7 @@ public class GameManager : MonoBehaviour {
         //if gametime is over save it on the server
         if (gameTimeLeft <= 0) {
             www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?" + "userID=" + Environment.GetCommandLineArgs()[2] + "&gameID=" + Environment.GetCommandLineArgs()[3] + "&score=" + _gameScore.ToString());
+            Application.Quit();
         }
 
         //Timer
