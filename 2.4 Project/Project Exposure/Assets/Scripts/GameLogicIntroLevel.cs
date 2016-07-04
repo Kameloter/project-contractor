@@ -34,6 +34,10 @@ public class GameLogicIntroLevel : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        //HEIM FIX
+        //This is to ensure the default settings will be used (at least on the second run)
+        PlayerPrefs.DeleteAll();
+
         player = Game.Player;
 
         light_1_control = light_1.gameObject.GetComponent<BlinkRedLightControl>();
