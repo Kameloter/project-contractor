@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour {
     GameObject QuitButton;
 
     [Header("Time")]
-    public float gameTimeLeft = 1000.0f; 
+    public float gameTimeLeft = 600.0f; 
     public float timeSpentLevel = 0.0f;
 
     float inactiveTime = 0;
@@ -260,7 +260,8 @@ public class GameManager : MonoBehaviour {
             EndScreen.EnableEndScreen();
         }
 
-        if (gameTimeLeft <= 0) {
+        if (gameTimeLeft <= 0 && Environment.GetCommandLineArgs().Length > 1) {
+            print("iets");
             www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?" + "userID=" + Environment.GetCommandLineArgs()[2] + "&gameID=" + Environment.GetCommandLineArgs()[3] + "&score=" + _gameScore.ToString());
             Application.Quit();
         }
