@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -57,15 +58,18 @@ public class GameManager : MonoBehaviour {
     //time
     Text gameTimeText;
     //Text levelTimeText;
-    //WWW www;
+    WWW www;
+    GameObject inactiveScreen;
+    GameObject QuitButton;
 
     [Header("Time")]
-    public float gameTimeLeft = 180.0f; 
+    public float gameTimeLeft = 1000.0f; 
     public float timeSpentLevel = 0.0f;
 
     float inactiveTime = 0;
 
     void Awake() {
+        gameTimeLeft = float.Parse(Environment.GetCommandLineArgs()[5]);
         FindObjectRefs();
     }
 
@@ -82,6 +86,15 @@ public class GameManager : MonoBehaviour {
         _scoreScreen = ScoreScreen;             //ref needed before it disables itself
         _endScreen = EndScreen;                 //ref needed before it disables itself
         _tutorialSelector = TutorialSelector;   //ref needed before it disables itself
+
+        inactiveScreen = GameObject.Find("InactiveScreen");
+        inactiveScreen.SetActive(false);
+
+        QuitButton = GameObject.Find("Quit");
+        Button button = QuitButton.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() => { Quit(); });
+        QuitButton.SetActive(false);
     }
 
     /// <summary>
@@ -221,22 +234,35 @@ public class GameManager : MonoBehaviour {
         timeSpentLevel += Time.deltaTime;
 
         //if input change inactive timer to 0
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButtonUp(0)) {
             inactiveTime = 0;
+            if (inactiveScreen.activeInHierarchy) {
+                inactiveScreen.SetActive(false);
+            }
+            if (QuitButton.activeInHierarchy) {
+                QuitButton.SetActive(false);
+            }
         }
 
+        if (inactiveTime >= 10) {
+            QuitButton.SetActive(true);
+        }
+
+        if (inactiveTime >= 20) {
+            inactiveScreen.SetActive(true);
+        }
         //if longer inactive than 30s close the game
         if (inactiveTime >= 30) {
             Application.Quit();
         }
-
         //if gametime is over save it on the server
         if (gameTimeLeft <= 10) {
             EndScreen.EnableEndScreen();
         }
 
         if (gameTimeLeft <= 0) {
-            //  www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?"+"userID="+Environment.GetCommandLineArgs()[2]+"&gameID="+Environment.GetCommandLineArgs()[3]+"&score="+score.ToString());
+            www = new WWW("http://www.serellyn.net/HEIM/php/insertScore.php?" + "userID=" + Environment.GetCommandLineArgs()[2] + "&gameID=" + Environment.GetCommandLineArgs()[3] + "&score=" + _gameScore.ToString());
+            Application.Quit();
         }
 
         //Timer
@@ -250,5 +276,10 @@ public class GameManager : MonoBehaviour {
 	/// <returns>The game timer text.</returns>
     public string UpdateGameTimerText() {
         return Mathf.Floor((gameTimeLeft / 60)).ToString("0" + "#':'") + ((int)gameTimeLeft % 60).ToString("D2");
+    }
+
+    public void Quit() {
+        print("closing");
+        Application.Quit();
     }
 }

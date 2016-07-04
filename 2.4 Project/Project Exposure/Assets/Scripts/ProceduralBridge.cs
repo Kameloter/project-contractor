@@ -192,9 +192,11 @@ public class ProceduralBridge : BaseActivatable {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(start.position, start.localScale);
     }
+    #endif
 
 }
 
+#if UNITY_EDITOR
 //Just some quick way to make buttons in the inspector:)
 //Did not feel the need to create new class for JUST that.
 [CustomEditor(typeof(ProceduralBridge))]
