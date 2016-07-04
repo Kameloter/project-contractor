@@ -69,7 +69,7 @@ public class GameManager : MonoBehaviour {
     float inactiveTime = 0;
 
     void Awake() {
-        gameTimeLeft = float.Parse(Environment.GetCommandLineArgs()[5]);
+        if (Environment.GetCommandLineArgs().Length > 4) gameTimeLeft = float.Parse(Environment.GetCommandLineArgs()[5]);
         FindObjectRefs();
     }
 
