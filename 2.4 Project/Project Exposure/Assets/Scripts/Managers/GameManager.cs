@@ -228,6 +228,12 @@ public class GameManager : MonoBehaviour {
 
 
     void Update() {
+        //playerprefs reset
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.LeftShift) && Input.GetKeyDown(KeyCode.Space)) {
+            PlayerPrefs.DeleteAll();
+            Debug.LogWarning("PlayerPrefs has been resetted.");
+        }
+
         //changing timers
         gameTimeLeft -= Time.deltaTime;
         inactiveTime += Time.deltaTime;
