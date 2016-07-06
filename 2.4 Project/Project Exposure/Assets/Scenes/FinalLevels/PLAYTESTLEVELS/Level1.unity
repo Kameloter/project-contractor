@@ -15051,7 +15051,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
@@ -15421,7 +15421,7 @@ Light:
   m_SpotAngle: 93.6
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 0.873
     m_Bias: 0.05
@@ -33200,6 +33200,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 11434264, guid: ba27e26350b964049b168265d0952b0e, type: 2}
+      propertyPath: textureSize
+      value: 512
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ba27e26350b964049b168265d0952b0e, type: 2}
   m_IsPrefabParent: 0
@@ -39629,7 +39633,7 @@ Light:
   m_SpotAngle: 93.6
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 0.873
     m_Bias: 0.05
@@ -46402,7 +46406,7 @@ Light:
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_Strength: 1
     m_Bias: 0.05
